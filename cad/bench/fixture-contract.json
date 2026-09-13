@@ -9,7 +9,26 @@
     "docs/specs/measured-authority-gate/evidence-contract.md",
     "Instrumentation/propulsion-bench-safety-checklist.md"
   ],
-  "release_gate": "Every clause evaluable AND its inputs at inspection/drawing evidence state; vendor_nominal rows satisfy geometry planning only. A CAD collision check does not prove structural stability or prop containment.",
+  "release_gate": "Verdicts, in order and never conflated: INPUTS_INCOMPLETE -> INPUTS_COMPLETE_NOT_RELEASE_GRADE (vendor_nominal/model_assumption rows remain) -> REQUIREMENTS_FAILED -> REQUIREMENTS_EVALUATED. Geometry match and physical validation are separate gates. A CAD collision check does not prove structural stability or prop containment.",
+  "allowed_evidence_states": [
+    "calibration_record",
+    "design_choice",
+    "drawing",
+    "inspection",
+    "model_assumption",
+    "owner_decision",
+    "pending",
+    "protocol",
+    "reported_vendor_nominal",
+    "vendor_nominal"
+  ],
+  "release_grade_states": [
+    "calibration_record",
+    "drawing",
+    "inspection",
+    "owner_decision",
+    "protocol"
+  ],
   "clauses": [
     {
       "id": "motor_mount_pattern",
@@ -57,15 +76,18 @@
       "inputs": [
         "prop_hub_bore",
         "motor_shaft_diameter",
-        "prop_mount_screw_spacing"
+        "prop_mount_screw_spacing",
+        "prop_hub_fit_tolerance"
       ],
       "status": "pending",
       "evidence_state": "pending",
       "pending_inputs": [
-        "prop_mount_screw_spacing"
+        "prop_mount_screw_spacing",
+        "prop_hub_fit_tolerance"
       ],
       "release_requirement": {
-        "prop_mount_screw_spacing": "Owner supplies matching bell and prop hub drawing or inspection"
+        "prop_mount_screw_spacing": "Owner supplies matching bell and prop hub drawing or inspection",
+        "prop_hub_fit_tolerance": "Owner chooses the bore-to-shaft fit tolerance with a stated design basis (fit class, retention method, vendor drawing); an unchosen tolerance is not 0.05 mm by default"
       },
       "value": {
         "hub_bore_mm": 1.5,
@@ -262,6 +284,7 @@
     "motor_mount_hole_diameter",
     "motor_mount_pitch_circle",
     "motor_mount_thread_engagement",
+    "prop_hub_fit_tolerance",
     "prop_mount_screw_spacing",
     "stand_anchor_spacing",
     "stand_calibration_lever",

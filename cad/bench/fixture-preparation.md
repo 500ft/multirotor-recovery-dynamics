@@ -18,6 +18,8 @@ The motor page confirms envelope/shaft values already in the register, but its a
 
 ## Geometry contract before a model
 
+Implemented as `cad/bench/fixture-contract.json` (DR-CAD-12): `python cad/fixture_contract.py --check` verifies it against the register, `--release` refuses while any clause is pending.
+
 The next fixture model must consume an identified cell revision, a motor-hole coordinate register with thread/depth, adapter/fastener stack, force-axis datum and actual bench anchors. Export STEP and a machine-readable report covering number of separate solids, each interface coordinate, minimum screw penetration/clearance, force-axis offset, and sensor deflection clearance. Compare numeric metrics against a reviewed parameter contract, not screenshots alone. Tolerances must come from drawings and inspected mating parts; unknown limits block release. No fixture STEP is produced in this task.
 
 Trace the load: prop/motor → adapter → cell loaded end → fixed end → anchored base. Cable forces, off-axis moment, motor torque reaction and containment attachments must not bypass or preload the measurement unintentionally. Record dead load and predicted peak load separately. A CAD collision check does not prove structural stability or prop containment.

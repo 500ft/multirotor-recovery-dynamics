@@ -24,3 +24,4 @@ collective_5,0.75,1,protocol,docs/specs/measured-authority-gate/design.md,Retain
 authority_threshold,0.020,N*m,protocol,docs/specs/measured-authority-gate/design.md,Uncertainty-adjusted empirical fifth percentile at every grid point
 thrust_expanded_uncertainty,,N,pending,docs/specs/measured-authority-gate/evidence-contract.md,Reviewed calibration and uncertainty artifact required
 arm_expanded_uncertainty,,m,pending,docs/specs/measured-authority-gate/evidence-contract.md,Reviewed geometry and uncertainty artifact required
+prop_hub_fit_tolerance,,mm,pending,cad/bench/design-inputs.md,"Owner chooses the bore-to-shaft fit tolerance with a stated design basis (fit class, retention method, vendor drawing); an unchosen tolerance is not 0.05 mm by default"

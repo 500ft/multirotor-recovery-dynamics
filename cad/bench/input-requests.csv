@@ -4,6 +4,7 @@ authority_arm_measured,m,measurement,,pending,docs/specs/measured-authority-gate
 stand_anchor_spacing,mm,measurement,,pending,Instrumentation/propulsion-bench-safety-checklist.md,Measure actual bench mounting and document stability/load path
 stand_calibration_lever,m,measurement,,pending,cad/bench/design-inputs.md,Calibrate perpendicular distance from pivot to calibration-force line
 thrust_expanded_uncertainty,N,measurement,,pending,docs/specs/measured-authority-gate/evidence-contract.md,Reviewed calibration and uncertainty artifact required
+prop_hub_fit_tolerance,mm,owner_decision,,pending,cad/bench/design-inputs.md,"Owner chooses the bore-to-shaft fit tolerance with a stated design basis (fit class, retention method, vendor drawing); an unchosen tolerance is not 0.05 mm by default"
 load_cell_capacity,N,vendor_drawing,,pending,Engineering Data/instrumentation.csv,Owner selects overload capacity and source drawing
 load_cell_mount_spacing,mm,vendor_drawing,,pending,Engineering Data/instrumentation.csv,Select and identify calibrated load cell then record both end interfaces
 motor_mount_hole_diameter,mm,vendor_drawing,,pending,cad/bench/design-inputs.md,Owner supplies thread size and fit with uncertainty

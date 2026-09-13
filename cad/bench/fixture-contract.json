@@ -1,0 +1,301 @@
+{
+  "family": "propulsion_bench_fixture",
+  "contract_version": "2026-09-12",
+  "status": "pending_inputs",
+  "source_parameters": "cad/bench/parameters.csv",
+  "governing_documents": [
+    "cad/bench/fixture-preparation.md",
+    "cad/bench/design-inputs.md",
+    "docs/specs/measured-authority-gate/evidence-contract.md",
+    "Instrumentation/propulsion-bench-safety-checklist.md"
+  ],
+  "release_gate": "Verdicts, in order and never conflated: INPUTS_INCOMPLETE -> INPUTS_COMPLETE_NOT_RELEASE_GRADE (vendor_nominal/model_assumption rows remain) -> REQUIREMENTS_FAILED -> REQUIREMENTS_EVALUATED. Geometry match and physical validation are separate gates. A CAD collision check does not prove structural stability or prop containment.",
+  "allowed_evidence_states": [
+    "calibration_record",
+    "design_choice",
+    "drawing",
+    "inspection",
+    "model_assumption",
+    "owner_decision",
+    "pending",
+    "protocol",
+    "reported_vendor_nominal",
+    "vendor_nominal"
+  ],
+  "release_grade_states": [
+    "calibration_record",
+    "drawing",
+    "inspection",
+    "owner_decision",
+    "protocol"
+  ],
+  "clauses": [
+    {
+      "id": "motor_mount_pattern",
+      "group": "interface",
+      "requirement": "Fixture motor plate hole coordinates equal the measured EX1103 pattern (pitch circle, hole diameter) within the drawing tolerance",
+      "inputs": [
+        "motor_mount_pitch_circle",
+        "motor_mount_hole_diameter"
+      ],
+      "status": "pending",
+      "evidence_state": "pending",
+      "pending_inputs": [
+        "motor_mount_pitch_circle",
+        "motor_mount_hole_diameter"
+      ],
+      "release_requirement": {
+        "motor_mount_pitch_circle": "Owner supplies dimensioned drawing or measured hole coordinates",
+        "motor_mount_hole_diameter": "Owner supplies thread size and fit with uncertainty"
+      },
+      "unit": "mm",
+      "verification": "Dimensioned drawing or measured hole coordinates with uncertainty"
+    },
+    {
+      "id": "motor_mount_thread_engagement",
+      "group": "interface",
+      "requirement": "Screw penetration into the motor bell is at or below the safe depth and at or above the minimum engagement, across the plate + adapter stack",
+      "inputs": [
+        "motor_mount_thread_engagement"
+      ],
+      "status": "pending",
+      "evidence_state": "pending",
+      "pending_inputs": [
+        "motor_mount_thread_engagement"
+      ],
+      "release_requirement": {
+        "motor_mount_thread_engagement": "Owner confirms safe screw penetration and mounting plate stack"
+      },
+      "unit": "mm",
+      "verification": "Owner confirms safe penetration; stack drawing lists every plate/washer thickness"
+    },
+    {
+      "id": "prop_hub_interface",
+      "group": "interface",
+      "requirement": "Prop hub bore and T-mount screw spacing match the delivered bell; hub bore equals shaft nominal until the delivered shaft is measured",
+      "inputs": [
+        "prop_hub_bore",
+        "motor_shaft_diameter",
+        "prop_mount_screw_spacing",
+        "prop_hub_fit_tolerance"
+      ],
+      "status": "pending",
+      "evidence_state": "pending",
+      "pending_inputs": [
+        "prop_mount_screw_spacing",
+        "prop_hub_fit_tolerance"
+      ],
+      "release_requirement": {
+        "prop_mount_screw_spacing": "Owner supplies matching bell and prop hub drawing or inspection",
+        "prop_hub_fit_tolerance": "Owner chooses the bore-to-shaft fit tolerance with a stated design basis (fit class, retention method, vendor drawing); an unchosen tolerance is not 0.05 mm by default"
+      },
+      "value": {
+        "hub_bore_mm": 1.5,
+        "shaft_nominal_mm": 1.5
+      },
+      "unit": "mm",
+      "note": "Vendor-nominal bore/shaft are planning values; the mating fit is confirmed only by measuring the delivered shaft and hub."
+    },
+    {
+      "id": "load_cell_end_interfaces",
+      "group": "interface",
+      "requirement": "Both load-cell end interfaces (mount spacing, thread, orientation) match the identified, calibrated cell revision",
+      "inputs": [
+        "load_cell_mount_spacing",
+        "load_cell_capacity"
+      ],
+      "status": "pending",
+      "evidence_state": "pending",
+      "pending_inputs": [
+        "load_cell_mount_spacing",
+        "load_cell_capacity"
+      ],
+      "release_requirement": {
+        "load_cell_mount_spacing": "Select and identify calibrated load cell then record both end interfaces",
+        "load_cell_capacity": "Owner selects overload capacity and source drawing"
+      },
+      "unit": "mm",
+      "verification": "Engineering Data/instrumentation.csv names the cell; its drawing is the source"
+    },
+    {
+      "id": "stand_anchor_pattern",
+      "group": "interface",
+      "requirement": "Fixture base anchor pattern equals the measured bench mounting and the documented stability/load path",
+      "inputs": [
+        "stand_anchor_spacing"
+      ],
+      "status": "pending",
+      "evidence_state": "pending",
+      "pending_inputs": [
+        "stand_anchor_spacing"
+      ],
+      "release_requirement": {
+        "stand_anchor_spacing": "Measure actual bench mounting and document stability/load path"
+      },
+      "unit": "mm",
+      "verification": "Instrumentation/propulsion-bench-safety-checklist.md"
+    },
+    {
+      "id": "prop_static_swept_envelope",
+      "group": "clearance",
+      "requirement": "No fixture, cable or guard element lies inside the static prop swept disc of diameter prop_diameter about the motor axis",
+      "inputs": [
+        "prop_diameter"
+      ],
+      "status": "evaluable",
+      "evidence_state": "vendor_nominal",
+      "formula": "static swept diameter = prop_diameter",
+      "value": 52.17,
+      "unit": "mm",
+      "note": "STATIC envelope only. Dynamic clearance (blade flap, whirl) and containment envelope are a separately approved addition per the register's release requirement, NOT derived here."
+    },
+    {
+      "id": "motor_envelope_volume",
+      "group": "clearance",
+      "requirement": "Motor keep-out cylinder D x L; the only solid cad/generate.py produces today",
+      "inputs": [
+        "motor_body_diameter",
+        "motor_body_length"
+      ],
+      "status": "evaluable",
+      "evidence_state": "vendor_nominal",
+      "formula": "pi/4 * D^2 * L",
+      "value": 2218.6516368273665,
+      "unit": "mm^3",
+      "note": "Envelope only (vendor nominal); no mount features are modelled until the pattern is measured."
+    },
+    {
+      "id": "sensor_deflection_clearance",
+      "group": "clearance",
+      "requirement": "Load-cell deflection at predicted peak load plus dead load does not close any clearance to a hard stop or preload path",
+      "inputs": [
+        "load_cell_capacity",
+        "total_thrust_model"
+      ],
+      "status": "pending",
+      "evidence_state": "pending",
+      "pending_inputs": [
+        "load_cell_capacity"
+      ],
+      "release_requirement": {
+        "load_cell_capacity": "Owner selects overload capacity and source drawing"
+      },
+      "unit": "mm",
+      "note": "Model peak thrust 4.2 N is a planning value (model_assumption); the cell's stiffness comes from its drawing once identified."
+    },
+    {
+      "id": "force_axis_datum",
+      "group": "load_path",
+      "requirement": "Thrust axis passes through the load-cell sensitive axis; offset recorded, off-axis moment bounded, never bypassing the cell",
+      "inputs": [
+        "load_cell_mount_spacing"
+      ],
+      "status": "pending",
+      "evidence_state": "pending",
+      "pending_inputs": [
+        "load_cell_mount_spacing"
+      ],
+      "release_requirement": {
+        "load_cell_mount_spacing": "Select and identify calibrated load cell then record both end interfaces"
+      },
+      "unit": "mm",
+      "verification": "Interface coordinates in the machine-readable report; cable and containment attachments traced"
+    },
+    {
+      "id": "load_cell_capacity_margin",
+      "group": "load_path",
+      "requirement": "Cell capacity exceeds dead load + predicted peak thrust + reaction transients with the owner-selected overload margin",
+      "inputs": [
+        "load_cell_capacity",
+        "total_thrust_model"
+      ],
+      "status": "pending",
+      "evidence_state": "pending",
+      "pending_inputs": [
+        "load_cell_capacity"
+      ],
+      "release_requirement": {
+        "load_cell_capacity": "Owner selects overload capacity and source drawing"
+      },
+      "formula": "capacity >= margin * (dead_load + peak_thrust); margin is an owner decision",
+      "unit": "N",
+      "note": "Planning peak thrust 4.2 N total (model_assumption, per-motor share is a design decision). Dead load and predicted peak are to be recorded separately."
+    },
+    {
+      "id": "stand_calibration_lever",
+      "group": "load_path",
+      "requirement": "If a lever-type calibration is used, the perpendicular pivot-to-force-line distance is calibrated and distinct from the vehicle authority arm",
+      "inputs": [
+        "stand_calibration_lever",
+        "authority_arm_measured"
+      ],
+      "status": "pending",
+      "evidence_state": "pending",
+      "pending_inputs": [
+        "stand_calibration_lever",
+        "authority_arm_measured"
+      ],
+      "release_requirement": {
+        "stand_calibration_lever": "Calibrate perpendicular distance from pivot to calibration-force line",
+        "authority_arm_measured": "Measure vehicle center-to-motor radius separately from stand calibration lever"
+      },
+      "unit": "m",
+      "verification": "docs/specs/measured-authority-gate/evidence-contract.md: arm_m is measured separately from stand calibration"
+    },
+    {
+      "id": "thrust_uncertainty_budget",
+      "group": "load_path",
+      "requirement": "The expanded thrust uncertainty artifact exists and covers calibration, alignment and dead-load subtraction before any authority number is computed",
+      "inputs": [
+        "thrust_expanded_uncertainty"
+      ],
+      "status": "pending",
+      "evidence_state": "pending",
+      "pending_inputs": [
+        "thrust_expanded_uncertainty"
+      ],
+      "release_requirement": {
+        "thrust_expanded_uncertainty": "Reviewed calibration and uncertainty artifact required"
+      },
+      "unit": "N",
+      "verification": "Reviewed calibration and uncertainty artifact"
+    }
+  ],
+  "evaluable_clauses": [
+    "prop_static_swept_envelope",
+    "motor_envelope_volume"
+  ],
+  "pending_clauses": [
+    "motor_mount_pattern",
+    "motor_mount_thread_engagement",
+    "prop_hub_interface",
+    "load_cell_end_interfaces",
+    "stand_anchor_pattern",
+    "sensor_deflection_clearance",
+    "force_axis_datum",
+    "load_cell_capacity_margin",
+    "stand_calibration_lever",
+    "thrust_uncertainty_budget"
+  ],
+  "not_generated_pending_owner_inputs": [
+    "authority_arm_measured",
+    "load_cell_capacity",
+    "load_cell_mount_spacing",
+    "motor_mount_hole_diameter",
+    "motor_mount_pitch_circle",
+    "motor_mount_thread_engagement",
+    "prop_hub_fit_tolerance",
+    "prop_mount_screw_spacing",
+    "stand_anchor_spacing",
+    "stand_calibration_lever",
+    "thrust_expanded_uncertainty"
+  ],
+  "vendor_nominal_inputs_awaiting_confirmation": [
+    "motor_body_diameter",
+    "motor_body_length",
+    "motor_shaft_diameter",
+    "prop_diameter",
+    "prop_hub_bore"
+  ],
+  "evidence_note": "Derived from the register on the stated version; no fixture STEP exists; nothing here authorises fabrication, spending, pressurisation or rotor operation."
+}

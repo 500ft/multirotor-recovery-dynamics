@@ -56,10 +56,11 @@ def test_filling_a_pending_row_makes_its_clause_evaluable_positive_control(tmp_p
 def _fill_all(rows, cap="60", state="inspection", src="synthetic inspection record", promote=False):
     for r in rows:
         if r["evidence_state"] == "pending":
-            r["value"] = cap if r["parameter"] == "load_cell_capacity" else "1"
+            r["value"] = cap if r["parameter"] == "load_cell_capacity" else ("0.05" if r["parameter"] == "prop_hub_fit_tolerance" else "1")
             r["evidence_state"], r["source"] = state, src
-        if r["parameter"] == "authority_arm_measured": r["value"] = "0.061"
-        if r["parameter"] == "stand_calibration_lever": r["value"] = "0.150"
+        # distinct measurement records, each naming its datum -- values may coincide
+        if r["parameter"] == "authority_arm_measured": r["value"], r["source"] = "0.061", (src + " #ARM-1: vehicle centre to motor axis (datum: frame centre)") if src else ""
+        if r["parameter"] == "stand_calibration_lever": r["value"], r["source"] = "0.150", (src + " #LEV-1: pivot to calibration-force line (datum: pivot)") if src else ""
         if promote and r["evidence_state"] in ("vendor_nominal", "model_assumption"):
             r["evidence_state"], r["source"] = "inspection", src
 
@@ -98,13 +99,41 @@ def test_absurd_load_cell_capacity_fails_requirements(tmp_path):
     assert rc == 3 and "REQUIREMENTS_FAILED" in out and "load_cell_capacity_margin" in out
 
 
-def test_lever_equal_to_authority_arm_fails_requirements(tmp_path):
-    def same(rows):
+def test_equal_lengths_with_distinct_records_pass_and_shared_record_fails(tmp_path):
+    # Review 2 (2026-09-12): equal numbers do not prove reused evidence. Identity is provenance.
+    def equal_values_distinct_records(rows):
         _fill_all(rows, promote=True)
         for r in rows:
             if r["parameter"] in ("authority_arm_measured", "stand_calibration_lever"): r["value"] = "0.060"
-    rc, out = _release(_write_register(tmp_path, same))
-    assert rc == 3 and "stand_calibration_lever" in out
+    rc, out = _release(_write_register(tmp_path, equal_values_distinct_records))
+    assert rc == 0 and "REQUIREMENTS_EVALUATED" in out, out
+    def same_record(rows):
+        _fill_all(rows, promote=True)
+        for r in rows:
+            if r["parameter"] in ("authority_arm_measured", "stand_calibration_lever"): r["source"] = "synthetic inspection record #X (datum: pivot)"
+    rc, out = _release(_write_register(tmp_path, same_record))
+    assert rc == 3 and "same source record" in out, out
+    def no_datum(rows):
+        _fill_all(rows, promote=True)
+        for r in rows:
+            if r["parameter"] == "stand_calibration_lever": r["source"] = "synthetic inspection record #LEV-1"
+    rc, out = _release(_write_register(tmp_path, no_datum))
+    assert rc == 3 and "does not name its datum" in out, out
+
+
+def test_hub_fit_tolerance_is_a_registered_choice_not_a_default(tmp_path):
+    reg = FC.load_register()
+    assert reg["prop_hub_fit_tolerance"]["state"] == "pending"
+    req = FC.evaluate_requirements(reg, FC.build(reg))
+    hub = next(r for r in req if r["clause"] == "prop_hub_interface")
+    assert hub["status"] == "unresolved" and "design basis" in hub["detail"]
+    def tight(rows):
+        _fill_all(rows, promote=True)
+        for r in rows:
+            if r["parameter"] == "prop_hub_fit_tolerance": r["value"] = "0.01"
+            if r["parameter"] == "prop_hub_bore": r["value"] = "1.6"
+    rc, out = _release(_write_register(tmp_path, tight))
+    assert rc == 3 and "prop_hub_interface" in out
 
 
 def test_release_grade_inputs_with_consistent_numbers_reach_requirements_evaluated_only(tmp_path):

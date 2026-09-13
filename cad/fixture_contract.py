@@ -25,7 +25,7 @@ OUTPUT = ROOT / "cad/bench/fixture-contract.json"
 CONTRACT_VERSION = "2026-09-12"
 UNITS = {
     "motor_body_diameter": "mm", "motor_body_length": "mm", "motor_shaft_diameter": "mm",
-    "prop_diameter": "mm", "prop_hub_bore": "mm",
+    "prop_diameter": "mm", "prop_hub_bore": "mm", "prop_hub_fit_tolerance": "mm",
     "motor_mount_pitch_circle": "mm", "motor_mount_hole_diameter": "mm", "motor_mount_thread_engagement": "mm",
     "prop_mount_screw_spacing": "mm", "load_cell_mount_spacing": "mm", "load_cell_capacity": "N",
     "stand_anchor_spacing": "mm", "stand_calibration_lever": "m", "authority_arm_measured": "m",
@@ -114,7 +114,7 @@ def build(reg: dict) -> dict:
         _clause("motor_mount_thread_engagement", "interface", "Screw penetration into the motor bell is at or below the safe depth and at or above the minimum engagement, across the plate + adapter stack",
                 ["motor_mount_thread_engagement"], reg, unit="mm", verification="Owner confirms safe penetration; stack drawing lists every plate/washer thickness"),
         _clause("prop_hub_interface", "interface", "Prop hub bore and T-mount screw spacing match the delivered bell; hub bore equals shaft nominal until the delivered shaft is measured",
-                ["prop_hub_bore", "motor_shaft_diameter", "prop_mount_screw_spacing"], reg, value={"hub_bore_mm": bore, "shaft_nominal_mm": ds}, unit="mm",
+                ["prop_hub_bore", "motor_shaft_diameter", "prop_mount_screw_spacing", "prop_hub_fit_tolerance"], reg, value={"hub_bore_mm": bore, "shaft_nominal_mm": ds}, unit="mm",
                 note="Vendor-nominal bore/shaft are planning values; the mating fit is confirmed only by measuring the delivered shaft and hub."),
         _clause("load_cell_end_interfaces", "interface", "Both load-cell end interfaces (mount spacing, thread, orientation) match the identified, calibrated cell revision",
                 ["load_cell_mount_spacing", "load_cell_capacity"], reg, unit="mm", verification="Engineering Data/instrumentation.csv names the cell; its drawing is the source"),
@@ -180,15 +180,30 @@ def evaluate_requirements(reg: dict, contract: dict) -> list[dict]:
     if lever is None or arm is None:
         add("stand_calibration_lever", "unresolved", "stand_calibration_lever and/or authority_arm_measured pending")
     else:
-        add("stand_calibration_lever", "pass" if abs(lever - arm) > 1e-9 else "fail",
-            f"lever {lever} m vs authority arm {arm} m; the evidence contract requires them to be measured separately, identical values indicate one measurement reused", lever_m=lever, arm_m=arm)
+        # The evidence contract requires the two lengths to be measured SEPARATELY. Separate means
+        # distinct measurement records with their own datum -- not different numbers: two
+        # independent measurements can both read 0.060 m (review 2, 2026-09-12). The check is
+        # therefore on provenance identity: source records must differ, and each must name a datum.
+        ls, as_ = reg["stand_calibration_lever"]["source"].strip(), reg["authority_arm_measured"]["source"].strip()
+        problems = []
+        if ls == as_: problems.append("both lengths cite the same source record")
+        for n, src in (("stand_calibration_lever", ls), ("authority_arm_measured", as_)):
+            if "datum" not in src.lower() and "pivot" not in src.lower() and "center" not in src.lower() and "centre" not in src.lower():
+                problems.append(f"{n} source does not name its datum (pivot / vehicle centre)")
+        add("stand_calibration_lever", "fail" if problems else "pass",
+            ("; ".join(problems) if problems else f"lever {lever} m and authority arm {arm} m carry distinct source records with named datums (equal values are permitted)"),
+            lever_m=lever, arm_m=arm, lever_source=ls, arm_source=as_)
     D, Dp = val("motor_body_diameter"), val("prop_diameter")
     add("prop_static_swept_envelope", "pass" if Dp > D else "fail", f"prop {Dp} mm clears motor body {D} mm (static only)")
-    bore, shaft = val("prop_hub_bore"), val("motor_shaft_diameter")
-    add("prop_hub_interface", "pass" if abs(bore - shaft) <= 0.05 else "fail",
-        f"hub bore {bore} mm vs shaft {shaft} mm (nominal fit check only; delivered parts unmeasured)" if val("prop_mount_screw_spacing") is not None else
-        f"bore/shaft nominal {bore}/{shaft} mm consistent; prop_mount_screw_spacing pending", partial=val("prop_mount_screw_spacing") is None)
-    if val("prop_mount_screw_spacing") is None: R[-1]["status"] = "unresolved"
+    bore, shaft, fit = val("prop_hub_bore"), val("motor_shaft_diameter"), val("prop_hub_fit_tolerance")
+    if fit is None:
+        # The fit tolerance is an engineering choice with a design basis (fit class, retention
+        # method, vendor drawing). It is a register row the owner fills; nothing is assumed here.
+        add("prop_hub_interface", "unresolved", f"bore {bore} mm vs shaft {shaft} mm recorded; prop_hub_fit_tolerance pending (design basis not yet chosen)")
+    else:
+        add("prop_hub_interface", "pass" if abs(bore - shaft) <= fit else "fail",
+            f"hub bore {bore} mm vs shaft {shaft} mm within the registered fit tolerance {fit} mm (nominal check; delivered parts unmeasured)", fit_tolerance_mm=fit)
+        if val("prop_mount_screw_spacing") is None: R[-1]["status"] = "unresolved"; R[-1]["detail"] += "; prop_mount_screw_spacing pending"
     eng = val("motor_mount_thread_engagement")
     if eng is None: add("motor_mount_thread_engagement", "unresolved", "motor_mount_thread_engagement pending")
     else:

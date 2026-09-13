@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REGISTER = ROOT / "cad/bench/parameters.csv"
 DEFAULT_OUTPUT = ROOT / "cad/bench/input-requests.csv"
 ROUTES = {
+    "prop_hub_fit_tolerance": "owner_decision",
     "motor_mount_pitch_circle": "vendor_drawing",
     "motor_mount_hole_diameter": "vendor_drawing",
     "motor_mount_thread_engagement": "vendor_drawing",

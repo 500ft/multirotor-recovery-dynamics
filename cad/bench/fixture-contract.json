@@ -76,15 +76,18 @@
       "inputs": [
         "prop_hub_bore",
         "motor_shaft_diameter",
-        "prop_mount_screw_spacing"
+        "prop_mount_screw_spacing",
+        "prop_hub_fit_tolerance"
       ],
       "status": "pending",
       "evidence_state": "pending",
       "pending_inputs": [
-        "prop_mount_screw_spacing"
+        "prop_mount_screw_spacing",
+        "prop_hub_fit_tolerance"
       ],
       "release_requirement": {
-        "prop_mount_screw_spacing": "Owner supplies matching bell and prop hub drawing or inspection"
+        "prop_mount_screw_spacing": "Owner supplies matching bell and prop hub drawing or inspection",
+        "prop_hub_fit_tolerance": "Owner chooses the bore-to-shaft fit tolerance with a stated design basis (fit class, retention method, vendor drawing); an unchosen tolerance is not 0.05 mm by default"
       },
       "value": {
         "hub_bore_mm": 1.5,
@@ -281,6 +284,7 @@
     "motor_mount_hole_diameter",
     "motor_mount_pitch_circle",
     "motor_mount_thread_engagement",
+    "prop_hub_fit_tolerance",
     "prop_mount_screw_spacing",
     "stand_anchor_spacing",
     "stand_calibration_lever",

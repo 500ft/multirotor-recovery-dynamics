@@ -221,7 +221,7 @@ def cg_tolerance_scan(thrusts_n: tuple[float, ...] = (1.27, 4.2),
 
 if __name__ == "__main__":
     import json
-    import os
+    from pathlib import Path
 
     # Scenario A — as-toleranced build (cg up to 5 mm): the honest headline.
     a = run_sweep(label="as-toleranced_cg5mm")
@@ -238,7 +238,7 @@ if __name__ == "__main__":
         print(f"  {k}: 100%-budget {v['cg_100pct_budget_mm']:.2f} mm, "
               f"50%-margin {v['cg_50pct_margin_mm']:.2f} mm")
 
-    repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    repo = Path(__file__).resolve().parents[1]
     out = {"note": ("GATE RESULT: FAIL at the placeholder torque authority "
                     "(EST-REC-007) — scenarios A/B. Scenario C is the PREDICTION "
                     "under the physically-derived mixer authority (ASSUMED 60 mm "
@@ -246,6 +246,6 @@ if __name__ == "__main__":
                     "the EST-REC-007 bench measurement must confirm before the "
                     "robustness claim is made. See Analysis/current-results.md."),
            "scenarios": [a, b, c], "static_cg_tolerance": static}
-    with open(os.path.join(repo, "Data", "monte_carlo_results.json"), "w") as fh:
+    with (repo / "Data" / "monte_carlo_results.json").open("w") as fh:
         json.dump(out, fh, indent=2)
     print(f"\n[written] Data/monte_carlo_results.json")

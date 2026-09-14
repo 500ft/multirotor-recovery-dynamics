@@ -14,16 +14,16 @@ Outputs: Figures/release_recovery_timeseries.{png,pdf}, Figures/release_recovery
 from __future__ import annotations
 
 import json
-import os
+from pathlib import Path
 
 import numpy as np
 
 from Analysis.sim_release_recovery import (best_params, max_recoverable_rate,
                                            nominal_params, simulate, worst_params)
 
-REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FIGS = os.path.join(REPO, "Figures")
-DATA = os.path.join(REPO, "Data")
+REPO = Path(__file__).resolve().parents[1]
+FIGS = REPO / "Figures"
+DATA = REPO / "Data"
 TIERS = [("best", best_params()), ("nominal", nominal_params()), ("worst", worst_params())]
 INIT_TILT = np.radians(60.0)
 
@@ -60,7 +60,7 @@ def timeseries_figure(plt, p, rate, name):
                  fontsize=11)
     fig.tight_layout()
     for ext in ("png", "pdf"):
-        fig.savefig(os.path.join(FIGS, f"release_recovery_timeseries.{ext}"))
+        fig.savefig(FIGS / f"release_recovery_timeseries.{ext}")
     plt.close(fig)
     return r
 
@@ -95,13 +95,13 @@ def envelope_figure(plt):
     ax[1].set_title("Recovery envelope by BOM tier")
     fig.tight_layout()
     for ext in ("png", "pdf"):
-        fig.savefig(os.path.join(FIGS, f"release_recovery_envelope.{ext}"))
+        fig.savefig(FIGS / f"release_recovery_envelope.{ext}")
     plt.close(fig)
     return summary
 
 
 def main():
-    os.makedirs(FIGS, exist_ok=True); os.makedirs(DATA, exist_ok=True)
+    FIGS.mkdir(exist_ok=True); DATA.mkdir(exist_ok=True)
     _style()
     import matplotlib
     matplotlib.use("Agg")
@@ -119,7 +119,7 @@ def main():
                       "altitude_lost_m": demo["max_descent_m"], "peak_thrust_n": demo["peak_thrust_n"]},
         "envelope_by_tier": envelope,
     }
-    with open(os.path.join(DATA, "release_recovery_results.json"), "w") as fh:
+    with (DATA / "release_recovery_results.json").open("w") as fh:
         json.dump(results, fh, indent=2)
 
     print("=== Release-to-stabilization (Lane A) ===")

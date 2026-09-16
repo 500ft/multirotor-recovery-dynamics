@@ -1,0 +1,5100 @@
+{
+  "note": "SIMULATION-ONLY PREDICTION (Study A/B). Mechanism and parachute action parameters are EST owner inputs (OQ-010); the bench/drop gates (Study C) must run before any survivable-set claim leaves this file. Preregistration: docs/specs/survivable-set/design.md",
+  "preregistration": {
+    "landing_criterion_bare": [
+      2.0,
+      29.999999999999996
+    ],
+    "landing_criterion_guarded_EST": [
+      2.5,
+      59.99999999999999
+    ],
+    "sensitivity": {
+      "strict": [
+        1.5,
+        20.0
+      ],
+      "lenient": [
+        3.0,
+        45.0
+      ]
+    },
+    "mech_mass_frac_EST": 0.12,
+    "mech_inertia_frac_EST": 0.3,
+    "parachute_EST": {
+      "terminal_m_s": 1.8,
+      "deploy_s": 0.8
+    },
+    "descent_rate_m_s": 1.0,
+    "init_tilt_max_deg": 29.999999999999996,
+    "primary_cells": [
+      "h3_vz0_w6_d0.11",
+      "h1.5_vz-1.5_w2_d0.3"
+    ],
+    "primary_classes": [
+      "one_out",
+      "two_adjacent"
+    ],
+    "trials": {
+      "exploratory": 30,
+      "primary": 300,
+      "parachute": 2000
+    },
+    "base_seed": 20260916
+  },
+  "kill_criterion": {
+    "mechanism_justified": false,
+    "verdict": "KILL: mechanism does not enlarge the survivable set beyond Monte Carlo uncertainty \u2014 redirect to the policy alone",
+    "comparisons": [
+      {
+        "class": "one_out",
+        "cell": "h1.5_vz-1.5_w2_d0.3",
+        "mechanism_lower": 0.0,
+        "realloc_upper": 0.00993608194445772,
+        "mechanism_dominates": false,
+        "realloc_dominates": false,
+        "both_actions_fail": true
+      },
+      {
+        "class": "one_out",
+        "cell": "h3_vz0_w6_d0.11",
+        "mechanism_lower": 0.0,
+        "realloc_upper": 0.00993608194445772,
+        "mechanism_dominates": false,
+        "realloc_dominates": false,
+        "both_actions_fail": true
+      },
+      {
+        "class": "two_adjacent",
+        "cell": "h1.5_vz-1.5_w2_d0.3",
+        "mechanism_lower": 0.0,
+        "realloc_upper": 0.00993608194445772,
+        "mechanism_dominates": false,
+        "realloc_dominates": false,
+        "both_actions_fail": true
+      },
+      {
+        "class": "two_adjacent",
+        "cell": "h3_vz0_w6_d0.11",
+        "mechanism_lower": 0.0,
+        "realloc_upper": 0.00993608194445772,
+        "mechanism_dominates": false,
+        "realloc_dominates": false,
+        "both_actions_fail": true
+      }
+    ]
+  },
+  "policy": [
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz-1.5_w2_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.04685482691460088,
+      "ambiguous_with": [
+        "mechanism"
+      ]
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz-1.5_w6_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz-1.5_w6_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz0_w2_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.24952590514663275,
+      "ambiguous_with": [
+        "mechanism"
+      ]
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz0_w2_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0017083156444657305,
+      "ambiguous_with": [
+        "mechanism"
+      ]
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz0_w6_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz-1.5_w2_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.22105944984601372,
+      "ambiguous_with": [
+        "mechanism"
+      ]
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz-1.5_w2_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0017083156444657305,
+      "ambiguous_with": [
+        "mechanism"
+      ]
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz-1.5_w6_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz-1.5_w6_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz0_w2_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.3084640271933943,
+      "ambiguous_with": [
+        "mechanism"
+      ]
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz0_w2_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.11498689556973896,
+      "ambiguous_with": [
+        "mechanism"
+      ]
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz0_w6_d0.11",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.05056808117475594,
+      "ambiguous_with": []
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz0_w6_d0.3",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.04361379118726858,
+      "ambiguous_with": [
+        "mechanism",
+        "realloc_only"
+      ]
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.3388926616095152,
+      "ambiguous_with": [
+        "mechanism"
+      ]
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.2336134585299549,
+      "ambiguous_with": [
+        "mechanism",
+        "realloc_only"
+      ]
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w6_d0.11",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.2502492915758137,
+      "ambiguous_with": []
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w6_d0.3",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.2345911502557063,
+      "ambiguous_with": []
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.11",
+      "best_action": "mechanism",
+      "best_p_safe_95_lower": 0.5349272934296909,
+      "ambiguous_with": [
+        "realloc_only"
+      ]
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.3",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.38085723309953584,
+      "ambiguous_with": [
+        "mechanism",
+        "realloc_only"
+      ]
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz0_w6_d0.11",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.3942473363121901,
+      "ambiguous_with": []
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz0_w6_d0.3",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.3773880433472457,
+      "ambiguous_with": []
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz-1.5_w2_d0.11",
+      "best_action": "mechanism",
+      "best_p_safe_95_lower": 0.642990885438347,
+      "ambiguous_with": [
+        "realloc_only"
+      ]
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz-1.5_w6_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz-1.5_w6_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w2_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.9049661471446958,
+      "ambiguous_with": [
+        "mechanism"
+      ]
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w2_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.4339452612134557,
+      "ambiguous_with": [
+        "mechanism"
+      ]
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz-1.5_w2_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.9049661471446958,
+      "ambiguous_with": [
+        "mechanism"
+      ]
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz-1.5_w2_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.011975800965209185,
+      "ambiguous_with": [
+        "mechanism"
+      ]
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz-1.5_w6_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.4339452612134557,
+      "ambiguous_with": []
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz-1.5_w6_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz0_w2_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.9049661471446958,
+      "ambiguous_with": [
+        "mechanism"
+      ]
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz0_w2_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.9049661471446958,
+      "ambiguous_with": []
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz0_w6_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.9049661471446958,
+      "ambiguous_with": [
+        "mechanism"
+      ]
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz0_w6_d0.3",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.04361379118726858,
+      "ambiguous_with": [
+        "mechanism",
+        "realloc_only"
+      ]
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz-1.5_w2_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.9049661471446958,
+      "ambiguous_with": [
+        "mechanism"
+      ]
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.9049661471446958,
+      "ambiguous_with": [
+        "mechanism"
+      ]
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz-1.5_w6_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.9049661471446958,
+      "ambiguous_with": [
+        "mechanism"
+      ]
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz-1.5_w6_d0.3",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.2345911502557063,
+      "ambiguous_with": []
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz0_w2_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.9049661471446958,
+      "ambiguous_with": [
+        "mechanism"
+      ]
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz0_w2_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.9049661471446958,
+      "ambiguous_with": [
+        "mechanism"
+      ]
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz0_w6_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.9049661471446958,
+      "ambiguous_with": [
+        "mechanism"
+      ]
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz0_w6_d0.3",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.3773880433472457,
+      "ambiguous_with": []
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz-1.5_w2_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz-1.5_w6_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz-1.5_w6_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz0_w2_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz0_w2_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz0_w6_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz-1.5_w2_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz-1.5_w2_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz-1.5_w6_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz-1.5_w6_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz0_w2_d0.11",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.046853697872644394,
+      "ambiguous_with": [
+        "mechanism",
+        "realloc_only"
+      ]
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz0_w2_d0.3",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.04963838478807428,
+      "ambiguous_with": [
+        "mechanism",
+        "realloc_only"
+      ]
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz0_w6_d0.11",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.05056808117475594,
+      "ambiguous_with": []
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz0_w6_d0.3",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.04361379118726858,
+      "ambiguous_with": [
+        "mechanism",
+        "realloc_only"
+      ]
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz-1.5_w2_d0.11",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.22481939436894433,
+      "ambiguous_with": []
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.2336134585299549,
+      "ambiguous_with": []
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz-1.5_w6_d0.11",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.2502492915758137,
+      "ambiguous_with": []
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz-1.5_w6_d0.3",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.2345911502557063,
+      "ambiguous_with": []
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz0_w2_d0.11",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.3853190278282365,
+      "ambiguous_with": []
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz0_w2_d0.3",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.38085723309953584,
+      "ambiguous_with": []
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz0_w6_d0.11",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.3942473363121901,
+      "ambiguous_with": []
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz0_w6_d0.3",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.3773880433472457,
+      "ambiguous_with": []
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz-1.5_w2_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz-1.5_w6_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz-1.5_w6_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz0_w2_d0.11",
+      "best_action": "mechanism",
+      "best_p_safe_95_lower": 0.027815549739749798,
+      "ambiguous_with": [
+        "realloc_only"
+      ]
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz0_w2_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz0_w6_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz-1.5_w2_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz-1.5_w2_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz-1.5_w6_d0.11",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz-1.5_w6_d0.3",
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz0_w2_d0.11",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.046853697872644394,
+      "ambiguous_with": [
+        "mechanism",
+        "realloc_only"
+      ]
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz0_w2_d0.3",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.04963838478807428,
+      "ambiguous_with": [
+        "mechanism",
+        "realloc_only"
+      ]
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz0_w6_d0.11",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.05056808117475594,
+      "ambiguous_with": [
+        "mechanism",
+        "realloc_only"
+      ]
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz0_w6_d0.3",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.04361379118726858,
+      "ambiguous_with": [
+        "mechanism",
+        "realloc_only"
+      ]
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz-1.5_w2_d0.11",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.22481939436894433,
+      "ambiguous_with": [
+        "realloc_only"
+      ]
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.2336134585299549,
+      "ambiguous_with": []
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz-1.5_w6_d0.11",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.2502492915758137,
+      "ambiguous_with": []
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz-1.5_w6_d0.3",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.2345911502557063,
+      "ambiguous_with": []
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.11",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.3853190278282365,
+      "ambiguous_with": [
+        "realloc_only"
+      ]
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.3",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.38085723309953584,
+      "ambiguous_with": []
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz0_w6_d0.11",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.3942473363121901,
+      "ambiguous_with": []
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz0_w6_d0.3",
+      "best_action": "parachute",
+      "best_p_safe_95_lower": 0.3773880433472457,
+      "ambiguous_with": []
+    }
+  ],
+  "exploratory": [
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz-1.5_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 3,
+      "p_safe": 0.1,
+      "p_safe_95_lower": 0.027815549739749798,
+      "p_safe_95_upper": 0.23859785729325056,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 4
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz-1.5_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz-1.5_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 4,
+      "p_safe": 0.13333333333333333,
+      "p_safe_95_lower": 0.04685482691460088,
+      "p_safe_95_upper": 0.2796151658934817,
+      "sensitivity_successes": {
+        "strict": 2,
+        "lenient": 10
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "action": "mechanism",
+      "n": 300,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.00993608194445772,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "action": "realloc_only",
+      "n": 300,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.00993608194445772,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz-1.5_w6_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz-1.5_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz-1.5_w6_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz-1.5_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz-1.5_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz-1.5_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz0_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 10,
+      "p_safe": 0.3333333333333333,
+      "p_safe_95_lower": 0.1933084211205933,
+      "p_safe_95_upper": 0.4994386971759526,
+      "sensitivity_successes": {
+        "strict": 7,
+        "lenient": 12
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz0_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz0_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 12,
+      "p_safe": 0.4,
+      "p_safe_95_lower": 0.24952590514663275,
+      "p_safe_95_upper": 0.5660547387865442,
+      "sensitivity_successes": {
+        "strict": 12,
+        "lenient": 13
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz0_w2_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz0_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz0_w2_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 1,
+      "p_safe": 0.03333333333333333,
+      "p_safe_95_lower": 0.0017083156444657305,
+      "p_safe_95_upper": 0.14859606865911323,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz0_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz0_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz0_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz-1.5_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 10,
+      "p_safe": 0.3333333333333333,
+      "p_safe_95_lower": 0.1933084211205933,
+      "p_safe_95_upper": 0.4994386971759526,
+      "sensitivity_successes": {
+        "strict": 9,
+        "lenient": 11
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz-1.5_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz-1.5_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 11,
+      "p_safe": 0.36666666666666664,
+      "p_safe_95_lower": 0.22105944984601372,
+      "p_safe_95_upper": 0.5330863299229496,
+      "sensitivity_successes": {
+        "strict": 11,
+        "lenient": 11
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz-1.5_w2_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz-1.5_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz-1.5_w2_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 1,
+      "p_safe": 0.03333333333333333,
+      "p_safe_95_lower": 0.0017083156444657305,
+      "p_safe_95_upper": 0.14859606865911323,
+      "sensitivity_successes": {
+        "strict": 1,
+        "lenient": 2
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz-1.5_w6_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz-1.5_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz-1.5_w6_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz-1.5_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz-1.5_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz-1.5_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz0_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 13,
+      "p_safe": 0.43333333333333335,
+      "p_safe_95_lower": 0.2786695738416112,
+      "p_safe_95_upper": 0.5983710526353453,
+      "sensitivity_successes": {
+        "strict": 11,
+        "lenient": 13
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz0_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 110,
+      "p_safe": 0.055,
+      "p_safe_95_lower": 0.046853697872644394,
+      "p_safe_95_upper": 0.0641323049960495,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 339
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz0_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 14,
+      "p_safe": 0.4666666666666667,
+      "p_safe_95_lower": 0.3084640271933943,
+      "p_safe_95_upper": 0.6300524448838062,
+      "sensitivity_successes": {
+        "strict": 14,
+        "lenient": 15
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz0_w2_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 2,
+      "p_safe": 0.06666666666666667,
+      "p_safe_95_lower": 0.011975800965209185,
+      "p_safe_95_upper": 0.19532604365492579,
+      "sensitivity_successes": {
+        "strict": 1,
+        "lenient": 3
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz0_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 116,
+      "p_safe": 0.058,
+      "p_safe_95_lower": 0.04963838478807428,
+      "p_safe_95_upper": 0.06734010836297,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 337
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz0_w2_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 7,
+      "p_safe": 0.23333333333333334,
+      "p_safe_95_lower": 0.11498689556973896,
+      "p_safe_95_upper": 0.3939474225223629,
+      "sensitivity_successes": {
+        "strict": 6,
+        "lenient": 8
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz0_w6_d0.11",
+      "action": "mechanism",
+      "n": 300,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.00993608194445772,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz0_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 118,
+      "p_safe": 0.059,
+      "p_safe_95_lower": 0.05056808117475594,
+      "p_safe_95_upper": 0.06840792629810577,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 335
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz0_w6_d0.11",
+      "action": "realloc_only",
+      "n": 300,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.00993608194445772,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz0_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz0_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 103,
+      "p_safe": 0.0515,
+      "p_safe_95_lower": 0.04361379118726858,
+      "p_safe_95_upper": 0.060381084659818285,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 314
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz0_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 11,
+      "p_safe": 0.36666666666666664,
+      "p_safe_95_lower": 0.22105944984601372,
+      "p_safe_95_upper": 0.5330863299229496,
+      "sensitivity_successes": {
+        "strict": 10,
+        "lenient": 11
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 481,
+      "p_safe": 0.2405,
+      "p_safe_95_lower": 0.22481939436894433,
+      "p_safe_95_upper": 0.2567459618346135,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1011
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 15,
+      "p_safe": 0.5,
+      "p_safe_95_lower": 0.3388926616095152,
+      "p_safe_95_upper": 0.6611073383904849,
+      "sensitivity_successes": {
+        "strict": 15,
+        "lenient": 15
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 9,
+      "p_safe": 0.3,
+      "p_safe_95_lower": 0.16632595561321192,
+      "p_safe_95_upper": 0.4650727065703091,
+      "sensitivity_successes": {
+        "strict": 7,
+        "lenient": 10
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 499,
+      "p_safe": 0.2495,
+      "p_safe_95_lower": 0.2336134585299549,
+      "p_safe_95_upper": 0.26593215828603345,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 986
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 4,
+      "p_safe": 0.13333333333333333,
+      "p_safe_95_lower": 0.04685482691460088,
+      "p_safe_95_upper": 0.2796151658934817,
+      "sensitivity_successes": {
+        "strict": 4,
+        "lenient": 5
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w6_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 533,
+      "p_safe": 0.2665,
+      "p_safe_95_lower": 0.2502492915758137,
+      "p_safe_95_upper": 0.2832590882434145,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1017
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w6_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 1,
+      "p_safe": 0.03333333333333333,
+      "p_safe_95_lower": 0.0017083156444657305,
+      "p_safe_95_upper": 0.14859606865911323,
+      "sensitivity_successes": {
+        "strict": 1,
+        "lenient": 1
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 501,
+      "p_safe": 0.2505,
+      "p_safe_95_lower": 0.2345911502557063,
+      "p_safe_95_upper": 0.2669522744548858,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1004
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 21,
+      "p_safe": 0.7,
+      "p_safe_95_lower": 0.5349272934296909,
+      "p_safe_95_upper": 0.833674044386788,
+      "sensitivity_successes": {
+        "strict": 18,
+        "lenient": 21
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 807,
+      "p_safe": 0.4035,
+      "p_safe_95_lower": 0.3853190278282365,
+      "p_safe_95_upper": 0.42189068039936073,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1476
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 20,
+      "p_safe": 0.6666666666666666,
+      "p_safe_95_lower": 0.5005613028240474,
+      "p_safe_95_upper": 0.8066915788794067,
+      "sensitivity_successes": {
+        "strict": 19,
+        "lenient": 21
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 7,
+      "p_safe": 0.23333333333333334,
+      "p_safe_95_lower": 0.11498689556973896,
+      "p_safe_95_upper": 0.3939474225223629,
+      "sensitivity_successes": {
+        "strict": 6,
+        "lenient": 7
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 798,
+      "p_safe": 0.399,
+      "p_safe_95_lower": 0.38085723309953584,
+      "p_safe_95_upper": 0.41736226121896547,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1507
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 13,
+      "p_safe": 0.43333333333333335,
+      "p_safe_95_lower": 0.2786695738416112,
+      "p_safe_95_upper": 0.5983710526353453,
+      "sensitivity_successes": {
+        "strict": 13,
+        "lenient": 13
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz0_w6_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz0_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 825,
+      "p_safe": 0.4125,
+      "p_safe_95_lower": 0.3942473363121901,
+      "p_safe_95_upper": 0.43094280250318706,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1520
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz0_w6_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 1,
+      "p_safe": 0.03333333333333333,
+      "p_safe_95_lower": 0.0017083156444657305,
+      "p_safe_95_upper": 0.14859606865911323,
+      "sensitivity_successes": {
+        "strict": 1,
+        "lenient": 1
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz0_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz0_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 791,
+      "p_safe": 0.3955,
+      "p_safe_95_lower": 0.3773880433472457,
+      "p_safe_95_upper": 0.41383906305932316,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1493
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h6_vz0_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz-1.5_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 24,
+      "p_safe": 0.8,
+      "p_safe_95_lower": 0.642990885438347,
+      "p_safe_95_upper": 0.9091259402949785,
+      "sensitivity_successes": {
+        "strict": 2,
+        "lenient": 29
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz-1.5_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz-1.5_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 19,
+      "p_safe": 0.6333333333333333,
+      "p_safe_95_lower": 0.46691367007705037,
+      "p_safe_95_upper": 0.7789405501539863,
+      "sensitivity_successes": {
+        "strict": 16,
+        "lenient": 30
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz-1.5_w6_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz-1.5_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz-1.5_w6_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 2
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz-1.5_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz-1.5_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz-1.5_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 30,
+      "p_safe": 1.0,
+      "p_safe_95_lower": 0.9049661471446958,
+      "p_safe_95_upper": 1.0,
+      "sensitivity_successes": {
+        "strict": 30,
+        "lenient": 30
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 30,
+      "p_safe": 1.0,
+      "p_safe_95_lower": 0.9049661471446958,
+      "p_safe_95_upper": 1.0,
+      "sensitivity_successes": {
+        "strict": 30,
+        "lenient": 30
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w2_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 3
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w2_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 16
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 9,
+      "p_safe": 0.3,
+      "p_safe_95_lower": 0.16632595561321192,
+      "p_safe_95_upper": 0.4650727065703091,
+      "sensitivity_successes": {
+        "strict": 2,
+        "lenient": 15
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 18,
+      "p_safe": 0.6,
+      "p_safe_95_lower": 0.4339452612134557,
+      "p_safe_95_upper": 0.7504740948533672,
+      "sensitivity_successes": {
+        "strict": 15,
+        "lenient": 26
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz-1.5_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 30,
+      "p_safe": 1.0,
+      "p_safe_95_lower": 0.9049661471446958,
+      "p_safe_95_upper": 1.0,
+      "sensitivity_successes": {
+        "strict": 25,
+        "lenient": 30
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz-1.5_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz-1.5_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 30,
+      "p_safe": 1.0,
+      "p_safe_95_lower": 0.9049661471446958,
+      "p_safe_95_upper": 1.0,
+      "sensitivity_successes": {
+        "strict": 30,
+        "lenient": 30
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz-1.5_w2_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz-1.5_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz-1.5_w2_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 2,
+      "p_safe": 0.06666666666666667,
+      "p_safe_95_lower": 0.011975800965209185,
+      "p_safe_95_upper": 0.19532604365492579,
+      "sensitivity_successes": {
+        "strict": 2,
+        "lenient": 13
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz-1.5_w6_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 6,
+      "p_safe": 0.2,
+      "p_safe_95_lower": 0.09087405970502152,
+      "p_safe_95_upper": 0.35700911456165296,
+      "sensitivity_successes": {
+        "strict": 4,
+        "lenient": 10
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz-1.5_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz-1.5_w6_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 18,
+      "p_safe": 0.6,
+      "p_safe_95_lower": 0.4339452612134557,
+      "p_safe_95_upper": 0.7504740948533672,
+      "sensitivity_successes": {
+        "strict": 17,
+        "lenient": 22
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz-1.5_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz-1.5_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz-1.5_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz0_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 30,
+      "p_safe": 1.0,
+      "p_safe_95_lower": 0.9049661471446958,
+      "p_safe_95_upper": 1.0,
+      "sensitivity_successes": {
+        "strict": 30,
+        "lenient": 30
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz0_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 110,
+      "p_safe": 0.055,
+      "p_safe_95_lower": 0.046853697872644394,
+      "p_safe_95_upper": 0.0641323049960495,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 339
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz0_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 30,
+      "p_safe": 1.0,
+      "p_safe_95_lower": 0.9049661471446958,
+      "p_safe_95_upper": 1.0,
+      "sensitivity_successes": {
+        "strict": 30,
+        "lenient": 30
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz0_w2_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 21,
+      "p_safe": 0.7,
+      "p_safe_95_lower": 0.5349272934296909,
+      "p_safe_95_upper": 0.833674044386788,
+      "sensitivity_successes": {
+        "strict": 12,
+        "lenient": 26
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz0_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 116,
+      "p_safe": 0.058,
+      "p_safe_95_lower": 0.04963838478807428,
+      "p_safe_95_upper": 0.06734010836297,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 337
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz0_w2_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 30,
+      "p_safe": 1.0,
+      "p_safe_95_lower": 0.9049661471446958,
+      "p_safe_95_upper": 1.0,
+      "sensitivity_successes": {
+        "strict": 28,
+        "lenient": 30
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz0_w6_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 29,
+      "p_safe": 0.9666666666666667,
+      "p_safe_95_lower": 0.8514039313408868,
+      "p_safe_95_upper": 0.9982916843555343,
+      "sensitivity_successes": {
+        "strict": 23,
+        "lenient": 29
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz0_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 118,
+      "p_safe": 0.059,
+      "p_safe_95_lower": 0.05056808117475594,
+      "p_safe_95_upper": 0.06840792629810577,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 335
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz0_w6_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 30,
+      "p_safe": 1.0,
+      "p_safe_95_lower": 0.9049661471446958,
+      "p_safe_95_upper": 1.0,
+      "sensitivity_successes": {
+        "strict": 29,
+        "lenient": 30
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz0_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz0_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 103,
+      "p_safe": 0.0515,
+      "p_safe_95_lower": 0.04361379118726858,
+      "p_safe_95_upper": 0.060381084659818285,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 314
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz0_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz-1.5_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 30,
+      "p_safe": 1.0,
+      "p_safe_95_lower": 0.9049661471446958,
+      "p_safe_95_upper": 1.0,
+      "sensitivity_successes": {
+        "strict": 30,
+        "lenient": 30
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz-1.5_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 481,
+      "p_safe": 0.2405,
+      "p_safe_95_lower": 0.22481939436894433,
+      "p_safe_95_upper": 0.2567459618346135,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1011
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz-1.5_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 30,
+      "p_safe": 1.0,
+      "p_safe_95_lower": 0.9049661471446958,
+      "p_safe_95_upper": 1.0,
+      "sensitivity_successes": {
+        "strict": 30,
+        "lenient": 30
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 27,
+      "p_safe": 0.9,
+      "p_safe_95_lower": 0.7614021427067494,
+      "p_safe_95_upper": 0.9721844502602502,
+      "sensitivity_successes": {
+        "strict": 24,
+        "lenient": 28
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 499,
+      "p_safe": 0.2495,
+      "p_safe_95_lower": 0.2336134585299549,
+      "p_safe_95_upper": 0.26593215828603345,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 986
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 30,
+      "p_safe": 1.0,
+      "p_safe_95_lower": 0.9049661471446958,
+      "p_safe_95_upper": 1.0,
+      "sensitivity_successes": {
+        "strict": 30,
+        "lenient": 30
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz-1.5_w6_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 27,
+      "p_safe": 0.9,
+      "p_safe_95_lower": 0.7614021427067494,
+      "p_safe_95_upper": 0.9721844502602502,
+      "sensitivity_successes": {
+        "strict": 23,
+        "lenient": 27
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz-1.5_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 533,
+      "p_safe": 0.2665,
+      "p_safe_95_lower": 0.2502492915758137,
+      "p_safe_95_upper": 0.2832590882434145,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1017
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz-1.5_w6_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 30,
+      "p_safe": 1.0,
+      "p_safe_95_lower": 0.9049661471446958,
+      "p_safe_95_upper": 1.0,
+      "sensitivity_successes": {
+        "strict": 30,
+        "lenient": 30
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz-1.5_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz-1.5_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 501,
+      "p_safe": 0.2505,
+      "p_safe_95_lower": 0.2345911502557063,
+      "p_safe_95_upper": 0.2669522744548858,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1004
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz-1.5_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz0_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 30,
+      "p_safe": 1.0,
+      "p_safe_95_lower": 0.9049661471446958,
+      "p_safe_95_upper": 1.0,
+      "sensitivity_successes": {
+        "strict": 30,
+        "lenient": 30
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz0_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 807,
+      "p_safe": 0.4035,
+      "p_safe_95_lower": 0.3853190278282365,
+      "p_safe_95_upper": 0.42189068039936073,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1476
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz0_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 30,
+      "p_safe": 1.0,
+      "p_safe_95_lower": 0.9049661471446958,
+      "p_safe_95_upper": 1.0,
+      "sensitivity_successes": {
+        "strict": 30,
+        "lenient": 30
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz0_w2_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 30,
+      "p_safe": 1.0,
+      "p_safe_95_lower": 0.9049661471446958,
+      "p_safe_95_upper": 1.0,
+      "sensitivity_successes": {
+        "strict": 29,
+        "lenient": 30
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz0_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 798,
+      "p_safe": 0.399,
+      "p_safe_95_lower": 0.38085723309953584,
+      "p_safe_95_upper": 0.41736226121896547,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1507
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz0_w2_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 30,
+      "p_safe": 1.0,
+      "p_safe_95_lower": 0.9049661471446958,
+      "p_safe_95_upper": 1.0,
+      "sensitivity_successes": {
+        "strict": 30,
+        "lenient": 30
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz0_w6_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 30,
+      "p_safe": 1.0,
+      "p_safe_95_lower": 0.9049661471446958,
+      "p_safe_95_upper": 1.0,
+      "sensitivity_successes": {
+        "strict": 29,
+        "lenient": 30
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz0_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 825,
+      "p_safe": 0.4125,
+      "p_safe_95_lower": 0.3942473363121901,
+      "p_safe_95_upper": 0.43094280250318706,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1520
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz0_w6_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 30,
+      "p_safe": 1.0,
+      "p_safe_95_lower": 0.9049661471446958,
+      "p_safe_95_upper": 1.0,
+      "sensitivity_successes": {
+        "strict": 30,
+        "lenient": 30
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz0_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz0_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 791,
+      "p_safe": 0.3955,
+      "p_safe_95_lower": 0.3773880433472457,
+      "p_safe_95_upper": 0.41383906305932316,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1493
+      }
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h6_vz0_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz-1.5_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz-1.5_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz-1.5_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "action": "mechanism",
+      "n": 300,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.00993608194445772,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "action": "realloc_only",
+      "n": 300,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.00993608194445772,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz-1.5_w6_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz-1.5_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz-1.5_w6_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz-1.5_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz-1.5_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz-1.5_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz0_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz0_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz0_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz0_w2_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz0_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz0_w2_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz0_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz0_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz0_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz-1.5_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz-1.5_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz-1.5_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz-1.5_w2_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz-1.5_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz-1.5_w2_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz-1.5_w6_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz-1.5_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz-1.5_w6_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz-1.5_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz-1.5_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz-1.5_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz0_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz0_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 110,
+      "p_safe": 0.055,
+      "p_safe_95_lower": 0.046853697872644394,
+      "p_safe_95_upper": 0.0641323049960495,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 339
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz0_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz0_w2_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz0_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 116,
+      "p_safe": 0.058,
+      "p_safe_95_lower": 0.04963838478807428,
+      "p_safe_95_upper": 0.06734010836297,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 337
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz0_w2_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz0_w6_d0.11",
+      "action": "mechanism",
+      "n": 300,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.00993608194445772,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz0_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 118,
+      "p_safe": 0.059,
+      "p_safe_95_lower": 0.05056808117475594,
+      "p_safe_95_upper": 0.06840792629810577,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 335
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz0_w6_d0.11",
+      "action": "realloc_only",
+      "n": 300,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.00993608194445772,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz0_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz0_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 103,
+      "p_safe": 0.0515,
+      "p_safe_95_lower": 0.04361379118726858,
+      "p_safe_95_upper": 0.060381084659818285,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 314
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz0_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz-1.5_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz-1.5_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 481,
+      "p_safe": 0.2405,
+      "p_safe_95_lower": 0.22481939436894433,
+      "p_safe_95_upper": 0.2567459618346135,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1011
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz-1.5_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 499,
+      "p_safe": 0.2495,
+      "p_safe_95_lower": 0.2336134585299549,
+      "p_safe_95_upper": 0.26593215828603345,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 986
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz-1.5_w6_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz-1.5_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 533,
+      "p_safe": 0.2665,
+      "p_safe_95_lower": 0.2502492915758137,
+      "p_safe_95_upper": 0.2832590882434145,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1017
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz-1.5_w6_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz-1.5_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz-1.5_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 501,
+      "p_safe": 0.2505,
+      "p_safe_95_lower": 0.2345911502557063,
+      "p_safe_95_upper": 0.2669522744548858,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1004
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz-1.5_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz0_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz0_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 807,
+      "p_safe": 0.4035,
+      "p_safe_95_lower": 0.3853190278282365,
+      "p_safe_95_upper": 0.42189068039936073,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1476
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz0_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz0_w2_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz0_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 798,
+      "p_safe": 0.399,
+      "p_safe_95_lower": 0.38085723309953584,
+      "p_safe_95_upper": 0.41736226121896547,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1507
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz0_w2_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz0_w6_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz0_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 825,
+      "p_safe": 0.4125,
+      "p_safe_95_lower": 0.3942473363121901,
+      "p_safe_95_upper": 0.43094280250318706,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1520
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz0_w6_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz0_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz0_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 791,
+      "p_safe": 0.3955,
+      "p_safe_95_lower": 0.3773880433472457,
+      "p_safe_95_upper": 0.41383906305932316,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1493
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h6_vz0_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz-1.5_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 3
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz-1.5_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz-1.5_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 5
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz-1.5_w6_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz-1.5_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz-1.5_w6_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz-1.5_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz-1.5_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz-1.5_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz0_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 3,
+      "p_safe": 0.1,
+      "p_safe_95_lower": 0.027815549739749798,
+      "p_safe_95_upper": 0.23859785729325056,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 3
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz0_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz0_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 3
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz0_w2_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz0_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz0_w2_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz0_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz0_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h1.5_vz0_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz-1.5_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz-1.5_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz-1.5_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz-1.5_w2_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz-1.5_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz-1.5_w2_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz-1.5_w6_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz-1.5_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz-1.5_w6_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz-1.5_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz-1.5_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz-1.5_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz0_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz0_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 110,
+      "p_safe": 0.055,
+      "p_safe_95_lower": 0.046853697872644394,
+      "p_safe_95_upper": 0.0641323049960495,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 339
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz0_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 1,
+      "p_safe": 0.03333333333333333,
+      "p_safe_95_lower": 0.0017083156444657305,
+      "p_safe_95_upper": 0.14859606865911323,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 3
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz0_w2_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz0_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 116,
+      "p_safe": 0.058,
+      "p_safe_95_lower": 0.04963838478807428,
+      "p_safe_95_upper": 0.06734010836297,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 337
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz0_w2_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz0_w6_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz0_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 118,
+      "p_safe": 0.059,
+      "p_safe_95_lower": 0.05056808117475594,
+      "p_safe_95_upper": 0.06840792629810577,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 335
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz0_w6_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz0_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz0_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 103,
+      "p_safe": 0.0515,
+      "p_safe_95_lower": 0.04361379118726858,
+      "p_safe_95_upper": 0.060381084659818285,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 314
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h3_vz0_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz-1.5_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz-1.5_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 481,
+      "p_safe": 0.2405,
+      "p_safe_95_lower": 0.22481939436894433,
+      "p_safe_95_upper": 0.2567459618346135,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1011
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz-1.5_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 5,
+      "p_safe": 0.16666666666666666,
+      "p_safe_95_lower": 0.0680555735803846,
+      "p_safe_95_upper": 0.318971181947315,
+      "sensitivity_successes": {
+        "strict": 5,
+        "lenient": 9
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 499,
+      "p_safe": 0.2495,
+      "p_safe_95_lower": 0.2336134585299549,
+      "p_safe_95_upper": 0.26593215828603345,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 986
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz-1.5_w6_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz-1.5_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 533,
+      "p_safe": 0.2665,
+      "p_safe_95_lower": 0.2502492915758137,
+      "p_safe_95_upper": 0.2832590882434145,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1017
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz-1.5_w6_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz-1.5_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz-1.5_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 501,
+      "p_safe": 0.2505,
+      "p_safe_95_lower": 0.2345911502557063,
+      "p_safe_95_upper": 0.2669522744548858,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1004
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz-1.5_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 1,
+      "p_safe": 0.03333333333333333,
+      "p_safe_95_lower": 0.0017083156444657305,
+      "p_safe_95_upper": 0.14859606865911323,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 807,
+      "p_safe": 0.4035,
+      "p_safe_95_lower": 0.3853190278282365,
+      "p_safe_95_upper": 0.42189068039936073,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1476
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 8,
+      "p_safe": 0.26666666666666666,
+      "p_safe_95_lower": 0.14018509946776792,
+      "p_safe_95_upper": 0.42993393380629286,
+      "sensitivity_successes": {
+        "strict": 8,
+        "lenient": 9
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 798,
+      "p_safe": 0.399,
+      "p_safe_95_lower": 0.38085723309953584,
+      "p_safe_95_upper": 0.41736226121896547,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1507
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz0_w6_d0.11",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz0_w6_d0.11",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 825,
+      "p_safe": 0.4125,
+      "p_safe_95_lower": 0.3942473363121901,
+      "p_safe_95_upper": 0.43094280250318706,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1520
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz0_w6_d0.11",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz0_w6_d0.3",
+      "action": "mechanism",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz0_w6_d0.3",
+      "action": "parachute",
+      "n": 2000,
+      "successes": 791,
+      "p_safe": 0.3955,
+      "p_safe_95_lower": 0.3773880433472457,
+      "p_safe_95_upper": 0.41383906305932316,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 1493
+      }
+    },
+    {
+      "class": "two_opposite",
+      "cell": "h6_vz0_w6_d0.3",
+      "action": "realloc_only",
+      "n": 30,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.09503385285530419,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    }
+  ],
+  "primary": [
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "action": "mechanism",
+      "n": 300,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.00993608194445772,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "action": "realloc_only",
+      "n": 300,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.00993608194445772,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz0_w6_d0.11",
+      "action": "mechanism",
+      "n": 300,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.00993608194445772,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz0_w6_d0.11",
+      "action": "realloc_only",
+      "n": 300,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.00993608194445772,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "action": "mechanism",
+      "n": 300,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.00993608194445772,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "action": "realloc_only",
+      "n": 300,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.00993608194445772,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz0_w6_d0.11",
+      "action": "mechanism",
+      "n": 300,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.00993608194445772,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    },
+    {
+      "class": "two_adjacent",
+      "cell": "h3_vz0_w6_d0.11",
+      "action": "realloc_only",
+      "n": 300,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.00993608194445772,
+      "sensitivity_successes": {
+        "strict": 0,
+        "lenient": 0
+      }
+    }
+  ]
+}

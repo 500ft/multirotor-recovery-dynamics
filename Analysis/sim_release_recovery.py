@@ -158,8 +158,12 @@ def axis_angle_quat(axis: np.ndarray, angle: float) -> np.ndarray:
     return np.array([cos(angle / 2), *(axis * sin(angle / 2))])
 
 
-def _control(q, omega, pos, vel, p: DroneParams):
-    """Saturated attitude + altitude controller. Returns (torque_body[3], thrust_collective)."""
+def _control(q, omega, pos, vel, p: DroneParams, descent_rate_m_s: float | None = None):
+    """Saturated attitude + altitude controller. Returns (torque_body[3], thrust_collective).
+
+    With ``descent_rate_m_s`` set, the altitude hold is replaced by a vertical-rate
+    reference of ``-descent_rate_m_s`` (controlled descent to touchdown, Study A).
+    """
     R = quat_to_rotmat(q)
     body_up_world = R[:, 2]
     tilt = acos(np.clip(body_up_world[2], -1.0, 1.0))
@@ -175,7 +179,10 @@ def _control(q, omega, pos, vel, p: DroneParams):
     # righting, instead of free-falling until upright.
     cos_tilt = R[2, 2]
     if cos_tilt > 0.2:
-        desired_fz = p.mass_kg * G - KP_ALT * pos[2] - KD_ALT * vel[2]
+        if descent_rate_m_s is None:
+            desired_fz = p.mass_kg * G - KP_ALT * pos[2] - KD_ALT * vel[2]
+        else:
+            desired_fz = p.mass_kg * G + KD_ALT * (-descent_rate_m_s - vel[2])
         thrust = float(np.clip(desired_fz / cos_tilt, 0.0, p.max_thrust_n))
     else:
         thrust = 0.0
@@ -185,13 +192,26 @@ def _control(q, omega, pos, vel, p: DroneParams):
 def simulate(p: DroneParams, initial_rate_rad_s: float, initial_tilt_rad: float,
              *, tumble_axis=(1.0, 1.0, 0.0), tilt_axis=(0.0, 1.0, 0.0),
              dt: float = 5e-4, t_max: float = 6.0,
-             imperfections: Imperfections | None = None) -> dict:
+             imperfections: Imperfections | None = None,
+             initial_vz_m_s: float = 0.0,
+             descent_rate_m_s: float | None = None,
+             motor_alloc=None,
+             control_floor: bool = True) -> dict:
     """Release the drone with an initial tumble + tilt and run closed-loop recovery.
 
     Motors are off for ``detection_latency + motor_start_latency`` (passive tumble + free
     fall), then the controller engages. The controller sees the MEASURED state: body rate
     clipped to the gyro range, plus (optional) measurement noise and actuation dispersions
     from ``imperfections``. Returns time-series arrays + recovery metrics.
+
+    Study-A extensions (all default to the original release-recovery behavior):
+    ``initial_vz_m_s`` sets the vertical speed at release (in-flight failure states);
+    ``descent_rate_m_s`` switches the altitude hold to a controlled descent so every
+    run terminates at touchdown and the impact state can be judged; ``motor_alloc``
+    (a ``failure_allocation.MotorAllocation``, mixer-mode params required) replaces
+    the scalar mixer clip with per-motor allocation under a failure class; and
+    ``control_floor=False`` disables the quarter-collective inverted-authority floor —
+    the guard-enabled mechanism behavior — to model the mechanism-less vehicle.
     """
     imp = imperfections or Imperfections()
     rng = np.random.default_rng(imp.seed)
@@ -203,7 +223,7 @@ def simulate(p: DroneParams, initial_rate_rad_s: float, initial_tilt_rad: float,
     omega = initial_rate_rad_s * (np.asarray(tumble_axis, float)
                                   / np.linalg.norm(tumble_axis))
     pos = np.zeros(3)
-    vel = np.zeros(3)
+    vel = np.array([0.0, 0.0, initial_vz_m_s])
     passive_time = p.detection_latency_s + p.motor_start_latency_s
     I = p.inertia
     e_int = np.zeros(3)                    # integral attitude trim state (mixer mode)
@@ -230,18 +250,25 @@ def simulate(p: DroneParams, initial_rate_rad_s: float, initial_tilt_rad: float,
                 axis = rng.normal(size=3)
                 q_meas = quat_mul(q, axis_angle_quat(axis, rng.normal(0.0, imp.tilt_noise_rad)))
                 q_meas = q_meas / np.linalg.norm(q_meas)
-            torque, thrust, _ = _control(q_meas, omega_meas, pos, vel, p)
+            torque, thrust, _ = _control(q_meas, omega_meas, pos, vel, p,
+                                         descent_rate_m_s=descent_rate_m_s)
             thrust = min(thrust, max_thrust_avail)          # battery sag caps thrust
             if p.arm_m is not None:
                 # mixer authority: keep a quarter-collective control floor while the
                 # >78deg thrust cut is active (motors spin for differential torque),
                 # then bound roll/pitch by the mixer capability at this collective.
+                # The floor is the guard-enabled mechanism behavior; Study A's
+                # mechanism-less action disables it (control_floor=False).
+                max_coll = (motor_alloc.max_collective(max_thrust_avail)
+                            if motor_alloc is not None else max_thrust_avail)
                 if thrust <= 0.0:
-                    thrust = min(0.25 * p.max_thrust_n, max_thrust_avail)
+                    floor = (motor_alloc.max_collective(p.max_thrust_n)
+                             if motor_alloc is not None else p.max_thrust_n)
+                    thrust = min(0.25 * floor, max_coll) if control_floor else 0.0
                 # attitude-priority desaturation ("airmode"): never command full
                 # collective — cap at 75% so differential headroom cannot vanish
                 # (tau_avail(T_max) = 0). Costs peak climb thrust, preserves control.
-                thrust = min(thrust, 0.75 * max_thrust_avail)
+                thrust = min(thrust, 0.75 * max_coll)
                 torque = torque * MIXER_ATT_GAIN_SCALE
                 # integral trim of constant disturbances (CG offset, motor bias):
                 # integrate the attitude error only when upright-ish (tilt < 45 deg,
@@ -252,10 +279,13 @@ def simulate(p: DroneParams, initial_rate_rad_s: float, initial_tilt_rad: float,
                     e_int = e_int + e_b * dt
                 trim = np.clip(KI_ATT * e_int, -I_TORQUE_CLAMP, I_TORQUE_CLAMP)
                 torque = torque + trim
-                tau_rp = mixer_torque_limit(thrust, max_thrust_avail, p.arm_m)
-                torque[:2] = np.clip(torque[:2], -tau_rp, tau_rp)
-                yaw_lim = p.yaw_torque_n_m if p.yaw_torque_n_m is not None else tau_rp
-                torque[2] = np.clip(torque[2], -yaw_lim, yaw_lim)
+                if motor_alloc is not None:
+                    torque, thrust = motor_alloc.apply(torque, thrust, max_thrust_avail)
+                else:
+                    tau_rp = mixer_torque_limit(thrust, max_thrust_avail, p.arm_m)
+                    torque[:2] = np.clip(torque[:2], -tau_rp, tau_rp)
+                    yaw_lim = p.yaw_torque_n_m if p.yaw_torque_n_m is not None else tau_rp
+                    torque[2] = np.clip(torque[2], -yaw_lim, yaw_lim)
             # actuation imperfections: thrust line offset from CG -> disturbance torque
             # tau = r_cg x F_body (F_body = [0,0,thrust]); plus motor-mismatch bias.
             torque = torque + np.array([cg[1] * thrust, -cg[0] * thrust, 0.0]) + torque_bias

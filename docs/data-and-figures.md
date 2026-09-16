@@ -66,6 +66,25 @@ from the generated JSON. The mixer-authority scenario still depends on an
 assumed 60 mm arm and catalog thrust; the registered measured-authority workflow
 must replace those values before the simulation can close the gate.
 
+## Survivable-set study (Study A/B)
+
+Generator: [`Analysis/run_survivable_set.py`](../Analysis/run_survivable_set.py)
+
+```bash
+python -m Analysis.run_survivable_set
+```
+
+Monte Carlo simulation class. Per (failure class, post-failure state cell,
+action): the 6-DoF simulation with per-motor failure allocation
+(`Analysis/failure_allocation.py`) for the reallocation and mechanism actions,
+and a closed-form drag-descent calculation for the parachute-like action, all
+under the gated dispersion draw and exact Clopper–Pearson bounds. Writes
+`Data/survivable_set_results.json`, `Figures/survivable_set_psafe.png`, and
+`Figures/survivable_set_policy.png`. Action parameters marked EST are owner
+inputs (OQ-010); the preregistration in
+[`docs/specs/survivable-set/design.md`](specs/survivable-set/design.md) freezes
+criteria, cells, seeds, and the mechanism kill criterion.
+
 ## Other generated data
 
 | Output | Generator | Main inputs |

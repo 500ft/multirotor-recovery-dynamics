@@ -63,6 +63,10 @@ class DroneParams:
     available_height_m: float = 3.0
     arm_m: float | None = None             # motor arm; set via with_mixer() -> mixer authority
     yaw_torque_n_m: float | None = None    # separate yaw bound in mixer mode (drag-generated)
+    # rotational yaw drag tau_z = -c*w_z*|w_z| (frame/prop aero). Default 0 preserves the
+    # gated release-recovery behavior exactly; Study A2 sets an EST value so the rotor-out
+    # drag-torque spin reaches a bounded terminal rate instead of growing without limit.
+    yaw_drag_n_m_s2: float = 0.0
 
     @property
     def inertia(self) -> np.ndarray:
@@ -122,6 +126,10 @@ KP_ALT, KD_ALT = 2.2, 2.2
 # mixer capability so the trim can never consume the stabilization authority.
 KI_ATT = 0.010
 I_TORQUE_CLAMP = 0.020
+# descent mode: brake (hold vertical speed) until the vehicle is upright-ish, then
+# track the commanded touchdown rate — descending while righting wastes the height
+# the arrest needs and arrives at the ground hot.
+BRAKE_TILT_RAD = np.radians(25.0)
 # mixer mode re-tune: the base PD gains were sized for the 0.004 N*m placeholder clip.
 # With mixer-level authority (~0.05 N*m at hover) the same gains leave the loop too soft
 # to out-torque a CG-offset disturbance at large tilt, so the attitude command is scaled
@@ -182,7 +190,10 @@ def _control(q, omega, pos, vel, p: DroneParams, descent_rate_m_s: float | None 
         if descent_rate_m_s is None:
             desired_fz = p.mass_kg * G - KP_ALT * pos[2] - KD_ALT * vel[2]
         else:
-            desired_fz = p.mass_kg * G + KD_ALT * (-descent_rate_m_s - vel[2])
+            # arrest-first: brake the fall while still righting (tilt large),
+            # only then track the touchdown descent rate
+            v_ref = -descent_rate_m_s if tilt < BRAKE_TILT_RAD else 0.0
+            desired_fz = p.mass_kg * G + KD_ALT * (v_ref - vel[2])
         thrust = float(np.clip(desired_fz / cos_tilt, 0.0, p.max_thrust_n))
     else:
         thrust = 0.0
@@ -196,7 +207,8 @@ def simulate(p: DroneParams, initial_rate_rad_s: float, initial_tilt_rad: float,
              initial_vz_m_s: float = 0.0,
              descent_rate_m_s: float | None = None,
              motor_alloc=None,
-             control_floor: bool = True) -> dict:
+             control_floor: bool = True,
+             spin_aware: bool = False) -> dict:
     """Release the drone with an initial tumble + tilt and run closed-loop recovery.
 
     Motors are off for ``detection_latency + motor_start_latency`` (passive tumble + free
@@ -212,6 +224,11 @@ def simulate(p: DroneParams, initial_rate_rad_s: float, initial_tilt_rad: float,
     the scalar mixer clip with per-motor allocation under a failure class; and
     ``control_floor=False`` disables the quarter-collective inverted-authority floor —
     the guard-enabled mechanism behavior — to model the mechanism-less vehicle.
+    ``spin_aware=True`` (Study A2) adds gyroscopic feedforward in the tilt plane:
+    the PD law alone ignores the precession torque ``w x Iw``, which grows with the
+    rotor-out drag spin until it overwhelms the attitude authority; the feedforward
+    cancels its roll/pitch component using the MEASURED rate and the modeled inertia
+    (the same idealization the gravity compensation already makes).
     """
     imp = imperfections or Imperfections()
     rng = np.random.default_rng(imp.seed)
@@ -268,7 +285,13 @@ def simulate(p: DroneParams, initial_rate_rad_s: float, initial_tilt_rad: float,
                 # attitude-priority desaturation ("airmode"): never command full
                 # collective — cap at 75% so differential headroom cannot vanish
                 # (tau_avail(T_max) = 0). Costs peak climb thrust, preserves control.
-                thrust = min(thrust, 0.75 * max_coll)
+                # In allocation mode the ceiling is already the BALANCED collective
+                # (much lower than 4 f_max under failures) and the allocator's
+                # direction-preserving desaturation manages the torque trade, so a
+                # smaller reserve suffices — 0.75 there would starve the vertical
+                # axis below hover thrust for one_out.
+                thrust = min(thrust, (0.9 if motor_alloc is not None else 0.75)
+                             * max_coll)
                 torque = torque * MIXER_ATT_GAIN_SCALE
                 # integral trim of constant disturbances (CG offset, motor bias):
                 # integrate the attitude error only when upright-ish (tilt < 45 deg,
@@ -279,6 +302,11 @@ def simulate(p: DroneParams, initial_rate_rad_s: float, initial_tilt_rad: float,
                     e_int = e_int + e_b * dt
                 trim = np.clip(KI_ATT * e_int, -I_TORQUE_CLAMP, I_TORQUE_CLAMP)
                 torque = torque + trim
+                if spin_aware:
+                    # cancel the measured precession torque in the tilt plane (yaw
+                    # is uncontrollable under rotor loss and is left to the drag)
+                    ff = np.cross(omega_meas, I * omega_meas)
+                    torque[:2] = torque[:2] + ff[:2]
                 if motor_alloc is not None:
                     torque, thrust = motor_alloc.apply(torque, thrust, max_thrust_avail)
                 else:
@@ -302,7 +330,8 @@ def simulate(p: DroneParams, initial_rate_rad_s: float, initial_tilt_rad: float,
 
         # attitude dynamics (Euler equations with gyroscopic coupling) + quaternion integration
         gyro = np.cross(omega, I * omega)
-        alpha = (torque - gyro) / I
+        drag_z = -p.yaw_drag_n_m_s2 * omega[2] * abs(omega[2])
+        alpha = (torque - gyro + np.array([0.0, 0.0, drag_z])) / I
 
         log["t"][k] = t; log["tilt"][k] = tilt; log["omega_mag"][k] = np.linalg.norm(omega)
         log["z"][k] = pos[2]; log["vz"][k] = vel[2]; log["thrust"][k] = thrust

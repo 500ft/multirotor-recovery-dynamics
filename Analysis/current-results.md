@@ -182,3 +182,44 @@ It validates supplied file consistency, not source authenticity or calibration
 quality. The empirical fifth percentile (the minimum with six observations)
 is not a confidence-qualified population bound. Synthetic bundles cannot issue
 a physical PASS. The fixed thresholds above are unchanged.
+
+## Survivable-Set Study A/A2/B (registered 2026-09-16)
+
+Full definitions and audit trail: `docs/specs/survivable-set/design.md` (Study
+A/B preregistration), `design-a2.md` (spin-aware variant + machinery revision),
+`drop-test-prediction.md` (registered Study C prediction). Generated data:
+`Data/survivable_set_results{,_a2}.json`, figures
+`Figures/survivable_set_{psafe,policy}{,_a2}.png`. Everything below is
+**simulation on EST action inputs (OQ-010)** — no survivable-set claim is
+released until the bench and drop gates run.
+
+Question: after a partial propulsion loss at state (height, vertical speed,
+tumble rate, detection delay), which action — thrust reallocation, the
+guard-enabled mechanism behavior, or a parachute-like device — maximises the
+probability of a survivable landing, judged by a preregistered impact criterion
+with exact Clopper–Pearson bounds?
+
+Results, both controller variants (baseline PD and spin-aware A2):
+
+- **Mechanism kill criterion fired in both variants**: in no primary
+  (class × cell) does the mechanism's exact lower bound clear reallocation's
+  exact upper bound. Every primary comparison is flagged `both_actions_fail` —
+  under the registered interpretation clause this is a *controller* finding,
+  not evidence the actions are interchangeable, and it blocks mechanism
+  redesign rather than motivating it.
+- **A2 hypothesis outcome**: H-A2.1 (gyroscopic feedforward + bounded terminal
+  spin helps in tall cells) was NOT supported — all A-vs-A2 differences sit
+  inside Monte Carlo uncertainty; H-A2.2 (parity at low height) held. The next
+  controls step is a spin-locked rotor-out controller, not more feedforward.
+- **Class structure**: 60% partial authority is benign nearly everywhere
+  (lower bound 0.90 in the registered cage cell); one rotor out is marginal at
+  2 rad/s and unrecoverable at 6 rad/s tumble; two adjacent out has no
+  surviving thrust action in any cell — a parachute-like device is its only
+  nonzero action. The device itself is worthless below ~3 m because deployment
+  consumes that height.
+- **Boundary finding**: a 6 rad/s tumble at failure is outside the arrest
+  envelope of this control family for the rotor-out classes at every tested
+  height.
+- **Integrator defense**: halving dt moves primary-cell impact speeds by at
+  most 0.0044 m/s with full landed/not-landed agreement
+  (`Data/survivable_set_convergence.json`).

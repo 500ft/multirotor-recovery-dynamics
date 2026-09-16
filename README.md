@@ -34,7 +34,7 @@ nominal motor-envelope CAD and bench preparation—not a finished recovery vehic
 | Nominal geometry | [Motor-envelope generator](cad/generate.py) and [geometry contract](cad/contract.json) | No guessed mount pattern, shaft or propulsion fixture |
 | Bench preparation | [Input requests](cad/bench/input-requests.csv) and [fixture requirements](cad/bench/fixture-preparation.md) | Vendor proposals are not measurements or purchased parts |
 | Measured-authority gate | [Registered evidence contract](docs/specs/measured-authority-gate/) | Actual thrust, installed geometry and recovery evaluation pending |
-| Survivable-set study (A/B) | [Preregistration](docs/specs/survivable-set/design.md), motor-failure allocation, policy map with exact bounds | Simulation on EST action inputs (OQ-010); no hardware claim until the bench and drop gates run |
+| Survivable-set study (A/A2/B) | [Preregistration](docs/specs/survivable-set/design.md), [spin-aware variant](docs/specs/survivable-set/design-a2.md), motor-failure allocation, policy map with exact bounds, [registered drop-test prediction](docs/specs/survivable-set/drop-test-prediction.md) | Simulation on EST action inputs (OQ-010); no hardware claim until the bench and drop gates run |
 
 ![Simulated altitude loss and recoverable tumble rate across component tiers](Figures/release_recovery_envelope.png)
 

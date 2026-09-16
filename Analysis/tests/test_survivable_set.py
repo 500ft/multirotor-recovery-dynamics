@@ -1,6 +1,7 @@
 """Study A/B machinery: exact bounds, action models, kill criterion, policy map."""
 
 import unittest
+from dataclasses import replace
 from math import radians, sqrt
 
 import numpy as np
@@ -135,6 +136,54 @@ class TestMergeRows(unittest.TestCase):
         self.assertEqual(m["sensitivity_successes"]["strict"], 42)
 
 
+class TestDropTestPrediction(unittest.TestCase):
+    """The registered Study C prediction must match the committed sweep data.
+
+    Same rationale as test_results_numbers: a document that quotes generated
+    numbers drifts silently unless a test pins it to the generator's output.
+    """
+
+    CELL = "h3_vz0_w6_d0.11"
+
+    @classmethod
+    def setUpClass(cls):
+        import json
+        from pathlib import Path
+        root = Path(__file__).resolve().parents[2]
+        cls.doc = (root / "docs" / "specs" / "survivable-set"
+                   / "drop-test-prediction.md").read_text(encoding="utf-8")
+        cls.data = {
+            "a": json.loads((root / "Data" / "survivable_set_results.json")
+                            .read_text()),
+            "a2": json.loads((root / "Data" / "survivable_set_results_a2.json")
+                             .read_text()),
+        }
+
+    def _rows(self):
+        import re
+        pat = re.compile(
+            r"^\| (a2?) \| (\w+) \| (\w+) \| (\d+)/(\d+) \| ([\d.]+) \| ([\d.]+) \|",
+            re.M)
+        rows = pat.findall(self.doc)
+        self.assertGreaterEqual(len(rows), 10, "prediction table not found")
+        return rows
+
+    def test_every_table_row_matches_the_committed_sweep(self):
+        for variant, cls_name, action, s, n, lo, hi in self._rows():
+            match = [r for r in self.data[variant]["exploratory"]
+                     if (r["class"], r["cell"], r["action"])
+                     == (cls_name, self.CELL, action)]
+            self.assertTrue(match, f"no sweep row for {variant}/{cls_name}/{action}")
+            r = match[0]
+            self.assertEqual((int(s), int(n)), (r["successes"], r["n"]),
+                             f"stale s/n in prediction row {variant}/{cls_name}/{action}")
+            self.assertAlmostEqual(float(lo), r["p_safe_95_lower"], places=4)
+            self.assertAlmostEqual(float(hi), r["p_safe_95_upper"], places=4)
+
+    def test_registered_cell_is_a_primary_cell(self):
+        self.assertIn(self.CELL, [c.label() for c in ss.PRIMARY_CELLS])
+
+
 class TestSimExtensions(unittest.TestCase):
     """The new simulate() arguments, exercised on real dynamics (slow-ish)."""
 
@@ -196,6 +245,35 @@ class TestSimExtensions(unittest.TestCase):
         # deterministic under the same seed
         again = ss.evaluate_cell("one_out", cell, "mechanism", 3, (1, 2, 3))
         self.assertEqual(row["successes"], again["successes"])
+
+    def test_evaluate_cell_a2_variant_recorded_and_deterministic(self):
+        cell = ss.Cell(1.5, 0.0, 2.0, 0.11)
+        row = ss.evaluate_cell("one_out", cell, "mechanism", 3, (1, 2, 3),
+                               variant="a2")
+        self.assertEqual(row["variant"], "a2")
+        again = ss.evaluate_cell("one_out", cell, "mechanism", 3, (1, 2, 3),
+                                 variant="a2")
+        self.assertEqual(row["successes"], again["successes"])
+
+    def test_yaw_drag_bounds_rotor_out_spin_inside_gyro_range(self):
+        # A2 coherence: the EST drag coefficient must hold the drag-torque spin
+        # below the gyro range — an unmeasurable spin cannot be claimed controlled
+        p = replace(with_mixer(nominal_params()), available_height_m=50.0,
+                    yaw_drag_n_m_s2=ss.A2_YAW_DRAG_N_M_S2)
+        alloc = MotorAllocation(FAILURE_CLASSES["one_out"], arm_m=p.arm_m,
+                                max_thrust_n=p.max_thrust_n,
+                                yaw_torque_n_m=p.yaw_torque_n_m)
+        r = simulate(p, 2.0, radians(15.0), motor_alloc=alloc,
+                     descent_rate_m_s=1.0, t_max=6.0, spin_aware=True)
+        self.assertLess(float(np.max(np.abs(r["log"]["omega_mag"]))),
+                        p.gyro_limit_rad_s)
+
+    def test_mech_mass_fraction_is_tied_to_the_live_rollup(self):
+        from Analysis.budget import load_mass_budget, rollup
+        nominal = float(rollup(load_mass_budget())["nominal_g"])
+        self.assertAlmostEqual(ss.MECH_MASS_FRAC, ss.MECH_MASS_G_EST / nominal,
+                               places=12)
+        self.assertLess(ss.MECH_MASS_FRAC, 0.5)
 
 
 if __name__ == "__main__":

@@ -1,5 +1,16 @@
 # Study C — Registered Drop-Test Prediction (DR-SS-03)
 
+> **Correction notice, 2026-09-19** (see
+> [review-2026-09-19.md](review-2026-09-19.md) F07/F08). The prediction *values*
+> below stand as registered. Two statements are withdrawn, not rewritten:
+> (1) "ten drops with ≥1 hard failure … falsifies" — with p₀ = 0.904966 that rule
+> rejects a true prediction with probability 0.6316 (P(≥3 of 10) = 0.0619,
+> P(≥4) = 0.0107); a single failure is a *safety stop*, and statistical rejection
+> needs a prospectively chosen null, error rates and sample size (W06 protocol).
+> (2) "netted 3 m enclosure" and failure-injection firmware are *prerequisites*,
+> not established facts: OQ-006 is open and `Controls/state_machine.json` is a
+> specification. This file is a prediction, not an operating plan.
+
 Status: PREREGISTERED PREDICTION, registered 2026-09-16 — **before any hardware
 drop exists**. The point of this file is to be wrong in public if the model is
 wrong: every number below was produced by the committed sweeps and is

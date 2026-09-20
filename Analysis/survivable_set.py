@@ -246,12 +246,18 @@ def merge_rows(rows: list[dict]) -> dict:
     }
 
 
-def kill_criterion(primary_results: list[dict]) -> dict:
+def kill_criterion(primary_results: list[dict],
+                   expected_pairs: int | None = None) -> dict:
     """Preregistered mechanism-justification test on the primary (class, cell) set.
 
     Justified only if the mechanism's exact lower bound beats reallocation's exact
     upper bound somewhere; ties inside Monte Carlo uncertainty do NOT justify it.
+    A truncated or empty comparison set is INCOMPLETE, never a verdict (F09,
+    review-2026-09-19): ``expected_pairs`` defaults to the preregistered
+    primary grid.
     """
+    if expected_pairs is None:
+        expected_pairs = len(PRIMARY_CLASSES) * len(PRIMARY_CELLS)
     by_key: dict[tuple[str, str], dict[str, dict]] = {}
     for r in primary_results:
         by_key.setdefault((r["class"], r["cell"]), {})[r["action"]] = r
@@ -271,6 +277,13 @@ def kill_criterion(primary_results: list[dict]) -> dict:
             "both_actions_fail": (m["p_safe_95_upper"] < 0.5
                                   and a["p_safe_95_upper"] < 0.5),
         })
+    if len(comparisons) < expected_pairs:
+        return {
+            "mechanism_justified": None,
+            "verdict": (f"INCOMPLETE: {len(comparisons)}/{expected_pairs} primary "
+                        "comparisons present — no verdict"),
+            "comparisons": comparisons,
+        }
     justified = any(c["mechanism_dominates"] for c in comparisons)
     return {
         "mechanism_justified": justified,

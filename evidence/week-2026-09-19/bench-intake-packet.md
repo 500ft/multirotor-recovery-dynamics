@@ -1,5 +1,14 @@
 # Bench intake packet — first physical-access session (W07, prepared 2026-09-19)
 
+> **Scope notice, 2026-09-21.** This packet was written for the designed vehicle's
+> single-motor thrust fixture (EX1103 / Gemfan / Phidgets 3132_0 candidate). It
+> remains the intake for **that** fixture's D1–D6 rows, which stay pending. The
+> actual test article this week is the stock Veeniix V995 with the purchased
+> Adafruit chain; its intake is [`platform-capabilities.md`](platform-capabilities.md)
+> and its wiring is [`docs/bench-acquisition.md`](../../docs/bench-acquisition.md).
+> Questions B1 (route) and B5 (reviewers) apply to both; B2–B4 apply to the
+> historical fixture only and must not be answered with V995 parts.
+
 Availability is recorded once: **components and a usable bench are available**
 (owner statement, 2026-09-19). Nothing here asks whether hardware exists; it asks
 *which* hardware, and records what is observed without power. No entry below is a

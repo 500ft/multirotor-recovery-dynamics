@@ -1,0 +1,139 @@
+{
+  "max_impact_speed_delta_m_s": 0.004352824801921784,
+  "landed_agreement": true,
+  "note": "Integrator diagnostic: production dt=5e-4 vs halved. Deltas small against the 0.5 m/s spacing of the criterion variants support the dt choice; a large delta would demand a smaller production step.",
+  "trials": [
+    {
+      "class": "one_out",
+      "cell": "h3_vz0_w6_d0.11",
+      "trial": 0,
+      "impact_speed_dt5e-4": 7.368695824310765,
+      "impact_speed_dt2.5e-4": 7.364342999508843,
+      "impact_tilt_rad_dt5e-4": 1.081136996415857,
+      "impact_tilt_rad_dt2.5e-4": 1.0777597418873575,
+      "speed_delta": 0.004352824801921784,
+      "landed_agrees": true
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz0_w6_d0.11",
+      "trial": 1,
+      "impact_speed_dt5e-4": 7.681894031506751,
+      "impact_speed_dt2.5e-4": 7.685045409276075,
+      "impact_tilt_rad_dt5e-4": 1.3265023618858953,
+      "impact_tilt_rad_dt2.5e-4": 1.322097603902543,
+      "speed_delta": 0.0031513777693241707,
+      "landed_agrees": true
+    },
+    {
+      "class": "one_out",
+      "cell": "h3_vz0_w6_d0.11",
+      "trial": 2,
+      "impact_speed_dt5e-4": 7.763832802326311,
+      "impact_speed_dt2.5e-4": 7.766729986473605,
+      "impact_tilt_rad_dt5e-4": 1.488458236310648,
+      "impact_tilt_rad_dt2.5e-4": 1.4940763803976962,
+      "speed_delta": 0.0028971841472937854,
+      "landed_agrees": true
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "trial": 0,
+      "impact_speed_dt5e-4": 5.167396430338802,
+      "impact_speed_dt2.5e-4": 5.1669857149903375,
+      "impact_tilt_rad_dt5e-4": 1.2480047213311576,
+      "impact_tilt_rad_dt2.5e-4": 1.2483567770763049,
+      "speed_delta": 0.00041071534846448543,
+      "landed_agrees": true
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "trial": 1,
+      "impact_speed_dt5e-4": 4.801839243410807,
+      "impact_speed_dt2.5e-4": 4.802145516444008,
+      "impact_tilt_rad_dt5e-4": 1.059670722125666,
+      "impact_tilt_rad_dt2.5e-4": 1.060179594509904,
+      "speed_delta": 0.0003062730332006325,
+      "landed_agrees": true
+    },
+    {
+      "class": "one_out",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "trial": 2,
+      "impact_speed_dt5e-4": 4.873680737881211,
+      "impact_speed_dt2.5e-4": 4.874382652356646,
+      "impact_tilt_rad_dt5e-4": 1.1546569505115831,
+      "impact_tilt_rad_dt2.5e-4": 1.15502803906394,
+      "speed_delta": 0.0007019144754352169,
+      "landed_agrees": true
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz0_w6_d0.11",
+      "trial": 0,
+      "impact_speed_dt5e-4": 0.989705853348841,
+      "impact_speed_dt2.5e-4": 0.9897259831128933,
+      "impact_tilt_rad_dt5e-4": 0.0692703727487294,
+      "impact_tilt_rad_dt2.5e-4": 0.06870414805260425,
+      "speed_delta": 2.012976405230127e-05,
+      "landed_agrees": true
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz0_w6_d0.11",
+      "trial": 1,
+      "impact_speed_dt5e-4": 0.9889967932846987,
+      "impact_speed_dt2.5e-4": 0.9889558516290321,
+      "impact_tilt_rad_dt5e-4": 0.021154466764839865,
+      "impact_tilt_rad_dt2.5e-4": 0.021627940320154953,
+      "speed_delta": 4.0941655666593135e-05,
+      "landed_agrees": true
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h3_vz0_w6_d0.11",
+      "trial": 2,
+      "impact_speed_dt5e-4": 0.9914054965624637,
+      "impact_speed_dt2.5e-4": 0.9913547387384778,
+      "impact_tilt_rad_dt5e-4": 0.06288968995715502,
+      "impact_tilt_rad_dt2.5e-4": 0.06197931325036489,
+      "speed_delta": 5.07578239858919e-05,
+      "landed_agrees": true
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "trial": 0,
+      "impact_speed_dt5e-4": 5.147353893238572,
+      "impact_speed_dt2.5e-4": 5.146477758050174,
+      "impact_tilt_rad_dt5e-4": 1.1845288278501132,
+      "impact_tilt_rad_dt2.5e-4": 1.1839816824053377,
+      "speed_delta": 0.0008761351883981305,
+      "landed_agrees": true
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "trial": 1,
+      "impact_speed_dt5e-4": 4.734441430345505,
+      "impact_speed_dt2.5e-4": 4.7330677561835985,
+      "impact_tilt_rad_dt5e-4": 0.8927774254248624,
+      "impact_tilt_rad_dt2.5e-4": 0.8936282213669327,
+      "speed_delta": 0.0013736741619068127,
+      "landed_agrees": true
+    },
+    {
+      "class": "partial_authority",
+      "cell": "h1.5_vz-1.5_w2_d0.3",
+      "trial": 2,
+      "impact_speed_dt5e-4": 4.769070836925577,
+      "impact_speed_dt2.5e-4": 4.768935308235093,
+      "impact_tilt_rad_dt5e-4": 0.9558771564365715,
+      "impact_tilt_rad_dt2.5e-4": 0.9556382205612256,
+      "speed_delta": 0.0001355286904836106,
+      "landed_agrees": true
+    }
+  ]
+}

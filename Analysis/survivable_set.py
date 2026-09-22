@@ -39,6 +39,7 @@ from math import exp, radians, sqrt
 
 import numpy as np
 
+from Analysis.budget import load_mass_budget, rollup
 from Analysis.failure_allocation import FAILURE_CLASSES, MotorAllocation
 from Analysis.monte_carlo_recovery import clopper_pearson_lower, draw_case
 from Analysis.sim_release_recovery import G, nominal_params, simulate, with_mixer
@@ -52,9 +53,14 @@ BARE_CRITERION = (2.0, radians(30.0))        # (max |vz| m/s, max tilt) — no g
 GUARDED_CRITERION = (2.5, radians(60.0))     # EST: guard absorbs energy, tolerates tilt
 SENSITIVITY = {"strict": (1.5, radians(20.0)), "lenient": (3.0, radians(45.0))}
 
-# Mechanism-less vehicle credit (EST, owner input OQ-010): removing the guard saves
-# mass and, because the guard is rim material, proportionally more lateral inertia.
-MECH_MASS_FRAC = 0.12
+# Mechanism-less vehicle credit (owner input OQ-010): removing the guard saves mass
+# and, because the guard is rim material, proportionally more lateral inertia. The
+# mass share is tied to the BOM: EST-MASS-012 carries frame+guard+mounts at 42.5 g
+# nominal, of which the removable guard portion is EST 16 g until the CAD mass
+# model splits the line; the fraction is computed against the live rollup so a
+# budget change cannot silently stale it. Inertia share stays EST pending CAD.
+MECH_MASS_G_EST = 16.0
+MECH_MASS_FRAC = MECH_MASS_G_EST / float(rollup(load_mass_budget())["nominal_g"])
 MECH_INERTIA_FRAC = 0.30
 
 # Parachute-like device (EST, owner input OQ-010): small canopy sized for ~1.8 m/s
@@ -70,6 +76,14 @@ DESCENT_RATE_M_S = 1.0                       # commanded touchdown descent rate
 INIT_TILT_MAX_RAD = radians(30.0)            # tilt at failure, drawn U(0, max)
 ARM_M = 0.060                                # ASSUMED build arm (matches run_sweep)
 T_MAX_S = 12.0
+
+# Study A2 (docs/specs/survivable-set/design-a2.md): spin-aware variant. The yaw
+# rotational-drag coefficient is EST (owner input, OQ-010): sized so the rotor-out
+# drag-torque spin reaches a terminal rate ~ sqrt(kappa*T_bal / c) ~ 26 rad/s,
+# safely inside the gyro range (35 rad/s) — a spin the sensor cannot measure could
+# not be claimed as controlled.
+A2_YAW_DRAG_N_M_S2 = 6e-6
+VARIANTS = ("a", "a2")
 
 ACTIONS = ("realloc_only", "mechanism", "parachute")
 
@@ -151,28 +165,34 @@ def _draw_vehicle(rng: np.random.Generator, cell: Cell, *, mechanism: bool):
 
 
 def _realloc_trial(rng: np.random.Generator, class_name: str, cell: Cell,
-                   *, mechanism: bool) -> tuple[float, float]:
+                   *, mechanism: bool, variant: str = "a",
+                   dt: float = 5e-4) -> tuple[float, float]:
     """One 6-DoF trial; returns (impact_speed_down_m_s, impact_tilt_rad).
 
-    A run that never reaches the ground within ``T_MAX_S`` did not land; it is
-    reported as an effectively infinite impact state (conservative: counted unsafe
-    under every criterion).
+    ``variant="a2"`` switches on the spin-aware controller (gyroscopic
+    feedforward) and the EST yaw rotational drag; ``dt`` is exposed for the
+    integrator-convergence diagnostic only. A run that never reaches the ground
+    within ``T_MAX_S`` did not land; it is reported as an effectively infinite
+    impact state (conservative: counted unsafe under every criterion).
     """
     p, imp = _draw_vehicle(rng, cell, mechanism=mechanism)
+    if variant == "a2":
+        p = replace(p, yaw_drag_n_m_s2=A2_YAW_DRAG_N_M_S2)
     alloc = MotorAllocation(FAILURE_CLASSES[class_name], arm_m=p.arm_m,
                             max_thrust_n=p.max_thrust_n,
                             yaw_torque_n_m=p.yaw_torque_n_m)
     tilt0 = rng.uniform(0.0, INIT_TILT_MAX_RAD)
     r = simulate(p, cell.omega0_rad_s, tilt0, imperfections=imp,
                  initial_vz_m_s=cell.vz0_m_s, descent_rate_m_s=DESCENT_RATE_M_S,
-                 motor_alloc=alloc, control_floor=mechanism, t_max=T_MAX_S)
+                 motor_alloc=alloc, control_floor=mechanism, t_max=T_MAX_S,
+                 spin_aware=variant == "a2", dt=dt)
     if not r["crashed"]:
         return float("inf"), float("inf")
     return abs(float(r["log"]["vz"][-1])), float(r["log"]["tilt"][-1])
 
 
 def evaluate_cell(class_name: str, cell: Cell, action: str, n: int,
-                  seed: tuple[int, ...]) -> dict:
+                  seed: tuple[int, ...], variant: str = "a") -> dict:
     """Monte Carlo P_safe for one (failure class, cell, action) with exact bounds."""
     rng = np.random.default_rng(seed)
     counts = {"primary": 0, "strict": 0, "lenient": 0}
@@ -186,7 +206,8 @@ def evaluate_cell(class_name: str, cell: Cell, action: str, n: int,
             criterion = BARE_CRITERION
         else:
             mechanism = action == "mechanism"
-            speed, tilt = _realloc_trial(rng, class_name, cell, mechanism=mechanism)
+            speed, tilt = _realloc_trial(rng, class_name, cell,
+                                         mechanism=mechanism, variant=variant)
             criterion = GUARDED_CRITERION if mechanism else BARE_CRITERION
         counts["primary"] += landing_ok(speed, tilt, criterion)
         counts["strict"] += landing_ok(speed, tilt, SENSITIVITY["strict"])
@@ -194,6 +215,7 @@ def evaluate_cell(class_name: str, cell: Cell, action: str, n: int,
     s = counts["primary"]
     return {
         "class": class_name, "cell": cell.label(), "action": action,
+        "variant": variant,
         "n": n, "successes": s, "p_safe": s / n,
         "p_safe_95_lower": clopper_pearson_lower(s, n),
         "p_safe_95_upper": clopper_pearson_upper(s, n),
@@ -216,6 +238,7 @@ def merge_rows(rows: list[dict]) -> dict:
             for k in ("strict", "lenient")}
     return {
         "class": first["class"], "cell": first["cell"], "action": first["action"],
+        "variant": first.get("variant", "a"),
         "n": n, "successes": s, "p_safe": s / n,
         "p_safe_95_lower": clopper_pearson_lower(s, n),
         "p_safe_95_upper": clopper_pearson_upper(s, n),

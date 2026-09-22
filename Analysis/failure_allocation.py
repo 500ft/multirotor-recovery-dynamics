@@ -32,10 +32,12 @@ little control that remains. The achieved yaw torque (including the spin-directi
 imbalance that drives the post-failure spin) is still computed and fed to the
 dynamics, so the spin and its gyroscopic coupling are simulated, not ignored.
 
-The least-squares solve + box clip is a single pass: clipping can degrade the
-achieved collective below the command near saturation. This is a declared
-conservative simplification (a real allocator could redistribute), recorded in
-``docs/specs/survivable-set/design.md``.
+Allocation is trim-anchored with direction-preserving desaturation (collective on
+the zero-torque trim direction; torque increment solved at invariant collective and
+scaled — never bent — into the per-motor box). The first committed version used a
+single-pass pseudo-inverse + clip, which distorts both the torque axis and the
+collective under saturation; the revision and its effect on Study A results are
+recorded in ``docs/specs/survivable-set/design-a2.md``.
 
 Analytic anchors reproduced exactly by the map (tested in
 ``tests/test_failure_allocation.py``):
@@ -103,22 +105,60 @@ class MotorAllocation:
         if not self.healthy:
             raise ValueError("all motors failed: no allocation exists")
         self._b = b_full[:, self.healthy]
-        self._pinv3 = np.linalg.pinv(self._b[:3, :])
+        n = len(self.healthy)
+        # constraint matrix [tau_x row; tau_y row; collective row]: used for the
+        # zero-torque trim direction and for collective-invariant torque increments
+        self._a = np.vstack([self._b[1:3, :], np.ones(n)])
+        # trim direction u: least-squares solution of (tau=0, collective=1). Exact
+        # where a trim exists (one_out: the diagonal pair; nominal: even split);
+        # the best compromise where none does (two_adjacent).
+        self._u, *_ = np.linalg.lstsq(self._a, np.array([0.0, 0.0, 1.0]), rcond=None)
 
     def max_collective(self, max_thrust_avail_n: float) -> float:
-        """Total thrust ceiling of the surviving, possibly derated motors."""
-        return len(self.healthy) * self.case.authority_frac * max_thrust_avail_n / 4.0
+        """Balanced (zero roll/pitch torque) collective ceiling of the survivors.
+
+        This is the hover-relevant ceiling: one motor out caps at 2 f_max (the
+        remaining diagonal pair), not 3 f_max — thrust from the odd motor cannot be
+        used without unbalancing the vehicle.
+        """
+        cap = self.case.authority_frac * max_thrust_avail_n / 4.0
+        return cap / float(np.max(self._u))
+
+    # weight on the torque rows relative to collective in the saturated re-solve:
+    # when the box binds, attitude authority is worth more than climb thrust
+    TORQUE_PRIORITY = 10.0
 
     def apply(self, torque_cmd: np.ndarray, thrust_cmd: float,
               max_thrust_avail_n: float) -> tuple[np.ndarray, float]:
         """Allocate (T, tau_x, tau_y) onto the healthy motors; return achieved wrench.
 
-        Yaw command is dropped (reduced-attitude allocation, see module docstring);
-        the achieved yaw torque from the clipped thrust pattern is returned so the
-        dynamics integrate the post-failure spin.
+        Cascaded allocation: an exact/least-squares joint solve first (identical to
+        the commanded wrench whenever it is feasible), then — if any motor
+        saturates — the saturated motors are pinned at their bounds and the free
+        ones re-solved with torque-priority weighting, so the attitude loop keeps
+        the best achievable moment instead of an arbitrarily distorted one. Yaw
+        command is dropped (reduced-attitude allocation, see module docstring); the
+        achieved yaw torque of the final thrust pattern is returned so the dynamics
+        integrate the post-failure spin.
         """
         cap = self.case.authority_frac * max_thrust_avail_n / 4.0
-        w3 = np.array([thrust_cmd, torque_cmd[0], torque_cmd[1]])
-        f = np.clip(self._pinv3 @ w3, 0.0, cap)
+        a3 = self._b[:3, :]
+        target = np.array([max(thrust_cmd, 0.0), torque_cmd[0], torque_cmd[1]])
+        n = a3.shape[1]
+        f = np.zeros(n)
+        free = np.ones(n, dtype=bool)
+        weights = np.array([1.0, self.TORQUE_PRIORITY, self.TORQUE_PRIORITY])
+        for _ in range(2):
+            residual = target - a3[:, ~free] @ f[~free]
+            sol, *_ = np.linalg.lstsq(weights[:, None] * a3[:, free],
+                                      weights * residual, rcond=None)
+            f[free] = sol
+            saturated = free & ((f < 0.0) | (f > cap))
+            f = np.clip(f, 0.0, cap)
+            if not saturated.any():
+                break
+            free = free & ~saturated
+            if not free.any():
+                break
         w = self._b @ f
         return np.array([w[1], w[2], w[3]]), float(w[0])

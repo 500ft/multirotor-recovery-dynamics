@@ -50,7 +50,23 @@ class TestGeometry(unittest.TestCase):
         alloc = make("one_out")
         _, thrust = alloc.apply(np.zeros(3), T_MAX, T_MAX)
         self.assertLessEqual(thrust, 3.0 * T_MAX / 4.0 + 1e-9)
-        self.assertAlmostEqual(alloc.max_collective(T_MAX), 3.0 * T_MAX / 4.0)
+        # max_collective is the BALANCED ceiling: the odd survivor's thrust
+        # cannot be used without unbalancing, so one-out hovers on 2 f_max
+        self.assertAlmostEqual(alloc.max_collective(T_MAX), 2.0 * T_MAX / 4.0)
+
+    def test_one_out_dead_halfplane_torque_not_zeroed(self):
+        # torque directions whose exact solution needs negative thrust on the
+        # dead motor's balancer must still yield a moment aligned with the
+        # command (the cascaded re-solve), not collapse to zero — one-out spins
+        # slowly, so the command sweeps through this half-plane every revolution
+        # (directions along the (1,-1) survivor-pair axis keep a feasible
+        # component; a command exactly on (1,1) is genuinely unreachable with
+        # the balancer pinned at zero and correctly yields no torque)
+        alloc = make("one_out")
+        for cmd in (np.array([-0.02, 0.0, 0.0]), np.array([0.0, -0.02, 0.0]),
+                    np.array([-0.02, 0.01, 0.0])):
+            torque, _ = alloc.apply(cmd, 2.0 * T_MAX / 4.0 * 0.6, T_MAX)
+            self.assertGreater(float(np.dot(torque[:2], cmd[:2])), 0.0)
 
     def test_two_opposite_torque_only_about_one_diagonal(self):
         # survivors m1 (+a,+a) and m3 (-a,-a) lie on one diagonal: the achievable

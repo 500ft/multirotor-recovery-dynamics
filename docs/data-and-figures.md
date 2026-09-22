@@ -75,15 +75,22 @@ python -m Analysis.run_survivable_set
 ```
 
 Monte Carlo simulation class. Per (failure class, post-failure state cell,
-action): the 6-DoF simulation with per-motor failure allocation
-(`Analysis/failure_allocation.py`) for the reallocation and mechanism actions,
-and a closed-form drag-descent calculation for the parachute-like action, all
-under the gated dispersion draw and exact Clopper–Pearson bounds. Writes
-`Data/survivable_set_results.json`, `Figures/survivable_set_psafe.png`, and
-`Figures/survivable_set_policy.png`. Action parameters marked EST are owner
-inputs (OQ-010); the preregistration in
-[`docs/specs/survivable-set/design.md`](specs/survivable-set/design.md) freezes
-criteria, cells, seeds, and the mechanism kill criterion.
+action, controller variant): the 6-DoF simulation with per-motor failure
+allocation (`Analysis/failure_allocation.py`, cascaded torque-priority) for the
+reallocation and mechanism actions, and a closed-form drag-descent calculation
+for the parachute-like action, all under the gated dispersion draw and exact
+Clopper–Pearson bounds. Variant `a` is the baseline PD controller; variant `a2`
+adds gyroscopic feedforward and EST yaw rotational drag. Writes
+`Data/survivable_set_results.json`, `Data/survivable_set_results_a2.json`, and
+`Figures/survivable_set_{psafe,policy}{,_a2}.png`. Two diagnostics:
+`--convergence` writes `Data/survivable_set_convergence.json` (dt-halving
+impact-state deltas) and `--smoke` exercises the pipeline in CI without writing.
+Action parameters marked EST are owner inputs (OQ-010); the preregistrations in
+[`docs/specs/survivable-set/design.md`](specs/survivable-set/design.md) and
+[`design-a2.md`](specs/survivable-set/design-a2.md) freeze criteria, cells,
+seeds, machinery revisions, and the mechanism kill criterion. The drop-test
+prediction registered before any hardware drop lives in
+[`drop-test-prediction.md`](specs/survivable-set/drop-test-prediction.md).
 
 ## Other generated data
 

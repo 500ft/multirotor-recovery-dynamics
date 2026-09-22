@@ -30,6 +30,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import tempfile
 import time
 from concurrent.futures import ProcessPoolExecutor
 from itertools import product
@@ -223,6 +224,21 @@ def preregistration_block(scale):
     }
 
 
+def resolve_output_dir(repo: Path, quick: bool, output_dir: str | None) -> Path:
+    """Where a sweep writes. Full runs: the repo (tracked results). Quick runs:
+    never the repo — a scratch directory by default, and an explicit
+    ``--output-dir`` under Data/ or Figures/ is refused (F03, review-2026-09-19:
+    a quick run silently replaced the committed 300-trial results)."""
+    repo = repo.resolve()
+    if not quick:
+        return Path(output_dir).resolve() if output_dir else repo
+    out = Path(output_dir or tempfile.mkdtemp(prefix="survivable-set-quick-")).resolve()
+    for tracked in (repo / "Data", repo / "Figures"):
+        if out == tracked or tracked in out.parents:
+            raise SystemExit(f"refusing --quick output under tracked {tracked}")
+    return out
+
+
 def run_smoke(workers):
     """CI pipeline exercise: tiny counts, no files. Fails loudly on structure."""
     tasks = []
@@ -297,6 +313,9 @@ def main(argv=None):
     ap.add_argument("--convergence", action="store_true",
                     help="dt-halving diagnostic on primary-cell trials")
     ap.add_argument("--workers", type=int, default=max(1, (os.cpu_count() or 2) - 2))
+    ap.add_argument("--output-dir", default=None,
+                    help="write results here (required-safe for --quick: "
+                         "defaults to a scratch dir, never the repo)")
     args = ap.parse_args(argv)
     repo = Path(__file__).resolve().parents[1]
 
@@ -308,6 +327,9 @@ def main(argv=None):
         return
 
     scale = 10 if args.quick else 1
+    out_dir = resolve_output_dir(repo, args.quick, args.output_dir)
+    (out_dir / "Data").mkdir(parents=True, exist_ok=True)
+    (out_dir / "Figures").mkdir(parents=True, exist_ok=True)
     tasks = build_tasks(scale)
     t0 = time.time()
     print(f"survivable-set sweep: {len(tasks)} tasks, {args.workers} workers"
@@ -334,17 +356,17 @@ def main(argv=None):
             "preregistration": preregistration_block(scale),
             **block,
         }
-        data_path = repo / "Data" / f"survivable_set_results{suffix}.json"
+        data_path = out_dir / "Data" / f"survivable_set_results{suffix}.json"
         with data_path.open("w") as fh:
             json.dump(out, fh, indent=2)
-        print(f"[written] {data_path.relative_to(repo)}")
+        print(f"[written] {data_path}")
         print(f"[{variant}] kill criterion: {block['kill_criterion']['verdict']}")
         if not args.quick:
             psafe_figure(block["exploratory"],
-                         repo / "Figures" / f"survivable_set_psafe{suffix}.png",
+                         out_dir / "Figures" / f"survivable_set_psafe{suffix}.png",
                          variant)
             policy_figure(block["policy"],
-                          repo / "Figures" / f"survivable_set_policy{suffix}.png",
+                          out_dir / "Figures" / f"survivable_set_policy{suffix}.png",
                           variant)
     if not args.quick:
         print("[written] Figures/survivable_set_{psafe,policy}{,_a2}.png")

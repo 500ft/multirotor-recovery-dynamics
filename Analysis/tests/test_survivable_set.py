@@ -82,29 +82,45 @@ class TestKillCriterion(unittest.TestCase):
     def test_clear_dominance_justifies(self):
         rows = [_row("one_out", "c", "mechanism", 295, 300),
                 _row("one_out", "c", "realloc_only", 150, 300)]
-        verdict = ss.kill_criterion(rows)
+        verdict = ss.kill_criterion(rows, expected_pairs=1)
         self.assertTrue(verdict["mechanism_justified"])
         self.assertTrue(verdict["comparisons"][0]["mechanism_dominates"])
 
     def test_tie_within_uncertainty_kills(self):
         rows = [_row("one_out", "c", "mechanism", 290, 300),
                 _row("one_out", "c", "realloc_only", 285, 300)]
-        verdict = ss.kill_criterion(rows)
+        verdict = ss.kill_criterion(rows, expected_pairs=1)
         self.assertFalse(verdict["mechanism_justified"])
         self.assertIn("KILL", verdict["verdict"])
         self.assertFalse(verdict["comparisons"][0]["both_actions_fail"])
 
+    def test_empty_or_truncated_comparison_set_is_incomplete_not_kill(self):
+        # F09 (review-2026-09-19): any([]) is False, so an empty set used to
+        # read as a completed negative verdict
+        for rows in ([], [_row("one_out", "c", "mechanism", 0, 300),
+                           _row("one_out", "c", "realloc_only", 0, 300)]):
+            verdict = ss.kill_criterion(rows)
+            self.assertIsNone(verdict["mechanism_justified"])
+            self.assertIn("INCOMPLETE", verdict["verdict"])
+            self.assertNotIn("KILL", verdict["verdict"])
+
+    def test_explicit_expected_pairs_completes_a_small_set(self):
+        rows = [_row("one_out", "c", "mechanism", 0, 300),
+                _row("one_out", "c", "realloc_only", 0, 300)]
+        verdict = ss.kill_criterion(rows, expected_pairs=1)
+        self.assertIn("KILL", verdict["verdict"])
+
     def test_mutual_failure_is_flagged_as_controller_finding(self):
         rows = [_row("one_out", "c", "mechanism", 0, 300),
                 _row("one_out", "c", "realloc_only", 0, 300)]
-        verdict = ss.kill_criterion(rows)
+        verdict = ss.kill_criterion(rows, expected_pairs=1)
         self.assertFalse(verdict["mechanism_justified"])
         self.assertTrue(verdict["comparisons"][0]["both_actions_fail"])
 
     def test_reverse_dominance_reported(self):
         rows = [_row("one_out", "c", "mechanism", 150, 300),
                 _row("one_out", "c", "realloc_only", 295, 300)]
-        verdict = ss.kill_criterion(rows)
+        verdict = ss.kill_criterion(rows, expected_pairs=1)
         self.assertFalse(verdict["mechanism_justified"])
         self.assertTrue(verdict["comparisons"][0]["realloc_dominates"])
 
@@ -278,3 +294,22 @@ class TestSimExtensions(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestRunnerOutputIsolation(unittest.TestCase):
+    """F03 (review-2026-09-19): --quick replaced the committed 300-trial JSONs."""
+
+    def test_quick_never_resolves_into_tracked_dirs(self):
+        import tempfile
+        from pathlib import Path
+        from Analysis.run_survivable_set import resolve_output_dir
+        repo = Path(tempfile.mkdtemp()).resolve()
+        out = resolve_output_dir(repo, quick=True, output_dir=None)
+        self.assertNotIn(repo, out.parents)
+        for bad in (repo / "Data", repo / "Data" / "sub", repo / "Figures"):
+            with self.assertRaises(SystemExit):
+                resolve_output_dir(repo, quick=True, output_dir=str(bad))
+        self.assertEqual(resolve_output_dir(repo, quick=False, output_dir=None), repo)
+        scratch = Path(tempfile.mkdtemp())
+        self.assertEqual(resolve_output_dir(repo, quick=True, output_dir=str(scratch)),
+                         scratch.resolve())

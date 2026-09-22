@@ -51,3 +51,31 @@ Intake packet and raw-observation templates prepared
 ([`bench-intake-packet.md`](bench-intake-packet.md), two CSVs). No inventory,
 layout or interface observation exists yet — each awaits the person at the bench.
 Every `input-requests.csv` row remains `pending` (12 rows).
+
+## 2026-09-21 — R1 platform identity (hardware-revision plan supersedes W02–W08)
+
+Owner photos of 2026-09-20 (purchase list P1/P2; exposed V995 electronics P3) change
+the test article and the bench chain; the simulation schedule in the Day-1 review
+becomes a backlog. Delivered on this branch:
+
+| File | Content | State of its contents |
+| --- | --- | --- |
+| [`hardware-inventory.csv`](hardware-inventory.csv) | 17 rows: V995 + battery/charger, ten purchased items, four `UNKNOWN` bench needs | `PURCHASE_REPORTED` / `OWNER_IDENTIFIED` / `MANUFACTURER_SPECIFICATION` / `UNKNOWN` — nothing `INSPECTED` |
+| [`platform-capabilities.md`](platform-capabilities.md) | two platform identities kept apart; capability table; first measured question; B01–B04 status; recorded decisions | planning record |
+| [`../../docs/bench-acquisition.md`](../../docs/bench-acquisition.md) | E1–E6 connection table, proposed settings, bring-up order | proposed topology, every row unverified |
+| `OPEN_QUESTIONS.md` OQ-011, OQ-012 | board access; load-cell selection/resolution | open |
+
+P3 was viewed directly (converted to JPEG in a scratch directory, not committed):
+four ducted three-blade rotors, two-wire motor leads, JST-style battery lead, one
+square IC + metal can, `CLK` pad group near the switch end, foam pad removed. P1/P2
+were **not** opened here; their product rows come from the plan's transcription and
+contain no payment or shipping details.
+
+Checks run at this revision: `python3 tools/check_presentation.py …` and
+`tools/test_presentation.py` (see PR CI); no analysis code changed, so the
+Analysis suite is unchanged from Day 1 (133 OK).
+
+Next owner returns (blocking R2 bench work): B01 photos; V995 flight-ready mass on a
+scale, connector polarity, rotor centres with a datum; which `UNKNOWN` inventory
+rows are on hand. Next Claude slice: `firmware/bench_logger/` (CircuitPython) +
+`Analysis/capture_bench.py` with no-overwrite runs, then R3 calibration analysis.

@@ -92,6 +92,15 @@ seeds, machinery revisions, and the mechanism kill criterion. The drop-test
 prediction registered before any hardware drop lives in
 [`drop-test-prediction.md`](specs/survivable-set/drop-test-prediction.md).
 
+## Bench acquisition (V995 demonstrator, planned)
+
+Wiring and settings: [`docs/bench-acquisition.md`](bench-acquisition.md). Raw
+captures will live under `evidence/week-<date>/runs/<run_id>/` (one CSV per
+sensor + one manifest) with calibrations under `calibrations/<id>/`; no such run
+exists yet. This chain measures the stock V995, a different platform from the
+designed vehicle above — see
+[`evidence/week-2026-09-19/platform-capabilities.md`](../evidence/week-2026-09-19/platform-capabilities.md).
+
 ## Other generated data
 
 | Output | Generator | Main inputs |

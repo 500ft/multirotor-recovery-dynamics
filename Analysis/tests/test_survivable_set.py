@@ -46,10 +46,63 @@ class TestParachuteModel(unittest.TestCase):
         self.assertLess(v, 8.0)
         self.assertGreater(v, 2.5)
 
+    def test_reproduces_published_impact_speeds(self):
+        """Validation against Siotia et al. (2026), doi:10.1038/s41598-026-47045-0.
+
+        Their 2 kg vehicle: 0.8 s deployment, ~3.2 m/s settled descent, measured
+        9.1 m/s impact from 10 m and 3.2 m/s from 25 m. The model must reproduce
+        both with one inflation value — this is what the pre-2026-09-22 model
+        (no inflation phase) could not do: it predicted 3.2 m/s at 10 m, i.e.
+        2.8x optimistic, which is literature/claim-ledger.md C1.
+        """
+        published = {10.0: 9.1, 25.0: 3.2}
+        for h, measured in published.items():
+            v = ss.parachute_impact_speed(h, 0.0, deploy_s=0.8, terminal_m_s=3.2,
+                                          inflate_s=ss.PARACHUTE_INFLATE_S)
+            self.assertAlmostEqual(v, measured, delta=1.0,
+                                   msg=f"{h} m: modelled {v:.2f}, measured {measured}")
+
+    def test_low_altitude_case_is_sensitive_to_the_inflation_estimate(self):
+        """The 10 m case sits where ballistic distance ~ available height, so the
+        answer is steeply sensitive to an EST parameter. That is a property of the
+        physics, not a modelling artifact, and it is why the parachute action's
+        low-altitude cells carry more uncertainty than their bounds suggest."""
+        a = ss.parachute_impact_speed(10.0, 0.0, 0.8, 3.2, inflate_s=0.594)
+        b = ss.parachute_impact_speed(10.0, 0.0, 0.8, 3.2, inflate_s=0.600)
+        self.assertGreater(abs(b - a), 0.5)   # 6 ms of inflation -> >0.5 m/s
+
+    def test_inflation_phase_is_what_fixes_the_low_altitude_case(self):
+        # without the inflation phase the model is optimistic by ~2.8x at 10 m
+        without = ss.parachute_impact_speed(10.0, 0.0, 0.8, 3.2, inflate_s=0.0)
+        with_inflation = ss.parachute_impact_speed(10.0, 0.0, 0.8, 3.2,
+                                                   inflate_s=ss.PARACHUTE_INFLATE_S)
+        self.assertLess(without, 4.0)            # the old, unsupported answer
+        self.assertGreater(with_inflation, 8.0)  # the measured regime
+        self.assertGreater(with_inflation, without)
+
+    def test_inflation_never_helps(self):
+        # a longer inflation can only raise impact speed, never lower it
+        prev = 0.0
+        for inflate in (0.0, 0.3, 0.6, 1.0, 2.0):
+            v = ss.parachute_impact_speed(20.0, 0.0, 0.8, 1.8, inflate_s=inflate)
+            self.assertGreaterEqual(v, prev - 1e-9)
+            prev = v
+
     def test_terminal_speed_coherent_with_bare_criterion(self):
         # a descent device whose terminal speed exceeds the impact limit is
         # impossible by construction (the spec's coherence requirement)
         self.assertLess(ss.PARACHUTE_TERMINAL_M_S, ss.BARE_CRITERION[0])
+
+    def test_dispersed_terminal_speed_can_exceed_the_limit(self):
+        """Known, documented property: the NOMINAL terminal speed clears the bare
+        limit but the top of the dispersion does not, so a minority of draws are
+        impossible at any height. Asserted so the property cannot change silently;
+        narrowing the dispersion would mean inventing data (OQ-010)."""
+        dispersed_max = ss.PARACHUTE_TERMINAL_M_S * 1.15
+        self.assertGreater(dispersed_max, ss.BARE_CRITERION[0])
+        impossible_fraction = ((dispersed_max - ss.BARE_CRITERION[0])
+                               / (dispersed_max - ss.PARACHUTE_TERMINAL_M_S * 0.85))
+        self.assertLess(impossible_fraction, 0.20)   # ~13% at present values
 
     def test_monotonic_in_height_after_deployment(self):
         vs = [ss.parachute_impact_speed(h, 0.0, deploy_s=0.4, terminal_m_s=2.5)

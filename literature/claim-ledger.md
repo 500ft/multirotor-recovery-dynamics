@@ -52,7 +52,7 @@ cited papers.
 - **Deployment time supported:** Siotia et al. (2026, A) measure exactly 0.8 s.
 - **Terminal speed and altitude floor contradicted:** measured floors are **10–15 m** (2 kg: 40 % survivability at 10 m, "effective" at 15 m, complete at 22–23 m; 900 g Mavic-class: **11 m average, 15.9 m worst-case** altitude loss to full canopy). A4 separately states **18.0 ft/s = 5.49 m/s** is the lowest *reliable* parachute descent rate — 3× our modelled 1.8 m/s.
 - **Root cause in our model:** we treat deployment as a delay followed by an instantly effective drag device. The **inflation transient is missing**, and that is exactly what kills low-altitude deployment.
-- **Action (OQ-010):** model inflation explicitly or raise the effective floor; re-run. The qualitative conclusion ("only nonzero action for two_adjacent") is directionally safe; the 3 m and 6 m cells are not credible. **Confidence: high.**
+- **RESOLVED 2026-09-22** (`fix/parachute-inflation-20260922`): inflation modelled as a separate no-useful-drag interval (`PARACHUTE_INFLATE_S`, EST 0.6 s), calibrated to reproduce both published data points; validation test added; sweep regenerated. Residual: the parameter is fitted to one 2 kg system and the ~10 m regime is steeply sensitive to it — both recorded in `design.md` §4. **Confidence: high** that the direction and magnitude of the correction are right, **moderate** on the specific value until sub-250 g data exists.
 
 ### C2. "Parachute recovery of small UAS is established" (`design.md` §1)
 - **True for ≥900 g**; **not established at sub-250 g** — no product, standard clause or study found. Lightest COTS system ≈185 g = **74 % of a 250 g budget** before canopy, bridle, ejector and trigger.

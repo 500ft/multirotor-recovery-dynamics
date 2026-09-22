@@ -53,7 +53,7 @@ residuals); no aerodynamic damping of the spin; rotor drag torque linear in thru
 |---|---|---|
 | `realloc_only` | 6-DoF sim, per-motor allocation, PD controller, **no** inverted-authority floor; mechanism mass removed: mass ×(1−0.12), lateral inertia ×(1−0.30) — EST credit, OQ-010 | bare |
 | `mechanism` | Same, **with** the quarter-collective inverted floor (the behavior the guard physically enables — motors keep spinning inverted) | guarded (EST) |
-| `parachute` | Motors cut; ballistic fall during deployment (drag-free, conservative), then closed-form quadratic-drag approach to terminal speed. Class-independent. v_t = 1.8 m/s ×U(0.85,1.15), t_d = 0.8 s ×U(0.8,1.5), impact tilt U(0°,45°) — all EST, OQ-010 | bare |
+| `parachute` | Motors cut; ballistic fall through **deployment + inflation**, then closed-form quadratic-drag approach to terminal speed. Class-independent. v_t = 1.8 m/s ×U(0.85,1.15), t_d = 0.8 s ×U(0.8,1.5), **t_inflate = 0.6 s ×U(0.8,1.5)**, impact tilt U(0°,45°) — all EST, OQ-010 | bare |
 
 **Coherence requirement + audit note.** A descent device's terminal speed must sit
 below the impact-speed limit it is judged against, or the action is impossible by
@@ -61,6 +61,51 @@ construction. The first drafted value (2.5 m/s) violated this; the sweep that
 exposed it (0/2000 in every cell) was discarded and the parameter corrected to
 1.8 m/s (~0.47 m² canopy at 165 g, Cd 1.4 — still catalog-plausible) before any
 committed run. Recorded here rather than silently edited.
+
+**Inflation amendment, 2026-09-22** (`literature/claim-ledger.md` C1). The
+action originally modelled deployment as a delay followed by an *instantly
+effective* drag device. Measured data contradicts that: a canopy that has begun
+to open is not yet decelerating. Against the only published system with two
+usable data points — Siotia et al. (2026), 2 kg, 0.8 s deployment — the old model
+predicted **3.2 m/s** impact from 10 m where **9.1 m/s** was measured, i.e. 2.8×
+optimistic. A single added inflation interval, treated as producing no useful
+drag, reproduces both their 10 m and 25 m results and is now part of the action
+(`PARACHUTE_INFLATE_S`, EST 0.6 s, calibrated not measured). It is fitted to one
+2 kg system; a smaller canopy would inflate faster, so carrying it onto a
+sub-250 g vehicle is conservative in the safe direction. The prior sweep's
+parachute cells are superseded; the regenerated data is in the same commit.
+
+**Known sensitivity.** At ~10 m the ballistic distance approaches the available
+height, so impact speed is steeply sensitive to the inflation estimate (6 ms of
+inflation moves it >0.5 m/s). The low-altitude parachute cells therefore carry
+more uncertainty than their binomial bounds alone express. Tested.
+
+**Consequence: the parachute action is empty across this study's entire domain.**
+Under the corrected model the nominal ballistic distance before useful drag is
+**9.6 m**, and the break-even height for a survivable parachute landing is
+**10.5 m** — against a tallest preregistered cell of **6.0 m**. The action is
+therefore 0/2000 in every cell, where the previous model made it the
+unambiguously best action in 22 class×cell combinations. Two things follow:
+
+1. The 10.5 m break-even is derived independently of the literature yet lands
+   inside the measured 10–15 m floor reported for 0.9–2 kg airframes — an
+   unplanned corroboration of the corrected model.
+2. **The earlier claim that a parachute is "the only nonzero action for
+   two-adjacent loss" is withdrawn.** Within this grid, two-adjacent loss has
+   *no* surviving action at all. That is a stronger and more useful negative
+   result, and it agrees with the independent mass argument
+   (`literature/notes/03-parachute-and-descent-recovery.md` §1).
+
+The grid is **not** being extended to chase the break-even: it is preregistered,
+and moving it after seeing results is precisely what §9 forbids. A taller-cell
+domain extension would be a registered amendment with a new study ID.
+
+**Second coherence gap (documented, not fixed).** The nominal terminal speed
+(1.8 m/s) clears the 2.0 m/s bare limit, but the top of its dispersion
+(1.8 × 1.15 = 2.07 m/s) does not — so roughly 13 % of parachute draws are
+impossible at any height, independently of the inflation finding. Narrowing the
+dispersion would mean inventing data, so the property is asserted in the tests
+instead and left for OQ-010.
 
 Both 6-DoF actions command a 1.0 m/s descent to touchdown (replaces the altitude
 hold), so every run terminates at the ground and the impact state is judged; a run

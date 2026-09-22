@@ -213,10 +213,17 @@ Results, both controller variants (baseline PD and spin-aware A2):
   controls step is a spin-locked rotor-out controller, not more feedforward.
 - **Class structure**: 60% partial authority is benign nearly everywhere
   (lower bound 0.90 in the registered cage cell); one rotor out is marginal at
-  2 rad/s and unrecoverable at 6 rad/s tumble; two adjacent out has no
-  surviving thrust action in any cell — a parachute-like device is its only
-  nonzero action. The device itself is worthless below ~3 m because deployment
-  consumes that height.
+  2 rad/s and unrecoverable at 6 rad/s tumble; **two adjacent out has no
+  surviving action of any kind in any cell.**
+- **Parachute action, corrected 2026-09-22**: the original model treated
+  deployment as a delay followed by an instantly effective drag device and made
+  the action the unambiguously best choice in 22 class×cell combinations. Adding
+  the inflation transient — calibrated to reproduce both published data points of
+  the only measured system available — makes it **0/2000 in every cell**. The
+  nominal ballistic distance before useful drag is 9.6 m and the break-even
+  height is 10.5 m, against a tallest preregistered cell of 6.0 m. The 10.5 m
+  figure is derived independently yet falls inside the 10–15 m floor measured for
+  0.9–2 kg airframes. See `docs/specs/survivable-set/design.md` §4.
 - **Boundary finding**: a 6 rad/s tumble at failure is outside the arrest
   envelope of this control family for the rotor-out classes at every tested
   height.

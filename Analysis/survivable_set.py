@@ -68,8 +68,23 @@ MECH_INERTIA_FRAC = 0.30
 # REQUIREMENT: the terminal speed must sit below the bare impact-speed limit or the
 # action is impossible by construction (the first drafted value, 2.5 m/s, violated
 # this and was corrected before any committed run — see the spec's audit note).
+#
+# INFLATION (added 2026-09-22, literature/claim-ledger.md C1): the first committed
+# model treated deployment as a delay followed by an INSTANTLY effective drag
+# device, which made the action look useful at 6 m. Measured data says otherwise —
+# a canopy that has begun to open is not yet a canopy that decelerates. Splitting
+# the two, and treating inflation as producing no useful drag (conservative, and
+# the only form the published data constrains), reproduces both measured points of
+# Siotia et al. (2026, doi:10.1038/s41598-026-47045-0) on their 2 kg vehicle:
+# 9.1 m/s impact from 10 m and 3.2 m/s from 25 m. See tests.
 PARACHUTE_TERMINAL_M_S = 1.8
-PARACHUTE_DEPLOY_S = 0.8
+PARACHUTE_DEPLOY_S = 0.8                     # trigger -> canopy starts opening (measured)
+# canopy start -> full drag. CALIBRATED, not measured: the value that reproduces
+# Siotia et al.'s 10 m and 25 m impact speeds given their 0.8 s deployment. It is
+# fitted to ONE published system (2 kg) at ONE canopy scale; a smaller canopy would
+# be expected to inflate faster, so carrying it onto a sub-250 g vehicle is
+# conservative in the safe direction. Replace with measured data (OQ-010).
+PARACHUTE_INFLATE_S = 0.6
 PARACHUTE_TILT_MAX_RAD = radians(45.0)       # pendulum under canopy, drawn U(0, max)
 
 DESCENT_RATE_M_S = 1.0                       # commanded touchdown descent rate
@@ -128,19 +143,24 @@ def landing_ok(impact_speed_m_s: float, impact_tilt_rad: float,
 
 
 def parachute_impact_speed(h_m: float, vz0_m_s: float, deploy_s: float,
-                           terminal_m_s: float) -> float:
+                           terminal_m_s: float, inflate_s: float = 0.0) -> float:
     """Impact speed for the drag-device action (closed form, downward positive).
 
-    Ballistic (drag-free, conservative) fall during deployment, then quadratic-drag
-    approach to terminal speed over the remaining drop:
-    ``s^2 = v_t^2 + (s1^2 - v_t^2) exp(-2 g d / v_t^2)``. If the ground arrives
-    before deployment completes, the fall is ballistic the whole way.
+    Ballistic (drag-free) fall for ``deploy_s + inflate_s`` — the trigger delay plus
+    the inflation interval, during which the canopy is opening but not yet
+    decelerating — then a quadratic-drag approach to terminal speed over the
+    remaining drop: ``s^2 = v_t^2 + (s1^2 - v_t^2) exp(-2 g d / v_t^2)``. If the
+    ground arrives first, the fall is ballistic the whole way.
+
+    ``inflate_s`` defaults to 0.0 so the original two-phase behavior is recoverable
+    for comparison; the study passes ``PARACHUTE_INFLATE_S``.
     """
     s0 = max(0.0, -vz0_m_s)
-    d1 = s0 * deploy_s + 0.5 * G * deploy_s ** 2
+    t_ballistic = deploy_s + inflate_s
+    d1 = s0 * t_ballistic + 0.5 * G * t_ballistic ** 2
     if d1 >= h_m:
         return sqrt(s0 ** 2 + 2.0 * G * h_m)
-    s1 = s0 + G * deploy_s
+    s1 = s0 + G * t_ballistic
     d2 = h_m - d1
     return sqrt(terminal_m_s ** 2
                 + (s1 ** 2 - terminal_m_s ** 2) * exp(-2.0 * G * d2 / terminal_m_s ** 2))
@@ -201,7 +221,8 @@ def evaluate_cell(class_name: str, cell: Cell, action: str, n: int,
             speed = parachute_impact_speed(
                 cell.h_m, cell.vz0_m_s,
                 PARACHUTE_DEPLOY_S * rng.uniform(0.8, 1.5),
-                PARACHUTE_TERMINAL_M_S * rng.uniform(0.85, 1.15))
+                PARACHUTE_TERMINAL_M_S * rng.uniform(0.85, 1.15),
+                inflate_s=PARACHUTE_INFLATE_S * rng.uniform(0.8, 1.5))
             tilt = rng.uniform(0.0, PARACHUTE_TILT_MAX_RAD)
             criterion = BARE_CRITERION
         else:

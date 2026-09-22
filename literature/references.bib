@@ -1,0 +1,673 @@
+% Verified references for multirotor-recovery-dynamics.
+% Assembled 2026-09-22. EVERY entry here was resolved to a publisher record,
+% DOI, arXiv listing or binding regulatory text at assembly time.
+% Entries listed under "Unverified" in literature/notes/*.md are DELIBERATELY
+% ABSENT from this file. Do not add one without opening the source.
+% Page numbers are omitted where the verification path returned DOIs and titles
+% but not pagination.
+
+% ===================== Rotor-loss fault-tolerant control =====================
+
+@inproceedings{mueller2014stability,
+  author    = {Mueller, Mark W. and D'Andrea, Raffaello},
+  title     = {Stability and control of a quadrocopter despite the complete loss of one, two, or three propellers},
+  booktitle = {IEEE International Conference on Robotics and Automation (ICRA)},
+  year      = {2014},
+  doi       = {10.1109/ICRA.2014.6906588},
+  note      = {One- and two-opposing-propeller cases validated in experiment; three-propeller in simulation. Does not treat two adjacent.}
+}
+
+@article{mueller2016relaxed,
+  author  = {Mueller, Mark W. and D'Andrea, Raffaello},
+  title   = {Relaxed hover solutions for multicopters: application to algorithmic redundancy and novel vehicles},
+  journal = {The International Journal of Robotics Research},
+  volume  = {35}, number = {8}, pages = {873--889}, year = {2016},
+  doi     = {10.1177/0278364915596233}
+}
+
+@misc{mueller2018patent,
+  author = {Mueller, Mark W.},
+  title  = {Controlled flight of a multicopter experiencing a failure affecting an effector},
+  note   = {US Patent 9,856,016 B2, granted 2018-01-02; continuation family includes 10,308,349; 10,562,611; 10,946,950; 11,591,071},
+  year   = {2018}
+}
+
+@article{lanzon2014flight,
+  author  = {Lanzon, Alexander and Freddi, Alessandro and Longhi, Sauro},
+  title   = {Flight control of a quadrotor vehicle subsequent to a rotor failure},
+  journal = {Journal of Guidance, Control, and Dynamics},
+  year    = {2014},
+  doi     = {10.2514/1.59869}
+}
+
+@inproceedings{freddi2011feedback,
+  author    = {Freddi, Alessandro and Lanzon, Alexander and Longhi, Sauro},
+  title     = {A feedback linearization approach to fault tolerance in quadrotor vehicles},
+  booktitle = {IFAC Proceedings Volumes (18th IFAC World Congress)},
+  year      = {2011},
+  doi       = {10.3182/20110828-6-IT-1002.02016}
+}
+
+@inproceedings{lippiello2014emergency,
+  author    = {Lippiello, Vincenzo and Ruggiero, Fabio and Serra, Diana},
+  title     = {Emergency landing for a quadrotor in case of a propeller failure: a backstepping approach},
+  booktitle = {IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  year      = {2014},
+  doi       = {10.1109/IROS.2014.6943242}
+}
+
+@article{sun2021incremental,
+  author  = {Sun, Sihao and Wang, Xuerui and Chu, Qiping and de Visser, Coen},
+  title   = {Incremental nonlinear fault-tolerant control of a quadrotor with complete loss of two opposing rotors},
+  journal = {IEEE Transactions on Robotics},
+  volume  = {37}, number = {1}, pages = {116--130}, year = {2021},
+  doi     = {10.1109/TRO.2020.3010626}, eprint = {2002.07837}, archivePrefix = {arXiv}
+}
+
+@article{sun2018highspeed,
+  author  = {Sun, Sihao and Sijbers, Leon and Wang, Xuerui and de Visser, Coen},
+  title   = {High-speed flight of quadrotor despite loss of single rotor},
+  journal = {IEEE Robotics and Automation Letters},
+  volume  = {3}, number = {4}, pages = {3201--3207}, year = {2018},
+  doi     = {10.1109/LRA.2018.2851028}
+}
+
+@inproceedings{sun2020upset,
+  author    = {Sun, Sihao and Baert, Matthijs and Strack van Schijndel, Bram and de Visser, Coen},
+  title     = {Upset recovery control for quadrotors subjected to a complete rotor failure from large initial disturbances},
+  booktitle = {IEEE International Conference on Robotics and Automation (ICRA)},
+  year      = {2020},
+  doi       = {10.1109/ICRA40945.2020.9197239}, eprint = {2002.09425}, archivePrefix = {arXiv},
+  note      = {Closest substantive precedent: Monte Carlo over randomised post-failure initial conditions, plus real flight.}
+}
+
+@article{ke2023uniform,
+  author  = {Ke, Chuanbo and Cai, Kai-Yuan and Quan, Quan},
+  title   = {Uniform passive fault-tolerant control of a quadcopter with one, two, or three rotor failure},
+  journal = {IEEE Transactions on Robotics},
+  year    = {2023},
+  doi     = {10.1109/TRO.2023.3297048}, eprint = {2211.12972}, archivePrefix = {arXiv},
+  note    = {Outdoor flight, all four failure classes, no switching. arXiv v2 comment flags errors needing correction: cite the T-RO version.}
+}
+
+@article{sun2021vision,
+  author  = {Sun, Sihao and Cioffi, Giovanni and de Visser, Coen and Scaramuzza, Davide},
+  title   = {Autonomous quadrotor flight despite rotor failure with onboard vision sensors: frames vs. events},
+  journal = {IEEE Robotics and Automation Letters},
+  year    = {2021},
+  doi     = {10.1109/LRA.2020.3048875},
+  note    = {Post-failure yaw rate exceeds 20 rad/s, blurring frame cameras.}
+}
+
+@article{nan2022nmpc,
+  author  = {Nan, Fanze and Sun, Sihao and Foehn, Philipp and Scaramuzza, Davide},
+  title   = {Nonlinear {MPC} for quadrotor fault-tolerant control},
+  journal = {IEEE Robotics and Automation Letters},
+  volume  = {7}, number = {2}, pages = {5047--5054}, year = {2022},
+  doi     = {10.1109/LRA.2022.3154033}, eprint = {2109.12886}, archivePrefix = {arXiv}
+}
+
+@article{mao2024propeller,
+  author  = {Mao, Jiaxu and Yeom, Jinseok and Nair, Sanjay and Loianno, Giuseppe},
+  title   = {From propeller damage estimation and adaptation to fault tolerant control: enhancing quadrotor resilience},
+  journal = {IEEE Robotics and Automation Letters},
+  year    = {2024},
+  doi     = {10.1109/LRA.2024.3380923}, eprint = {2310.13091}, archivePrefix = {arXiv},
+  note    = {Closest published work to an action-selection policy: experimentally identified threshold between adaptive compensation and FTC.}
+}
+
+@article{du2015controllability,
+  author  = {Du, Guang-Xun and Quan, Quan and Yang, Bin-Xian and Cai, Kai-Yuan},
+  title   = {Controllability analysis for multirotor helicopter rotor degradation and failure},
+  journal = {Journal of Guidance, Control, and Dynamics},
+  year    = {2015},
+  doi     = {10.2514/1.G000731}
+}
+
+@inproceedings{tzoumanikas2020nmpc,
+  author    = {Tzoumanikas, Dimos and Yan, Qingyue and Leutenegger, Stefan},
+  title     = {Nonlinear {MPC} with motor failure identification and recovery for safe and aggressive multicopter flight},
+  booktitle = {IEEE International Conference on Robotics and Automation (ICRA)},
+  year      = {2020},
+  doi       = {10.1109/ICRA40945.2020.9196690}, eprint = {2002.06598}, archivePrefix = {arXiv},
+  note      = {Hexacopter: failure identified within 0.18 s, maximum height loss 0.60 m.}
+}
+
+@article{siotia2026survivability,
+  author  = {Siotia, V. and Shankar, R. S. and Nair, N. and Nair, V. G.},
+  title   = {Enhancing {UAV} survivability through real-time stall detection and parachute assisted recovery},
+  journal = {Scientific Reports},
+  volume  = {16}, pages = {18189}, year = {2026},
+  doi     = {10.1038/s41598-026-47045-0},
+  note    = {Contested gap claim; HIL and simulation only, no free-flight drops. 2 kg: 40 percent survivability at 10 m, effective at 15 m, complete at 22-23 m.}
+}
+
+% ========================= Control allocation and FDI =========================
+
+@article{johansen2013survey,
+  author  = {Johansen, Tor A. and Fossen, Thor I.},
+  title   = {Control allocation -- a survey},
+  journal = {Automatica},
+  volume  = {49}, number = {5}, pages = {1087--1103}, year = {2013},
+  doi     = {10.1016/j.automatica.2013.01.035}
+}
+
+@article{durham1993constrained,
+  author  = {Durham, Wayne C.},
+  title   = {Constrained control allocation},
+  journal = {Journal of Guidance, Control, and Dynamics},
+  volume  = {16}, number = {4}, pages = {717--725}, year = {1993},
+  doi     = {10.2514/3.21072}
+}
+
+@article{bordignon1995closedform,
+  author  = {Bordignon, Kenneth A. and Durham, Wayne C.},
+  title   = {Closed-form solutions to constrained control allocation problem},
+  journal = {Journal of Guidance, Control, and Dynamics},
+  volume  = {18}, number = {5}, pages = {1000--1007}, year = {1995},
+  doi     = {10.2514/3.21497}
+}
+
+@inproceedings{virnig1994redistributed,
+  author    = {Virnig, Jack C. and Bodden, David S.},
+  title     = {Multivariable control allocation and control law conditioning when control effectors limit},
+  booktitle = {AIAA Guidance, Navigation and Control Conference},
+  year      = {1994},
+  doi       = {10.2514/6.1994-3609},
+  note      = {Origin of the redistributed pseudo-inverse (RPI) -- the method used in Analysis/failure_allocation.py}
+}
+
+@article{bodson2002evaluation,
+  author  = {Bodson, Marc},
+  title   = {Evaluation of optimization methods for control allocation},
+  journal = {Journal of Guidance, Control, and Dynamics},
+  volume  = {25}, number = {4}, pages = {703--711}, year = {2002},
+  doi     = {10.2514/2.4937}
+}
+
+@inproceedings{harkegard2002activeset,
+  author    = {H{\"a}rkeg{\aa}rd, Ola},
+  title     = {Efficient active set algorithms for solving constrained least squares problems in aircraft control allocation},
+  booktitle = {41st IEEE Conference on Decision and Control (CDC)},
+  year      = {2002},
+  doi       = {10.1109/CDC.2002.1184694},
+  note      = {States that RPI-type methods deliver approximate and sometimes unreliable solutions.}
+}
+
+@article{harkegard2004dynamic,
+  author  = {H{\"a}rkeg{\aa}rd, Ola},
+  title   = {Dynamic control allocation using constrained quadratic programming},
+  journal = {Journal of Guidance, Control, and Dynamics},
+  volume  = {27}, number = {6}, pages = {1028--1034}, year = {2004},
+  doi     = {10.2514/1.11607}
+}
+
+@article{kirchengast2018saturation,
+  author  = {Kirchengast, Martin and Steinberger, Martin and Horn, Martin},
+  title   = {Control allocation under actuator saturation: an experimental evaluation},
+  journal = {IFAC-PapersOnLine},
+  volume  = {51}, number = {25}, pages = {48--54}, year = {2018},
+  doi     = {10.1016/j.ifacol.2018.11.080}
+}
+
+@article{hafner2025accelerating,
+  author  = {Hafner, Simon and Myschik, Stephan and Holzapfel, Florian},
+  title   = {Accelerating sequential least squares active set control allocation},
+  journal = {Control Engineering Practice},
+  volume  = {166}, pages = {106621}, year = {2025},
+  doi     = {10.1016/j.conengprac.2025.106621}
+}
+
+@article{faessler2017thrust,
+  author  = {Faessler, Matthias and Falanga, Davide and Scaramuzza, Davide},
+  title   = {Thrust mixing, saturation, and body-rate control for accurate aggressive quadrotor flight},
+  journal = {IEEE Robotics and Automation Letters},
+  volume  = {2}, number = {2}, pages = {476--482}, year = {2017},
+  doi     = {10.1109/LRA.2016.2640362},
+  note    = {Peer-reviewed anchor for attitude-priority desaturation: roll/pitch, then collective, then yaw.}
+}
+
+@inproceedings{smeur2017prioritized,
+  author    = {Smeur, Ewoud and H{\"o}ppener, Diederik and de Wagter, Christophe},
+  title     = {Prioritized control allocation for quadrotors subject to saturation},
+  booktitle = {International Micro Air Vehicle Conference and Flight Competition (IMAV)},
+  pages     = {37--43}, year = {2017},
+  url       = {https://www.imavs.org/papers/2017/6.pdf}
+}
+
+@article{fourlas2021survey,
+  author  = {Fourlas, George K. and Karras, George C.},
+  title   = {A survey on fault diagnosis and fault-tolerant control methods for unmanned aerial vehicles},
+  journal = {Machines},
+  volume  = {9}, number = {9}, pages = {197}, year = {2021},
+  doi     = {10.3390/machines9090197}
+}
+
+@article{zhang2008bibliographical,
+  author  = {Zhang, Youmin and Jiang, Jin},
+  title   = {Bibliographical review on reconfigurable fault-tolerant control systems},
+  journal = {Annual Reviews in Control},
+  volume  = {32}, number = {2}, pages = {229--252}, year = {2008},
+  doi     = {10.1016/j.arcontrol.2008.03.008}
+}
+
+@misc{strackvanschijndel2021fast,
+  author = {Strack van Schijndel, Bram and Sun, Sihao and de Visser, Coen},
+  title  = {Fast fault detection on a quadrotor using onboard sensors and a Kalman filter approach},
+  year   = {2021}, eprint = {2102.06439}, archivePrefix = {arXiv},
+  note   = {26 real propeller ejections; detection delays 30--130 ms.}
+}
+
+@misc{eschmann2024motordelays,
+  author = {Eschmann, Jonas and Albani, Dario and Loianno, Giuseppe},
+  title  = {Data-driven system identification of quadrotors subject to motor delays},
+  year   = {2024}, eprint = {2404.07837}, archivePrefix = {arXiv},
+  note   = {Crazyflie 2.1 (27 g, brushed): motor time constant approximately 0.072 s.}
+}
+
+% ====================== Parachute and descent recovery =======================
+
+@techreport{astm2022f3322,
+  author      = {{ASTM International}},
+  title       = {Standard Specification for Small Unmanned Aircraft System ({sUAS}) Parachutes},
+  number      = {F3322-22}, institution = {ASTM International}, year = {2022},
+  doi         = {10.1520/F3322-22},
+  note        = {Section 3.1.27 defines minimum deployable altitude as airframe/speed dependent and certified through testing -- no numeric value. Later edition F3322-24a, doi 10.1520/F3322-24A.}
+}
+
+@techreport{easa2023moc,
+  author      = {{European Union Aviation Safety Agency}},
+  title       = {Means of Compliance with Light-{UAS}.2512 (Means of compliance with {SORA} {M2}, medium robustness)},
+  number      = {MOC Light-UAS.2512-01, Issue 1}, institution = {EASA}, year = {2023},
+  note        = {MDA = greatest recorded altitude loss across all deployment tests plus twice the full parachute assembly length; plus 3 s free fall if manually activated.}
+}
+
+@techreport{faa2021oop,
+  author      = {{Federal Aviation Administration}},
+  title       = {Operation of Small Unmanned Aircraft Systems Over People, Final Rule},
+  number      = {RIN 2120-AK85, 86 FR 4314}, institution = {U.S. Department of Transportation}, year = {2021},
+  note        = {Category 1 = 0.55 lb (250 g). The 11 and 25 ft-lb figures are rigid-object injury-severity equivalences, not drone kinetic-energy caps: a Phantom 3 requires about 130 and 220 ft-lb respectively to match them.}
+}
+
+@article{lacourharbo2017mass,
+  author  = {la Cour-Harbo, Anders},
+  title   = {Mass threshold for ``harmless'' drones},
+  journal = {International Journal of Micro Air Vehicles},
+  volume  = {9}, number = {2}, pages = {77--92}, year = {2017},
+  doi     = {10.1177/1756829317691991},
+  note    = {Origin of 250 g as a defended figure. Abstract verified; full text not read.}
+}
+
+@article{farajijalal2025safety,
+  author  = {Farajijalal, Mohammad and Eslamiat, Hossein and Avineni, Vishnu and Hettel, Eric and Lindsay, Chad},
+  title   = {Safety systems for emergency landing of civilian unmanned aerial vehicles ({UAVs}) -- a comprehensive review},
+  journal = {Drones},
+  volume  = {9}, number = {2}, pages = {141}, year = {2025},
+  doi     = {10.3390/drones9020141}
+}
+
+@misc{mili2026bench,
+  author = {Mili, A. M. and Catar, L. and G{\'e}rard, P. and Tabiai, I. and St-Onge, D.},
+  title  = {From bench to flight: translating drone impact tests into operational safety limits},
+  year   = {2026}, eprint = {2602.05922}, archivePrefix = {arXiv},
+  note   = {410 g DJI Avata 230.4 N peak; 250 g Cognifly 84.4 N. Compliant joints cut peak force 13 percent but increase rebound energy.}
+}
+
+% ================ Impact severity, injury, crashworthiness ==================
+
+@techreport{arterburn2017a4,
+  author      = {Arterburn, David and Ewing, Mark and Prabhu, Raj and Zhu, Feng and Francis, David},
+  title       = {{FAA UAS} Center of Excellence Task {A4}: {UAS} Ground Collision Severity Evaluation, Revision 2},
+  institution = {ASSURE / University of Alabama in Huntsville}, year = {2017},
+  url         = {https://assureuas.com/wp-content/uploads/2021/06/A4-Final-Report.pdf},
+  note        = {Multirotor terminal KE 64.7 ft-lb per lb MGTOW; blade guards increase vertical flat-plate drag area 42 percent; guarded laceration onset about 1.07 m/s.}
+}
+
+@techreport{arterburn2019a14,
+  author      = {Arterburn, David and Olivares, Gerardo and Bolte, John and Prabhu, Raj and Duma, Stefan},
+  title       = {Task {A14}: {UAS} Ground Collision Severity Evaluation 2017--2019},
+  institution = {FAA William J. Hughes Technical Center / ASSURE}, year = {2019},
+  url         = {https://www.assureuas.com/wp-content/uploads/2021/06/A14-Final-Report.pdf},
+  note        = {The 198 g skull-fracture-onset limit corresponds to only 9 percent probability of AIS>=2; PMHS-derived risk curves for sUAS still needed.}
+}
+
+@article{svaty2025impact,
+  author  = {Svat{\'y}, Zden{\v{e}}k and Vrtal, Petr and Mi{\v{c}}unek, Tom{\'a}{\v{s}} and Kohout, Tom{\'a}{\v{s}} and Nouzovsk{\'y}, Lukas and Fryd{\r{y}}n, Michal and Blodek, T. and Koci{\'a}n, K.},
+  title   = {Impact analysis assessment of {UAS} collision with a human body},
+  journal = {PLOS ONE},
+  volume  = {20}, number = {3}, pages = {e0320073}, year = {2025},
+  doi     = {10.1371/journal.pone.0320073},
+  note    = {49 impact tests, about 20 g to over 1 kg, 7--24 m/s, 1--280 J. HIC15 saturates with kinetic energy; KE models fail for frangible structures.}
+}
+
+@article{campolettano2017ranges,
+  author  = {Campolettano, Eamon T. and Bland, Michael L. and Gellner, Ryan A. and Sproule, Daniel W. and Rowson, Bethany and Tyson, Abigail M. and Duma, Stefan M. and Rowson, Steven},
+  title   = {Ranges of injury risk associated with impact from unmanned aircraft systems},
+  journal = {Annals of Biomedical Engineering},
+  volume  = {45}, number = {12}, pages = {2733--2741}, year = {2017},
+  doi     = {10.1007/s10439-017-1921-6},
+  note    = {Tested mass range 1.2--11 kg only. Abstract verified; internal numbers not read.}
+}
+
+@article{hammer2023freefall,
+  author  = {Hammer, T. and Quitter, J. W. and Mayntz, J. and Bauschat, J. M. and Dahmann, P. and G{\"o}tten, F.},
+  title   = {Free fall drag estimation of small-scale multirotor unmanned aircraft systems using computational fluid dynamics and wind tunnel experiments},
+  journal = {CEAS Aeronautical Journal},
+  volume  = {15}, number = {2}, pages = {269--282}, year = {2023},
+  doi     = {10.1007/s13272-023-00702-w},
+  note    = {Free-spinning propellers may increase drag up to 110 percent; contradicts A4's observation that blades stop windmilling.}
+}
+
+@misc{cfr27725,
+  author = {{U.S. Code of Federal Regulations}},
+  title  = {14 {CFR} 27.725 Limit drop test; 27.727 Reserve energy absorption drop test; 29.725; 25.473 Landing load conditions},
+  note   = {Certified design landing velocities: 13 in drop = 2.55 m/s; 1.5x height = 3.12 m/s; 8 in = 2.0 m/s; 10 and 6 fps = 3.05 and 1.83 m/s. The anchor, by analogy, for a 1.5--3 m/s impact criterion.}
+}
+
+@article{ferrentino2026lattice,
+  author  = {Ferrentino, P. and Wu, R. and Nuzzo, S. and Girardi, L. and Brancart, J. and Vanderborght, B.},
+  title   = {A visco-hyperelastic lattice-based arm structure to improve {UAV} collision resilience},
+  journal = {Drones},
+  volume  = {10}, number = {9}, pages = {698}, year = {2026},
+  doi     = {10.3390/drones10090698},
+  note    = {Up to 99 percent increase in specific energy absorption, 65 percent reduction in peak impact force. Abstract verified only.}
+}
+
+% ============== Statistics, reachability, preregistration ===================
+
+@article{clopper1934use,
+  author  = {Clopper, C. J. and Pearson, E. S.},
+  title   = {The use of confidence or fiducial limits illustrated in the case of the binomial},
+  journal = {Biometrika},
+  volume  = {26}, number = {4}, pages = {404--413}, year = {1934},
+  doi     = {10.1093/biomet/26.4.404}
+}
+
+@article{brown2001interval,
+  author  = {Brown, Lawrence D. and Cai, T. Tony and DasGupta, Anirban},
+  title   = {Interval estimation for a binomial proportion},
+  journal = {Statistical Science},
+  volume  = {16}, number = {2}, pages = {101--133}, year = {2001},
+  doi     = {10.1214/ss/1009213286},
+  note    = {The canonical critique: Clopper-Pearson is wastefully conservative.}
+}
+
+@article{agresti1998approximate,
+  author  = {Agresti, Alan and Coull, Brent A.},
+  title   = {Approximate is better than ``exact'' for interval estimation of binomial proportions},
+  journal = {The American Statistician},
+  volume  = {52}, number = {2}, pages = {119--126}, year = {1998},
+  doi     = {10.1080/00031305.1998.10480550}
+}
+
+@article{thulin2014cost,
+  author  = {Thulin, M{\aa}ns},
+  title   = {The cost of using exact confidence intervals for a binomial proportion},
+  journal = {Electronic Journal of Statistics},
+  volume  = {8}, number = {1}, pages = {817--840}, year = {2014},
+  doi     = {10.1214/14-EJS909}
+}
+
+@article{hanley1983nothing,
+  author  = {Hanley, James A. and Lippman-Hand, Abby},
+  title   = {If nothing goes wrong, is everything all right? Interpreting zero numerators},
+  journal = {JAMA},
+  volume  = {249}, number = {13}, pages = {1743--1745}, year = {1983},
+  doi     = {10.1001/jama.1983.03330370053031}
+}
+
+@article{mcnemar1947note,
+  author  = {McNemar, Quinn},
+  title   = {Note on the sampling error of the difference between correlated proportions or percentages},
+  journal = {Psychometrika},
+  volume  = {12}, number = {2}, pages = {153--157}, year = {1947},
+  doi     = {10.1007/BF02295996}
+}
+
+@article{fagerland2013mcnemar,
+  author  = {Fagerland, Morten W. and Lydersen, Stian and Laake, Petter},
+  title   = {The {McNemar} test for binary matched-pairs data: mid-p and asymptotic are better than exact conditional},
+  journal = {BMC Medical Research Methodology},
+  volume  = {13}, pages = {91}, year = {2013},
+  doi     = {10.1186/1471-2288-13-91}
+}
+
+@article{tango1998equivalence,
+  author  = {Tango, Toshiro},
+  title   = {Equivalence test and confidence interval for the difference in proportions for the paired-sample design},
+  journal = {Statistics in Medicine},
+  volume  = {17}, number = {8}, pages = {891--908}, year = {1998},
+  doi     = {10.1002/(SICI)1097-0258(19980430)17:8<891::AID-SIM780>3.0.CO;2-B},
+  note    = {The key reference for this repo's paired controller comparison.}
+}
+
+@article{altman1995absence,
+  author  = {Altman, Douglas G. and Bland, J. Martin},
+  title   = {Absence of evidence is not evidence of absence},
+  journal = {BMJ},
+  volume  = {311}, number = {7003}, pages = {485}, year = {1995},
+  doi     = {10.1136/bmj.311.7003.485}
+}
+
+@article{piaggio2012noninferiority,
+  author  = {Piaggio, Gilda and Elbourne, Diana R. and Pocock, Stuart J. and Evans, Stephen J. W. and Altman, Douglas G.},
+  title   = {Reporting of noninferiority and equivalence randomized trials: extension of the {CONSORT} 2010 statement},
+  journal = {JAMA},
+  volume  = {308}, number = {24}, pages = {2594--2604}, year = {2012},
+  doi     = {10.1001/jama.2012.87802}
+}
+
+@article{schuirmann1987tost,
+  author  = {Schuirmann, Donald J.},
+  title   = {A comparison of the two one-sided tests procedure and the power approach for assessing the equivalence of average bioavailability},
+  journal = {Journal of Pharmacokinetics and Biopharmaceutics},
+  volume  = {15}, number = {6}, pages = {657--680}, year = {1987},
+  doi     = {10.1007/BF01068419}
+}
+
+@article{lakens2017equivalence,
+  author  = {Lakens, Dani{\"e}l},
+  title   = {Equivalence tests: a practical primer for t tests, correlations, and meta-analyses},
+  journal = {Social Psychological and Personality Science},
+  volume  = {8}, number = {4}, pages = {355--362}, year = {2017},
+  doi     = {10.1177/1948550617697177}
+}
+
+@techreport{kalra2016driving,
+  author      = {Kalra, Nidhi and Paddock, Susan M.},
+  title       = {Driving to Safety: How Many Miles of Driving Would It Take to Demonstrate Autonomous Vehicle Reliability?},
+  number      = {RR-1478-RC}, institution = {RAND Corporation}, year = {2016},
+  doi         = {10.7249/RR1478}
+}
+
+@article{corso2021survey,
+  author  = {Corso, Anthony and Moss, Robert J. and Koren, Mark and Lee, Ritchie and Kochenderfer, Mykel J.},
+  title   = {A survey of algorithms for black-box safety validation of cyber-physical systems},
+  journal = {Journal of Artificial Intelligence Research},
+  volume  = {72}, pages = {377--428}, year = {2021},
+  doi     = {10.1613/jair.1.12716}
+}
+
+@inproceedings{lee2015adaptive,
+  author    = {Lee, Ritchie and Kochenderfer, Mykel J. and Mengshoel, Ole J. and Brat, Guillaume P. and Owen, Michael P.},
+  title     = {Adaptive stress testing of airborne collision avoidance systems},
+  booktitle = {IEEE/AIAA 34th Digital Avionics Systems Conference (DASC)},
+  year      = {2015},
+  doi       = {10.1109/DASC.2015.7311613}
+}
+
+@article{zhao2017accelerated,
+  author  = {Zhao, Ding and Lam, Henry and Peng, Huei and Bao, Shan and LeBlanc, David J. and Nobukawa, Kazutoshi and Pan, Christopher S.},
+  title   = {Accelerated evaluation of automated vehicles safety in lane-change scenarios based on importance sampling techniques},
+  journal = {IEEE Transactions on Intelligent Transportation Systems},
+  volume  = {18}, number = {3}, pages = {595--607}, year = {2017},
+  doi     = {10.1109/TITS.2016.2582208}
+}
+
+@article{mitchell2005timedependent,
+  author  = {Mitchell, Ian M. and Bayen, Alexandre M. and Tomlin, Claire J.},
+  title   = {A time-dependent {Hamilton-Jacobi} formulation of reachable sets for continuous dynamic games},
+  journal = {IEEE Transactions on Automatic Control},
+  volume  = {50}, number = {7}, pages = {947--957}, year = {2005},
+  doi     = {10.1109/TAC.2005.851439}
+}
+
+@inproceedings{bansal2017hj,
+  author    = {Bansal, Somil and Chen, Mo and Herbert, Sylvia and Tomlin, Claire J.},
+  title     = {{Hamilton-Jacobi} reachability: a brief overview and recent advances},
+  booktitle = {IEEE 56th Conference on Decision and Control (CDC)},
+  pages     = {2242--2253}, year = {2017},
+  doi       = {10.1109/CDC.2017.8263977},
+  note      = {Curse of dimensionality caps exact HJ at about 4--5 states -- the justification for sampling instead.}
+}
+
+@article{nabi2018structural,
+  author  = {Nabi, H. N. and Lombaerts, Thomas and Zhang, Y. and van Kampen, Erik-Jan and Chu, Q. P. and de Visser, Coen C.},
+  title   = {Effects of structural failure on the safe flight envelope of aircraft},
+  journal = {Journal of Guidance, Control, and Dynamics},
+  volume  = {41}, number = {6}, year = {2018},
+  doi     = {10.2514/1.G003184}
+}
+
+@inproceedings{sun2019envelope,
+  author    = {Sun, Sihao and de Visser, Coen C.},
+  title     = {Quadrotor safe flight envelope prediction in the high-speed regime: a {Monte-Carlo} approach},
+  booktitle = {AIAA SciTech Forum},
+  number    = {AIAA 2019-0948}, year = {2019},
+  doi       = {10.2514/6.2019-0948},
+  note      = {Closest methodological precedent: rejects level-set HJ above about 4 states and substitutes Monte Carlo. Binary labels, no per-cell confidence bounds.}
+}
+
+@article{yin2019probabilistic,
+  author  = {Yin, M. and Chu, Q. P. and Zhang, Y. and Niestroy, M. A. and de Visser, Coen C.},
+  title   = {Probabilistic flight envelope estimation with application to unstable overactuated aircraft},
+  journal = {Journal of Guidance, Control, and Dynamics},
+  volume  = {42}, number = {12}, pages = {2650--2663}, year = {2019},
+  doi     = {10.2514/1.G004193}
+}
+
+@article{nosek2018preregistration,
+  author  = {Nosek, Brian A. and Ebersole, Charles R. and DeHaven, Alexander C. and Mellor, David T.},
+  title   = {The preregistration revolution},
+  journal = {Proceedings of the National Academy of Sciences},
+  volume  = {115}, number = {11}, pages = {2600--2606}, year = {2018},
+  doi     = {10.1073/pnas.1708274114}
+}
+
+@article{sandve2013ten,
+  author  = {Sandve, Geir Kjetil and Nekrutenko, Anton and Taylor, James and Hovig, Eivind},
+  title   = {Ten simple rules for reproducible computational research},
+  journal = {PLoS Computational Biology},
+  volume  = {9}, number = {10}, pages = {e1003285}, year = {2013},
+  doi     = {10.1371/journal.pcbi.1003285}
+}
+
+% ================== Measurement, thrust stands, propellers ==================
+
+@techreport{jcgm2008gum,
+  author      = {{Joint Committee for Guides in Metrology}},
+  title       = {Evaluation of measurement data -- Guide to the expression of uncertainty in measurement ({GUM})},
+  number      = {JCGM 100:2008}, institution = {BIPM}, year = {2008},
+  doi         = {10.59161/jcgm100-2008e}
+}
+
+@techreport{jcgm2012vim,
+  author      = {{Joint Committee for Guides in Metrology}},
+  title       = {International vocabulary of metrology -- basic and general concepts and associated terms ({VIM}), 3rd edition},
+  number      = {JCGM 200:2012}, institution = {BIPM}, year = {2012},
+  note        = {Entry 2.39 Note 2: calibration must not be confused with adjustment of a measuring system, often mistakenly called self-calibration.}
+}
+
+@techreport{taylor1994nist1297,
+  author      = {Taylor, Barry N. and Kuyatt, Chris E.},
+  title       = {Guidelines for Evaluating and Expressing the Uncertainty of {NIST} Measurement Results},
+  number      = {NIST Technical Note 1297}, institution = {NIST}, year = {1994}
+}
+
+@techreport{possolo2015nist1900,
+  author      = {Possolo, Antonio},
+  title       = {Simple Guide for Evaluating and Expressing the Uncertainty of {NIST} Measurement Results},
+  number      = {NIST Technical Note 1900}, institution = {NIST}, year = {2015},
+  doi         = {10.6028/NIST.TN.1900}
+}
+
+@techreport{ilac2020p14,
+  author      = {{International Laboratory Accreditation Cooperation}},
+  title       = {{ILAC} Policy for Measurement Uncertainty in Calibration},
+  number      = {ILAC-P14:09/2020}, institution = {ILAC}, year = {2020},
+  note        = {Report y plus or minus U, state k and coverage probability, U to at most two significant digits.}
+}
+
+@techreport{oiml2021r60,
+  author      = {{International Organization of Legal Metrology}},
+  title       = {Metrological regulation for load cells -- Part 1: Metrological and technical requirements},
+  number      = {OIML R 60-1, Edition 2021 (E)}, institution = {OIML}, year = {2021},
+  note        = {Definitions and limits for creep, hysteresis error, minimum dead load output return, and temperature effects.}
+}
+
+@inproceedings{brandt2011propeller,
+  author    = {Brandt, John B. and Selig, Michael S.},
+  title     = {Propeller performance data at low {Reynolds} numbers},
+  booktitle = {49th AIAA Aerospace Sciences Meeting},
+  number    = {AIAA 2011-1255}, year = {2011},
+  doi       = {10.2514/6.2011-1255}
+}
+
+@inproceedings{deters2014reynolds,
+  author    = {Deters, Robert W. and Ananda, Gavin K. and Selig, Michael S.},
+  title     = {{Reynolds} number effects on the performance of small-scale propellers},
+  booktitle = {32nd AIAA Applied Aerodynamics Conference},
+  number    = {AIAA 2014-2151}, year = {2014},
+  doi       = {10.2514/6.2014-2151},
+  note      = {Propellers kept more than 1.5 diameters from the fairing -- the only hard clearance number verified in a peer-reviewed source.}
+}
+
+@inproceedings{deters2017static,
+  author    = {Deters, Robert W. and Kleinke, Stefan and Selig, Michael S.},
+  title     = {Static testing of propulsion elements for small multirotor unmanned aerial vehicles},
+  booktitle = {35th AIAA Applied Aerodynamics Conference},
+  number    = {AIAA 2017-3743}, year = {2017},
+  doi       = {10.2514/6.2017-3743},
+  note      = {Regulated bench supply rather than a battery; dead-weight calibration loading and unloading; slope changes typically 1 percent or less.}
+}
+
+@inproceedings{russell2016wind,
+  author    = {Russell, Carl and Jung, Jaewoo and Willink, Gina and Glasner, Brett},
+  title     = {Wind tunnel and hover performance test results for multicopter {UAS} vehicles},
+  booktitle = {AHS International 72nd Annual Forum},
+  year      = {2016},
+  note      = {NASA NTRS 20160007399. Thermal zero drift 0.1--0.3 lb correlated with temperature; tunnel recirculation explicitly left unquantified.}
+}
+
+@article{sanchezcuevas2017ground,
+  author  = {Sanchez-Cuevas, Pedro J. and Heredia, Guillermo and Ollero, Anibal},
+  title   = {Characterization of the aerodynamic ground effect and its influence in multirotor control},
+  journal = {International Journal of Aerospace Engineering},
+  volume  = {2017}, pages = {1823056}, year = {2017},
+  doi     = {10.1155/2017/1823056},
+  note    = {Whole-quadrotor thrust inflation reaches about 1.4x near z/R = 1 and does not settle until z/R = 5--6 (fountain effect).}
+}
+
+@book{leishman2006principles,
+  author    = {Leishman, J. Gordon},
+  title     = {Principles of Helicopter Aerodynamics},
+  edition   = {2nd}, publisher = {Cambridge University Press}, year = {2006},
+  isbn      = {0-521-85860-7},
+  note      = {Figure of Merit, section 2.8.}
+}
+
+@phdthesis{pereira2008shrouded,
+  author = {Pereira, Jason L.},
+  title  = {Hover and wind-tunnel testing of shrouded rotors for improved micro air vehicle design},
+  school = {University of Maryland}, year = {2008},
+  note   = {16 cm rotor scale: up to 94 percent more thrust at equal power, or 62 percent less power at equal thrust. A prop guard is not a duct.}
+}
+
+@article{li2021ducted,
+  author  = {Li, Yao and Yonezawa, Koichi and Liu, Hao},
+  title   = {Effect of ducted multi-propeller configuration on aerodynamic performance in quadrotor drone},
+  journal = {Drones},
+  volume  = {5}, number = {3}, pages = {101}, year = {2021},
+  doi     = {10.3390/drones5030101},
+  note    = {CFD only, no experimental validation.}
+}

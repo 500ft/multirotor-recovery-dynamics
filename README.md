@@ -34,6 +34,7 @@ nominal motor-envelope CAD and bench preparation—not a finished recovery vehic
 | Nominal geometry | [Motor-envelope generator](cad/generate.py) and [geometry contract](cad/contract.json) | No guessed mount pattern, shaft or propulsion fixture |
 | Bench preparation | [Input requests](cad/bench/input-requests.csv) and [fixture requirements](cad/bench/fixture-preparation.md) | Vendor proposals are not measurements or purchased parts |
 | Measured-authority gate | [Registered evidence contract](docs/specs/measured-authority-gate/) | Actual thrust, installed geometry and recovery evaluation pending |
+| Literature review | [Index](literature/README.md), [claim ledger](literature/claim-ledger.md), [novelty and gaps](literature/novelty-and-gaps.md), [references.bib](literature/references.bib) | External sources verified online at assembly; unresolved items quarantined, not cited |
 | Survivable-set study (A/A2/B) | [Preregistration](docs/specs/survivable-set/design.md), [spin-aware variant](docs/specs/survivable-set/design-a2.md), motor-failure allocation, policy map with exact bounds, [registered drop-test prediction](docs/specs/survivable-set/drop-test-prediction.md) | Simulation on EST action inputs (OQ-010); no hardware claim until the bench and drop gates run |
 
 ![Simulated altitude loss and recoverable tumble rate across component tiers](Figures/release_recovery_envelope.png)
@@ -70,6 +71,7 @@ optional study regeneration and pinned CadQuery environment.
 | --- | --- |
 | [Reading guide](docs/START_HERE.md) | Choose a short review or a technical reproduction |
 | [Current results](Analysis/current-results.md) | Inspect mass, guard, recovery and Monte Carlo conclusions |
+| [Literature review](literature/README.md) | See what is established, what is open, and which repo claims the sources contradict |
 | [Data and figures](docs/data-and-figures.md) | Trace plots to inputs, code and evidence states |
 | [Measured-authority contract](docs/specs/measured-authority-gate/) | Understand what the next measurement must establish |
 | [Fixture preparation](cad/bench/fixture-preparation.md) | Review load-cell proposal, interfaces and metrology |

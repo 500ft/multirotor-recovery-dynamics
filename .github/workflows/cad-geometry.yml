@@ -15,7 +15,7 @@ jobs:
       run:
         shell: bash -el {0}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           # Full history: the historical ledger report reads
           # docs/SPRINT_TASKS.csv at HISTORICAL_BASE via `git show`.

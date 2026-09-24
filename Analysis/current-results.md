@@ -207,6 +207,30 @@ Results, both controller variants (baseline PD and spin-aware A2):
   under the registered interpretation clause this is a *controller* finding,
   not evidence the actions are interchangeable, and it blocks mechanism
   redesign rather than motivating it.
+- **Paired analysis (added 2026-09-23, `design.md` §7a) — the mechanism does not
+  merely fail to help; within this model it hurts.** With both arms now drawing
+  identical vehicles, noise and initial states, the comparison is exact
+  conditional on discordant pairs rather than a clash of marginal intervals:
+  - All four **primary** cells return `no_discordant_pairs` — mechanism and
+    reallocation produced **identical outcomes on all 300 paired trials**. That
+    is a far stronger statement of indistinguishability than the overlapping
+    intervals previously reported, and it is what actually backs the kill verdict.
+  - Across the 96 exploratory comparisons, 72 have no discordant pair at all.
+    Of the 76 discordant pairs that exist, **69 favour reallocation and 7 favour
+    the mechanism** (pooled π = 0.092, exact 95 % CI [0.038, 0.181]; pooled sign
+    test mid-p ≈ 3.5 × 10⁻¹⁴). Two individual cells reach `b_superior`.
+  - The direction matters more than the significance: the mechanism is judged
+    against the **more lenient** guarded criterion (2.5 m/s, 60°) and still loses
+    the overwhelming majority of discordant pairs. It is carrying mass and rim
+    inertia that the paired trials say it does not earn back.
+  - Pooling across heterogeneous cells is descriptive only; the per-cell verdicts
+    in `Data/survivable_set_results.json` are primary.
+- **H-A2.1 is contradicted, not merely unsupported.** Across 192 paired
+  variant comparisons, the spin-aware variant won **zero** discordant pairs; the
+  baseline won all 15 that exist (π = 1.000, exact 95 % CI [0.782, 1.000]).
+  184 comparisons are outcome-identical. The gyroscopic feedforward never
+  produced a survivable landing the baseline did not, and in 15 paired trials the
+  baseline survived where it did not.
 - **A2 hypothesis outcome**: H-A2.1 (gyroscopic feedforward + bounded terminal
   spin helps in tall cells) was NOT supported — all A-vs-A2 differences sit
   inside Monte Carlo uncertainty; H-A2.2 (parity at low height) held. The next

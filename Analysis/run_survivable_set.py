@@ -67,21 +67,25 @@ def build_tasks(scale: int = 1, variants=ss.VARIANTS):
     n_exp = max(2, ss.EXPLORATORY_TRIALS // scale)
     n_pri = max(4, ss.PRIMARY_TRIALS // scale)
     n_par = max(20, ss.PARACHUTE_TRIALS // scale)
-    for vi, variant in enumerate(variants):
+    # PAIRED DESIGN (literature/claim-ledger.md E1): the seed deliberately
+    # excludes the action index and the variant index, so every action and every
+    # controller variant draws the SAME dispersed vehicle, the same imperfections
+    # and the same initial tilt for a given trial. Trials therefore pair
+    # one-to-one across actions and variants, which is what makes McNemar/exact
+    # conditional analysis valid. Do not add ai or vi back into this prefix.
+    for variant in variants:
         for ci, class_name in enumerate(sorted(FAILURE_CLASSES)):
             for ki, cell in enumerate(ss.EXPLORATORY_CELLS):
                 if class_name in ss.PRIMARY_CLASSES and cell in ss.PRIMARY_CELLS:
                     continue  # covered by the higher-N primary tasks below
-                for ai, action in enumerate(REALLOC_ACTIONS):
+                for action in REALLOC_ACTIONS:
                     tasks += _chunked_tasks(class_name, cell, action, n_exp,
-                                            (ss.BASE_SEED, vi, 0, ci, ki, ai),
-                                            variant)
+                                            (ss.BASE_SEED, 0, ci, ki), variant)
         for ci, class_name in enumerate(sorted(ss.PRIMARY_CLASSES)):
             for ki, cell in enumerate(ss.PRIMARY_CELLS):
-                for ai, action in enumerate(REALLOC_ACTIONS):
+                for action in REALLOC_ACTIONS:
                     tasks += _chunked_tasks(class_name, cell, action, n_pri,
-                                            (ss.BASE_SEED, vi, 1, ci, ki, ai),
-                                            variant)
+                                            (ss.BASE_SEED, 1, ci, ki), variant)
     # parachute is controller- and class-independent: once per cell, shared
     for ki, cell in enumerate(ss.EXPLORATORY_CELLS):
         tasks += _chunked_tasks("any", cell, "parachute", n_par,
@@ -172,6 +176,55 @@ def policy_figure(policy, path: Path, variant: str):
     plt.close(fig)
 
 
+def paired_action_comparisons(rows, variant):
+    """Mechanism vs reallocation on identical trials, per (class, cell).
+
+    The unpaired marginal intervals stay in the output; this is the comparison
+    that is actually valid (literature/claim-ledger.md E1). Action A is
+    ``mechanism``, action B is ``realloc_only``.
+    """
+    by_key = {}
+    for r in rows:
+        if r.get("variant") == variant and r["action"] in REALLOC_ACTIONS:
+            by_key.setdefault((r["class"], r["cell"]), {})[r["action"]] = r
+    out = []
+    for (cls, cell), acts in sorted(by_key.items()):
+        if set(acts) != set(REALLOC_ACTIONS):
+            continue
+        a, b = acts["mechanism"], acts["realloc_only"]
+        if not a.get("outcomes") or len(a["outcomes"]) != len(b["outcomes"]):
+            continue
+        table = ss.paired_table(a["outcomes"], b["outcomes"])
+        out.append({"class": cls, "cell": cell, "a": "mechanism",
+                    "b": "realloc_only", **ss.paired_verdict(table)})
+    return out
+
+
+def paired_variant_comparisons(rows, va, vb):
+    """Controller variant A vs A2 on identical trials, per (class, cell, action)."""
+    by_key = {}
+    for r in rows:
+        if r["action"] in REALLOC_ACTIONS:
+            by_key.setdefault((r["class"], r["cell"], r["action"]),
+                              {})[r.get("variant")] = r
+    out = []
+    for (cls, cell, action), vs in sorted(by_key.items()):
+        if va not in vs or vb not in vs:
+            continue
+        a, b = vs[va], vs[vb]
+        if not a.get("outcomes") or len(a["outcomes"]) != len(b["outcomes"]):
+            continue
+        table = ss.paired_table(a["outcomes"], b["outcomes"])
+        out.append({"class": cls, "cell": cell, "action": action,
+                    "a": va, "b": vb, **ss.paired_verdict(table)})
+    return out
+
+
+def _strip_outcomes(rows):
+    """Per-trial vectors are needed for pairing, not for the committed record."""
+    return [{k: v for k, v in r.items() if k != "outcomes"} for r in rows]
+
+
 def assemble_variant(rows, parachute_rows, variant, scale):
     """Kill criterion + policy + sorted row lists for one controller variant."""
     own = [r for r in rows if r.get("variant") == variant
@@ -186,11 +239,12 @@ def assemble_variant(rows, parachute_rows, variant, scale):
     return {
         "variant": variant,
         "kill_criterion": ss.kill_criterion(primary),
-        "policy": ss.policy_map(exploratory),
-        "exploratory": sorted(exploratory,
-                              key=lambda r: (r["class"], r["cell"], r["action"])),
-        "primary": sorted(primary,
-                          key=lambda r: (r["class"], r["cell"], r["action"])),
+        "paired_mechanism_vs_realloc": paired_action_comparisons(rows, variant),
+        "policy": ss.policy_map(_strip_outcomes(exploratory)),
+        "exploratory": _strip_outcomes(
+            sorted(exploratory, key=lambda r: (r["class"], r["cell"], r["action"]))),
+        "primary": _strip_outcomes(
+            sorted(primary, key=lambda r: (r["class"], r["cell"], r["action"]))),
     }
 
 
@@ -356,6 +410,9 @@ def main(argv=None):
             "preregistration": preregistration_block(scale),
             **block,
         }
+        if variant == ss.VARIANTS[0] and len(ss.VARIANTS) > 1:
+            out["paired_variant_comparison"] = paired_variant_comparisons(
+                rows, ss.VARIANTS[0], ss.VARIANTS[1])
         data_path = out_dir / "Data" / f"survivable_set_results{suffix}.json"
         with data_path.open("w") as fh:
             json.dump(out, fh, indent=2)

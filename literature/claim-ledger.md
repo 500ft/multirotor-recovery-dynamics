@@ -85,12 +85,12 @@ cited papers.
 ### E1. "Mechanism lower bound vs reallocation upper bound" (`kill_criterion`)
 - **Sidedness mislabelled:** a 95 % lower combined with a 95 % upper is a **90 % central** construction (Brown, Cai & DasGupta 2001 A; Meeker et al. 2017 B; ICH E9 convention B). Keep the preregistered rule; **relabel it**.
 - **Design error:** the comparison should be **paired**. Our seeds include the action index, so mechanism and realloc draw *different* vehicles. Correct analysis is McNemar (mid-p preferred; Fagerland et al. 2013 A) with Tango's (1998, A) score interval for the paired risk difference.
-- **Action:** pair the draws (already in the W05 plan — now a **correctness requirement**, not an optimisation), then re-analyse. **Confidence: high.**
+- **RESOLVED 2026-09-23** (`fix/paired-comparison-20260923`): the seed prefix no longer includes the action or variant index, so both arms draw identical vehicles; exact conditional (McNemar) verdicts and mid-p values are emitted per (class, cell) for mechanism-vs-realloc and for A-vs-A2; a regression test asserts the pairing. Tango's unconditional score interval is deliberately deferred rather than coded from memory (`design.md` §7a). **Confidence: high.**
 
 ### E2. "H-A2.1 not supported" / "the mechanism did not beat the baseline"
 - **Not equivalence.** Altman & Bland (1995, A): absence of evidence is not evidence of absence. Overlapping CP intervals are especially weak since conservatism widens both.
 - **Needs a preregistered margin δ** to become testable (Piaggio et al. 2012 A; Schuirmann 1987 A; Lakens 2017 A; Tango 1998 A for paired binary).
-- **Action:** report exactly one of superiority / non-inferiority (δ named) / **inconclusive with achieved n and detectable effect size**. Our current statements are the third. **Confidence: high.**
+- **RESOLVED 2026-09-23**: with the paired design in place the verdicts are no longer "inconclusive" by default. Mechanism vs reallocation returns `no_discordant_pairs` in 72/96 cells (identical outcomes, including all four primary cells) and, where discordant evidence exists, 69/76 pairs favour **reallocation** — a directional superiority finding against the mechanism, not an absence of evidence. A-vs-A2 likewise: a2 won 0 of 15 discordant pairs. A preregistered margin δ plus Tango's interval remains the outstanding piece for a formal *non-inferiority* claim (`design.md` §7a). **Confidence: high.**
 
 ### E3. Using Clopper–Pearson at all
 - **Criticised but defensible.** Brown, Cai & DasGupta (2001, A) call it "wastefully conservative"; Agresti & Coull (1998, A) prefer approximate intervals; Thulin (2014, A) quantifies the sample-size cost.

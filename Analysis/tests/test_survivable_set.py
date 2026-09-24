@@ -178,6 +178,58 @@ class TestKillCriterion(unittest.TestCase):
         self.assertTrue(verdict["comparisons"][0]["realloc_dominates"])
 
 
+class TestPairedAnalysis(unittest.TestCase):
+    """literature/claim-ledger.md E1: the action comparison is paired."""
+
+    def test_table_counts(self):
+        t = ss.paired_table([True, True, False, False], [True, False, True, False])
+        self.assertEqual((t["both_safe"], t["only_a"], t["only_b"], t["neither"]),
+                         (1, 1, 1, 1))
+        self.assertEqual((t["n"], t["discordant"]), (4, 2))
+
+    def test_length_mismatch_rejected(self):
+        with self.assertRaises(ValueError):
+            ss.paired_table([True], [True, False])
+
+    def test_identical_outcomes_are_not_a_tie_but_an_absence_of_evidence(self):
+        v = ss.paired_verdict(ss.paired_table([True] * 50, [True] * 50))
+        self.assertEqual(v["verdict"], "no_discordant_pairs")
+        self.assertEqual(v["discordant"], 0)
+        self.assertEqual(v["midp"], 1.0)
+        self.assertIsNone(v["pi_lower"])
+
+    def test_clean_dominance_detected(self):
+        v = ss.paired_verdict(ss.paired_table([True] * 12, [False] * 12))
+        self.assertEqual(v["verdict"], "a_superior")
+        self.assertLess(v["midp"], 0.01)
+        v2 = ss.paired_verdict(ss.paired_table([False] * 12, [True] * 12))
+        self.assertEqual(v2["verdict"], "b_superior")
+
+    def test_small_discordant_count_is_not_distinguished(self):
+        v = ss.paired_verdict(ss.paired_table([True] * 5 + [False] * 5,
+                                              [False] * 5 + [True] * 5))
+        self.assertEqual(v["verdict"], "not_distinguished")
+        self.assertEqual(v["midp"], 1.0)
+
+    def test_midp_matches_exact_binomial_construction(self):
+        # b of m successes under Binomial(m, 1/2); all-one-sided case is 0.5**m
+        for m in (1, 5, 10):
+            self.assertAlmostEqual(ss.mcnemar_midp(m, 0), 0.5 ** m, places=12)
+        self.assertEqual(ss.mcnemar_midp(0, 0), 1.0)
+        # symmetry
+        self.assertAlmostEqual(ss.mcnemar_midp(7, 2), ss.mcnemar_midp(2, 7))
+
+    def test_pairing_requires_identical_draws(self):
+        """The seed must not depend on the action, or the pairing is fictional."""
+        from Analysis.run_survivable_set import build_tasks
+        seeds = {}
+        for class_name, cell, action, n, seed, variant in build_tasks(scale=10):
+            if action in ("mechanism", "realloc_only"):
+                seeds.setdefault((class_name, cell, variant, seed), set()).add(action)
+        paired = [k for k, v in seeds.items() if len(v) == 2]
+        self.assertTrue(paired, "no (class, cell, variant, seed) shared by both actions")
+
+
 class TestPolicyMap(unittest.TestCase):
     def test_best_action_by_lower_bound_with_ambiguity(self):
         rows = [_row("one_out", "c", "mechanism", 295, 300),

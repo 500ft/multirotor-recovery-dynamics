@@ -69,6 +69,18 @@ feedforward alone is insufficient and a genuinely spin-locked rotor-out
 controller (primary-axis / reduced-attitude in the spun frame) becomes the next
 work item.
 
+**Outcome, amended 2026-09-23 after the paired re-analysis** (`design.md` §7a).
+The original unpaired comparison reported H-A2.1 as "not supported". With
+identical draws in both arms the result is sharper and worse for A2: across 192
+paired comparisons the spin-aware variant won **zero** discordant pairs while the
+baseline won all 15 that exist (exact 95 % CI on π = [0.782, 1.000]). So
+feedforward is not neutral here — it is mildly harmful in the cells where the two
+differ at all. The registered conclusion stands and strengthens: a genuinely
+spin-locked rotor-out controller is the next work item, and per
+`literature/notes/01` §2 that is **adoption of a known controller**
+(Mueller & D'Andrea's primary-axis relaxed hover, which is also patented), not an
+invention.
+
 ## 5. Integrator defense
 
 `python -m Analysis.run_survivable_set --convergence` repeats primary-cell

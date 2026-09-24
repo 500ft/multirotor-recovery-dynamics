@@ -90,7 +90,7 @@ Action parameters marked EST are owner inputs (OQ-010); the preregistrations in
 [`design-a2.md`](specs/survivable-set/design-a2.md) freeze criteria, cells,
 seeds, machinery revisions, and the mechanism kill criterion. The drop-test
 prediction registered before any hardware drop lives in
-[`drop-test-prediction.md`](specs/survivable-set/drop-test-prediction.md).
+[`drop-test-prediction.md`](specs/survivable-set/drop-test-prediction.md). Scope limits and the status of the 2026-09-24 external critique are in [`critique-2026-09-24-status.md`](specs/survivable-set/critique-2026-09-24-status.md) — note that the `policy` field ranks **design packages**, not in-flight actions.
 
 ## Bench acquisition (V995 demonstrator, planned)
 

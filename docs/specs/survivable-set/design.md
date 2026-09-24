@@ -12,10 +12,16 @@ dedicated recovery mechanism (the guard) enlarge the survivable set beyond what
 thrust reallocation alone achieves?
 
 Known (not claimed as novel here): controlled flight after one- and two-rotor loss
-via thrust reallocation; parachute recovery of small UAS. Open (this study's
-contribution): a *policy* over the post-failure state that selects among actions,
-with a quantified survivable set that includes recovery delay and authority loss —
-and whether the mechanism is justified at all.
+via thrust reallocation — including two-adjacent loss in outdoor flight; parachute
+recovery of small UAS **at ≥900 g** (not established at sub-250 g).
+
+**What this study actually delivers, corrected 2026-09-24 (§6b):** a quantified
+comparison of **design packages** over the post-failure state, with recovery delay
+and authority loss as state coordinates, and a test of whether the mechanism is
+justified. It does **not** deliver a runtime policy: its cases differ in installed
+hardware, and no aircraft can choose its own mass in flight. A runtime policy over
+`A(c)` for one fixed configuration remains **specified but not performed** — see
+§6b and `literature/novelty-and-gaps.md`.
 
 ## 2. Post-failure state space
 
@@ -155,13 +161,34 @@ battery sag. Deterministic seeding per (class, cell, action, chunk) — base see
 The mechanism is justified **only if**, in at least one primary (class × cell), its
 95% lower bound exceeds `realloc_only`'s 95% upper bound — dominance beyond Monte
 Carlo uncertainty. Ties inside uncertainty do **not** justify it. If killed, the
-result is reported as such and the work redirects to the policy alone (Study B);
+result is reported as such and the work redirects to the package ranking alone (Study B);
 the mechanism is not redesigned first (see the plan's "do not" clause).
 
 Interpretation clause: a kill reached because **both** actions fail in a cell
 (`both_actions_fail` in the output) is a controller finding, not evidence that the
 actions are interchangeable — it redirects to the controller follow-on below, and
 the mechanism question stays open only if a future controller separates the actions.
+
+## 6a. Scenario label (amendment, 2026-09-24)
+
+Critique C04. The simulator cuts **all four motors** for
+`detection_latency + motor_start_latency` and only then engages the controller.
+That is a **release/startup transient** — a vehicle dropped with motors off which
+must spool up. It is **not** an in-flight failure, where healthy motors keep
+running under the nominal controller until detection and reconfiguration.
+
+The mode is now named in code (`Analysis/survivable_set.py: SCENARIO`) and emitted
+in every results file as `scenario: "release_startup"`, with a test asserting the
+dynamics still match the label. **Every rotor-out result in this study is
+conditional on that reading and must be reported with it.**
+
+An `in_flight_loss` mode needs its own registration before use, specifying: the
+pre-failure command; the failed rotor's residual thrust during detection; the
+healthy motors' behaviour during detection; when fault-aware allocation begins;
+whether actuator response is instantaneous or lagged; and whether the initial
+state is trim-consistent. Failure type must also be specified — motor stop,
+propeller loss, effectiveness loss and power loss differ in their thrust, torque,
+drag and inertia transients.
 
 ## 6b. Configuration vs action — scope correction (amendment, 2026-09-24)
 
@@ -281,11 +308,16 @@ that spinning flight needs a reduced-attitude, spin-aware controller. That
 controller is the study's follow-on (Study A2), and it is a *controls* work item,
 not a mechanism redesign.
 
-## 8. Study B — policy map
+## 8. Study B — package ranking (formerly "policy map")
 
-Best action per (class, cell) by exact lower bound; every alternative whose interval
-overlaps the winner's lower bound is listed as ambiguous. The map must say where it
-cannot distinguish.
+Best-performing **package** per (class, cell) by exact lower bound; every
+alternative whose interval overlaps the winner's lower bound is listed as
+ambiguous. The map must say where it cannot distinguish.
+
+**Naming, corrected 2026-09-24 (§6b):** the generated field is still called
+`policy` for file compatibility, but it ranks *configurations*, not in-flight
+choices. Read "best action" as "best-performing package". A genuine runtime policy
+needs one fixed configuration and `A(c)` executable on it.
 
 ## 9. Outputs and evidence category
 
@@ -300,4 +332,4 @@ have run.
 
 Mechanism mass/inertia fractions, guarded impact tolerance, parachute terminal
 speed and deployment delay — or the decision that no parachute variant exists, which
-removes that action from the policy.
+removes that action from the ranking. (As of 2026-09-24 the parachute action is UNAVAILABLE in every configuration we own — §6b.)

@@ -169,9 +169,10 @@ def policy_figure(policy, path: Path, variant: str):
         ax.text(j, i, letter + m, ha="center", va="center", fontsize=7)
     ax.set_yticks(range(len(classes)), classes)
     ax.set_xticks(range(len(cells)), cells, rotation=90, fontsize=6)
-    ax.set_title(f"Recovery policy map, variant {variant}: best action by exact "
-                 "lower bound (R=realloc_only, M=mechanism, P=parachute; "
-                 "'?' = within Monte Carlo uncertainty of an alternative)")
+    ax.set_title(f"Design-package ranking, variant {variant} — NOT a runtime "
+                 "policy (design.md 6b)\nbest package by exact lower bound "
+                 "(R=realloc_only, M=mechanism, P=parachute; "
+                 "'?' = within Monte Carlo uncertainty)", fontsize=9)
     fig.savefig(path, dpi=160)
     plt.close(fig)
 
@@ -270,6 +271,12 @@ def preregistration_block(scale):
                    "primary": ss.PRIMARY_TRIALS // scale,
                    "parachute": ss.PARACHUTE_TRIALS // scale},
         "base_seed": ss.BASE_SEED,
+        "scenario": ss.SCENARIO,
+        "scenario_note": ("All motors are off for detection+spool latency, then "
+                          "the controller engages: a RELEASE/STARTUP transient, "
+                          "NOT an in-flight failure in which healthy motors keep "
+                          "running until detection. Every rotor-out result here "
+                          "is conditional on that reading (critique C04)."),
         "machinery_rev": ("2026-09-16: cascaded torque-priority allocation, "
                           "balanced collective ceiling (0.9 airmode reserve in "
                           "allocation mode), arrest-first descent; supersedes the "

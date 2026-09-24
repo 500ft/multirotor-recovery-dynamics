@@ -35,7 +35,7 @@ nominal motor-envelope CAD and bench preparation—not a finished recovery vehic
 | Bench preparation | [Input requests](cad/bench/input-requests.csv) and [fixture requirements](cad/bench/fixture-preparation.md) | Vendor proposals are not measurements or purchased parts |
 | Measured-authority gate | [Registered evidence contract](docs/specs/measured-authority-gate/) | Actual thrust, installed geometry and recovery evaluation pending |
 | Literature review | [Index](literature/README.md), [claim ledger](literature/claim-ledger.md), [novelty and gaps](literature/novelty-and-gaps.md), [references.bib](literature/references.bib) | External sources verified online at assembly; unresolved items quarantined, not cited |
-| Survivable-set study (A/A2/B) | [Preregistration](docs/specs/survivable-set/design.md), [spin-aware variant](docs/specs/survivable-set/design-a2.md), motor-failure allocation, policy map with exact bounds, [registered drop-test prediction](docs/specs/survivable-set/drop-test-prediction.md) | Simulation on EST action inputs (OQ-010); no hardware claim until the bench and drop gates run |
+| Survivable-set study (A/A2/B) | [Preregistration](docs/specs/survivable-set/design.md), [spin-aware variant](docs/specs/survivable-set/design-a2.md), motor-failure allocation, design-package ranking with exact bounds, [registered drop-test prediction](docs/specs/survivable-set/drop-test-prediction.md) | Simulation on EST action inputs (OQ-010); compares **design packages**, not in-flight actions (`design.md` §6b); no hardware claim until the bench and drop gates run |
 
 ![Simulated altitude loss and recoverable tumble rate across component tiers](Figures/release_recovery_envelope.png)
 

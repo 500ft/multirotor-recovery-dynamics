@@ -227,18 +227,21 @@
     {
       "class": "one_out",
       "cell": "h3_vz0_w6_d0.11",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.0487094100188624,
-      "ambiguous_with": []
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
     },
     {
       "class": "one_out",
       "cell": "h3_vz0_w6_d0.3",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.047317340348277115,
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
       "ambiguous_with": [
         "mechanism",
-        "realloc_only"
+        "parachute"
       ]
     },
     {
@@ -253,26 +256,31 @@
     {
       "class": "one_out",
       "cell": "h6_vz-1.5_w2_d0.3",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.23410229023979676,
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.1933084211205933,
       "ambiguous_with": [
-        "mechanism",
-        "realloc_only"
+        "mechanism"
       ]
     },
     {
       "class": "one_out",
       "cell": "h6_vz-1.5_w6_d0.11",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.24584261680680705,
-      "ambiguous_with": []
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
     },
     {
       "class": "one_out",
       "cell": "h6_vz-1.5_w6_d0.3",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.23556895497996316,
-      "ambiguous_with": []
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
     },
     {
       "class": "one_out",
@@ -280,33 +288,36 @@
       "best_action": "mechanism",
       "best_p_safe_95_lower": 0.4016289473646547,
       "ambiguous_with": [
-        "parachute",
         "realloc_only"
       ]
     },
     {
       "class": "one_out",
       "cell": "h6_vz0_w2_d0.3",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.3892863907266074,
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.24952590514663275,
       "ambiguous_with": [
-        "mechanism",
-        "realloc_only"
+        "mechanism"
       ]
     },
     {
       "class": "one_out",
       "cell": "h6_vz0_w6_d0.11",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.3882944336034893,
-      "ambiguous_with": []
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0017083156444657305,
+      "ambiguous_with": [
+        "mechanism"
+      ]
     },
     {
       "class": "one_out",
       "cell": "h6_vz0_w6_d0.3",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.396232254257922,
-      "ambiguous_with": []
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
     },
     {
       "class": "partial_authority",
@@ -450,11 +461,11 @@
     {
       "class": "partial_authority",
       "cell": "h3_vz0_w6_d0.3",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.047317340348277115,
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
       "ambiguous_with": [
         "mechanism",
-        "realloc_only"
+        "parachute"
       ]
     },
     {
@@ -487,9 +498,12 @@
     {
       "class": "partial_authority",
       "cell": "h6_vz-1.5_w6_d0.3",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.23556895497996316,
-      "ambiguous_with": []
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
     },
     {
       "class": "partial_authority",
@@ -521,9 +535,11 @@
     {
       "class": "partial_authority",
       "cell": "h6_vz0_w6_d0.3",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.396232254257922,
-      "ambiguous_with": []
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.027815549739749798,
+      "ambiguous_with": [
+        "mechanism"
+      ]
     },
     {
       "class": "two_adjacent",
@@ -648,95 +664,122 @@
     {
       "class": "two_adjacent",
       "cell": "h3_vz0_w2_d0.11",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.04268998250739059,
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
       "ambiguous_with": [
         "mechanism",
-        "realloc_only"
+        "parachute"
       ]
     },
     {
       "class": "two_adjacent",
       "cell": "h3_vz0_w2_d0.3",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.04361379118726858,
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
       "ambiguous_with": [
         "mechanism",
-        "realloc_only"
+        "parachute"
       ]
     },
     {
       "class": "two_adjacent",
       "cell": "h3_vz0_w6_d0.11",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.0487094100188624,
-      "ambiguous_with": []
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
     },
     {
       "class": "two_adjacent",
       "cell": "h3_vz0_w6_d0.3",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.047317340348277115,
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
       "ambiguous_with": [
         "mechanism",
-        "realloc_only"
+        "parachute"
       ]
     },
     {
       "class": "two_adjacent",
       "cell": "h6_vz-1.5_w2_d0.11",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.24584261680680705,
-      "ambiguous_with": []
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
     },
     {
       "class": "two_adjacent",
       "cell": "h6_vz-1.5_w2_d0.3",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.23410229023979676,
-      "ambiguous_with": []
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
     },
     {
       "class": "two_adjacent",
       "cell": "h6_vz-1.5_w6_d0.11",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.24584261680680705,
-      "ambiguous_with": []
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
     },
     {
       "class": "two_adjacent",
       "cell": "h6_vz-1.5_w6_d0.3",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.23556895497996316,
-      "ambiguous_with": []
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
     },
     {
       "class": "two_adjacent",
       "cell": "h6_vz0_w2_d0.11",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.3744152183470095,
-      "ambiguous_with": []
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
     },
     {
       "class": "two_adjacent",
       "cell": "h6_vz0_w2_d0.3",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.3892863907266074,
-      "ambiguous_with": []
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
     },
     {
       "class": "two_adjacent",
       "cell": "h6_vz0_w6_d0.11",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.3882944336034893,
-      "ambiguous_with": []
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
     },
     {
       "class": "two_adjacent",
       "cell": "h6_vz0_w6_d0.3",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.396232254257922,
-      "ambiguous_with": []
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
     },
     {
       "class": "two_opposite",
@@ -867,94 +910,110 @@
     {
       "class": "two_opposite",
       "cell": "h3_vz0_w2_d0.3",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.04361379118726858,
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
       "ambiguous_with": [
         "mechanism",
-        "realloc_only"
+        "parachute"
       ]
     },
     {
       "class": "two_opposite",
       "cell": "h3_vz0_w6_d0.11",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.0487094100188624,
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
       "ambiguous_with": [
         "mechanism",
-        "realloc_only"
+        "parachute"
       ]
     },
     {
       "class": "two_opposite",
       "cell": "h3_vz0_w6_d0.3",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.047317340348277115,
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
       "ambiguous_with": [
         "mechanism",
-        "realloc_only"
+        "parachute"
       ]
     },
     {
       "class": "two_opposite",
       "cell": "h6_vz-1.5_w2_d0.11",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.24584261680680705,
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.1933084211205933,
       "ambiguous_with": [
-        "mechanism",
-        "realloc_only"
+        "mechanism"
       ]
     },
     {
       "class": "two_opposite",
       "cell": "h6_vz-1.5_w2_d0.3",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.23410229023979676,
-      "ambiguous_with": []
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
     },
     {
       "class": "two_opposite",
       "cell": "h6_vz-1.5_w6_d0.11",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.24584261680680705,
-      "ambiguous_with": []
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
     },
     {
       "class": "two_opposite",
       "cell": "h6_vz-1.5_w6_d0.3",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.23556895497996316,
-      "ambiguous_with": []
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
     },
     {
       "class": "two_opposite",
       "cell": "h6_vz0_w2_d0.11",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.3744152183470095,
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.22105944984601372,
       "ambiguous_with": [
-        "mechanism",
-        "realloc_only"
+        "mechanism"
       ]
     },
     {
       "class": "two_opposite",
       "cell": "h6_vz0_w2_d0.3",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.3892863907266074,
-      "ambiguous_with": []
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
     },
     {
       "class": "two_opposite",
       "cell": "h6_vz0_w6_d0.11",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.3882944336034893,
-      "ambiguous_with": []
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
     },
     {
       "class": "two_opposite",
       "cell": "h6_vz0_w6_d0.3",
-      "best_action": "parachute",
-      "best_p_safe_95_lower": 0.396232254257922,
-      "ambiguous_with": []
+      "best_action": "realloc_only",
+      "best_p_safe_95_lower": 0.0,
+      "ambiguous_with": [
+        "mechanism",
+        "parachute"
+      ]
     }
   ],
   "exploratory": [
@@ -1519,13 +1578,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 101,
-      "p_safe": 0.0505,
-      "p_safe_95_lower": 0.04268998250739059,
-      "p_safe_95_upper": 0.05930745322137432,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 333
+        "lenient": 0
       }
     },
     {
@@ -1564,13 +1623,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 103,
-      "p_safe": 0.0515,
-      "p_safe_95_lower": 0.04361379118726858,
-      "p_safe_95_upper": 0.060381084659818285,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 321
+        "lenient": 0
       }
     },
     {
@@ -1609,13 +1668,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 114,
-      "p_safe": 0.057,
-      "p_safe_95_lower": 0.0487094100188624,
-      "p_safe_95_upper": 0.06627157733822064,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 330
+        "lenient": 0
       }
     },
     {
@@ -1654,13 +1713,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 111,
-      "p_safe": 0.0555,
-      "p_safe_95_lower": 0.047317340348277115,
-      "p_safe_95_upper": 0.06466740513019087,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 334
+        "lenient": 0
       }
     },
     {
@@ -1699,13 +1758,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 524,
-      "p_safe": 0.262,
-      "p_safe_95_lower": 0.24584261680680705,
-      "p_safe_95_upper": 0.2786756141443262,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 994
+        "lenient": 0
       }
     },
     {
@@ -1744,13 +1803,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 500,
-      "p_safe": 0.25,
-      "p_safe_95_lower": 0.23410229023979676,
-      "p_safe_95_upper": 0.26644223049547133,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 973
+        "lenient": 0
       }
     },
     {
@@ -1789,13 +1848,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 524,
-      "p_safe": 0.262,
-      "p_safe_95_lower": 0.24584261680680705,
-      "p_safe_95_upper": 0.2786756141443262,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 972
+        "lenient": 0
       }
     },
     {
@@ -1834,13 +1893,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 503,
-      "p_safe": 0.2515,
-      "p_safe_95_lower": 0.23556895497996316,
-      "p_safe_95_upper": 0.2679722778482184,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 982
+        "lenient": 0
       }
     },
     {
@@ -1879,13 +1938,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 785,
-      "p_safe": 0.3925,
-      "p_safe_95_lower": 0.3744152183470095,
-      "p_safe_95_upper": 0.4108184132040671,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 1505
+        "lenient": 0
       }
     },
     {
@@ -1924,13 +1983,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 815,
-      "p_safe": 0.4075,
-      "p_safe_95_lower": 0.3892863907266074,
-      "p_safe_95_upper": 0.4259146195446294,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 1524
+        "lenient": 0
       }
     },
     {
@@ -1969,13 +2028,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 813,
-      "p_safe": 0.4065,
-      "p_safe_95_lower": 0.3882944336034893,
-      "p_safe_95_upper": 0.42490875108917847,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 1508
+        "lenient": 0
       }
     },
     {
@@ -2014,13 +2073,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 829,
-      "p_safe": 0.4145,
-      "p_safe_95_lower": 0.396232254257922,
-      "p_safe_95_upper": 0.43295353626871236,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 1558
+        "lenient": 0
       }
     },
     {
@@ -2599,13 +2658,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 101,
-      "p_safe": 0.0505,
-      "p_safe_95_lower": 0.04268998250739059,
-      "p_safe_95_upper": 0.05930745322137432,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 333
+        "lenient": 0
       }
     },
     {
@@ -2644,13 +2703,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 103,
-      "p_safe": 0.0515,
-      "p_safe_95_lower": 0.04361379118726858,
-      "p_safe_95_upper": 0.060381084659818285,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 321
+        "lenient": 0
       }
     },
     {
@@ -2689,13 +2748,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 114,
-      "p_safe": 0.057,
-      "p_safe_95_lower": 0.0487094100188624,
-      "p_safe_95_upper": 0.06627157733822064,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 330
+        "lenient": 0
       }
     },
     {
@@ -2734,13 +2793,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 111,
-      "p_safe": 0.0555,
-      "p_safe_95_lower": 0.047317340348277115,
-      "p_safe_95_upper": 0.06466740513019087,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 334
+        "lenient": 0
       }
     },
     {
@@ -2779,13 +2838,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 524,
-      "p_safe": 0.262,
-      "p_safe_95_lower": 0.24584261680680705,
-      "p_safe_95_upper": 0.2786756141443262,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 994
+        "lenient": 0
       }
     },
     {
@@ -2824,13 +2883,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 500,
-      "p_safe": 0.25,
-      "p_safe_95_lower": 0.23410229023979676,
-      "p_safe_95_upper": 0.26644223049547133,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 973
+        "lenient": 0
       }
     },
     {
@@ -2869,13 +2928,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 524,
-      "p_safe": 0.262,
-      "p_safe_95_lower": 0.24584261680680705,
-      "p_safe_95_upper": 0.2786756141443262,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 972
+        "lenient": 0
       }
     },
     {
@@ -2914,13 +2973,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 503,
-      "p_safe": 0.2515,
-      "p_safe_95_lower": 0.23556895497996316,
-      "p_safe_95_upper": 0.2679722778482184,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 982
+        "lenient": 0
       }
     },
     {
@@ -2959,13 +3018,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 785,
-      "p_safe": 0.3925,
-      "p_safe_95_lower": 0.3744152183470095,
-      "p_safe_95_upper": 0.4108184132040671,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 1505
+        "lenient": 0
       }
     },
     {
@@ -3004,13 +3063,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 815,
-      "p_safe": 0.4075,
-      "p_safe_95_lower": 0.3892863907266074,
-      "p_safe_95_upper": 0.4259146195446294,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 1524
+        "lenient": 0
       }
     },
     {
@@ -3049,13 +3108,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 813,
-      "p_safe": 0.4065,
-      "p_safe_95_lower": 0.3882944336034893,
-      "p_safe_95_upper": 0.42490875108917847,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 1508
+        "lenient": 0
       }
     },
     {
@@ -3094,13 +3153,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 829,
-      "p_safe": 0.4145,
-      "p_safe_95_lower": 0.396232254257922,
-      "p_safe_95_upper": 0.43295353626871236,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 1558
+        "lenient": 0
       }
     },
     {
@@ -3679,13 +3738,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 101,
-      "p_safe": 0.0505,
-      "p_safe_95_lower": 0.04268998250739059,
-      "p_safe_95_upper": 0.05930745322137432,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 333
+        "lenient": 0
       }
     },
     {
@@ -3724,13 +3783,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 103,
-      "p_safe": 0.0515,
-      "p_safe_95_lower": 0.04361379118726858,
-      "p_safe_95_upper": 0.060381084659818285,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 321
+        "lenient": 0
       }
     },
     {
@@ -3769,13 +3828,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 114,
-      "p_safe": 0.057,
-      "p_safe_95_lower": 0.0487094100188624,
-      "p_safe_95_upper": 0.06627157733822064,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 330
+        "lenient": 0
       }
     },
     {
@@ -3814,13 +3873,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 111,
-      "p_safe": 0.0555,
-      "p_safe_95_lower": 0.047317340348277115,
-      "p_safe_95_upper": 0.06466740513019087,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 334
+        "lenient": 0
       }
     },
     {
@@ -3859,13 +3918,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 524,
-      "p_safe": 0.262,
-      "p_safe_95_lower": 0.24584261680680705,
-      "p_safe_95_upper": 0.2786756141443262,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 994
+        "lenient": 0
       }
     },
     {
@@ -3904,13 +3963,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 500,
-      "p_safe": 0.25,
-      "p_safe_95_lower": 0.23410229023979676,
-      "p_safe_95_upper": 0.26644223049547133,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 973
+        "lenient": 0
       }
     },
     {
@@ -3949,13 +4008,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 524,
-      "p_safe": 0.262,
-      "p_safe_95_lower": 0.24584261680680705,
-      "p_safe_95_upper": 0.2786756141443262,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 972
+        "lenient": 0
       }
     },
     {
@@ -3994,13 +4053,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 503,
-      "p_safe": 0.2515,
-      "p_safe_95_lower": 0.23556895497996316,
-      "p_safe_95_upper": 0.2679722778482184,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 982
+        "lenient": 0
       }
     },
     {
@@ -4039,13 +4098,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 785,
-      "p_safe": 0.3925,
-      "p_safe_95_lower": 0.3744152183470095,
-      "p_safe_95_upper": 0.4108184132040671,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 1505
+        "lenient": 0
       }
     },
     {
@@ -4084,13 +4143,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 815,
-      "p_safe": 0.4075,
-      "p_safe_95_lower": 0.3892863907266074,
-      "p_safe_95_upper": 0.4259146195446294,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 1524
+        "lenient": 0
       }
     },
     {
@@ -4129,13 +4188,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 813,
-      "p_safe": 0.4065,
-      "p_safe_95_lower": 0.3882944336034893,
-      "p_safe_95_upper": 0.42490875108917847,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 1508
+        "lenient": 0
       }
     },
     {
@@ -4174,13 +4233,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 829,
-      "p_safe": 0.4145,
-      "p_safe_95_lower": 0.396232254257922,
-      "p_safe_95_upper": 0.43295353626871236,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 1558
+        "lenient": 0
       }
     },
     {
@@ -4759,13 +4818,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 101,
-      "p_safe": 0.0505,
-      "p_safe_95_lower": 0.04268998250739059,
-      "p_safe_95_upper": 0.05930745322137432,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 333
+        "lenient": 0
       }
     },
     {
@@ -4804,13 +4863,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 103,
-      "p_safe": 0.0515,
-      "p_safe_95_lower": 0.04361379118726858,
-      "p_safe_95_upper": 0.060381084659818285,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 321
+        "lenient": 0
       }
     },
     {
@@ -4849,13 +4908,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 114,
-      "p_safe": 0.057,
-      "p_safe_95_lower": 0.0487094100188624,
-      "p_safe_95_upper": 0.06627157733822064,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 330
+        "lenient": 0
       }
     },
     {
@@ -4894,13 +4953,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 111,
-      "p_safe": 0.0555,
-      "p_safe_95_lower": 0.047317340348277115,
-      "p_safe_95_upper": 0.06466740513019087,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 334
+        "lenient": 0
       }
     },
     {
@@ -4939,13 +4998,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 524,
-      "p_safe": 0.262,
-      "p_safe_95_lower": 0.24584261680680705,
-      "p_safe_95_upper": 0.2786756141443262,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 994
+        "lenient": 0
       }
     },
     {
@@ -4984,13 +5043,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 500,
-      "p_safe": 0.25,
-      "p_safe_95_lower": 0.23410229023979676,
-      "p_safe_95_upper": 0.26644223049547133,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 973
+        "lenient": 0
       }
     },
     {
@@ -5029,13 +5088,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 524,
-      "p_safe": 0.262,
-      "p_safe_95_lower": 0.24584261680680705,
-      "p_safe_95_upper": 0.2786756141443262,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 972
+        "lenient": 0
       }
     },
     {
@@ -5074,13 +5133,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 503,
-      "p_safe": 0.2515,
-      "p_safe_95_lower": 0.23556895497996316,
-      "p_safe_95_upper": 0.2679722778482184,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 982
+        "lenient": 0
       }
     },
     {
@@ -5119,13 +5178,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 785,
-      "p_safe": 0.3925,
-      "p_safe_95_lower": 0.3744152183470095,
-      "p_safe_95_upper": 0.4108184132040671,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 1505
+        "lenient": 0
       }
     },
     {
@@ -5164,13 +5223,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 815,
-      "p_safe": 0.4075,
-      "p_safe_95_lower": 0.3892863907266074,
-      "p_safe_95_upper": 0.4259146195446294,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 1524
+        "lenient": 0
       }
     },
     {
@@ -5209,13 +5268,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 813,
-      "p_safe": 0.4065,
-      "p_safe_95_lower": 0.3882944336034893,
-      "p_safe_95_upper": 0.42490875108917847,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 1508
+        "lenient": 0
       }
     },
     {
@@ -5254,13 +5313,13 @@
       "action": "parachute",
       "variant": "a",
       "n": 2000,
-      "successes": 829,
-      "p_safe": 0.4145,
-      "p_safe_95_lower": 0.396232254257922,
-      "p_safe_95_upper": 0.43295353626871236,
+      "successes": 0,
+      "p_safe": 0.0,
+      "p_safe_95_lower": 0.0,
+      "p_safe_95_upper": 0.0014967448951882512,
       "sensitivity_successes": {
         "strict": 0,
-        "lenient": 1558
+        "lenient": 0
       }
     },
     {

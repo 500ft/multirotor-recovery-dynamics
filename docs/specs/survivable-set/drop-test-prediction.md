@@ -11,6 +11,14 @@
 > not established facts: OQ-006 is open and `Controls/state_machine.json` is a
 > specification. This file is a prediction, not an operating plan.
 
+> **Amendment, 2026-09-22** (registration still open — no drop data exists). The
+> parachute row is regenerated after the inflation correction to the descent model
+> (`design.md` §4, `literature/claim-ledger.md` C1): the cage cell's parachute
+> prediction moves from 114/2000 to **0/2000**, because the corrected model's
+> ballistic distance before useful drag (9.6 m) exceeds the 3 m cell height. The
+> thrust-action rows are unchanged. Prediction values for all other rows stand as
+> originally registered.
+
 Status: PREREGISTERED PREDICTION, registered 2026-09-16 — **before any hardware
 drop exists**. The point of this file is to be wrong in public if the model is
 wrong: every number below was produced by the committed sweeps and is
@@ -55,7 +63,7 @@ upper. Variant `a` = baseline PD, `a2` = spin-aware (design-a2.md).
 | a | two_adjacent | realloc_only | 0/300 | 0.0000 | 0.0099 |
 | a | two_opposite | mechanism | 0/30 | 0.0000 | 0.0950 |
 | a | two_opposite | realloc_only | 0/30 | 0.0000 | 0.0950 |
-| a | one_out | parachute | 114/2000 | 0.0487 | 0.0663 |
+| a | one_out | parachute | 0/2000 | 0.0000 | 0.0015 |
 | a2 | partial_authority | mechanism | 30/30 | 0.9050 | 1.0000 |
 | a2 | one_out | mechanism | 0/300 | 0.0000 | 0.0099 |
 | a2 | two_adjacent | realloc_only | 0/300 | 0.0000 | 0.0099 |
@@ -76,6 +84,11 @@ upper. Variant `a` = baseline PD, `a2` = spin-aware (design-a2.md).
 
 Parachute rows apply only if the owner adds a descent device (OQ-010); a
 decision not to fit one removes those rows without voiding the registration.
+**As of the 2026-09-22 amendment the parachute prediction at this cell is 0/2000**
+— the corrected model says a descent device cannot contribute at 3 m, so a drop
+test cannot distinguish "fitted" from "not fitted" at this height. That is itself
+a testable claim: observing any parachute-assisted survival at 3 m would falsify
+the inflation model.
 
 ## Safety boundary
 

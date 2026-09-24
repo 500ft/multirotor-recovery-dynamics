@@ -35,7 +35,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, replace
 from itertools import product
-from math import exp, radians, sqrt
+from math import comb, exp, radians, sqrt
 
 import numpy as np
 
@@ -136,6 +136,86 @@ def clopper_pearson_upper(successes: int, n: int, alpha: float = 0.05) -> float:
     return 1.0 - clopper_pearson_lower(n - successes, n, alpha)
 
 
+# ------------------------------------------------------------ paired analysis
+# literature/claim-ledger.md E1: the action comparisons are PAIRED by
+# construction (identical dispersed vehicle, identical noise, identical initial
+# state) and must not be analysed as two independent proportions — doing so
+# discards the pairing, inflates the variance of the comparison and manufactures
+# an "intervals overlap" non-result. See literature/notes/05 §3.
+#
+# Inference here is EXACT CONDITIONAL on the discordant pairs (McNemar's
+# conditioning): given m = b + c discordant trials, b ~ Binomial(m, 1/2) under
+# the null that the two actions are equally likely to win a discordant pair.
+# Fagerland, Lydersen & Laake (2013) note this is conservative relative to mid-p;
+# the mid-p value is reported alongside for exactly that reason. The unconditional
+# score interval on the marginal difference (Tango 1998) is the recommended
+# complement and is deliberately NOT implemented from memory — see the registered
+# follow-on in docs/specs/survivable-set/design.md §8.
+
+
+def paired_table(outcomes_a: list[bool], outcomes_b: list[bool]) -> dict:
+    """2x2 counts for two actions run on identical trials, in trial order."""
+    if len(outcomes_a) != len(outcomes_b):
+        raise ValueError("paired analysis needs equal-length outcome vectors")
+    n11 = sum(1 for x, y in zip(outcomes_a, outcomes_b) if x and y)
+    n10 = sum(1 for x, y in zip(outcomes_a, outcomes_b) if x and not y)
+    n01 = sum(1 for x, y in zip(outcomes_a, outcomes_b) if y and not x)
+    n00 = len(outcomes_a) - n11 - n10 - n01
+    return {"n": len(outcomes_a), "both_safe": n11, "only_a": n10,
+            "only_b": n01, "neither": n00, "discordant": n10 + n01}
+
+
+def mcnemar_midp(only_a: int, only_b: int) -> float:
+    """Two-sided mid-p McNemar p-value on the discordant pairs.
+
+    Exact conditional binomial with the mid-p correction (Fagerland et al. 2013,
+    doi:10.1186/1471-2288-13-91), which they recommend over exact conditional
+    because the latter is needlessly conservative. Returns 1.0 when there are no
+    discordant pairs — no evidence either way, which is the honest answer.
+    """
+    m = only_a + only_b
+    if m == 0:
+        return 1.0
+    half = 0.5 ** m
+    le = sum(comb(m, k) for k in range(0, only_a + 1)) * half
+    ge = sum(comb(m, k) for k in range(only_a, m + 1)) * half
+    eq = comb(m, only_a) * half
+    return min(1.0, 2.0 * min(le - 0.5 * eq, ge - 0.5 * eq))
+
+
+def paired_verdict(table: dict, alpha: float = 0.05) -> dict:
+    """Exact conditional verdict for one paired (class, cell, action-pair).
+
+    Reports the conditional probability pi that a discordant pair favours action
+    A, with an exact Clopper-Pearson interval. pi > 1/2 means A wins more
+    discordant pairs than B. Three outcomes, and never "equivalent":
+
+    * ``a_superior`` / ``b_superior`` -- the interval excludes 1/2.
+    * ``no_discordant_pairs`` -- the actions produced IDENTICAL outcomes on every
+      paired trial. This is a far stronger statement of indistinguishability than
+      overlapping marginal intervals, and it is the answer our unpaired analysis
+      could not give.
+    * ``not_distinguished`` -- discordant evidence exists but the interval spans
+      1/2; report the discordant count so the reader sees how little evidence
+      there is.
+    """
+    b, c, m = table["only_a"], table["only_b"], table["discordant"]
+    midp = mcnemar_midp(b, c)
+    if m == 0:
+        return {**table, "pi_lower": None, "pi_upper": None, "midp": midp,
+                "verdict": "no_discordant_pairs"}
+    lo = clopper_pearson_lower(b, m, alpha / 2.0)
+    hi = clopper_pearson_upper(b, m, alpha / 2.0)
+    if lo > 0.5:
+        verdict = "a_superior"
+    elif hi < 0.5:
+        verdict = "b_superior"
+    else:
+        verdict = "not_distinguished"
+    return {**table, "pi_lower": lo, "pi_upper": hi, "midp": midp,
+            "verdict": verdict}
+
+
 def landing_ok(impact_speed_m_s: float, impact_tilt_rad: float,
                criterion: tuple[float, float]) -> bool:
     vz_max, tilt_max = criterion
@@ -216,6 +296,7 @@ def evaluate_cell(class_name: str, cell: Cell, action: str, n: int,
     """Monte Carlo P_safe for one (failure class, cell, action) with exact bounds."""
     rng = np.random.default_rng(seed)
     counts = {"primary": 0, "strict": 0, "lenient": 0}
+    outcomes: list[bool] = []          # per-trial, in order, for paired analysis
     for _ in range(n):
         if action == "parachute":
             speed = parachute_impact_speed(
@@ -230,7 +311,9 @@ def evaluate_cell(class_name: str, cell: Cell, action: str, n: int,
             speed, tilt = _realloc_trial(rng, class_name, cell,
                                          mechanism=mechanism, variant=variant)
             criterion = GUARDED_CRITERION if mechanism else BARE_CRITERION
-        counts["primary"] += landing_ok(speed, tilt, criterion)
+        primary_ok = landing_ok(speed, tilt, criterion)
+        outcomes.append(bool(primary_ok))
+        counts["primary"] += primary_ok
         counts["strict"] += landing_ok(speed, tilt, SENSITIVITY["strict"])
         counts["lenient"] += landing_ok(speed, tilt, SENSITIVITY["lenient"])
     s = counts["primary"]
@@ -241,6 +324,7 @@ def evaluate_cell(class_name: str, cell: Cell, action: str, n: int,
         "p_safe_95_lower": clopper_pearson_lower(s, n),
         "p_safe_95_upper": clopper_pearson_upper(s, n),
         "sensitivity_successes": {k: counts[k] for k in ("strict", "lenient")},
+        "outcomes": outcomes,
     }
 
 
@@ -257,6 +341,7 @@ def merge_rows(rows: list[dict]) -> dict:
     s = sum(r["successes"] for r in rows)
     sens = {k: sum(r["sensitivity_successes"][k] for r in rows)
             for k in ("strict", "lenient")}
+    outcomes = [o for r in rows for o in r.get("outcomes", [])]
     return {
         "class": first["class"], "cell": first["cell"], "action": first["action"],
         "variant": first.get("variant", "a"),
@@ -264,6 +349,7 @@ def merge_rows(rows: list[dict]) -> dict:
         "p_safe_95_lower": clopper_pearson_lower(s, n),
         "p_safe_95_upper": clopper_pearson_upper(s, n),
         "sensitivity_successes": sens,
+        "outcomes": outcomes,
     }
 
 

@@ -149,6 +149,50 @@ Interpretation clause: a kill reached because **both** actions fail in a cell
 actions are interchangeable — it redirects to the controller follow-on below, and
 the mechanism question stays open only if a future controller separates the actions.
 
+## 7a. Paired comparison (amendment, 2026-09-23)
+
+`literature/claim-ledger.md` E1. The action comparison is **paired by
+construction** — mechanism and reallocation see the same dispersed vehicle, the
+same imperfections, the same initial tilt and the same sensor-noise stream — but
+until this amendment the trial seed included the action index, so the two arms
+drew *different* vehicles and the design was paired in intent only. Analysing
+paired binary outcomes as two independent proportions discards the pairing,
+inflates the variance of the comparison, and manufactures the
+"intervals overlap" non-result that variant A and A2 both reported.
+
+**Change.** The seed prefix drops both the action index and the variant index, so
+every action and both controller variants pair one-to-one per trial. A regression
+test asserts that at least one `(class, cell, variant, seed)` is shared by both
+actions, so the pairing cannot silently regress.
+
+**Inference.** Exact conditional on the discordant pairs (McNemar's conditioning):
+given `m = b + c` discordant trials, `b ~ Binomial(m, ½)` under the null that
+either action is equally likely to win a discordant pair. Reported per
+(class, cell):
+
+| Verdict | Meaning |
+| --- | --- |
+| `a_superior` / `b_superior` | the exact interval on π = b/m excludes ½ |
+| `no_discordant_pairs` | the actions produced **identical** outcomes on every paired trial — a far stronger statement of indistinguishability than overlapping marginal intervals, and one the unpaired analysis could not make |
+| `not_distinguished` | discordant evidence exists but the interval spans ½; the discordant count is reported so the reader sees how little evidence there is |
+
+The mid-p McNemar p-value is reported alongside, because Fagerland, Lydersen &
+Laake (2013, doi:10.1186/1471-2288-13-91) show the exact conditional test is
+needlessly conservative and recommend mid-p as the default. Both are given; the
+interval is exact.
+
+**Deliberately not implemented.** The unconditional score interval on the
+*marginal* difference (Tango 1998, doi:10.1002/(SICI)1097-0258(19980430)17:8<891::AID-SIM780>3.0.CO;2-B)
+is the recommended complement and is what a preregistered non-inferiority margin
+δ would be tested against. It is **not** implemented here rather than coded from
+half-remembered algebra with no reference to validate against — a wrong interval
+is worse than a missing one. Registering δ and adding Tango's interval is a
+follow-on with its own study ID.
+
+**What this does not change.** The marginal Clopper–Pearson bounds and the
+preregistered kill criterion stay exactly as registered; the paired analysis is
+*additional*. §7's sidedness caveat still applies to the marginal bounds.
+
 ## 7b. Verification anchors (run before trusting any sweep)
 
 The no-failure allocation control case and the `partial_authority` class must land

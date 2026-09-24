@@ -207,8 +207,15 @@ Results, both controller variants (baseline PD and spin-aware A2):
   under the registered interpretation clause this is a *controller* finding,
   not evidence the actions are interchangeable, and it blocks mechanism
   redesign rather than motivating it.
-- **Paired analysis (added 2026-09-23, `design.md` §7a) — the mechanism does not
-  merely fail to help; within this model it hurts.** With both arms now drawing
+- **SCOPE CORRECTION (2026-09-24, `design.md` §6b): this is a comparison of
+  design packages, not a runtime policy.** `realloc_only` removes the guard's
+  mass and inertia; `mechanism` keeps it. An airborne vehicle cannot choose to
+  have launched without its guard, so the `policy` output is a **ranking of
+  aircraft configurations**, not an executable in-flight selector. The parachute
+  action is **UNAVAILABLE** in every configuration we own. Read every statement
+  below as "which package performs better", never "which action to take".
+- **Paired analysis (added 2026-09-23, `design.md` §7a) — the mechanism package
+  does not merely fail to help; within this model it performs worse.** With both arms now drawing
   identical vehicles, noise and initial states, the comparison is exact
   conditional on discordant pairs rather than a clash of marginal intervals:
   - All four **primary** cells return `no_discordant_pairs` — mechanism and

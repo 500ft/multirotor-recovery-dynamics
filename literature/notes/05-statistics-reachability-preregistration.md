@@ -7,15 +7,16 @@ Repo artifacts this cluster governs: `clopper_pearson_lower/_upper`,
 
 ## Headline findings for this repo
 
-1. **Our comparison design is wrong in a fixable way.** Mechanism vs
-   reallocation, and A vs A2, are compared through *two independently computed
-   Clopper–Pearson intervals*. The design is (or should be) **paired** — same
-   dispersed vehicle, same noise, same initial state. Analysing paired binary
-   outcomes as independent proportions discards the pairing, inflates the
-   variance of the comparison and **manufactures the overlapping-interval
-   non-result we reported**. Correct objects: McNemar's test on the discordant
-   pairs (mid-p preferred), and Tango's score interval for the paired risk
-   difference. This upgrades — and partly supersedes — F01's remedy.
+1. **Our comparison can be made much more precise (corrected 2026-09-24,
+   critique C09).** Mechanism vs reallocation, and A vs A2, were compared through
+   two independently computed Clopper–Pearson intervals. That design is **valid
+   but low-powered**, not erroneous — an earlier version of this note said it
+   "manufactures" the non-result, which overstated the case and is withdrawn.
+   Common random numbers induce positive covariance and, via
+   `Var(A−B) = Var(A)+Var(B)−2Cov(A,B)`, sharpen the contrast; they also make a
+   paired analysis available. Correct objects: McNemar on discordant pairs
+   (mid-p preferred), Tango's score interval, and **both** π (conditional
+   discordant win-rate) and Δ (unconditional marginal difference).
 2. **"No demonstrated advantage" needs a preregistered margin δ.** Without one,
    a null result is only "underpowered". With one, it becomes a testable
    non-inferiority claim. Absence of evidence ≠ evidence of absence

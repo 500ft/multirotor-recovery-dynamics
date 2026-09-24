@@ -7,6 +7,14 @@ decision; `design.md` §4 and §1 ("parachute recovery of small UAS is establish
 
 ## Headline findings for this repo
 
+0. **Provenance correction, 2026-09-24 (critique C03).** Every landing outcome
+   cited in this note from Siotia et al. is a **simulation or hardware-in-the-loop
+   result, not a physical drop measurement**; the ParaZero figures are vendor test
+   data obtained via a search-engine extract. Nothing here is an independent
+   physical validation of any model, and fitting our inflation interval to these
+   numbers is **model-to-model calibration**. The evidence grades below already
+   said B/C; the prose did not, and now does.
+
 1. **Our parachute action is optimistic by roughly an order of magnitude in
    altitude.** We model 0.8 s deployment to a 1.8 m/s terminal speed and find the
    action worthless below ~3 m and ~40 % effective at 6 m. Measured data on

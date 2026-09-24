@@ -46,14 +46,19 @@ class TestParachuteModel(unittest.TestCase):
         self.assertLess(v, 8.0)
         self.assertGreater(v, 2.5)
 
-    def test_reproduces_published_impact_speeds(self):
-        """Validation against Siotia et al. (2026), doi:10.1038/s41598-026-47045-0.
+    def test_calibration_against_published_model_outputs(self):
+        """CALIBRATION check against Siotia et al. (2026), doi:10.1038/s41598-026-47045-0.
 
-        Their 2 kg vehicle: 0.8 s deployment, ~3.2 m/s settled descent, measured
-        9.1 m/s impact from 10 m and 3.2 m/s from 25 m. The model must reproduce
-        both with one inflation value — this is what the pre-2026-09-22 model
-        (no inflation phase) could not do: it predicted 3.2 m/s at 10 m, i.e.
-        2.8x optimistic, which is literature/claim-ledger.md C1.
+        Renamed 2026-09-24 (critique C03): this is NOT validation. Their 10 m and
+        25 m landing outcomes are simulation/HIL results, not physical drop
+        measurements, so agreeing with them is model-to-model calibration. The
+        test pins our fitted inflation interval so it cannot drift silently; it
+        cannot establish that either model matches reality, and it says nothing
+        about the V995.
+
+        Their 2 kg vehicle: 0.8 s deployment, 9.1 m/s from 10 m and 3.2 m/s from
+        25 m. The pre-2026-09-22 model (no inflation phase) predicted 3.2 m/s at
+        10 m — 2.8x optimistic — which is literature/claim-ledger.md C1.
         """
         published = {10.0: 9.1, 25.0: 3.2}
         for h, measured in published.items():
@@ -70,6 +75,16 @@ class TestParachuteModel(unittest.TestCase):
         a = ss.parachute_impact_speed(10.0, 0.0, 0.8, 3.2, inflate_s=0.594)
         b = ss.parachute_impact_speed(10.0, 0.0, 0.8, 3.2, inflate_s=0.600)
         self.assertGreater(abs(b - a), 0.5)   # 6 ms of inflation -> >0.5 m/s
+
+    def test_terminal_speed_interpretation_mismatch_is_recorded(self):
+        """C03: we take terminal from their 25 m landing outcome (3.2 m/s), but
+        their stated m/Cd/A/rho give ~4.22 m/s. Unresolved; asserted so the
+        discrepancy cannot be quietly tuned away."""
+        from math import sqrt
+        m, g, rho, cd, area = 2.0, 9.81, 1.225, 1.2, 1.5
+        from_stated_params = sqrt(2 * m * g / (rho * cd * area))
+        self.assertAlmostEqual(from_stated_params, 4.22, delta=0.02)
+        self.assertGreater(abs(from_stated_params - 3.2), 0.9)
 
     def test_inflation_phase_is_what_fixes_the_low_altitude_case(self):
         # without the inflation phase the model is optimistic by ~2.8x at 10 m
@@ -210,6 +225,23 @@ class TestPairedAnalysis(unittest.TestCase):
                                               [False] * 5 + [True] * 5))
         self.assertEqual(v["verdict"], "not_distinguished")
         self.assertEqual(v["midp"], 1.0)
+
+    def test_reports_marginal_delta_not_only_conditional_pi(self):
+        """C09: pi is the conditional win-rate among discordant pairs; delta is
+        the unconditional improvement in landing success. They are different
+        numbers and both must be reported."""
+        # 10 of 100 favour A, 2 favour B -> delta = 0.08, pi = 10/12 = 0.833
+        a = [True] * 10 + [False] * 2 + [True] * 44 + [False] * 44
+        b = [False] * 10 + [True] * 2 + [True] * 44 + [False] * 44
+        v = ss.paired_verdict(ss.paired_table(a, b))
+        self.assertAlmostEqual(v["delta"], 0.08, places=9)
+        self.assertNotAlmostEqual(v["delta"], v["only_a"] / v["discordant"])
+        self.assertAlmostEqual(v["only_a"] / v["discordant"], 10 / 12, places=9)
+
+    def test_delta_is_zero_and_defined_when_no_discordant_pairs(self):
+        v = ss.paired_verdict(ss.paired_table([True] * 20, [True] * 20))
+        self.assertEqual(v["delta"], 0.0)
+        self.assertEqual(v["verdict"], "no_discordant_pairs")
 
     def test_midp_matches_exact_binomial_construction(self):
         # b of m successes under Binomial(m, 1/2); all-one-sided case is 0.5**m

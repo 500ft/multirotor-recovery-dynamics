@@ -104,9 +104,24 @@ residuals alone.
   order**. They are not separable in a recovery budget, and our model currently
   treats spool-up and detection as independent additive latencies. Worth stating
   as a limitation.
-- No source reports detection latency as a **distribution** over failure
-  conditions. Our treatment of delay as a swept state variable is ahead of what
-  is published — that is a framing to claim, carefully, not a number to cite.
+- **Corrected 2026-09-24 (critique C02).** This note previously said no source
+  reports detection latency as a *distribution*. **That is false.** Strack van
+  Schijndel et al. (2021) report, over **26 real propeller-ejection flights** on a
+  Bebop 2 at 500 Hz: **95 % confidence bounds of [28, 132] ms**, plus box plots
+  (quartiles and outliers) and per-event delays for every flight. Our earlier
+  "30–130 ms" range citation was the abstract's summary of exactly this dataset,
+  and the `[28, 132] ms` figure previously sitting in our unverified list is now
+  **confirmed at source**.
+  - Scope caveat that matters for us: their injected fault is idealised —
+    *"the loss of effectiveness of an actuator is sudden and total, so no
+    spin-down lag or percentage reduction of effectiveness."* The distribution is
+    for **sudden total** propeller loss, not for the degraded-authority case.
+  - They characterise sensitivity to *algorithm parameters*, not to failure
+    condition (rotor index, RPM, thrust level). So "delay as a function of the
+    failure condition" remains open; "delay has a published distribution" does not.
+  - What our study may still claim is narrower: we sweep delay as a **state
+    coordinate of the recovery problem**, which is a different use from reporting
+    a detector's achieved latency.
 
 ## Unverified — do not cite until confirmed
 
@@ -115,8 +130,8 @@ residuals alone.
   and control allocation*, [10.2514/1.G009745](https://arc.aiaa.org/doi/10.2514/1.G009745)
   — title/DOI/journal confirmed, **authors and year not**.
 - CGI flown on the X-35B (secondary source only).
-- The "[28, 132] ms, 95% confidence bounds, Bebop 2, 500 Hz" phrasing of the
-  Strack van Schijndel result — the fetched abstract says "30 to 130 ms".
+- ~~The "[28, 132] ms, 95% confidence bounds, Bebop 2, 500 Hz" phrasing~~ —
+  **CONFIRMED at source 2026-09-24**; moved into §4 above.
 - Motor time constants "17/28/40/60/80 ms" for 3-inch quadrotors — could not be
   confirmed at source.
 - "~0.1 s FDD observation delay" attributed to Chen et al., arXiv 2503.02649 —

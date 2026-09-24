@@ -69,21 +69,33 @@ MECH_INERTIA_FRAC = 0.30
 # action is impossible by construction (the first drafted value, 2.5 m/s, violated
 # this and was corrected before any committed run — see the spec's audit note).
 #
-# INFLATION (added 2026-09-22, literature/claim-ledger.md C1): the first committed
-# model treated deployment as a delay followed by an INSTANTLY effective drag
-# device, which made the action look useful at 6 m. Measured data says otherwise —
-# a canopy that has begun to open is not yet a canopy that decelerates. Splitting
-# the two, and treating inflation as producing no useful drag (conservative, and
-# the only form the published data constrains), reproduces both measured points of
-# Siotia et al. (2026, doi:10.1038/s41598-026-47045-0) on their 2 kg vehicle:
-# 9.1 m/s impact from 10 m and 3.2 m/s from 25 m. See tests.
+# INFLATION (added 2026-09-22; provenance corrected 2026-09-24, critique C03):
+# the first committed model treated deployment as a delay followed by an INSTANTLY
+# effective drag device, which made the action look useful at 6 m. Splitting
+# deployment from inflation, and treating inflation as producing no useful drag,
+# reproduces both published landing outcomes of Siotia et al. (2026,
+# doi:10.1038/s41598-026-47045-0) on their 2 kg vehicle: 9.1 m/s impact from 10 m
+# and 3.2 m/s from 25 m.
+#
+# PROVENANCE, stated precisely: those outcomes are **simulation and
+# hardware-in-the-loop results, not physical drop measurements**. Fitting our
+# inflation interval to them is MODEL-TO-MODEL CALIBRATION, not independent
+# physical validation, and it says nothing about the V995. An unresolved
+# interpretation mismatch is recorded with it: we take terminal_m_s = 3.2 m/s from
+# their 25 m landing outcome, but their own stated m = 2 kg, Cd = 1.2, A = 1.5 m^2,
+# rho = 1.225 gives sqrt(2mg/(rho*Cd*A)) ~ 4.22 m/s. That is not resolved by
+# tuning; it needs the paper's timing/drag definitions. See
+# docs/specs/survivable-set/design.md section 4.
 PARACHUTE_TERMINAL_M_S = 1.8
-PARACHUTE_DEPLOY_S = 0.8                     # trigger -> canopy starts opening (measured)
-# canopy start -> full drag. CALIBRATED, not measured: the value that reproduces
-# Siotia et al.'s 10 m and 25 m impact speeds given their 0.8 s deployment. It is
-# fitted to ONE published system (2 kg) at ONE canopy scale; a smaller canopy would
-# be expected to inflate faster, so carrying it onto a sub-250 g vehicle is
-# conservative in the safe direction. Replace with measured data (OQ-010).
+PARACHUTE_DEPLOY_S = 0.8                     # trigger -> canopy starts opening (published, simulation/HIL)
+# canopy start -> full drag. CALIBRATED against another model's outputs, not
+# measured: the value that reproduces Siotia et al.'s simulated/HIL 10 m and 25 m
+# landing outcomes given their 0.8 s deployment. Fitted to ONE published system
+# (2 kg) at ONE canopy scale. The earlier claim that transferring it to a smaller
+# craft is "conservative in the safe direction" is WITHDRAWN (critique C03): a
+# smaller canopy plausibly inflates faster, but that is an expectation, not a
+# proof, and the direction of the transfer error is unestablished. Replace with
+# measured data (OQ-010).
 PARACHUTE_INFLATE_S = 0.6
 PARACHUTE_TILT_MAX_RAD = radians(45.0)       # pendulum under canopy, drawn U(0, max)
 
@@ -137,11 +149,13 @@ def clopper_pearson_upper(successes: int, n: int, alpha: float = 0.05) -> float:
 
 
 # ------------------------------------------------------------ paired analysis
-# literature/claim-ledger.md E1: the action comparisons are PAIRED by
-# construction (identical dispersed vehicle, identical noise, identical initial
-# state) and must not be analysed as two independent proportions — doing so
-# discards the pairing, inflates the variance of the comparison and manufactures
-# an "intervals overlap" non-result. See literature/notes/05 §3.
+# literature/claim-ledger.md E1, as corrected by the 2026-09-24 critique (C09).
+# The earlier independent-draw design was VALID, not wrong; running both actions
+# on common random numbers is a variance-reduction technique, not a repair. Since
+# Var(A-B) = Var(A) + Var(B) - 2 Cov(A,B), inducing positive covariance sharpens
+# the comparison — it does not retroactively make the earlier overlap an artifact.
+# What the coupling does buy is a valid paired analysis, which is strictly more
+# informative than comparing two marginal intervals. See literature/notes/05 §3.
 #
 # Inference here is EXACT CONDITIONAL on the discordant pairs (McNemar's
 # conditioning): given m = b + c discordant trials, b ~ Binomial(m, 1/2) under
@@ -192,18 +206,24 @@ def paired_verdict(table: dict, alpha: float = 0.05) -> dict:
 
     * ``a_superior`` / ``b_superior`` -- the interval excludes 1/2.
     * ``no_discordant_pairs`` -- the actions produced IDENTICAL outcomes on every
-      paired trial. This is a far stronger statement of indistinguishability than
-      overlapping marginal intervals, and it is the answer our unpaired analysis
-      could not give.
+      paired trial under these common random numbers. That is strong evidence of
+      indistinguishability IN THIS MODEL, but it does NOT prove the two true
+      probabilities are equal (critique 2026-09-24, C09): zero discordant
+      observations bounds the discordance rate, it does not zero it.
     * ``not_distinguished`` -- discordant evidence exists but the interval spans
       1/2; report the discordant count so the reader sees how little evidence
       there is.
     """
     b, c, m = table["only_a"], table["only_b"], table["discordant"]
     midp = mcnemar_midp(b, c)
+    # Unconditional marginal difference. pi (below) is the probability that a
+    # DISCORDANT pair favours A -- it is not the improvement in landing success.
+    # delta is that improvement, and the two must be reported together
+    # (critique 2026-09-24, C09).
+    delta = (b - c) / table["n"] if table["n"] else 0.0
     if m == 0:
-        return {**table, "pi_lower": None, "pi_upper": None, "midp": midp,
-                "verdict": "no_discordant_pairs"}
+        return {**table, "delta": delta, "pi_lower": None, "pi_upper": None,
+                "midp": midp, "verdict": "no_discordant_pairs"}
     lo = clopper_pearson_lower(b, m, alpha / 2.0)
     hi = clopper_pearson_upper(b, m, alpha / 2.0)
     if lo > 0.5:
@@ -212,8 +232,8 @@ def paired_verdict(table: dict, alpha: float = 0.05) -> dict:
         verdict = "b_superior"
     else:
         verdict = "not_distinguished"
-    return {**table, "pi_lower": lo, "pi_upper": hi, "midp": midp,
-            "verdict": verdict}
+    return {**table, "delta": delta, "pi_lower": lo, "pi_upper": hi,
+            "midp": midp, "verdict": verdict}
 
 
 def landing_ok(impact_speed_m_s: float, impact_tilt_rad: float,

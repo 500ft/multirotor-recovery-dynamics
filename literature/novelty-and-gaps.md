@@ -44,12 +44,27 @@ different actions, indexed by post-failure state**, is close to unoccupied.
 4. **The abort boundary.** Sun et al. (2020) recover from arbitrary attitude at
    generous altitude; nobody characterises where the **vertical budget** runs out
    first.
-5. **Sub-250 g scale is empirically empty** — no published rotor-loss FTC flight
-   demonstration below 250 g, and the spin-rate/sensing-saturation failure mode
-   *worsens* as the vehicle shrinks.
+5. **Sub-250 g complete rotor loss: search-bounded, not empty** (amended
+   2026-09-24). We found no published demonstration of recovery from *complete*
+   rotor loss below 250 g — but a dedicated verified pass was not completed, so
+   this is an open question rather than a confirmed gap. **Partial degradation at
+   this scale is NOT open**: Çintaş & Özyer (2026) demonstrate it in real flight
+   on a 30.6 g Crazyflie. The earlier claim that the spin/sensing failure mode
+   "worsens as the vehicle shrinks" is **withdrawn** — terminal spin is
+   independent of `Izz` (note 01 §6), so that scaling does not follow.
 6. **Per-cell probability with exact bounds against a preregistered criterion.**
    The nearest work labels states binary safe/unsafe (Sun & de Visser 2019) or
    attaches probabilities on a fixed-wing, non-failure envelope (Yin et al. 2019).
+
+### Scope correction, 2026-09-24 (critique C01)
+
+The open lane above is stated in terms of a **policy over actions**. Our own
+study does not yet deliver one: its `mechanism` and `realloc_only` cases differ in
+installed hardware, so it compares **design packages**, not actions a single
+aircraft could choose between in flight (`design.md` §6b). The novelty wording
+below therefore describes work that is **specified but not yet performed**, and
+must not be cited as a result of the current sweep. A runtime-policy claim
+requires one fixed configuration with `A(c)` executable on it.
 
 ### The wording that survives
 
@@ -98,9 +113,14 @@ These are real absences, verified, and within reach of this project:
 1. **No dimensional prescription for weighting force against moment residuals in
    multirotor allocation.** Normalising to reference scales and reporting the
    effect would be a small, citable contribution (note 02 §3).
-2. **No detection-latency distribution.** Everyone reports best-case latency;
-   nobody characterises it as a random variable. Our treatment of delay as a
-   swept state coordinate is ahead of the published work.
+2. **~~No detection-latency distribution.~~ WITHDRAWN 2026-09-24 (critique C02).**
+   Strack van Schijndel et al. (2021) report 95 % bounds of **[28, 132] ms** with
+   box plots over 26 real propeller ejections. What remains open is narrower:
+   delay as a function of the *failure condition* (rotor index, thrust level,
+   degraded vs sudden-total loss) — their fault is idealised as "sudden and
+   total". Our use of delay as a **state coordinate of the recovery problem** is
+   a different construct from a detector's achieved latency, and should be
+   described that way rather than as a gap in the literature.
 3. **No quantitative recirculation correction for a small restrained multirotor
    bench test** — NASA Ames explicitly leaves it unquantified. A height/wall
    sweep at fixed commanded RPM would close it (note 06 §4).

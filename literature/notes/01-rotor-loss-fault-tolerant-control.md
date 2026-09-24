@@ -26,8 +26,9 @@ premise that a *policy over actions* is the open contribution.
    that explicitly detects unrecoverable loss-of-control states and dynamically
    transitions between active stabilization and passive descent using
    altitude-aware decision logic." We must cite them and state how we differ.
-5. **Sub-250 g rotor-loss FTC is empirically empty** — a genuine open lane, and
-   the reason is physical, not neglect (§6).
+5. **Sub-250 g: partial degradation is NOT open** — Çintaş & Özyer (2026)
+   demonstrate it in real flight on a 30.6 g Crazyflie. Complete rotor loss below
+   250 g remains a *search-bounded* absence, not a confirmed gap (§6).
 6. **A two-action switching threshold already exists** for propeller damage
    (Mao et al., RA-L 2024) — cite before claiming the policy idea is unprecedented.
 
@@ -112,18 +113,54 @@ required**. Useful if we ever argue spinning is not purely a penalty.
   policy across fault-free → partial → complete. **The learned analogue of a
   recovery-action selector — check carefully before claiming novelty.**
 
-## 6. Sub-250 g rotor-loss FTC — verified negative result
+## 6. Sub-250 g: a counterexample exists, for a *different* failure mode
 
-**No verified paper demonstrates rotor-loss fault-tolerant control on a sub-250 g
-quadrotor.** Canonical demonstrations are ~0.5–1.5 kg research platforms. The
-27 g Crazyflie literature is nominal control/estimation/swarms, not rotor-loss FTC.
+**Amended 2026-09-24 (critique C02), and the amendment matters.**
 
-The reason is physical and citable: post-failure spin rate rises as inertia falls
-relative to residual torque, and it already exceeds sensing limits at full scale
-(>20 rad/s blurring cameras, Sun et al. 2021; Yeom et al. 2024 modify rotational
-drag mechanically to keep the spin inside sensing constraints). **Sub-250 g is not
-a trivial scale-down** — and our own gyro-limited envelope
-(`max_recoverable_rate`, `gyro_limit_rad_s`) is the same phenomenon.
+**Çintaş & Özyer (2026)**, *A robust fault-tolerant control algorithm for
+GPS-denied mini quadrotors using PID-TinyMPC and visual-inertial odometry*,
+Control Engineering Practice 169:106779,
+[10.1016/j.conengprac.2026.106779](https://doi.org/10.1016/j.conengprac.2026.106779)
+— aboutness 3 for `partial_authority`, 1 for complete loss; evidence **B**
+(real indoor flight). **Crazyflie 2.1, 30.6 g** including a 3.6 g FPV camera;
+onboard IMU/barometer at 100 Hz, monocular VIO at 30 Hz.
+
+**It handles partial rotor-speed degradation, not complete rotor loss**, and says
+so: it cites Mueller & D'Andrea and Sun et al. for complete loss and frames its
+own gap as *"performance degradation (rotor speed reduction) situations"*.
+Contribution (1) reads *"even under partial rotor speed reduction or failure"*.
+The degradation magnitude is in the paywalled body and was not read; the abstract
+was not retrievable, so quotes come from the publisher-served Introduction,
+Contributions, Experiment setup and Conclusion.
+
+**Two consequences for us:**
+
+1. **Our `partial_authority` class now has a sub-35 g real-flight precedent.**
+   That class is no longer an empty lane — it is the one failure class where
+   small-scale FTC has been demonstrated in flight. Cite this before describing
+   any partial-degradation result as unprecedented at this scale.
+2. **The complete-loss statement survives, narrowed and search-bounded:** *we
+   found no published demonstration of recovery from complete rotor loss on a
+   sub-250 g multirotor.* A dedicated verified pass was not completed, so treat
+   this as an open question, **not** a confirmed gap. Canonical complete-loss
+   demonstrations remain ~0.4–1.5 kg platforms.
+
+**Corrected 2026-09-24 (critique C07).** This note previously argued that
+post-failure spin rate rises as inertia falls. That is wrong for the *terminal*
+spin. For a single-axis model `Izz ṙ = τ_res − c₁r − c₂|r|r`, the equilibrium
+satisfies `τ_res = c₁r + c₂|r|r` — **`Izz` cancels**. Inertia sets how fast the
+spin builds (the transient), not where it settles. A smaller aircraft therefore
+does *not* necessarily spin faster at equilibrium; residual reaction torque,
+rotational drag, geometry and thrust all scale together and must be scaled
+together before any such claim is made.
+
+What survives, and is citable: high post-failure spin is a demonstrated *sensing*
+problem at full scale (>20 rad/s blurring frame cameras, Sun et al. 2021; Yeom
+et al. 2024 deliberately modify rotational drag to hold the spin inside sensing
+constraints). Whether it is worse at sub-250 g is **an open question requiring the
+scaling to be worked through or measured**, not something this note establishes.
+Our own gyro-limited envelope (`max_recoverable_rate`, `gyro_limit_rad_s`) is a
+modelled sensing limit, not evidence about scale.
 
 State it as *"no published flight demonstration at sub-250 g that we could find"*,
 never as "no one has considered it".
@@ -164,7 +201,8 @@ different actions, indexed by post-failure state**, is close to unoccupied:
 4. **The abort boundary is unquantified for quadrotors** — Sun et al. (2020)
    recover from arbitrary attitude at generous altitude; nobody characterises where
    the vertical budget runs out first.
-5. **Sub-250 g is empirically empty** (§6).
+5. **Sub-250 g**: partial degradation has a real-flight precedent at 30.6 g;
+   complete loss is a search-bounded absence (§6).
 6. **Two-adjacent evidence is thin** — a policy result saying "no thrust action
    survives two-adjacent at low height" is defensible and cite-supported, but it is
    a claim about a thin base and must say so.

@@ -71,9 +71,17 @@ predicted **3.2 m/s** impact from 10 m where **9.1 m/s** was measured, i.e. 2.8�
 optimistic. A single added inflation interval, treated as producing no useful
 drag, reproduces both their 10 m and 25 m results and is now part of the action
 (`PARACHUTE_INFLATE_S`, EST 0.6 s, calibrated not measured). It is fitted to one
-2 kg system; a smaller canopy would inflate faster, so carrying it onto a
-sub-250 g vehicle is conservative in the safe direction. The prior sweep's
-parachute cells are superseded; the regenerated data is in the same commit.
+2 kg system. **Amended 2026-09-24 (critique C03): the claim that transferring it
+to a smaller craft is "conservative in the safe direction" is withdrawn** — a
+smaller canopy plausibly inflates faster, but that is an expectation, not a proof,
+and the direction of the transfer error is unestablished. An unresolved
+interpretation mismatch is recorded with the fit: we take `terminal = 3.2 m/s`
+from their 25 m landing outcome, while their own stated m = 2 kg, Cd = 1.2,
+A = 1.5 m², ρ = 1.225 give √(2mg/(ρ·Cd·A)) ≈ **4.22 m/s**. This is not to be
+resolved by tuning; it needs their timing and drag definitions. Future
+calibration requires separate failure, trigger, deployment-start and full-drag
+timestamps. The prior sweep's parachute cells are superseded; the regenerated
+data is in the same commit.
 
 **Known sensitivity.** At ~10 m the ballistic distance approaches the available
 height, so impact speed is steeply sensitive to the inflation estimate (6 ms of
@@ -87,9 +95,15 @@ Under the corrected model the nominal ballistic distance before useful drag is
 therefore 0/2000 in every cell, where the previous model made it the
 unambiguously best action in 22 class×cell combinations. Two things follow:
 
-1. The 10.5 m break-even is derived independently of the literature yet lands
-   inside the measured 10–15 m floor reported for 0.9–2 kg airframes — an
-   unplanned corroboration of the corrected model.
+1. The 10.5 m break-even lands inside the 10–15 m range reported for 0.9–2 kg
+   airframes. **Amended 2026-09-24 (critique C03): this is weaker than
+   "corroboration".** Those published figures are simulation/HIL outputs and
+   vendor test data, not independent physical drop measurements, and our
+   inflation interval was *fitted to one of them*. Agreement is therefore partly
+   circular — it confirms the fit reproduces its own calibration source at a
+   third height, not that either model matches reality. The claim that a
+   10–15 m floor is a **universal** property is withdrawn; it is a
+   configuration-specific published result.
 2. **The earlier claim that a parachute is "the only nonzero action for
    two-adjacent loss" is withdrawn.** Within this grid, two-adjacent loss has
    *no* surviving action at all. That is a stronger and more useful negative
@@ -148,6 +162,67 @@ Interpretation clause: a kill reached because **both** actions fail in a cell
 (`both_actions_fail` in the output) is a controller finding, not evidence that the
 actions are interchangeable — it redirects to the controller follow-on below, and
 the mechanism question stays open only if a future controller separates the actions.
+
+## 6b. Configuration vs action — scope correction (amendment, 2026-09-24)
+
+Critique C01/C05. **The comparison in §4 is a comparison of complete
+design/control packages, not a policy over actions available in flight.** It must
+not be described as a runtime policy, and the `policy` field in the generated
+JSON is a *ranking of packages*, not an executable selector.
+
+Why: `realloc_only` removes the guard's mass and rim inertia and disables the
+inverted-authority floor; `mechanism` retains both. **An airborne vehicle cannot
+choose to have launched without its guard.** The same applies to a carried
+descent device: its mass is present whether or not it is deployed. A comparison
+that varies installed hardware between "actions" is answering *which aircraft
+should we build*, which is a legitimate and useful question — but a different one.
+
+### Corrected structure for any successor study
+
+Define a **hardware configuration `c`** before launch, and the set of actions
+`A(c)` that *that* aircraft can actually execute. Then:
+
+- **Design comparison:** compare `c₁` against `c₂`, each under its own declared
+  policy. Mass, inertia and installed protection differ *by construction*.
+- **Runtime policy:** `π_c(observed state, uncertainty) → a ∈ A(c)`, evaluated on
+  **one fixed** mass, inertia, propulsion and installed protection. Outcome
+  definitions may not change between actions inside one runtime comparison.
+
+An action requiring hardware the configuration lacks is **UNAVAILABLE**, not a
+low-scoring option. Passive protection is part of `c`; it is not a command unless
+a deployment mechanism exists.
+
+### Configuration register (initial)
+
+| Configuration | Installed | Available actions `A(c)` | Status |
+| --- | --- | --- | --- |
+| `guarded` (designed vehicle) | guard, no descent device | reallocation; inverted-floor control law | modelled |
+| `bare` (designed vehicle) | no guard, no descent device | reallocation | modelled |
+| `v995_stock` | stock guards, no descent device, **no established per-motor command access** | *none established* — see `evidence/week-2026-09-19/platform-capabilities.md` | **actions UNAVAILABLE pending board access (OQ-011)** |
+
+**The `parachute` action is UNAVAILABLE in every configuration we own**: no
+characterised deployable device exists in the inventory. It remains admissible
+only as a clearly-labelled hypothetical-device sensitivity study, never as a
+hardware capability.
+
+### C05 — the guard/inverted-floor coupling is unjustified
+
+The code enables the quarter-collective inverted-authority floor **iff** the guard
+is present. No mechanical reason is stated, and in free air inversion alone does
+not prevent an unguarded rotor from producing thrust. Contact, obstruction or an
+explicit operational rule might justify it; none is represented by the switch.
+
+Before any claim that the guard *enables* airborne recovery, its causal mechanism
+must be written down and evidenced separately: does it prevent rotor contact,
+preserve clearance under load, decouple contact torque, absorb deformation energy,
+or change drag? Briod et al. (2014, doi:10.1002/rob.21495) support one particular
+construction — a cage on a passive three-axis gimbal — which is **not** equivalent
+to rigid propeller rings.
+
+**Successor-study rule:** run the same admissible airborne controller on both
+architectures, varying mass/inertia/aerodynamics/clearance explicitly; then toggle
+the control floor on **one fixed** architecture as a separate diagnostic. The
+historical package comparison is retained and cannot isolate guard causation.
 
 ## 7a. Paired comparison (amendment, 2026-09-23)
 

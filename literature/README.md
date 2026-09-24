@@ -42,12 +42,12 @@ still tangential):
 ## The five findings that change the repo
 
 1. **Our comparison design is unpaired and should not be.** Mechanism vs
-   reallocation, and A vs A2, are analysed as two independent Clopper–Pearson
-   intervals. The design is paired by construction (same dispersed vehicle, same
-   noise) — but our seeds include the action index, so it *isn't*. Analysing
-   paired binary outcomes as independent proportions inflates the comparison's
-   variance and manufactures the overlapping-interval non-result we reported.
-   → note 05 §3.
+   reallocation, and A vs A2, were analysed as two independent Clopper–Pearson
+   intervals — a **valid but low-powered** design, not an erroneous one (wording
+   corrected 2026-09-24, critique C09: the earlier claim that it "manufactures"
+   the non-result overstated the case). Running both arms on common random
+   numbers induces positive covariance and sharpens the contrast, and makes a
+   paired analysis available. → note 05 §3.
 2. **The landing criterion cannot rest on injury data, but 1.5–3 m/s has a real
    anchor.** At 165 g and 3 m/s we carry 0.74 J against a most-conservative
    published yardstick of 14.9 J — non-binding by ~27×. The defensible source for
@@ -65,6 +65,17 @@ still tangential):
    including two-adjacent loss, in outdoor flight, with a single non-switching
    controller. Our open lane is narrower and sharper than claimed, and **someone
    else is already publishing an adjacent gap claim**. → `novelty-and-gaps.md`.
+
+**Corrections applied 2026-09-24** after an external critique, listed here because
+several were errors in this review itself: the comparison in the study is a
+**design** comparison, not a runtime policy (`design.md` §6b); the claim that no
+detection-latency **distribution** exists was **false** (note 02 §4); the
+spin-scaling rationale for sub-250 g difficulty was **wrong physics** — terminal
+spin is independent of `Izz` (note 01 §6); a **30.6 g real-flight FTC result**
+exists for partial degradation (ledger G3); Siotia et al.'s landing numbers are
+**simulation/HIL, not measurements**, so our parachute fit is calibration rather
+than validation (ledger C1); and two one-sided bounds on **different** proportions
+do not form a central interval for their difference (ledger E1).
 
 ## Standing rules
 

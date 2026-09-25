@@ -89,6 +89,43 @@ asynchronous (one CSV per sensor + one manifest); no synthetic synchronized rows
 Before step 2 the owner does a power-off continuity/polarity check of every row in
 §2 and ticks "Verified". Loose bench jumpers are a bench harness, not an airborne one.
 
+## 4b. Observability contract (C06)
+
+One row per desired output. **Missing is not zero**: a quantity marked
+*unavailable* must not be plotted, fitted or labelled with a surrogate.
+
+| Quantity | Source | Frame / node | Timestamp meaning | Rate / filter age | Range | Uncertainty | Availability | Permitted claim |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Aggregate axial force | installed cell + NAU7802 | fixture axis, cradle datum | ADC data-ready | 80 SPS nominal; conversion + filter age to be measured | cell-dependent | from installed calibration; **not** the datasheet figure | after R3 calibration | whole-article axial force in the stated restraint |
+| Bus voltage, current | INA260 | declared node (VBus ties to `Vin+`), averaging declared | conversion-window end | configured window; report achieved rate | chip limits ≠ harness rating | reference-instrument comparison | after R2 dummy-load check | aggregate electrical power at that node |
+| Specific force | LIS3DH | sensor axes + mounting offset from CG | sample register read | 100 Hz proposed | ±2/4/8/16 g, per-axis saturation flagged | axis map, offsets, scale vs gravity | after six-orientation check | specific force only — **not** attitude, **not** rate |
+| Beam crossing | IR break-beam | geometry and polarity recorded | edge timestamp | <2 ms device response + software stamp | — | spacing, ambient light | after 30-cycle check | one coarse crossing event |
+| Per-rotor force | — | — | — | — | — | — | **unavailable** | none |
+| Angular rate / full attitude | — | — | — | — | — | — | **unavailable** (LIS3DH is specific force; no gyro purchased) | none |
+| Trajectory | — | — | — | — | — | — | **unavailable** without external tracking | none |
+| Fault identity | — | — | — | — | — | — | **unavailable** | none |
+| Physical damage | — | — | — | — | — | — | **unavailable** — requires inspection, recorded separately from any kinematic proxy | none |
+
+**Offset-sensor caveat.** A sensor not at the CG also measures `α × r` and
+`ω × (ω × r)`. At 20 rad/s with a 10 mm perpendicular offset the centripetal term
+is ≈4 m/s² — comparable to a large tilt signal and **not** gravity. Mounting
+dimensions are therefore estimation inputs and must be recorded.
+
+### Static vs impact bandwidth (C08)
+
+The purchased chain is a **static** force instrument and must not be promoted into
+an impact instrument. At 80 SPS samples are **12.5 ms** apart; even 320 SPS gives
+3.125 ms, before filter delay. A contact event is far shorter, so peak force needs
+demonstrated bandwidth, a characterised mechanical response and enough samples
+across the contact. Repeated drops on one damaged specimen are **not** independent
+trials.
+
+**Contact-state record**, when a contact study is eventually run — each field
+stored explicitly, with damage kept separate from any kinematic proxy: vertical
+velocity, lateral velocity, attitude, angular velocity, surface, contact location,
+configuration, specimen history, and observed physical damage / post-event
+function.
+
 ## 5. Not part of this document
 
 Load-cell selection (1 kg vs 5 kg — needs the installed load budget, R3.2), the

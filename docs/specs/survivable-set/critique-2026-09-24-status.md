@@ -71,6 +71,16 @@ selector observes *estimates*, not true state, so state uncertainty and diagnosi
 confidence belong in any future policy evaluation; an oracle policy is a labelled
 upper benchmark only.
 
+## Follow-on raised by the scenario diagnostic (2026-09-26)
+
+The DR-SS-SCENARIO-01 diagnostic showed all four primary cells are saturated, so
+the registered grid cannot resolve a scenario effect on the binary proxy. Evidence
+and a candidate replacement set are in
+[`primary-cell-reselection-proposal.md`](primary-cell-reselection-proposal.md) —
+**a proposal awaiting owner registration, not a registered change.** Headline:
+71 of 96 class-cell combinations are saturated, `two_adjacent` has **no**
+resolvable cell anywhere, and resolvable cells cluster at ω = 2 rad/s.
+
 ## Not accepted as stated
 
 None of the ten was rejected. C02's sub-35 g counterexample was **narrowed** on

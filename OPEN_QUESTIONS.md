@@ -19,6 +19,9 @@ Track unresolved design decisions here. Close each item with evidence rather tha
 
 | OQ-013 | What is the guard's causal mechanism for airborne recovery, and what evidence supports it — does it prevent rotor contact, preserve clearance under load, decouple contact torque, absorb deformation energy, or change drag? | Owner (mechanism statement) + drop/contact evidence | A written mechanism plus evidence for that specific construction; Briod et al. (2014) support a cage on a passive three-axis gimbal, which is NOT equivalent to rigid propeller rings | OPEN (until answered, the inverted-authority floor's coupling to guard presence is unjustified and guard causation cannot be claimed — `docs/specs/survivable-set/design.md` §6b) |
 
+| OQ-014 | What does the 25 g buffer below the 250 g regulatory boundary (REQ-MASS-002) actually allocate to, and is 25 g the right size? | Owner (policy) or a mass-uncertainty allocation | Either an itemised allocation (weighing method and its uncertainty, battery variation, un-itemised hardware, post-freeze additions) summing to a justified buffer, or an explicit statement that it is a policy margin rather than a derived one | OPEN (not currently binding — headroom is 60 g; `Design Report/calculations.md` §Abort threshold, audit Tier B) |
+| OQ-015 | What justifies `UNMODELED_HARDWARE_G` = 5 g, the guard safety factors (2.0 clearance / 3.0 stress) and the authority-gate sampling constants (n=6, 5th percentile, 25–75% band)? | Owner + itemised estimates / material data | Itemised un-modelled hardware estimate; quantified PETG property scatter tied to the stress SF; a stated basis for the sampling constants | OPEN (audit Tier C — bare constants that gate real decisions; `docs/ENGINEERING_AUDIT.md`) |
+
 ## Milestone Schedule
 
 Target dates are placeholders until the student fills them in against their actual semester schedule.

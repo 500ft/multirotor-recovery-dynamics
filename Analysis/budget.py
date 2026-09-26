@@ -9,7 +9,16 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MASS_BUDGET = ROOT / "Engineering Data" / "mass_budget.csv"
+# Provenance (docs/ENGINEERING_AUDIT.md). REQ-MASS-002. A selected round buffer
+# of 25 g (10%) below the 250 g regulatory class boundary; the buffer is NOT
+# allocated against quantified contributors. Derivation and what would close it:
+# "Design Report/calculations.md" -> Decision: the 225 g abort threshold.
 ABORT_THRESHOLD_G = 225.0
+# Provenance: BARE CONSTANT -- audit Tier C, priority P1. An allowance for
+# hardware not itemised in mass_budget.csv (fasteners, adhesive, wire dressing).
+# No requirement ID, and the 5 g is not derived from any itemised estimate. It
+# sets the frozen maximum directly, so it is consequential. Do not treat it as
+# justified because it is small.
 UNMODELED_HARDWARE_G = 5.0
 
 

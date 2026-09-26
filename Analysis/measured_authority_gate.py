@@ -14,11 +14,17 @@ from pathlib import Path
 from typing import Dict, Iterable, List, Optional
 
 
-ACCEPTANCE_VOLTAGE_V = 7.0
-COLLECTIVE_GRID = (0.25, 0.375, 0.50, 0.625, 0.75)
-MIN_REPEATS_PER_POINT = 6
-LOWER_QUANTILE = 0.05
-MIN_AUTHORITY_N_M = 0.020
+# Provenance notes (docs/ENGINEERING_AUDIT.md). MIN_AUTHORITY_N_M is Tier A --
+# derived in docs/specs/measured-authority-gate/design.md from the 225 g
+# full-reserve requirement and a 5 mm thrust-line offset, with ~20% margin. The
+# four constants around it are Tier C: they gate the same decision but their
+# values are not derived anywhere. Recorded here rather than left implicit.
+ACCEPTANCE_VOLTAGE_V = 7.0      # REQ-PROP-002: worst permitted loaded pack voltage
+COLLECTIVE_GRID = (0.25, 0.375, 0.50, 0.625, 0.75)  # Tier C: band not derived
+MIN_REPEATS_PER_POINT = 6       # Tier C: an empirical 5th percentile of 6 samples
+                                # IS the minimum, not a confidence-qualified bound
+LOWER_QUANTILE = 0.05           # Tier C: conservatism of the gate, not derived
+MIN_AUTHORITY_N_M = 0.020       # Tier A: derived, see spec
 CALIBRATION_QUANTITIES = {"thrust_n", "voltage_v", "current_a", "temperature_c", "rpm", "time_s", "arm_m"}
 
 

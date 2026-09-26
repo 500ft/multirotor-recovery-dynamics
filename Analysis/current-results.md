@@ -207,6 +207,13 @@ Results, both controller variants (baseline PD and spin-aware A2):
   under the registered interpretation clause this is a *controller* finding,
   not evidence the actions are interchangeable, and it blocks mechanism
   redesign rather than motivating it.
+- **SCENARIO CAVEAT (2026-09-24, critique C04):** the simulator cuts **all four
+  motors** for detection + spool latency before the controller engages. That is a
+  **release/startup transient**, not an in-flight failure in which the healthy
+  motors keep running until the fault is detected. Every rotor-out number below is
+  conditional on that reading. The generated JSON now carries
+  `scenario: "release_startup"`. Implementing `in_flight_loss` requires its own
+  registration — see `docs/specs/survivable-set/critique-2026-09-24-status.md`.
 - **SCOPE CORRECTION (2026-09-24, `design.md` §6b): this is a comparison of
   design packages, not a runtime policy.** `realloc_only` removes the guard's
   mass and inertia; `mechanism` keeps it. An airborne vehicle cannot choose to

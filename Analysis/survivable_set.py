@@ -99,6 +99,22 @@ PARACHUTE_DEPLOY_S = 0.8                     # trigger -> canopy starts opening 
 PARACHUTE_INFLATE_S = 0.6
 PARACHUTE_TILT_MAX_RAD = radians(45.0)       # pendulum under canopy, drawn U(0, max)
 
+# SCENARIO LABEL (critique C04, 2026-09-24). The simulator cuts ALL FOUR motors
+# for detection_latency + motor_start_latency and only then engages the
+# controller. That is a RELEASE / STARTUP transient: it describes a vehicle
+# dropped with motors off, which must spool up. It is NOT an in-flight failure,
+# where the healthy motors keep running and keep following the nominal controller
+# until the fault is detected and the allocation reconfigures.
+#
+# Every rotor-out number this study produces is therefore conditional on the
+# release-startup reading, and must be labelled as such wherever it is reported.
+# Implementing the in-flight mode (`in_flight_loss`) needs its own registration:
+# the pre-failure command, the failed rotor's residual thrust, the healthy motors'
+# behaviour during detection, when fault-aware allocation begins, and whether
+# actuator response is instantaneous or lagged. See
+# docs/specs/survivable-set/critique-2026-09-24-status.md (C04).
+SCENARIO = "release_startup"
+
 DESCENT_RATE_M_S = 1.0                       # commanded touchdown descent rate
 INIT_TILT_MAX_RAD = radians(30.0)            # tilt at failure, drawn U(0, max)
 ARM_M = 0.060                                # ASSUMED build arm (matches run_sweep)

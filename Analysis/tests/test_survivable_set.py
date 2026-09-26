@@ -193,6 +193,27 @@ class TestKillCriterion(unittest.TestCase):
         self.assertTrue(verdict["comparisons"][0]["realloc_dominates"])
 
 
+class TestScenarioLabelling(unittest.TestCase):
+    """C04: the scenario must be named, and the name must match the dynamics."""
+
+    def test_scenario_is_labelled_release_startup(self):
+        self.assertEqual(ss.SCENARIO, "release_startup")
+
+    def test_all_motors_are_off_during_the_latency_window(self):
+        """The label is only honest if the sim really cuts every motor first.
+        If someone implements in_flight_loss, this test must be updated with it,
+        not deleted."""
+        p = with_mixer(nominal_params())
+        r = simulate(p, 2.0, radians(15.0), descent_rate_m_s=1.0, t_max=4.0)
+        passive = p.detection_latency_s + p.motor_start_latency_s
+        t, thrust = r["log"]["t"], r["log"]["thrust"]
+        during = [th for ti, th in zip(t, thrust) if ti < passive]
+        self.assertTrue(during, "no samples inside the latency window")
+        self.assertEqual(max(during), 0.0,
+                         "thrust is non-zero before the controller engages, so "
+                         "'release_startup' no longer describes the dynamics")
+
+
 class TestPairedAnalysis(unittest.TestCase):
     """literature/claim-ledger.md E1: the action comparison is paired."""
 

@@ -43,6 +43,8 @@
       "parachute": 2000
     },
     "base_seed": 20260916,
+    "scenario": "release_startup",
+    "scenario_note": "All motors are off for detection+spool latency, then the controller engages: a RELEASE/STARTUP transient, NOT an in-flight failure in which healthy motors keep running until detection. Every rotor-out result here is conditional on that reading (critique C04).",
     "machinery_rev": "2026-09-16: cascaded torque-priority allocation, balanced collective ceiling (0.9 airmode reserve in allocation mode), arrest-first descent; supersedes the single-pass pinv allocation of the first committed sweep \u2014 see design-a2.md"
   },
   "variant": "a2",

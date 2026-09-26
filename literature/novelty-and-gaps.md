@@ -95,9 +95,10 @@ our positioning.
 
 | | Siotia et al. (2026) | This repo |
 | --- | --- | --- |
-| Trigger | stall detection → deployment **threshold** | **policy** over a gridded post-failure state |
+| Trigger | stall detection → deployment **threshold** | ranking over a gridded post-failure state (a *policy* is the stated goal, **not yet delivered** — see Status row) |
 | State | altitude | (h, v_z, tumble rate, **detection delay**) × failure class |
-| Actions | stabilise **or** deploy | reallocation / mechanism / descent device, compared |
+| Status | published result | **package comparison performed; runtime policy specified but NOT performed** (§ scope correction) |
+| Actions | stabilise **or** deploy | reallocation / mechanism / descent device — compared as **whole aircraft configurations**, not as choices one aircraft can make |
 | Output | a decision rule | **P(survivable landing) per cell with exact bounds** |
 | Failure mode | stall / loss of control, unspecified cause | **specified propulsion-failure classes** |
 | Validation | HIL + simulation, 2 kg, no free-flight drops | simulation on EST inputs, sub-250 g, preregistered |

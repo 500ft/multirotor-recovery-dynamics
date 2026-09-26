@@ -268,3 +268,42 @@ Results, both controller variants (baseline PD and spin-aware A2):
 - **Integrator defense**: halving dt moves primary-cell impact speeds by at
   most 0.0044 m/s with full landed/not-landed agreement
   (`Data/survivable_set_convergence.json`).
+
+## Scenario correction diagnostic — DR-SS-SCENARIO-01 (2026-09-25)
+
+Registration: [`docs/specs/survivable-set/scenario-contract.md`](../docs/specs/survivable-set/scenario-contract.md),
+frozen before execution. Data: `Data/scenario-diagnostic/scenario_diagnostic.json`.
+Generator: `python -m Analysis.run_scenario_diagnostic`. **Exploratory, 288
+trajectories on a limited slice — not a full-grid verdict.**
+
+Three arms on identical physical draws: **L** legacy `release_startup` (all rotors
+off until detection + spool), **H** `in_flight_hold_matched` (healthy rotors hold
+pre-fault trim, same switch time), **I** `in_flight_hold_immediate` (held outputs,
+recovery at detection). Fault abstraction is idealized complete rotor
+effectiveness loss (R01) — **not** a validated motor-stop or propeller-loss
+transient.
+
+- **The binary proxy cannot resolve the scenario effect at the primary cells.**
+  All 288 trajectories reached contact and **every one failed the criterion in
+  every arm** — the two primary cells are precisely where everything already
+  fails. So H−L, I−H and I−L are all 0/24 discordant, and the paired verdicts are
+  `no_discordant_pairs` by saturation, not by agreement. **A full-grid rerun
+  judged only on the binary proxy would have reported "no change" and been
+  uninformative.** That is a finding about the study design.
+- **The effect is real in the continuous quantities, and its sign depends on the
+  cell.** Retaining healthy thrust delays contact everywhere
+  (+0.03 to +0.07 s). Mean paired impact-speed change, I−L: **−0.38 m/s** at
+  `h3_vz0_w6_d0.11` (one_out) and **−0.18 m/s** (two_adjacent), but **+0.21 m/s**
+  at `h1.5_vz-1.5_w2_d0.3` (one_out) and **+0.09 m/s** (two_adjacent). Per-trial
+  spread is wide (down to −3.4 m/s, up to +1.2 m/s).
+- **This is exactly the registered warning.** Retained thrust slows the descent
+  while the retained *unbalanced moments* worsen attitude; neither contrast was
+  registered as expected to improve anything, and neither did uniformly.
+- **I−H is small** (|mean| ≤ 0.16 m/s), so most of the change comes from
+  retaining thrust rather than from removing the startup dead time.
+
+**What this does not establish.** Nothing about the V995, no measured failure
+transient, no change to the historical study (its data is untouched), and no
+resolution of whether rotor-out recovery is achievable — every arm still fails
+the proxy at these cells. A full registered rerun needs cells where the proxy is
+not saturated, which is a design question the diagnostic has now surfaced.

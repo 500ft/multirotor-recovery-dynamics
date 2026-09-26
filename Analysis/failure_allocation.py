@@ -81,6 +81,55 @@ _MOTOR_XY = np.array([[+1.0, +1.0], [-1.0, +1.0], [-1.0, -1.0], [+1.0, -1.0]])
 _SPIN = np.array([+1.0, -1.0, +1.0, -1.0])
 
 
+def healthy_wrench_map(arm_m: float, max_thrust_n: float,
+                       yaw_torque_n_m: float) -> np.ndarray:
+    """Full four-rotor wrench map ``w = B f``, w = (T, tau_x, tau_y, tau_z).
+
+    Exposed so the pre-switch interval of an in-flight failure uses the SAME map
+    as the post-switch dynamics rather than a second, drifting copy
+    (DR-SS-SCENARIO-01 R05). ``MotorAllocation`` builds its own view from this.
+    """
+    a = arm_m / sqrt(2.0)
+    kappa = yaw_torque_n_m / (2.0 * (max_thrust_n / 4.0))
+    return np.vstack([
+        np.ones(4),
+        a * _MOTOR_XY[:, 1],
+        -a * _MOTOR_XY[:, 0],
+        kappa * _SPIN,
+    ])
+
+
+def solve_healthy_trim(arm_m: float, max_thrust_n: float, yaw_torque_n_m: float,
+                       mass_kg: float, g: float,
+                       cg_offset_m=(0.0, 0.0), torque_bias_n_m=(0.0, 0.0, 0.0),
+                       cap_n: float | None = None):
+    """Pre-fault four-rotor equilibrium (DR-SS-SCENARIO-01 R03).
+
+    Solves, in the dynamics' own conventions, for per-rotor thrusts that hold
+    hover with the modelled CG-offset moment and motor bias cancelled:
+
+        sum(f)            = m g
+        B_moment f + tau_cg(sum f) + bias = 0,   tau_cg = (cg_y T, -cg_x T, 0)
+
+    which is linear in ``f``. Returns ``(f_trim, feasible)``. ``feasible`` is
+    False when any rotor leaves ``[0, cap]`` — the caller must record
+    ``trim_infeasible`` and must NOT silently substitute equal thrust or drop the
+    sample (R03). With zero CG offset and zero bias this returns m*g/4 per rotor.
+    """
+    b = healthy_wrench_map(arm_m, max_thrust_n, yaw_torque_n_m)
+    cg = np.asarray(cg_offset_m, float)
+    bias = np.asarray(torque_bias_n_m, float)
+    # moment rows plus the CG term, which is itself proportional to total thrust
+    a_moment = b[1:4, :] + np.outer(np.array([cg[1], -cg[0], 0.0]), np.ones(4))
+    a_full = np.vstack([np.ones(4), a_moment])
+    rhs = np.array([mass_kg * g, -bias[0], -bias[1], -bias[2]])
+    f_trim, *_ = np.linalg.lstsq(a_full, rhs, rcond=None)
+    cap = cap_n if cap_n is not None else max_thrust_n / 4.0
+    feasible = bool(np.all(f_trim >= -1e-9) and np.all(f_trim <= cap + 1e-9)
+                    and np.allclose(a_full @ f_trim, rhs, atol=1e-6))
+    return f_trim, feasible
+
+
 class MotorAllocation:
     """Wrench allocation onto the healthy motors of one failure case.
 

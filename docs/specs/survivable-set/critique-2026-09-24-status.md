@@ -14,13 +14,13 @@ change. Status values: **applied** / **partly applied** / **deferred (recorded)*
 | C01 | Separate design selection from actions available in flight | **applied** | `design.md` §6b; `Analysis/current-results.md`; §1 and §8 reconciled 2026-09-24 |
 | C02 | Correct novelty claims (detection-delay distribution; sub-35 g counterexample) | **applied** | `literature/notes/01` §6, `notes/02` §4, ledger G2/G3, `novelty-and-gaps.md` |
 | C03 | Repair parachute evidence provenance; stop calling calibration validation | **applied** | `Analysis/survivable_set.py`, renamed test, `design.md` §4, ledger C1 |
-| C04 | Make the failure scenario and recovery metric physically consistent | **partly applied** | scenario now named and emitted (`design.md` §6a, `SCENARIO`, `scenario` field, test); the `in_flight_loss` mode and the three outcome definitions remain deferred — see below |
+| C04 | Make the failure scenario and recovery metric physically consistent | **model implemented, study open** | `in_flight_hold_matched` / `in_flight_hold_immediate` arms implemented and anchored (DR-SS-SCENARIO-01, `scenario-contract.md`); 288-trajectory diagnostic run. The three outcome definitions (regulation / contact-before-regulation / touchdown) and the full-grid rerun remain open — and the diagnostic showed the primary cells saturate the binary proxy |
 | C05 | Do not attribute the guard's benefit to an arbitrary controller restriction | **applied** | `design.md` §6b |
-| C06 | Preserve bench instrumentation; add an observability contract | **deferred (recorded)** | see below |
+| C06 | Preserve bench instrumentation; add an observability contract | **applied** | `docs/bench-acquisition.md` §4b observability table, offset-sensor caveat |
 | C07 | Correct the spin-scaling argument | **applied** | `literature/notes/01` §6, ledger G2 |
-| C08 | Treat touchdown limits as an unvalidated proxy, not airframe survival | **partly applied** | `literature/notes/04` §7–8 already frames the band as an analogy; the contact-state record and load-cell bandwidth limits are deferred |
+| C08 | Treat touchdown limits as an unvalidated proxy, not airframe survival | **applied (documentation)** | `bench-acquisition.md` §4b static-vs-impact bandwidth and contact-state fields; `design.md` §5 keeps PREREGISTERED-ASSUMED with landing-gear context added as context only. Physical validation remains unmeasured |
 | C09 | Improve statistics without overstating what pairing proves | **applied** | `Analysis/survivable_set.py` (Δ added), ledger E1/E2, `notes/05` |
-| C10 | Bound what "the boundary" means | **deferred (recorded)** | see below |
+| C10 | Bound what "the boundary" means | **applied** | `design.md` §6c conditional-bounds statement and parameter-provenance table |
 
 ## Deferred items, stated precisely enough to act on later
 

@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main, "task/priority-one-*", "study/**", "week/**"]
+    branches: [main, "task/priority-one-*", "study/**", "week/**", "docs/**", "fix/**"]
 
 jobs:
   analysis-tests:

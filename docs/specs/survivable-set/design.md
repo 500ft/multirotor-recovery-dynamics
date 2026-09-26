@@ -136,7 +136,7 @@ mechanism policy vs. vehicle-without-mechanism flying reallocation. The mass/ine
 credit and the guarded-impact relaxation are therefore part of the action
 definitions, not confounds.
 
-## 5. Landing criterion (PREREGISTERED-ASSUMED)
+## 5. Landing criterion (PREREGISTERED-ASSUMED — label retained)
 
 Survivable touchdown: impact |vz| ≤ 2.0 m/s AND tilt ≤ 30° (bare vehicle). Guarded:
 ≤ 2.5 m/s and ≤ 60° (EST — the guard absorbs energy and tolerates attitude; owner
@@ -146,6 +146,18 @@ the number is asserted, not measured, so sensitivity variants strict (1.5 m/s, 2
 and lenient (3.0 m/s, 45°) are computed for every cell and reported alongside.
 Lateral impact velocity is excluded (declared limitation — no wind or lateral
 guidance is modeled).
+
+**Context added 2026-09-25 — the evidence label does NOT change.** Rotorcraft and
+transport landing-gear drop tests sit in a comparable speed range: 14 CFR 27.725
+specifies a 13-inch drop (or a justified lesser height of at least 8 inches) and
+27.727 uses 1.5× the chosen height, whose nominal free-fall equivalents are about
+**2.55 and 3.12 m/s**. That is *context for why the band is not arbitrary*, and
+nothing more. Those are **landing-gear qualification tests for other vehicle
+classes at other scales** — they do not supply our band, they do not validate a
+2.0/2.5 m/s impact limit or a 30°/60° tilt limit for a sub-250 g plastic drone,
+and this study must not be described as satisfying any standard. The thresholds
+remain **assumed**, with sensitivity variants reported per cell; only a drop test
+of the actual vehicle can change that.
 
 ## 6. Statistics
 
@@ -250,6 +262,32 @@ to rigid propeller rings.
 architectures, varying mass/inertia/aerodynamics/clearance explicitly; then toggle
 the control floor on **one fixed** architecture as a separate diagnostic. The
 historical package comparison is retained and cannot isolate guard causation.
+
+## 6c. What the bounds cover, and where inputs come from (C10, 2026-09-25)
+
+The Clopper–Pearson bounds in this study are **conditional Monte Carlo sampling
+bounds**: they quantify finite sampling *under this model, these distributions and
+this landing proxy*. They do not cover model error, scenario error or real-world
+reliability, and more samples shrink only the first. A scenario bracket has no
+implied probability or confidence level.
+
+### Parameter provenance
+
+| Parameter | Provenance |
+| --- | --- |
+| mass, inertia, torque, thrust, latency multipliers | **assumed dispersion** (stated engineering bounds on the locked BOM, deliberately wider than expected build tolerance) |
+| CG offset, motor bias, gyro/attitude noise, battery sag | **assumed dispersion** |
+| guard mass share (EST-MASS-012 split) | **assumed**, tied to the live rollup (OQ-010) |
+| guard inertia share, guarded impact tolerance | **assumed** (OQ-010) |
+| parachute terminal speed, deployment, inflation | **calibrated to another model's outputs**, not measured (OQ-010) |
+| A2 yaw rotational drag | **assumed** (OQ-010) |
+| detection delay cells | **scenario bracket** — 0.11 s sits inside the published 20–130 ms envelope; 0.30 s is a deliberate stress case beyond it |
+| arm length, landing criterion | **assumed** |
+| measured variation / measurement uncertainty | **none yet** — no accepted physical measurement exists |
+
+Existing uniform distributions are **preserved** in the historical study and in
+the matched scenario contrast so inputs stay comparable; replacing them with
+brackets would change the experiment and needs its own registration.
 
 ## 7a. Paired comparison (amendment, 2026-09-23)
 

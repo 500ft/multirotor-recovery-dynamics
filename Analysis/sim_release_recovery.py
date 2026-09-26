@@ -45,6 +45,9 @@ import numpy as np
 G = 9.81
 RHO_AIR = 1.225
 
+# DR-SS-SCENARIO-01 arms. "release_startup" is the frozen legacy behaviour.
+SCENARIOS = ("release_startup", "in_flight_hold_matched", "in_flight_hold_immediate")
+
 
 @dataclass(frozen=True)
 class DroneParams:
@@ -208,7 +211,9 @@ def simulate(p: DroneParams, initial_rate_rad_s: float, initial_tilt_rad: float,
              descent_rate_m_s: float | None = None,
              motor_alloc=None,
              control_floor: bool = True,
-             spin_aware: bool = False) -> dict:
+             spin_aware: bool = False,
+             scenario: str = "release_startup",
+             trim_thrusts=None) -> dict:
     """Release the drone with an initial tumble + tilt and run closed-loop recovery.
 
     Motors are off for ``detection_latency + motor_start_latency`` (passive tumble + free
@@ -224,6 +229,25 @@ def simulate(p: DroneParams, initial_rate_rad_s: float, initial_tilt_rad: float,
     the scalar mixer clip with per-motor allocation under a failure class; and
     ``control_floor=False`` disables the quarter-collective inverted-authority floor —
     the guard-enabled mechanism behavior — to model the mechanism-less vehicle.
+    ``scenario`` selects the pre-reconfiguration behaviour (DR-SS-SCENARIO-01):
+
+    * ``"release_startup"`` (default, legacy): every rotor is off until
+      ``detection_latency + motor_start_latency``. A release/startup transient.
+    * ``"in_flight_hold_matched"``: failed rotors produce nothing from t=0 while
+      healthy rotors HOLD their pre-fault trim thrust; recovery control still
+      begins at ``detection_latency + motor_start_latency`` so the switch time
+      matches the legacy arm.
+    * ``"in_flight_hold_immediate"``: same held outputs, recovery control begins
+      at ``detection_latency`` — healthy motors are already spinning, so the
+      release spool-up dead time does not apply to them.
+
+    The two in-flight arms require ``motor_alloc`` (for the failed indices) and
+    ``trim_thrusts`` (the pre-fault four-rotor equilibrium from
+    ``failure_allocation.solve_healthy_trim``). Force AND all three moments are
+    derived from the realized rotor vector through the same wrench map the
+    post-switch dynamics use — retaining 3/4 of collective while applying zero
+    roll/pitch torque would not be rotor-loss physics.
+
     ``spin_aware=True`` (Study A2) adds gyroscopic feedforward in the tilt plane:
     the PD law alone ignores the precession torque ``w x Iw``, which grows with the
     rotor-out drag spin until it overwhelms the attitude authority; the feedforward
@@ -241,7 +265,32 @@ def simulate(p: DroneParams, initial_rate_rad_s: float, initial_tilt_rad: float,
                                   / np.linalg.norm(tumble_axis))
     pos = np.zeros(3)
     vel = np.array([0.0, 0.0, initial_vz_m_s])
-    passive_time = p.detection_latency_s + p.motor_start_latency_s
+    if scenario not in SCENARIOS:
+        raise ValueError(f"unknown scenario {scenario!r}; expected one of {SCENARIOS}")
+    in_flight = scenario != "release_startup"
+    if in_flight and (motor_alloc is None or trim_thrusts is None):
+        raise ValueError("in-flight scenarios need motor_alloc and trim_thrusts")
+    # when fault-aware control takes over. The legacy arm and the matched arm
+    # share a switch time; the immediate arm drops the release spool-up dead
+    # time, which does not apply to motors that are already running (R07).
+    if scenario == "in_flight_hold_immediate":
+        passive_time = p.detection_latency_s
+    else:
+        passive_time = p.detection_latency_s + p.motor_start_latency_s
+    held_wrench = None
+    if in_flight:
+        from Analysis.failure_allocation import healthy_wrench_map
+        b_full = healthy_wrench_map(p.arm_m, p.max_thrust_n, p.yaw_torque_n_m)
+        f_held = np.asarray(trim_thrusts, float).copy()
+        f_held[list(motor_alloc.case.failed)] = 0.0      # failed outputs vanish
+        # partial_authority is a per-rotor CAP, not a multiplicative loss of
+        # effectiveness (DR-SS-SCENARIO-01 R02): a held command below the reduced
+        # cap is unaffected. Multiplying here would silently turn the class into
+        # an effectiveness fault and change what the study measures.
+        _cap = motor_alloc.case.authority_frac * p.max_thrust_n / 4.0
+        f_held = np.minimum(f_held, _cap)
+        held_wrench = b_full @ f_held                    # (T, tau_x, tau_y, tau_z)
+    t_switch_realized = None
     I = p.inertia
     e_int = np.zeros(3)                    # integral attitude trim state (mixer mode)
 
@@ -255,6 +304,8 @@ def simulate(p: DroneParams, initial_rate_rad_s: float, initial_tilt_rad: float,
         R = quat_to_rotmat(q)
         tilt = acos(np.clip(R[2, 2], -1.0, 1.0))
         motors_on = t >= passive_time
+        if motors_on and t_switch_realized is None:
+            t_switch_realized = t
         if motors_on:
             # measured state: gyro clips at its range; optional white noise on the rate
             # and on the attitude estimate (small random rotation of q).
@@ -317,6 +368,13 @@ def simulate(p: DroneParams, initial_rate_rad_s: float, initial_tilt_rad: float,
             # actuation imperfections: thrust line offset from CG -> disturbance torque
             # tau = r_cg x F_body (F_body = [0,0,thrust]); plus motor-mismatch bias.
             torque = torque + np.array([cg[1] * thrust, -cg[0] * thrust, 0.0]) + torque_bias
+        elif in_flight:
+            # healthy rotors hold their pre-fault commands; the failed ones are
+            # already zero. All three moments come from the realized vector.
+            thrust = float(held_wrench[0])
+            torque = held_wrench[1:4].copy()
+            torque = torque + np.array([cg[1] * thrust, -cg[0] * thrust, 0.0]) \
+                + torque_bias
         else:
             torque, thrust = np.zeros(3), 0.0
 
@@ -346,7 +404,9 @@ def simulate(p: DroneParams, initial_rate_rad_s: float, initial_tilt_rad: float,
             for key in log:
                 log[key] = log[key][:k + 1]
             return _result(p, log, success=False, crashed=True,
-                           recovery_time=None, initial_rate_rad_s=initial_rate_rad_s)
+                           recovery_time=None, initial_rate_rad_s=initial_rate_rad_s,
+                           scenario=scenario, t_switch_requested=passive_time,
+                           t_switch_realized=t_switch_realized)
 
         # stabilized = upright, low rate, near-zero vertical speed, after motors engaged
         if motors_on and tilt < np.radians(5) and np.linalg.norm(omega) < 0.3 and abs(vel[2]) < 0.2:
@@ -359,12 +419,19 @@ def simulate(p: DroneParams, initial_rate_rad_s: float, initial_tilt_rad: float,
     for key in log:
         log[key] = log[key][:T]
     return _result(p, log, success=recovered_at is not None, crashed=False,
-                   recovery_time=recovered_at, initial_rate_rad_s=initial_rate_rad_s)
+                   recovery_time=recovered_at, initial_rate_rad_s=initial_rate_rad_s,
+                   scenario=scenario, t_switch_requested=passive_time,
+                   t_switch_realized=t_switch_realized)
 
 
-def _result(p, log, *, success, crashed, recovery_time, initial_rate_rad_s):
+def _result(p, log, *, success, crashed, recovery_time, initial_rate_rad_s,
+            scenario="release_startup", t_switch_requested=None,
+            t_switch_realized=None):
     max_descent = float(-np.min(log["z"])) if log["z"].size else float("nan")
     return {
+        "scenario": scenario,
+        "t_switch_requested_s": t_switch_requested,
+        "t_switch_realized_s": t_switch_realized,
         "initial_rate_rad_s": initial_rate_rad_s,
         "success": bool(success),
         "crashed": bool(crashed),

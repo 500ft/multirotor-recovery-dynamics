@@ -77,3 +77,58 @@ This is a **datasheet screen, not measured uncertainty**, and neither cell is an
 accepted calibrated instrument. Adafruit's "capacity ≥ 2× maximum applied load"
 guidance makes ≈4.90 N a preliminary screening ceiling for the 1 kg cell — not a
 verified fixture strength rating. Taring does not remove physical dead load.
+
+## What the cradle and base plate still need
+
+Both generators are **written, tested and wired in**. They are skipped today
+because five register rows are pending — not because the geometry is unknown.
+Populate the rows and the parts build on the next run, with the same oracle and
+STEP round-trip checks as the adapter.
+
+### Cradle — 3 measurements, all on the aircraft you own
+
+| Row | What to measure | How |
+| --- | --- | --- |
+| `aircraft_capture_width` | outer body width at the station the cradle grips — **not** the rotor-tip span | calipers at a recorded datum; take three independently repositioned readings and save all three |
+| `aircraft_capture_length` | body length the cradle floor spans, chosen to sit between rotor arms without fouling the guards | record which features bound the chosen station |
+| `cradle_wall_height` | wall height that retains the airframe laterally without reaching the rotor plane | derive from measured body height and rotor-plane offset; justify against rotor clearance, do not pick for convenience |
+
+Already registered as `design_choice`: wall thickness 3.0 mm, floor thickness
+4.0 mm. Neither is derived from a load case.
+
+**Design intent already encoded.** The cradle is a U-channel, not a gravity
+pocket, because the reaction can reverse — the fixture has to transmit **uplift
+as well as downward load**. It bolts to the cell's loaded end on the registered
+hole pattern, and the generator refuses a floor too short for that pattern.
+
+### Base plate — 2 measurements, both on the bench
+
+| Row | What to measure | How |
+| --- | --- | --- |
+| `bench_anchor_spacing` | centre distance between the two anchor points the plate bolts to | measure the actual bench/clamp pattern, or design and verify a new mounting interface |
+| `bench_anchor_hole_diameter` | clearance for the anchor fastener | follows from the chosen anchor hardware |
+
+Already registered as `design_choice`: plate thickness 6.0 mm, relief depth
+2.0 mm.
+
+**Design intent already encoded.** The plate carries a **relief pocket** between
+the cell pattern and the anchors, so the cell's sensing section stays free to
+deform. Without it the plate becomes a parallel force path around the cell and
+the measurement is invalid. The generator fails closed if the pocket would breach
+the plate, if a hole would fall off the plate, or if there is no room for the
+pocket once fastener land is allowed for.
+
+### What is still *not* covered by these five rows
+
+- **Signed load cases and off-axis moments.** Every thickness above is a
+  printability choice. No stress or deflection check exists, so none of these
+  parts is structurally justified — only geometrically defined.
+- **Rotor-airflow interference.** The cradle's effect on the flow it sits in is
+  unassessed; see the ground-effect and recirculation notes in
+  `literature/notes/06`.
+- **Cable and restraint routing**, which must not create a parallel force path
+  alongside the cell.
+- **Delivered cell revision** (OQ-017) — the bolt pattern is `candidate_drawing`.
+
+Closing the five rows makes the parts *buildable*. It does not make them
+*accepted*.

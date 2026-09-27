@@ -1,0 +1,6 @@
+parameter,value,unit,evidence_state,source,release_requirement
+cell_end_hole_spacing,15.0,mm,candidate_drawing,"Adafruit PID 5231 80 mm drawing image; longitudinal hole positions 5/20 and 60/75 mm -> 15 mm end-pair spacing. NOT confirmed as the delivered 4540 drawing (the 4540 PDF viewer was unreadable).",Confirm against the delivered 4540 part and its own drawing revision
+cell_end_hole_diameter,4.5,mm,design_choice,"Clearance for the M4x0.7 end noted on the candidate drawing; clearance value chosen, not from a drawing.",Confirm thread designation and fastener stack on the delivered part
+cell_body_width,12.7,mm,candidate_drawing,"Adafruit 4540/4541 product pages and the 5231 candidate image both give a 12.7 mm section.",Measure the delivered part
+adapter_edge_margin,6.0,mm,design_choice,"Chosen so the plate footprint follows from the hole pattern; no load case has been evaluated.",Replace once the signed load cases and a stress check exist
+adapter_thickness,4.0,mm,design_choice,"Chosen for printability and handling; NOT derived from a load case.",Replace once the signed load cases and a stress check exist

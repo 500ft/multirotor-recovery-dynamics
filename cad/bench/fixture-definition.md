@@ -1,5 +1,11 @@
 # Fixture definition — gap inventory (T11, started 2026-09-15)
 
+> **Scope correction, 2026-09-27:** this gap inventory is for the historical
+> EX1103/Gemfan single-motor fixture. The stock V995 uses a whole-aircraft cradle
+> with different interfaces. See the [V995 research and row-disposition note](../../docs/v995-fixture-research-2026-09-27.md)
+> before treating these gaps as the V995 critical path. This notice does not
+> freeze T12 or amend the legacy release checker.
+
 Status: **gap inventory only; schema not frozen**. T12 (field/unit/source-to-criterion
 freeze) is blocked until the relevant D2–D5 reviews land; per
 [DAY4_PLAN.md](../../docs/DAY4_PLAN.md), unknown dimensions and unchosen tolerances

@@ -1,0 +1,22 @@
+{
+  "status": "datasheet_screen_not_installed_calibration",
+  "mass_scenario_kg": 0.05,
+  "mass_evidence": "unverified owner estimate",
+  "standard_gravity_m_s2": 9.80665,
+  "whole_aircraft_hover_scenario_n": 0.4903325,
+  "per_rotor_symmetric_hover_scenario_n": 0.122583125,
+  "target_basis": "exploratory U <= 0.025 F_ref_use",
+  "target_expanded_uncertainty_n": 0.0122583125,
+  "five_kg_full_scale_n": 49.033249999999995,
+  "five_kg_component_bound_n": 0.014709974999999997,
+  "distribution_assumption": "independent symmetric rectangular bounds; k=2; not manufacturer-certified combined uncertainty",
+  "five_kg_three_term_expanded_screen_n": 0.029419949999999997,
+  "five_kg_three_term_relative_to_force_percent": 5.999999999999999,
+  "five_kg_three_term_target_ratio": 2.4,
+  "five_kg_three_term_bound_sum_n": 0.044129924999999987,
+  "five_kg_five_term_expanded_screen_n": 0.04968272531820458,
+  "five_kg_five_term_relative_to_force_percent": 10.132456102380441,
+  "five_kg_zero_temperature_coefficient_n_per_c": 0.014709975,
+  "one_kg_total_budget_percent_fs": 0.125,
+  "one_kg_performance_specification": "not verified; no 4541 or generic TAL220 substitution"
+}

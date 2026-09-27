@@ -30,6 +30,8 @@ jobs:
         run: conda install -y --file cad/requirements.lock
       - name: Regenerate geometry from the registered parameters
         run: python cad/generate.py --parameters cad/bench/parameters.csv --output ${{ runner.temp }}/cad-out
+      - name: Regenerate the V995 fixture geometry (separate register)
+        run: python cad/v995/generate_fixture.py --parameters cad/v995/parameters.csv --output ${{ runner.temp }}/v995-out
       - name: Geometry tests (contract, negative controls, version constraints)
         run: python -m pytest cad/tests -q
       - uses: actions/upload-artifact@v7

@@ -2,6 +2,10 @@
 
 ## Choose a path
 
+- **Learning the project end to end:** [Learning path](LEARNING_PATH.md) — ten
+  modules with defence questions, for the person who has to explain this work
+  rather than review it.
+
 - **Two-minute review:** [README evidence](../README.md#evidence-snapshot) →
   [current results](../Analysis/current-results.md) →
   [bench preparation](../cad/bench/fixture-preparation.md).

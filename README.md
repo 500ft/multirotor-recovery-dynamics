@@ -72,6 +72,7 @@ optional study regeneration and pinned CadQuery environment.
 | [Reading guide](docs/START_HERE.md) | Choose a short review or a technical reproduction |
 | [Current results](Analysis/current-results.md) | Inspect mass, guard, recovery and Monte Carlo conclusions |
 | [Literature review](literature/README.md) | See what is established, what is open, and which repo claims the sources contradict |
+| [Learning path](docs/LEARNING_PATH.md) | Work through the project end to end, with a defence question per module |
 | [Engineering audit](docs/ENGINEERING_AUDIT.md) | See which numbers are derived, which are asserted, and which are bare constants |
 | [Traceability index](docs/TRACEABILITY.md) | Follow any decision to its requirement, reasoning, inputs and validation status |
 | [Data and figures](docs/data-and-figures.md) | Trace plots to inputs, code and evidence states |

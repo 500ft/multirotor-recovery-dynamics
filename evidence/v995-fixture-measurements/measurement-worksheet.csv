@@ -1,0 +1,28 @@
+id,group,quantity,unit,feeds,method,repeats,reading_1,reading_2,reading_3,instrument,datum_or_station,notes
+LC-01,load_cell,Body length overall,mm,confirms 4540 vs 4541 vs 80mm variant,calipers,3,,,,,,"Distinguishes the 75 mm and 80 mm bodies. Decides which drawing applies."
+LC-02,load_cell,Body section width,mm,cell_body_width,calipers,3,,,,,,"Expected ~12.7 mm; confirm it is not a different family."
+LC-03,load_cell,Body section height,mm,context,calipers,3,,,,,,
+LC-04,load_cell,Hole count at end A,count,cell bolt pattern,visual,1,,,,,,"Record which physical end you are calling A and mark it."
+LC-05,load_cell,Hole count at end B,count,cell bolt pattern,visual,1,,,,,,
+LC-06,load_cell,Hole 1 position from end A face,mm,cell_end_hole_spacing,calipers,3,,,,,,"Longitudinal distance along the body."
+LC-07,load_cell,Hole 2 position from end A face,mm,cell_end_hole_spacing,calipers,3,,,,,,"Spacing = LC-07 minus LC-06."
+LC-08,load_cell,Hole 3 position from end A face,mm,cell_end_hole_spacing,calipers,3,,,,,,
+LC-09,load_cell,Hole 4 position from end A face,mm,cell_end_hole_spacing,calipers,3,,,,,,
+LC-10,load_cell,Thread designation end A,text,cell_end_hole_diameter,thread gauge or drawing,1,,,,,,"Do NOT infer pitch from a caliper diameter. Gauge it or read a drawing."
+LC-11,load_cell,Thread designation end B,text,cell_end_hole_diameter,thread gauge or drawing,1,,,,,,"Candidate drawing suggests the two ends differ (M4 vs M5)."
+LC-12,load_cell,Usable thread depth end A,mm,fastener stack,depth gauge,3,,,,,,"Governs screw length; too long bottoms out and preloads the cell."
+LC-13,load_cell,Usable thread depth end B,mm,fastener stack,depth gauge,3,,,,,,
+LC-14,load_cell,Which end is the LOADED end,text,fixture topology,label or drawing,1,,,,,,"Usually marked by an arrow or a label. Getting this wrong inverts the fixture."
+LC-15,load_cell,Printed capacity marking,text,confirms 1 kg vs 5 kg,visual,1,,,,,,"You own both; confirm which physical part you are measuring."
+AC-01,aircraft,Body width at capture station,mm,aircraft_capture_width,calipers,3,,,,,,"NOT rotor-tip span. Across the axis the cradle grips."
+AC-02,aircraft,Body length at capture station,mm,aircraft_capture_length,calipers,3,,,,,,"Must sit between rotor arms without fouling the guards. Record which features bound it."
+AC-03,aircraft,Body height at capture station,mm,cradle_wall_height (input),calipers,3,,,,,,"Used with AC-04 to derive wall height."
+AC-04,aircraft,Rotor plane height above capture surface,mm,cradle_wall_height (input),calipers or depth gauge,3,,,,,,"Wall must retain the airframe and stay clear of this plane."
+AC-05,aircraft,Guard lower edge height above capture surface,mm,cradle_wall_height (input),calipers,3,,,,,,"The wall must also clear the guards, which may sit below the rotor plane."
+AC-06,aircraft,Flight-ready mass with battery,g,replaces the 50 g estimate,scale,3,,,,,,"Currently an unverified owner estimate. Drives the whole force scale and cell choice."
+AC-07,aircraft,Rotor centre coordinates in body axes,mm,later torque work,calipers,1,,,,,,"Not needed for the cradle. Needed before any torque or arm claim."
+BN-01,bench,Anchor spacing centre to centre,mm,bench_anchor_spacing,tape or calipers,3,,,,,,"If no usable anchors exist say so; a new mounting interface must then be designed."
+BN-02,bench,Anchor thread or clearance size,text,bench_anchor_hole_diameter,thread gauge,1,,,,,,"Determines the clearance diameter to register."
+BN-03,bench,Usable surface length,mm,context,tape,1,,,,,,"For clearance and obstruction checks."
+BN-04,bench,Usable surface width,mm,context,tape,1,,,,,,
+BN-05,bench,Nearest obstruction distance from rotor plane,mm,ground effect assessment,tape,1,,,,,,"Floor, wall and ceiling. Whole-vehicle ground effect persists to roughly 2.5-3 rotor diameters."

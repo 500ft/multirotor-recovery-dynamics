@@ -159,6 +159,19 @@ and this study must not be described as satisfying any standard. The thresholds
 remain **assumed**, with sensitivity variants reported per cell; only a drop test
 of the actual vehicle can change that.
 
+**Tilt geometry bound added 2026-09-29 — the evidence label does NOT change.**
+`Analysis/tip_over.py` computes the static tip-over angle, `atan(footprint
+radius / CG height)`: 60 mm bare footprint (`ARM_M`), 62.5–70 mm guarded
+(half the README 125–140 mm envelope), CG at 0.35–0.65 of the 35–45 mm stack
+(EST-GEOM-001, **assumed** — no CAD mass model, DR-CAD-05 deferred). Result:
+**64.0–78.5° bare, 64.9–80.1° guarded**. Both asserted tilt limits (30° / 60°)
+sit inside that bound, so neither asks the vehicle to touch down past the point
+where it rotates over. This is an *upper bound from geometry*, not a derivation
+of 30° or 60°: it says nothing about impact loading, rebound or frangibility,
+and the guarded 60° also rests on the unsupported energy-absorption claim
+(OQ-010). It also does not justify the bare/guarded *difference*, which the
+geometry puts at under 1° at the low end. A drop test can still move the limits.
+
 ## 6. Statistics
 
 Exact one-sided Clopper–Pearson bounds at 95%, reusing the gated implementation

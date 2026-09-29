@@ -22,3 +22,4 @@ EST-REC-008,Total available thrust,3.5,4.2,5.0,N,estimated,Placeholder before pr
 EST-GUARD-001,Radial guard stiffness,500,900,1400,N_per_m,estimated,Placeholder before unit-load analysis,low_increases_deflection,Replace with FEA and load test
 EST-GUARD-002,Stress coefficient,150000,225000,300000,Pa_per_N,estimated,Placeholder before unit-load analysis,high_increases_stress,Replace with linear FEA
 EST-GUARD-003,Repeated-event impact energy,0.02,0.05,0.10,J,estimated,Initial functional-event envelope,high_increases_deflection,Replace with trajectory measurements
+EST-GEOM-001,CG height as fraction of stack height,0.35,0.50,0.65,dimensionless,estimated,No CAD mass model exists (EST-MASS-012; DR-CAD-05 deferred); symmetric split assumed as nominal; bracket reflects bottom-mounted battery vs top-heavy avionics skew,high_increases_risk,Replace with CAD mass model (DR-CAD-05) once vehicle work is promoted

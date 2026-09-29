@@ -25,6 +25,8 @@ the whole justification for the guard/mechanism.
 3. **The tilt limit has no published basis at all.** No sUAS standard specifies
    impact attitude as a pass/fail parameter. It must come from a **tip-over
    calculation on our own guard geometry**, validated by drop test.
+   (Static bound now in `Analysis/tip_over.py`: 64–80° on an assumed CG
+   height, EST-GEOM-001 — bounds the limit from above; does not derive it.)
 4. **A scalar criterion is the wrong shape.** Both 27.725's "greatest probable
    sinking speed" language and the Apollo LM gear criterion are *coupled
    envelopes* over (vertical velocity, horizontal velocity, attitude, attitude

@@ -9,9 +9,9 @@ after release—and identify the measurements needed to test that prediction.
 
 [Start here](docs/START_HERE.md) · [Evidence](#evidence-snapshot) · [Quick start](#quick-start) · [Documentation](#documentation) · [Safety](#safety-and-limits)
 
-![Conceptual sequence from simulated release to pending propulsion measurements and a new fixed-controller recovery evaluation](docs/media/project-overview.svg)
+![Illustration of a guarded micro-UAV rotating after release](docs/media/hero.jpg)
 
-*Conceptual engineering sequence, not a flight demonstration. Measured propulsion
+*AI-generated concept illustration, not a flight demonstration. Measured propulsion
 authority and physical recovery remain pending.*
 
 ## About

@@ -63,6 +63,10 @@ repository.**
 | Load-cell selection 1 kg vs 5 kg | **OQ-012** | installed calibration | **`blocked`** |
 | Static-only force chain | [`bench-acquisition.md` §4b](bench-acquisition.md) | — | `derived` (12.5 ms at 80 SPS) |
 | V995 control access | **OQ-011** | board investigation B01–B04 | **`blocked`** |
+| Platform = stock Veeniix V995 | [`cad/v995/README.md`](../cad/v995/README.md) | — | **owner decision 2026-09-27** |
+| Cell selection (1 kg 4540) | [`cad/v995/README.md`](../cad/v995/README.md) screening table | installed calibration | `asserted` — datasheet screen, **conditional** on an unverified 4540 accuracy class |
+| Cell-end adapter geometry | [`cad/v995/`](../cad/v995/README.md) + `contract.json` | delivered-part inspection (OQ-017) | `derived` from `candidate_drawing` inputs |
+| V995 cradle / base plate | `generate_fixture.py` `NOT_GENERATED` | aircraft + bench inspection | **`blocked`**, reasons recorded |
 
 ## How to use this
 

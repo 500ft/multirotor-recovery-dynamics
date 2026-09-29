@@ -1,5 +1,22 @@
 # Source-backed candidate packet — 2026-09-15 (T01)
 
+
+> **Platform scope, owner decision 2026-09-27.** The physical platform is fixed
+> as the **stock Veeniix V995**. This file and `cad/bench/parameters.csv` describe
+> the **historical EX1103 / Gemfan single-motor stand**, which keeps its own gates
+> and pending rows. Do **not** populate these rows with V995 values. The V995
+> whole-aircraft fixture has its own register at
+> [`cad/v995/`](../v995/README.md).
+
+> **Scope correction, 2026-09-27:** C1–C3 below describe the historical
+> EX1103/Gemfan single-motor stand. The owner has reaffirmed the stock V995 as
+> the continuing physical platform. Its purchased Adafruit 4540/4541 cells and
+> whole-aircraft cradle are covered in the [V995 research note](../../docs/v995-fixture-research-2026-09-27.md).
+> C1 is not the V995 sensor or a purchased-part record. The note transcribes the
+> current 4541 drawing and an 80 mm candidate drawing, and calculates the 5 kg
+> uncertainty screen. The 4540 performance specification remains unverified.
+> Do not transfer the Phidgets hole pattern to either Adafruit cell.
+
 Status: **candidate research only**. Nothing here is an accepted register value, a
 delivered-part identity, or an Owner decision. Every value below is a manufacturer or
 retailer claim pending D2/D4 acceptance and, where fit-critical, delivered-part

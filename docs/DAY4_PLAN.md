@@ -1,5 +1,13 @@
 # Day 4 — decide the measurement route, then earn fixture readiness
 
+> **Platform scope, 2026-09-27:** the owner has reaffirmed the stock Veeniix V995
+> as the continuing physical platform. D1–D6 and T12 below govern the historical
+> single-motor fixture; they are not the V995 whole-aircraft cradle's release
+> contract. See the [V995 scope correction and online research](v995-fixture-research-2026-09-27.md)
+> and the [existing platform capability sheet](../evidence/week-2026-09-19/platform-capabilities.md).
+> Historical decisions and frozen protocol values are retained as historical
+> requirements, not transferred to the V995.
+
 Status: **proposed; Owner decisions pending**. Revised 2026-09-15.
 Supersedes [PR #19](https://github.com/500ft/multirotor-recovery-dynamics/pull/19),
 reviewed at `4a6b0b760751cbff3d72d644a214f3c9f882af0f`.

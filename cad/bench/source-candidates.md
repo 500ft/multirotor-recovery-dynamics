@@ -21,7 +21,7 @@ Status: **candidate research only**. Nothing here is an accepted register value,
 delivered-part identity, or an Owner decision. Every value below is a manufacturer or
 retailer claim pending D2/D4 acceptance and, where fit-critical, delivered-part
 inspection. Sources fetched 2026-09-15; access noted per entry. Governed by
-[DAY4_PLAN.md](../../docs/DAY4_PLAN.md) (T01) and the earlier
+[DAY4_PLAN.md](https://github.com/500ft/multirotor-recovery-dynamics/blob/935a38b5f4d187669ce2f6d0ceb88ef0a8d79c6c/docs/DAY4_PLAN.md) (T01) and the earlier
 [fixture preparation](fixture-preparation.md).
 
 ## C1 — Load cell candidate: Phidgets 3132_0 (existing unselected proposal, extended)

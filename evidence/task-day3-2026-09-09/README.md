@@ -7,7 +7,7 @@ Branch: `task/day-three-20260909`. Scope: Resolve fixture preparation, not measu
 
 Six request-sheet tests cover exact pending-row coverage, a newly added unknown pending row, invalid units, a filled pending value, duplicates and snapshot drift. 29 CAD tests pass. The load-cell choice is sourced and proposed; no fixture geometry, hole pattern or measurement was invented.
 
-See [plan](../../docs/DAY3_PLAN.md) and [primary deliverable](../../cad/bench/fixture-preparation.md). Status is maintained only in [SPRINT_TASKS.csv](../../docs/SPRINT_TASKS.csv); original research/CAD gates remain unchanged. Delivery is a new PR, not an automatic merge or scientific release.
+See [plan](https://github.com/500ft/multirotor-recovery-dynamics/blob/935a38b5f4d187669ce2f6d0ceb88ef0a8d79c6c/docs/DAY3_PLAN.md) and [primary deliverable](../../cad/bench/fixture-preparation.md). Status is maintained only in [SPRINT_TASKS.csv](../../docs/SPRINT_TASKS.csv); original research/CAD gates remain unchanged. Delivery is a new PR, not an automatic merge or scientific release.
 
 ## Verification and reproducibility
 

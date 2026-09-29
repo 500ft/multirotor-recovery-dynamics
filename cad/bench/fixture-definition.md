@@ -8,7 +8,7 @@
 
 Status: **gap inventory only; schema not frozen**. T12 (field/unit/source-to-criterion
 freeze) is blocked until the relevant D2–D5 reviews land; per
-[DAY4_PLAN.md](../../docs/DAY4_PLAN.md), unknown dimensions and unchosen tolerances
+[DAY4_PLAN.md](https://github.com/500ft/multirotor-recovery-dynamics/blob/935a38b5f4d187669ce2f6d0ceb88ef0a8d79c6c/docs/DAY4_PLAN.md), unknown dimensions and unchosen tolerances
 cannot be frozen. Load-path and budget rules follow the plan's R4. Candidate values
 live only in [source-candidates.md](source-candidates.md).
 

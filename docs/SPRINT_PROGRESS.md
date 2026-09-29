@@ -8,7 +8,7 @@ Each omitted or incomplete recommendation is accounted for separately in the cur
 
 ## Day-3 work — 2026-09-09
 
-Delivery update: the preparation was committed as 500ft and pushed; [day-3 PR](https://github.com/500ft/SelfStabilizingDrone/pull/12) is open against main. Initial implementation source: `7b13fa1d314e711fe5ff298cb42c32ef400359ca` (later review/documentation commits are visible in the PR). This supersedes the pre-push stopping state below. Original day-1/day-2 PRs are merged; this new PR is not merged. Resume from the named unresolved project gates in [DAY3_PLAN.md](DAY3_PLAN.md), not from the already completed push step.
+Delivery update: the preparation was committed as 500ft and pushed; [day-3 PR](https://github.com/500ft/SelfStabilizingDrone/pull/12) is open against main. Initial implementation source: `7b13fa1d314e711fe5ff298cb42c32ef400359ca` (later review/documentation commits are visible in the PR). This supersedes the pre-push stopping state below. Original day-1/day-2 PRs are merged; this new PR is not merged. Resume from the named unresolved project gates in [DAY3_PLAN.md](https://github.com/500ft/multirotor-recovery-dynamics/blob/935a38b5f4d187669ce2f6d0ceb88ef0a8d79c6c/docs/DAY3_PLAN.md), not from the already completed push step.
 
 Both reviewed PR layers merged into main; new work starts from `3658f038f115f0c2d831333eed935b13caf032c0` on `task/day-three-20260909`. Six request-sheet tests cover exact pending-row coverage, a newly added unknown pending row, invalid units, a filled pending value, duplicates and snapshot drift. 29 CAD tests pass. The load-cell choice is sourced and proposed; no fixture geometry, hole pattern or measurement was invented.
 

@@ -20,7 +20,7 @@ jobs:
           # Full history: the historical ledger report reads
           # docs/SPRINT_TASKS.csv at HISTORICAL_BASE via `git show`.
           fetch-depth: 0
-      - uses: conda-incubator/setup-miniconda@v3
+      - uses: conda-incubator/setup-miniconda@v4
         with:
           activate-environment: cad-geometry
           python-version: "3.11"

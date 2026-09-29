@@ -94,10 +94,13 @@ prediction registered before any hardware drop lives in
 
 ## Bench acquisition (V995 demonstrator, planned)
 
-Wiring and settings: [`docs/bench-acquisition.md`](bench-acquisition.md). Raw
-captures will live under `evidence/week-<date>/runs/<run_id>/` (one CSV per
-sensor + one manifest) with calibrations under `calibrations/<id>/`; no such run
-exists yet. This chain measures the stock V995, a different platform from the
+Wiring and settings: [`docs/bench-acquisition.md`](bench-acquisition.md). Firmware
+([`Instrumentation/firmware/code.py`](../Instrumentation/firmware/code.py)) and the
+host-side demuxer (`python -m Instrumentation.bench_capture --port ... --out ...`)
+write raw captures under `evidence/week-<date>/runs/<run_id>/` (one CSV per sensor +
+one manifest) with calibrations under `calibrations/<id>/`; no run against real
+hardware exists yet, and a device reset mid-run marks the manifest incomplete rather
+than splicing it. This chain measures the stock V995, a different platform from the
 designed vehicle above — see
 [`evidence/week-2026-09-19/platform-capabilities.md`](../evidence/week-2026-09-19/platform-capabilities.md).
 

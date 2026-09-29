@@ -2,8 +2,13 @@
 
 Status: **proposed topology**, to be checked against the delivered board revisions
 before any wire is placed. Sources are the vendor pinout pages cited in the
-2026-09-20 hardware plan (S1–S11); nothing below is a measurement. Firmware,
-host capture and analysis scripts are the next slice and are not yet in the repo.
+2026-09-20 hardware plan (S1–S11); nothing below is a measurement. Firmware and
+host capture now exist ([`Instrumentation/firmware/code.py`](../Instrumentation/firmware/code.py),
+[`Instrumentation/bench_capture.py`](../Instrumentation/bench_capture.py)) and implement
+this wiring, the settings in §3 and the fail-closed run semantics in §4b — they have
+**not** run against real hardware; §4 bring-up is still owner work, one step at a
+time, starting with the power-off continuity check. Analysis scripts that consume a
+completed run are a later slice.
 
 Platform: bench chain for the Veeniix V995 demonstrator
 ([`evidence/week-2026-09-19/platform-capabilities.md`](../evidence/week-2026-09-19/platform-capabilities.md)).

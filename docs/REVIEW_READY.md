@@ -4,7 +4,7 @@
 
 Six request-sheet tests cover exact pending-row coverage, a newly added unknown pending row, invalid units, a filled pending value, duplicates and snapshot drift. 29 CAD tests pass. The load-cell choice is sourced and proposed; no fixture geometry, hole pattern or measurement was invented.
 
-Review [DAY3_PLAN.md](DAY3_PLAN.md), [deliverable](../cad/bench/fixture-preparation.md), and [commands/evidence](../evidence/task-day3-2026-09-09/README.md). Base: `3658f038f115f0c2d831333eed935b13caf032c0`; new PR branch: `task/day-three-20260909`. No original Owner/External gate is closed. Final source identity is the PR head, reported in its delivery record rather than embedded circularly here.
+Review [DAY3_PLAN.md](https://github.com/500ft/multirotor-recovery-dynamics/blob/935a38b5f4d187669ce2f6d0ceb88ef0a8d79c6c/docs/DAY3_PLAN.md), [deliverable](../cad/bench/fixture-preparation.md), and [commands/evidence](../evidence/task-day3-2026-09-09/README.md). Base: `3658f038f115f0c2d831333eed935b13caf032c0`; new PR branch: `task/day-three-20260909`. No original Owner/External gate is closed. Final source identity is the PR head, reported in its delivery record rather than embedded circularly here.
 
 No guessed motor-hole layout, caliper readings, calibrated thrust, vehicle radius or fixture approval.
 
@@ -28,7 +28,7 @@ and STEP round-trip metric checks are hardened with reproduced regressions.
 [DR-CAD-10 geometry-tooling handoff](../evidence/task-2026-09-09/README.md) adds a parameter-driven
 CadQuery generator, a reviewed geometry contract with 12 fail-closed tests, and a pinned
 toolchain. It regenerates model geometry from the register; it is not a fixture design, part or
-measurement. Geometry CI awaits the owner applying `ci-proposed/cad-geometry-workflow.patch`.
+measurement. Geometry CI runs in [`.github/workflows/cad-geometry.yml`](../.github/workflows/cad-geometry.yml).
 
 ## Follow-up — 2026-09-08
 

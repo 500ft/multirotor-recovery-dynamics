@@ -21,7 +21,7 @@ Where things go (no new register is created):
 | What is physically present | [`hardware-inventory.csv`](hardware-inventory.csv) (this folder) |
 | Raw non-powered readings, one row per reading | [`interface-observations.csv`](interface-observations.csv) (this folder) |
 | Bench sketch: origin, axes, anchors, obstructions, usable volume | `bench-layout.md` (this folder; create on return) |
-| Accepted numeric inputs | `cad/bench/parameters.csv` only, via the existing D1–D5 route in [`docs/DAY4_PLAN.md`](../../docs/DAY4_PLAN.md) |
+| Accepted numeric inputs | `cad/bench/parameters.csv` only, via the existing D1–D5 route in [`docs/DAY4_PLAN.md`](https://github.com/500ft/multirotor-recovery-dynamics/blob/935a38b5f4d187669ce2f6d0ceb88ef0a8d79c6c/docs/DAY4_PLAN.md) |
 | Owner decisions D1–D6 | `cad/bench/owner-inputs.md` (create only to record an actual decision) |
 
 ## Session A–D (≈2–3 h at the bench)

@@ -1,37 +1,49 @@
 # Start here — Multirotor Recovery Dynamics
 
-## Choose a path
+The [README](../README.md) is the overview and the [roadmap](../ROADMAP.md) is
+the plan. This guide is for reading the work quickly or rerunning it.
 
-- **Two-minute review:** [README results](../README.md#simulation-results) →
-  [current results](../Analysis/current-results.md) →
-  [bench preparation](../cad/bench/fixture-preparation.md).
-- **Technical review:** trace one [figure](data-and-figures.md) to its source,
-  inspect the [measured-authority contract](specs/measured-authority-gate/),
-  then reproduce the relevant check.
-- **Contribution:** read [Contributing](../CONTRIBUTING.md), select a bounded
-  defect or source correction, and preserve the registered evidence requirements.
+## Reading paths
+
+| If you have | Read |
+| --- | --- |
+| Two minutes | [README results](../README.md#simulation-results), then [current results](../Analysis/current-results.md) |
+| Half an hour | The [survivable-set design](specs/survivable-set/design.md), then one figure traced through [data and figures](data-and-figures.md) |
+| A review to do | The [review index](REVIEW_READY.md) |
+| Hardware to set up | [V995 fixture notes](../cad/v995/README.md), the [measurement worksheet](../evidence/v995-fixture-measurements/README.md) and the [bench wiring and bring-up](bench-acquisition.md) |
+
+## Two vehicles, kept apart
+
+The simulation work used a designed 130–165 g vehicle (EX1103 motors, Kakute H7
+flight controller, 2S battery). It was never built. Its numbers live in
+`Engineering Data/`, `cad/bench/` and the analysis code, with its own gates
+(7.0 V, six motors, 0.020 N·m).
+
+The physical platform since 2026-09-27 is a stock Veeniix V995, about 50 g.
+It has its own register in `cad/v995/` and no values are copied from the
+designed vehicle. Its first measured values will go into a new
+`Engineering Data/platform_v995.csv`.
 
 ## Software checks — Python 3.11
 
-Use the [README installation](../README.md#quick-start), then run from the root:
+Set up as in the [README](../README.md#quick-start), then from the repository
+root:
 
 ```sh
 python cad/input_requests.py --check
 python -m unittest discover -s Analysis/tests -v
+python -m unittest discover -s Instrumentation/tests -v
 ```
 
-The full suite is longer than the quickstart; the recorded baseline took about
-2.5 minutes in the local environment. Runtime is not a hardware-performance claim.
-See [CI](../.github/workflows/ci.yml) for the maintained sequence.
+The full analysis suite takes a few minutes. [CI](../.github/workflows/ci.yml)
+runs the same sequence. Real inputs belong in the parameter registers
+([designed vehicle](../cad/bench/parameters.csv), [V995](../cad/v995/parameters.csv)),
+never in the derived request sheet.
 
-Input-sheet generation cannot fill an unknown dimension or change provenance.
-The [canonical register](../cad/bench/parameters.csv), not the derived request
-sheet, is where evidence-backed inputs belong.
+## CAD — pinned environment
 
-## Nominal CAD — separate pinned environment
-
-Use [cad/requirements.lock](../cad/requirements.lock), which pins direct
-packages but is not a complete transitive/platform lock:
+The pins in [cad/requirements.lock](../cad/requirements.lock) cover direct
+packages only, not the whole dependency tree:
 
 ```sh
 conda create -n recovery-cad -c conda-forge --strict-channel-priority --file cad/requirements.lock
@@ -39,42 +51,33 @@ conda activate recovery-cad
 python -m pytest cad/tests -q
 ```
 
-The [CAD workflow](../.github/workflows/cad-geometry.yml) regenerates and uploads
-the nominal envelope for inspection. The [generator](../cad/generate.py) refuses
-pending inputs needed by supported geometry; its current motor body is not a
-mounting pattern, propeller or assembled fixture.
+The [CAD workflow](../.github/workflows/cad-geometry.yml) regenerates the
+geometry and uploads it for inspection. For the V995, only the load-cell end
+adapter builds today; the cradle and base plate build once the worksheet is
+filled.
 
-## Optional simulation regeneration
+## Regenerating the simulations
 
-Use a disposable checkout at a recorded revision because these commands
-overwrite generated JSON and figures:
+These overwrite the committed JSON and figures, so use a spare checkout at a
+recorded revision:
 
 ```sh
 python -m Analysis.run_release_recovery
 python -m Analysis.monte_carlo_recovery
 ```
 
-Use [the figure guide](data-and-figures.md) to select a smaller calculator or
-inspect committed outputs instead. The 4% placeholder result and the 300/300
-revised prediction differ in controller behavior as well as authority assumptions;
-they are not a controlled causal test of torque alone.
+[Data and figures](data-and-figures.md) lists smaller single-study commands.
+The 4% placeholder result and the 300 of 300 mixer prediction differ in
+controller as well as torque, so they are not a controlled test of torque
+alone.
 
-## What the next measurement needs
+## Before any powered work
 
-[Fixture preparation](../cad/bench/fixture-preparation.md) distinguishes vendor
-lookups, physical observations and design decisions. The proposed load cell
-is not an installed/calibrated component. The stand calibration lever and
-vehicle `arm_m` are different quantities.
+Nothing in this guide authorises powering anything. Go through
+[Safety](../Safety/README.md) and the
+[bench checklist](../Instrumentation/propulsion-bench-safety-checklist.md)
+with the person responsible, and start the bench bring-up with the power-off
+continuity check in [bench-acquisition.md](bench-acquisition.md).
 
-Freeze the fixture's dimensional/uncertainty contract before modeling or loading
-the measurement assembly. Keep the registered 7.0 V bench condition, individual
-thrust observations, installed geometry and fixed-controller evaluation distinct.
-
-No instruction here permits powered work. Review [Safety](../Safety/README.md)
-and the [propulsion-bench checklist](../Instrumentation/propulsion-bench-safety-checklist.md)
-with the responsible operator. The [review index](REVIEW_READY.md) and
-[task ledger](SPRINT_TASKS.csv) retain actual completion status.
-
-## September 11 completion correction
-
-Read the [item-by-item correction](COMPLETION_RECONCILIATION.md) before interpreting a prepared protocol, software check, or search export as a completed research gate. It identifies actual deliverables and the remaining measurement, review, or source-reading work separately.
+The September 11 [completion correction](COMPLETION_RECONCILIATION.md)
+explains which early deliverables were preparation rather than finished work.

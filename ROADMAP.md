@@ -47,7 +47,7 @@ nothing to run a controller on.
 
 | # | Step | Who | Done when |
 |---|---|---|---|
-| 1 | Weigh the V995 ready to fly. Measure the body width and length where the cradle grips it, and the body height and rotor-plane offset for the wall height. Measure the bench anchor spacing and bolt size. Check which revision of the load cell arrived (OQ-017). See [cad/v995](cad/v995/README.md) for how | Owner | Dimensions entered in `cad/v995/parameters.csv`; mass and cell revision recorded (the agent starts `Engineering Data/platform_v995.csv` for them). **Current step.** |
+| 1 | Fill the [measurement worksheet](evidence/v995-fixture-measurements/README.md): 27 rows in one unpowered bench session. That covers the delivered load cell (15 rows, which also settles OQ-017), the aircraft including its flight-ready mass (7 rows) and the bench (5 rows) | Owner | Worksheet committed; the agent then fills `cad/v995/parameters.csv` and starts `Engineering Data/platform_v995.csv` for the mass. **Current step.** |
 | 2 | Decide whether the 1 kg cell is good enough at the measured mass | Agent | Screening updated with the real mass |
 | 3 | Generate the cradle and base plate, check them against the oracle, export STEP | Agent | Parts accepted |
 | 4 | Print the parts, wire the bench chain, and do the bring-up in [docs/bench-acquisition.md](docs/bench-acquisition.md), starting with the power-off continuity check. Calibrate with known masses | Owner | Calibration record committed |

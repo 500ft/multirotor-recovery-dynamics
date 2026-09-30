@@ -12,9 +12,10 @@ Veeniix V995 micro-quad.
 [Results](#simulation-results) · [Roadmap](ROADMAP.md) ·
 [Quick start](#quick-start) · [Safety](#safety-and-limits)
 
-![Illustration of a guarded micro-UAV rotating after release](docs/media/hero.jpg)
+![Simulated altitude loss and recoverable tumble rate across component tiers](Figures/release_recovery_envelope.png)
 
-*Concept illustration (AI-generated), not a flight test.*
+*Simulated altitude lost against initial tumble rate, by component tier, with
+estimated inputs. [Figure provenance](docs/data-and-figures.md).*
 
 ## About
 
@@ -50,11 +51,6 @@ motor failing in flight. A first diagnostic of the in-flight case showed the
 effect of keeping the healthy motors running changes sign from case to case.
 The details are in [current results](Analysis/current-results.md).
 
-![Simulated altitude loss and recoverable tumble rate across component tiers](Figures/release_recovery_envelope.png)
-
-*Simulated altitude lost against initial tumble rate, by component tier, with
-estimated inputs. [Figure provenance](docs/data-and-figures.md).*
-
 ## Hardware so far
 
 - **Bench chain.** A QT Py RP2040 reads a load cell through an NAU7802
@@ -86,11 +82,13 @@ regeneration and the pinned CadQuery environment.
 
 ## What's next
 
-Weigh the V995 and take five measurements, then build the cradle and measure
-thrust and power against throttle. After that comes an airborne logger board to
-record what the stock controller does when the drone is released. The
-[roadmap](ROADMAP.md) has the steps; its finish line is a proposal waiting for
-the owner to confirm.
+Fill the [measurement worksheet](evidence/v995-fixture-measurements/README.md):
+27 readings in one unpowered bench session, covering the delivered load cell,
+the aircraft (including its flight-ready mass) and the bench. Then build the
+cradle and measure thrust and power against throttle. After that comes an
+airborne logger board to record what the stock controller does when the drone
+is released. The [roadmap](ROADMAP.md) has the steps; its finish line is a
+proposal waiting for the owner to confirm.
 
 ## Safety and limits
 

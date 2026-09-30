@@ -1,128 +1,104 @@
-# Sprint progress — SelfStabilizingDrone
+# Progress log
 
-## 2026-09-11 — evidence-gap correction
+What changed and when, newest first, one line per change that matters. The
+plan is in the [roadmap](../ROADMAP.md). The earlier, longer version of this
+log is kept at
+[commit 246d163](https://github.com/500ft/multirotor-recovery-dynamics/blob/246d163dcd8ce25242baee585e6ea1d05a53e7f4/docs/SPRINT_PROGRESS.md).
 
-The [current correction](COMPLETION_RECONCILIATION.md) supersedes any interpretation that earlier preparation closed a physical, approval, or source-review gate. Work is on `fix/evidence-gaps-20260911` from current renamed main; historical entries below retain their original dates and PR snapshots. The original day-3 and presentation PRs are now merged, but this correction is a new reviewable change, not an asserted merge or publication.
+## Week of 2026-09-28
 
-Each omitted or incomplete recommendation is accounted for separately in the current correction and existing task ledgers. No owner signature, measurement, PI conversation, imagery judgment, disclosure approval or independent review was fabricated. Exact tests, scope and next inputs are linked from the correction record; actual delivery state is established by its PR.
+- **09-30** Proposed finish line for the V995: bench thrust and power, logged
+  releases with an airborne logger board, and a comparison with the model.
+  Waiting for the owner to confirm. README rewritten
+  ([#51](https://github.com/500ft/multirotor-recovery-dynamics/pull/51)).
+- **09-29** Bench firmware for the QT Py RP2040 (load cell through an NAU7802,
+  INA260 power monitor, LIS3DH accelerometer) and host capture code. A device
+  reset mid-run marks the run incomplete rather than splicing it. Tested on
+  synthetic serial output, not yet on hardware
+  ([#44](https://github.com/500ft/multirotor-recovery-dynamics/pull/44)).
+- **09-29** Static tip-over bound for the landing criterion: 64–80° on an
+  assumed CG height, so the 30° and 60° limits sit inside it
+  ([#45](https://github.com/500ft/multirotor-recovery-dynamics/pull/45)).
+- **09-29** V995 whole-aircraft fixture: its own parameter register, a
+  generator and a contract. The load-cell end adapter builds; the cradle and
+  base plate wait on five measurements
+  ([#41](https://github.com/500ft/multirotor-recovery-dynamics/pull/41)).
+- **09-29** The study's primary cells can't show a scenario effect: every
+  trajectory fails the binary landing criterion in every arm, so the paired
+  comparison is empty by saturation, not by agreement
+  ([#40](https://github.com/500ft/multirotor-recovery-dynamics/pull/40)).
 
-## Day-3 work — 2026-09-09
+## Week of 2026-09-21
 
-Delivery update: the preparation was committed as 500ft and pushed; [day-3 PR](https://github.com/500ft/SelfStabilizingDrone/pull/12) is open against main. Initial implementation source: `7b13fa1d314e711fe5ff298cb42c32ef400359ca` (later review/documentation commits are visible in the PR). This supersedes the pre-push stopping state below. Original day-1/day-2 PRs are merged; this new PR is not merged. Resume from the named unresolved project gates in [DAY3_PLAN.md](https://github.com/500ft/multirotor-recovery-dynamics/blob/935a38b5f4d187669ce2f6d0ceb88ef0a8d79c6c/docs/DAY3_PLAN.md), not from the already completed push step.
+- **09-27** Owner decision: the physical platform is a stock Veeniix V995. The
+  designed vehicle's gates (7.0 V, six motors, 0.020 N·m) do not carry over
+  ([V995 fixture notes](../cad/v995/README.md)).
+- **09-26** In-flight failure scenario added next to the release scenario.
+  Keeping the healthy motors running changes the impact speed by −0.38 to
+  +0.21 m/s depending on the case
+  ([#38](https://github.com/500ft/multirotor-recovery-dynamics/pull/38)).
+  Scope correction reconciled and the scenario labelled
+  ([#37](https://github.com/500ft/multirotor-recovery-dynamics/pull/37)).
+- **09-26** Engineering traceability audit and decision index
+  ([#39](https://github.com/500ft/multirotor-recovery-dynamics/pull/39)).
+- **09-24** Critique corrections, several to the repository's own earlier
+  review ([#36](https://github.com/500ft/multirotor-recovery-dynamics/pull/36)).
+- **09-24** Paired comparisons. The guard does not merely fail to help: it
+  lost 69 of the 76 trials where the two designs differed. The spin-aware
+  controller won none of its discordant pairs
+  ([#35](https://github.com/500ft/multirotor-recovery-dynamics/pull/35)).
+- **09-24** Parachute inflation time modelled: it saves 0 of 2,000 runs in
+  every case, and needs about 10.5 m of drop against a tallest case of 6 m
+  ([#34](https://github.com/500ft/multirotor-recovery-dynamics/pull/34)).
+- **09-22** Literature review: 81 verified references, a claim ledger and a
+  novelty assessment ([#26](https://github.com/500ft/multirotor-recovery-dynamics/pull/26)).
+- **09-22** V995 identity, capability sheet, parts inventory and bench wiring
+  sheet ([#24](https://github.com/500ft/multirotor-recovery-dynamics/pull/24)).
+  Claim audit of findings F01–F10 and the bench intake packet
+  ([#25](https://github.com/500ft/multirotor-recovery-dynamics/pull/25)).
+- **09-22** Study A2 (a spin-aware controller variant) and a registered
+  drop-test prediction ([#22](https://github.com/500ft/multirotor-recovery-dynamics/pull/22)).
 
-Both reviewed PR layers merged into main; new work starts from `3658f038f115f0c2d831333eed935b13caf032c0` on `task/day-three-20260909`. Six request-sheet tests cover exact pending-row coverage, a newly added unknown pending row, invalid units, a filled pending value, duplicates and snapshot drift. 29 CAD tests pass. The load-cell choice is sourced and proposed; no fixture geometry, hole pattern or measurement was invented.
+## Week of 2026-09-14
 
-The [evidence record](../evidence/task-day3-2026-09-09/README.md) contains checks and limits. All 91 existing analysis tests passed in 143.964 seconds, alongside 29 CAD tests. Work is locally verified and not yet recorded here as pushed/merged. Current edits belong to this task; original checkouts were preserved. Next: commit the bounded change and open the new PR; preserve all stated external gates.
+- **09-16** Survivable-set study: after a partial loss of propulsion, which
+  design package gives a survivable landing, judged by a preregistered impact
+  criterion ([#21](https://github.com/500ft/multirotor-recovery-dynamics/pull/21)).
+- **09-15** Source candidates and a gap inventory for the single-motor bench
+  fixture ([#20](https://github.com/500ft/multirotor-recovery-dynamics/pull/20)).
 
-## Hosted tooling acceptance — 2026-09-09
+## Week of 2026-09-07
 
-DR-CAD-10 is now **done**: hosted geometry and existing CI passed for source
-`82a652bd615f17862dbeed326828289b2af73b58`. The uploaded STEP was downloaded, hash-checked,
-reimported and checked for one solid and contracted volume. See
-[hosted checks and artifact identity](../evidence/review-2026-09-09/hosted-verification.json). This supersedes the
-intermediate in-progress statements below. Owner/physical gates remain open.
+- **09-13** Bench-fixture geometry contract, then tightened twice
+  ([#15](https://github.com/500ft/multirotor-recovery-dynamics/pull/15),
+  [#16](https://github.com/500ft/multirotor-recovery-dynamics/pull/16),
+  [#17](https://github.com/500ft/multirotor-recovery-dynamics/pull/17)).
+- **09-10 to 09-12** Sourced bench inputs and fixture requirements; blockers
+  made explicit ([#12](https://github.com/500ft/multirotor-recovery-dynamics/pull/12),
+  [#14](https://github.com/500ft/multirotor-recovery-dynamics/pull/14)).
+- **09-11** README and presentation rewrite
+  ([#13](https://github.com/500ft/multirotor-recovery-dynamics/pull/13)).
+- **09-09** CAD input register and geometry CI for the motor envelope
+  ([#10](https://github.com/500ft/multirotor-recovery-dynamics/pull/10),
+  [#11](https://github.com/500ft/multirotor-recovery-dynamics/pull/11)).
+- **09-07** Mass numbers reconciled (155 g against 165 g) and gated by tests;
+  CAD part list; wire routing table
+  ([#8](https://github.com/500ft/multirotor-recovery-dynamics/pull/8),
+  [#5](https://github.com/500ft/multirotor-recovery-dynamics/pull/5) to
+  [#7](https://github.com/500ft/multirotor-recovery-dynamics/pull/7),
+  [#9](https://github.com/500ft/multirotor-recovery-dynamics/pull/9)).
+- **09-06** Measured-authority evidence checks hardened
+  ([#4](https://github.com/500ft/multirotor-recovery-dynamics/pull/4)).
 
+## Week of 2026-08-31
 
-## 2026-09-09 — adversarial CAD review amendment
+- **09-04** Mass rollup synced with the committed budget and gated by tests
+  ([#1](https://github.com/500ft/multirotor-recovery-dynamics/pull/1),
+  [#2](https://github.com/500ft/multirotor-recovery-dynamics/pull/2)).
 
-The original day-2 completion statement below was premature: a proposed workflow
-is not running CI. DR-CAD-10 is now `in_progress` pending a green hosted CAD job.
-The workflow is installed and existing CI also targets day-1 stack bases. Current
-authentication includes workflow permission; the old restriction is historical.
+## Before September
 
-Baseline 12 CAD tests passed. Eleven regression cases then failed on the
-original implementation: nonfinite numeric inputs, populated pending/blank states,
-duplicate parameter rows, three unchecked dependency versions, and two undetected
-STEP round-trip metric changes. Minimal fixes produce 23 passing CAD tests.
-The direct-package constraints are not a platform/transitive build lock.
-See [review evidence](../evidence/review-2026-09-09/README.md).
-Owner gates, recorded dimensions, registered thresholds, original model exports,
-and the historical sprint ledger are unchanged. No fabrication or measurement.
-Next action: push the amended PR, observe both hosted jobs, then close only the
-tooling task if its installed geometry job passes.
-
-## 2026-09-09 — DR-CAD-10 code-CAD regeneration and geometry tests (historical initial handoff)
-
-Completed the day-2 CAD tooling task. CadQuery is installed in an isolated environment and
-pinned in [`cad/requirements.lock`](../cad/requirements.lock) only after a STEP export/reimport
-smoke test. [`cad/generate.py`](../cad/generate.py) regenerates the `motor_envelope` family from
-the registered parameters and refuses anything missing, pending, mis-united or invalid;
-[12 tests](../cad/tests/test_geometry.py) hold it to [`cad/contract.json`](../cad/contract.json)
-and prove failure on every bad-input class the task names. Geometry CI is shipped as an
-appliable patch under `ci-proposed/` because the PR token lacks workflow scope. No CAD model of a
-fixture, no physical part and no owner approval; owner gates are unchanged. Sole status is in
-[CAD_TASKS.csv](CAD_TASKS.csv). [Verification](../evidence/task-2026-09-09/README.md).
-Branch `task/priority-two-20260909`, stacked on the day-1 branch.
-Next check: `python -m pytest cad/tests -q`.
-
-## 2026-09-08 — DR-CAD-01 input register
-
-Completed the existing highest-priority ready CAD-input task; its sole status is
-in [CAD_TASKS.csv](CAD_TASKS.csv), not a duplicate sprint row. Historical sprint
-CSV remains byte-preserved. [Inputs](../cad/bench/design-inputs.md) and
-[verification](../evidence/task-2026-09-08/README.md) distinguish design/vendor
-values from unavailable fit/measurement inputs. No CAD model, physical test or
-owner approval. DR-CAD-10 is now ready for a later software tooling task; owner
-interface approval still blocks real geometry acceptance and fabrication.
-Branch `task/priority-one-20260908`; PR records committed/pushed identity.
-Next check: `python -m unittest Analysis.tests.test_bench_inputs -v`.
-
-## 2026-09-06 — Reviewer-driven CAD amendment
-
-This entry supersedes the earlier CAD allocation and readiness wording. The same CAD PR is now draft, pending the owner planning-ledger placement decision. [Review disposition](CAD_REVIEW_DISPOSITION.md) records that block; [CAD_PLAN.md](CAD_PLAN.md) and [CAD_TASKS.csv](CAD_TASKS.csv) contain revised priorities, separate tooling estimates and explicit parked work. No CAD model or new measurement was produced. Original integrity-sprint tasks/evidence remain unchanged. Next work is limited to active input-register tasks and unresolved owner decisions, not the parked portfolio-wide CAD program.
-
-## 2026-09-06 — CAD task amendment
-
-Added [individual CAD work orders](CAD_PLAN.md) and [CAD_TASKS.csv](CAD_TASKS.csv), separating component modeling, fixtures, inspection and release deliverables. This is planning only: no CAD or physical task is complete. The original sprint ledger and evidence are unchanged. CAD branch: `plan/cad-tasks-20260906`; the PR supplies the committed source identity. Next CAD action: the first input-register task in the CAD ledger; owner-gated successors remain blocked. Verification of this amendment is recorded in [CAD_PLAN_CHECKS.md](CAD_PLAN_CHECKS.md).
-
-Task status authority: [SPRINT_TASKS.csv](SPRINT_TASKS.csv).
-
-## 2026-09-05 — preparation and baseline
-
-- Isolated checkout `/Users/redhose/Developer/research-sprints/2026-09-05/SelfStabilizingDrone`; branch `sprint/evidence-integrity-20260905`, base `45da9be1a9647ce39ae18e3ea2494d965ee827e8`; initially clean.
-- Read execute-and-test and quality-gates instructions; found unittest in CI, no configured lint/typecheck/build.
-- Reproduced positive-infinite torque PASS using all 30 grid rows. This is a product defect, not a dependency error.
-- Full baseline suite completed: 69 tests in 119.355s, exit 0. NumPy 2.1.1 and Matplotlib 3.10.1 observed.
-- Proposed six-day 30h roadmap saved. No behavior changed; waiting for parent to present the roadmap and authorize implementation continuation.
-- Owner measurement evidence and facility readiness remain absent. Preparing requirements is not measurement, outreach, or approval.
-- Next action: write failing regression when parent gives GO.
-- At preparation checkpoint no commit/push; only sprint records were new.
-
-## 2026-09-05 to 2026-09-06 — authorized implementation and partial handoff
-
-- Parent presented roadmaps and gave GO. Rechecked the isolated checkout on
-  September 6: same branch/base, only this sprint's changes; no original-owner
-  checkout edits.
-- DR-S03/S04: test-first finite/sign validation, unique observation IDs,
-  six-motor coverage per grid, hashed raw/derived/calibration/uncertainty/
-  derivation artifacts, declared reviewer/coverage, uncertainty subtraction.
-  Synthetic-labeled data returns DEVELOPMENT_ONLY; caller-provided labels and
-  review strings do not authenticate physical data.
-- DR-S05: corrected Scenario C's joint authority/controller interpretation;
-  static authority and empirical quantiles no longer imply dynamic validation
-  or confidence-qualified population coverage. Preserved 0.020 N·m and
-  962/1,000 requirements.
-- DR-S06: real module CLI tested; exit 0 PASS, 1 FAIL, 2 INCONCLUSIVE, 3
-  DEVELOPMENT_ONLY; strict JSON output; old three-column input is now
-  intentionally INCONCLUSIVE. Input format and owner intake are documented.
-- DR-S07: froze code/test hashes and ten expected synthetic CLI judgments
-  before executing the additional scenario script; 10/10 matched, exit 0.
-  This is developer evidence, not independent or physical evaluation. Earlier
-  acquisition-tolerance endpoint failure was fixed test-first and retained as
-  development material. No physical gate or general accuracy claim follows.
-- Final full suite: 86 tests in 128.281s, exit 0. Focused suite21/21; compile,
-  diff check, and Markdown links passed. Detailed commands/results:
-  [verification](../evidence/sprint-2026-09-05/verification.md).
-- DR-S08: review packet assembled. DR-S02 and DR-S09 remain blocked on actual
-  Owner evidence/readiness and human feedback. No outreach, procurement,
-  hardware operation, scheduling, commit, push, publication, or deployment.
-- The 30 hours are planned workload estimates, not a claim that 30 clock hours
-  elapsed in this session. Agent-owned bounded software deliverables completed;
-  hardware/data/reviewer lead times are not compressed.
-- HEAD remains `45da9be1a9647ce39ae18e3ea2494d965ee827e8`; branch
-  `sprint/evidence-integrity-20260905`. Eight tracked source/docs files modified
-  plus new sprint/evidence/contract documents. Candidate explicitly uncommitted.
-- Next Agent action: parent independently runs
-  `python -m unittest discover -s Analysis/tests -v` from this checkout and
-  reviews `docs/REVIEW_READY.md`. Next Owner task: DR-S02 evidence intake;
-  no further measured-result work until that dependency is genuinely supplied.
+Repository started 2026-05-06 as SelfStabilizingDrone: the 6-DoF release and
+recovery model, the component tiers, the Monte Carlo sweeps (4% recovery with
+placeholder torque; 300 of 300 with the mixer model and revised controller) and
+the guard analysis.

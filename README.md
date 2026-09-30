@@ -27,9 +27,9 @@ Monte Carlo sweeps over those variations and judges each case against a
 survivable-landing criterion.
 
 The simulation work used a designed 130–165 g vehicle with estimated and catalog
-inputs. In September the physical platform became a stock V995 (about 50 g,
-stock board and transmitter), and the bench and CAD work now target that
-aircraft. Values are never copied between the two: the V995 has its own
+inputs. The physical platform is now a stock V995 with its original board and
+transmitter. Its flight-ready mass still needs to be weighed, and the bench and
+CAD work target that aircraft. The V995 has its own
 parameter register and its own gates.
 
 ## Simulation results
@@ -45,11 +45,12 @@ All of these use estimated inputs. None has been checked against hardware.
 | One rotor out? | Marginal at 2 rad/s tumble, unrecoverable at 6 rad/s |
 | Two adjacent rotors out? | Nothing survives in any tested case |
 
-One caveat applies to every rotor-out number. The simulator cuts all four
-motors until the failure is detected, which is closer to a release than to a
-motor failing in flight. A first diagnostic of the in-flight case showed the
-effect of keeping the healthy motors running changes sign from case to case.
-The details are in [current results](Analysis/current-results.md).
+The rotor-out results above use a release/startup scenario that cuts all four
+motors during detection and startup. A new comparison ran 7,200 trajectories
+with the healthy motors held at their previous thrust after a fault. All 8
+primary comparisons distinguish the scenarios: one-rotor-loss cases get worse,
+while the two-opposite-rotor and reduced-authority cases improve. These results
+use the historical estimated aircraft. See the [new scenario results](Analysis/current-results.md#scenario-comparison-with-selected-cases).
 
 ## Hardware so far
 
@@ -59,8 +60,10 @@ The details are in [current results](Analysis/current-results.md).
   have not run on hardware yet. [Wiring and bring-up](docs/bench-acquisition.md).
 - **CAD.** The load-cell end adapter is generated and checked. The cradle that
   holds the whole V995 on the load cell, and the base plate under it, have
-  working generators that are waiting on five measurements of the aircraft and
-  the bench. [V995 fixture](cad/v995/README.md).
+  working generators waiting on the [measurement worksheet](evidence/v995-fixture-measurements/README.md).
+  It has 15 load-cell rows, 7 aircraft rows and 5 bench rows. Those readings
+  supply five pending CAD parameters and confirm the delivered cell's mounting
+  pattern. [V995 fixture](cad/v995/README.md).
 
 ## Quick start
 
@@ -83,7 +86,7 @@ regeneration and the pinned CadQuery environment.
 ## What's next
 
 Fill the [measurement worksheet](evidence/v995-fixture-measurements/README.md):
-27 readings in one unpowered bench session, covering the delivered load cell,
+27 rows in one unpowered bench session, covering the delivered load cell,
 the aircraft (including its flight-ready mass) and the bench. Then build the
 cradle and measure thrust and power against throttle. After that comes an
 airborne logger board to record what the stock controller does when the drone

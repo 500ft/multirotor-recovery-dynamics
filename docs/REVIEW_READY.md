@@ -13,13 +13,20 @@ Nothing here has had an independent review, and nothing has been measured.
    [design](specs/survivable-set/design.md)). The guard loses 69 of 76
    discordant paired trials, the parachute needs about 10.5 m, and two adjacent
    rotors out is unrecoverable. Worth checking: the scenario caveat (rotor-out
-   cases model a release, not an in-flight failure) and whether the binary
-   landing criterion can resolve anything in the primary cells.
-2. **The V995 bench chain** ([wiring and bring-up](bench-acquisition.md),
+   cases model a release, not an in-flight failure).
+2. **Scenario 02** ([registration](specs/survivable-set/scenario-02.md),
+   [results](../Analysis/current-results.md#scenario-comparison-with-selected-cases)).
+   The follow-up that answers the saturation problem: four new cases, 7,200
+   trajectories, all eight primary comparisons distinguished. Worth checking:
+   that the registration commit (`1546c69`) precedes the results commit, that
+   the recorded registration hash matches, and the reading of the exact paired
+   interval (it concerns which arm wins among discordant pairs, not the size of
+   the pass-rate change).
+3. **The V995 bench chain** ([wiring and bring-up](bench-acquisition.md),
    [firmware](../Instrumentation/firmware/code.py),
    [capture](../Instrumentation/bench_capture.py)). Worth checking: the wiring
    table against the delivered boards before any wire is placed.
-3. **The V995 fixture** ([notes](../cad/v995/README.md)). Worth checking:
+4. **The V995 fixture** ([notes](../cad/v995/README.md)). Worth checking:
    whether the 1 kg load cell can resolve the target force at a mass around
    50 g, once the aircraft is weighed.
 

@@ -48,9 +48,10 @@ All of these use estimated inputs. None has been checked against hardware.
 The rotor-out results above use a release/startup scenario that cuts all four
 motors during detection and startup. A new comparison ran 7,200 trajectories
 with the healthy motors held at their previous thrust after a fault. All 8
-primary comparisons distinguish the scenarios: one-rotor-loss cases get worse,
-while the two-opposite-rotor and reduced-authority cases improve. These results
-use the historical estimated aircraft. See the [new scenario results](Analysis/current-results.md#scenario-comparison-with-selected-cases).
+primary comparisons distinguish the scenarios. Losing one rotor gets worse by
+18 to 53 percentage points of landing pass rate, while losing two opposite
+rotors improves by 9 to 16 points and reduced authority on all motors by 38 to
+41 points. These results use the historical estimated aircraft. See the [new scenario results](Analysis/current-results.md#scenario-comparison-with-selected-cases).
 
 ## Hardware so far
 

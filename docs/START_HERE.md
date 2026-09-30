@@ -2,7 +2,7 @@
 
 ## Choose a path
 
-- **Two-minute review:** [README evidence](../README.md#evidence-snapshot) →
+- **Two-minute review:** [README results](../README.md#simulation-results) →
   [current results](../Analysis/current-results.md) →
   [bench preparation](../cad/bench/fixture-preparation.md).
 - **Technical review:** trace one [figure](data-and-figures.md) to its source,

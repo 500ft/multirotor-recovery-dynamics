@@ -2,6 +2,11 @@
 
 Track unresolved design decisions here. Close each item with evidence rather than removing it silently.
 
+The physical platform is now the stock V995. Its questions are OQ-011, OQ-012
+and OQ-017. OQ-001, OQ-002, OQ-005 and OQ-007 to OQ-009 belong to the
+historical designed vehicle, which is not being built; they stay here as
+record. The plan and finish line are in [ROADMAP.md](ROADMAP.md).
+
 | ID | Question | Decision Needed From | Required Evidence | Status |
 |---|---|---|---|---|
 | OQ-001 | Does the locked propulsion set (EX1103 11000KV / Gemfan 2023-3 / GNB 2S 550 mAh) meet thrust reserve on the bench? | Propulsion bench testing | Thrust/current/RPM curves at 8.4/7.6/7.0 V; >=112.5 gf/motor at 7.0 V for full 225 g reserve | OPEN (catalog selection LOCKED 2026-06-20; performance bench-gated) |
@@ -25,14 +30,6 @@ Track unresolved design decisions here. Close each item with evidence rather tha
 | OQ-016 | Which primary cells should the survivable-set study use, given that 71 of 96 class-cell combinations are saturated and all four current primary cells are pinned at zero? Should the primary outcome remain binary, and does `two_adjacent` need a continuous-outcome study to say anything at all? | Owner registration | A registered cell set with a new study ID, an explicit note that the cells were selected using existing results, and a decision on binary vs continuous primary outcome | OPEN (evidence and candidates in `docs/specs/survivable-set/primary-cell-reselection-proposal.md`; blocks the full scenario rerun) |
 | OQ-017 | Which mounting revision is the **delivered** Adafruit 4540? The 4540 PDF viewer was unreadable and the indexed 80 mm drawing sits under PID 5231; Adafruit also lists an older 80 mm 5 kg version, so product number and capacity do not fix the revision. | Owner (inspect the delivered part) | Delivered-part inspection: body length, section, hole count/coordinates/thread designations at both ends, load-end designation, usable thread depth — compared against whichever drawing the part actually matches | OPEN (blocks the V995 fixture geometry from leaving `candidate_drawing`; `cad/v995/parameters.csv`) |
 
-## Milestone Schedule
+## Milestones
 
-Target dates are placeholders until the student fills them in against their actual semester schedule.
-
-| Milestone | Target Date | Status |
-|---|---|---|
-| Mass freeze | TBD | Not started |
-| Manual hover test | TBD | Not started |
-| Classifier dataset collection | TBD | Not started |
-| Release-rig test | TBD | Not started |
-| Powered recovery test | TBD | Not started |
+Milestones and their order are in [ROADMAP.md](ROADMAP.md).

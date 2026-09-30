@@ -17,5 +17,5 @@
 
 September 5 rebaseline: the August 3 date is historical and did not produce a
 measured dataset in this checkout. The page remains measurement pending. The
-active software sprint is [SPRINT_ROADMAP.md](../../SPRINT_ROADMAP.md); no new
+active software sprint is [SPRINT_ROADMAP.md](https://github.com/500ft/multirotor-recovery-dynamics/blob/a1d5bf944247e55688d18af85cfe9efab1591b13/docs/SPRINT_ROADMAP.md); no new
 physical-test date is claimed without Owner/facility availability.

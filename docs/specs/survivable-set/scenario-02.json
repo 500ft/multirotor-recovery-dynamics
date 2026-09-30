@@ -1,0 +1,14 @@
+{
+  "study_id": "DR-SS-SCENARIO-02",
+  "controller": "a2",
+  "pairs_per_case": 300,
+  "base_seed": 2026093002,
+  "family_alpha": 0.05,
+  "primary_contrast": "I-L",
+  "cases": [
+    {"class": "one_out", "h_m": 6.0, "vz0_m_s": 0.0, "omega0_rad_s": 2.0, "delay_s": 0.11},
+    {"class": "one_out", "h_m": 6.0, "vz0_m_s": -1.5, "omega0_rad_s": 2.0, "delay_s": 0.30},
+    {"class": "two_opposite", "h_m": 6.0, "vz0_m_s": 0.0, "omega0_rad_s": 2.0, "delay_s": 0.11},
+    {"class": "partial_authority", "h_m": 1.5, "vz0_m_s": 0.0, "omega0_rad_s": 6.0, "delay_s": 0.11}
+  ]
+}

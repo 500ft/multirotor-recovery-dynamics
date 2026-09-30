@@ -13,7 +13,8 @@ plan, read the [roadmap](../../ROADMAP.md).
 | [survivable-set/design-a2.md](survivable-set/design-a2.md) | Frozen addendum, 2026-09-16 | The spin-aware controller variant |
 | [survivable-set/scenario-contract.md](survivable-set/scenario-contract.md) | Frozen 2026-09-25 | The in-flight failure scenario, registered before the diagnostic ran |
 | [survivable-set/drop-test-prediction.md](survivable-set/drop-test-prediction.md) | Registered prediction | A drop-test prediction for the designed vehicle, with a 2026-09-19 correction notice |
-| [survivable-set/primary-cell-reselection-proposal.md](survivable-set/primary-cell-reselection-proposal.md) | **Proposal, needs an owner decision (OQ-016)** | New primary cells, because the registered ones saturate the binary criterion |
+| [survivable-set/primary-cell-reselection-proposal.md](survivable-set/primary-cell-reselection-proposal.md) | Original proposal; decision recorded below | The candidate cases considered for OQ-016 |
+| [survivable-set/scenario-02.md](survivable-set/scenario-02.md) · [settings](survivable-set/scenario-02.json) | Registered before execution | Fresh paired scenario comparisons in cases with mixed historical outcomes |
 
 ## The designed vehicle's bench gate (not being built)
 

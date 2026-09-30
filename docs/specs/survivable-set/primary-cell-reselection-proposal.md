@@ -1,9 +1,11 @@
-# Proposed primary-cell reselection — for owner registration
+# Original primary-case reselection proposal
 
-Status: **PROPOSAL, not registered.** Prepared 2026-09-26 in response to the
-DR-SS-SCENARIO-01 diagnostic finding. **No study currently uses these cells and
-no sweep has been run against them.** They must be registered by the owner before
-any decisive run, exactly as `design.md` §9 requires.
+The decision is now recorded in [scenario-02.md](scenario-02.md), with its
+settings in [scenario-02.json](scenario-02.json). It adopts the proposed cases
+and keeps the binary primary outcome. The registration also corrects the
+power argument below: paired comparisons depend on discordant outcomes, which
+cannot be inferred from marginal pass rates alone. The original proposal
+follows for reference.
 
 ## Why this exists
 

@@ -302,8 +302,33 @@ transient.
 - **I−H is small** (|mean| ≤ 0.16 m/s), so most of the change comes from
   retaining thrust rather than from removing the startup dead time.
 
-**What this does not establish.** Nothing about the V995, no measured failure
-transient, no change to the historical study (its data is untouched), and no
-resolution of whether rotor-out recovery is achievable — every arm still fails
-the proxy at these cells. A full registered rerun needs cells where the proxy is
-not saturated, which is a design question the diagnostic has now surfaced.
+The diagnostic uses the historical estimated aircraft. Its all-fail outcomes
+motivated the new case selection below.
+
+## Scenario comparison with selected cases
+
+The new cases distinguish the release/startup and corrected in-flight scenarios
+in every primary comparison. The in-flight case reduces landing pass rates for
+one-rotor loss and increases them for opposite-rotor loss and reduced authority.
+The exact counts, rate changes and intervals are in
+[`Data/scenario-02/results.json`](../Data/scenario-02/results.json).
+
+The [registration](../docs/specs/survivable-set/scenario-02.md) was committed
+before execution. Its [settings](../docs/specs/survivable-set/scenario-02.json)
+record the cases, sample count and new seed. Every draw is run in all three
+scenarios and both aircraft packages. The original landing thresholds and A2
+controller stay fixed. I-L is the primary comparison, with a Bonferroni
+adjustment across the case-package comparisons. H-L and I-H show how the
+retained-thrust history and transition timing contribute.
+
+For each paired comparison, b counts passes only in the first scenario and c
+counts passes only in the second. The pass-rate change is `(b-c)/N`. The exact
+interval describes `b/(b+c)`, the share of disagreements favouring the first
+scenario. These are different quantities, and the output reports both. Raw
+per-trial outcomes are in [`trials.jsonl`](../Data/scenario-02/trials.jsonl).
+
+The cases were selected using earlier simulation results and then evaluated
+with fresh draws. The conclusions apply to the historical model and its assumed
+landing limits. V995 measurements remain the next step in the
+[roadmap](../ROADMAP.md). The original `two_adjacent` impact-speed results remain
+in the earlier diagnostic; no additional study of that class is scheduled.

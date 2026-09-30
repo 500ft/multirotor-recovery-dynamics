@@ -1,0 +1,2050 @@
+{
+  "study_id": "DR-SS-SCENARIO-02",
+  "registration": "docs/specs/survivable-set/scenario-02.json",
+  "registration_sha256": "55e5cf6369889f47c835e7136db9ba0c993f9a5679fda0ff3fd5480082115ecf",
+  "source_commit": "1546c694a1e4bee3c73eeeaa7b1cd1d4a8fdd348",
+  "python": "3.11.8",
+  "numpy": "2.1.1",
+  "seconds": 609.5,
+  "trials": "trials.jsonl",
+  "trials_sha256": "f22e1ada7072d27d022f583832433ec4d749121f862a5e478624eda3a2fce035",
+  "trajectories": 7200,
+  "primary_family_size": 8,
+  "status_counts": {
+    "contact": 7200
+  },
+  "marginals": [
+    {
+      "case_index": 0,
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "mechanism",
+      "arm": "release_startup",
+      "attempted": 300,
+      "successes": 162,
+      "p_pass": 0.54,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 0,
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "mechanism",
+      "arm": "in_flight_hold_matched",
+      "attempted": 300,
+      "successes": 6,
+      "p_pass": 0.02,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 0,
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "mechanism",
+      "arm": "in_flight_hold_immediate",
+      "attempted": 300,
+      "successes": 2,
+      "p_pass": 0.006666666666666667,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 0,
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "realloc_only",
+      "arm": "release_startup",
+      "attempted": 300,
+      "successes": 185,
+      "p_pass": 0.6166666666666667,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 0,
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "realloc_only",
+      "arm": "in_flight_hold_matched",
+      "attempted": 300,
+      "successes": 32,
+      "p_pass": 0.10666666666666667,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 0,
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "realloc_only",
+      "arm": "in_flight_hold_immediate",
+      "attempted": 300,
+      "successes": 62,
+      "p_pass": 0.20666666666666667,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 1,
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "package": "mechanism",
+      "arm": "release_startup",
+      "attempted": 300,
+      "successes": 55,
+      "p_pass": 0.18333333333333332,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 1,
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "package": "mechanism",
+      "arm": "in_flight_hold_matched",
+      "attempted": 300,
+      "successes": 0,
+      "p_pass": 0.0,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 1,
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "package": "mechanism",
+      "arm": "in_flight_hold_immediate",
+      "attempted": 300,
+      "successes": 0,
+      "p_pass": 0.0,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 1,
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "package": "realloc_only",
+      "arm": "release_startup",
+      "attempted": 300,
+      "successes": 115,
+      "p_pass": 0.38333333333333336,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 1,
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "package": "realloc_only",
+      "arm": "in_flight_hold_matched",
+      "attempted": 300,
+      "successes": 0,
+      "p_pass": 0.0,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 1,
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "package": "realloc_only",
+      "arm": "in_flight_hold_immediate",
+      "attempted": 300,
+      "successes": 1,
+      "p_pass": 0.0033333333333333335,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 2,
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "mechanism",
+      "arm": "release_startup",
+      "attempted": 300,
+      "successes": 73,
+      "p_pass": 0.24333333333333335,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 2,
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "mechanism",
+      "arm": "in_flight_hold_matched",
+      "attempted": 300,
+      "successes": 106,
+      "p_pass": 0.35333333333333333,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 2,
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "mechanism",
+      "arm": "in_flight_hold_immediate",
+      "attempted": 300,
+      "successes": 121,
+      "p_pass": 0.4033333333333333,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 2,
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "realloc_only",
+      "arm": "release_startup",
+      "attempted": 300,
+      "successes": 121,
+      "p_pass": 0.4033333333333333,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 2,
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "realloc_only",
+      "arm": "in_flight_hold_matched",
+      "attempted": 300,
+      "successes": 139,
+      "p_pass": 0.4633333333333333,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 2,
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "realloc_only",
+      "arm": "in_flight_hold_immediate",
+      "attempted": 300,
+      "successes": 148,
+      "p_pass": 0.49333333333333335,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 3,
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "package": "mechanism",
+      "arm": "release_startup",
+      "attempted": 300,
+      "successes": 176,
+      "p_pass": 0.5866666666666667,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 3,
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "package": "mechanism",
+      "arm": "in_flight_hold_matched",
+      "attempted": 300,
+      "successes": 299,
+      "p_pass": 0.9966666666666667,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 3,
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "package": "mechanism",
+      "arm": "in_flight_hold_immediate",
+      "attempted": 300,
+      "successes": 300,
+      "p_pass": 1.0,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 3,
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "package": "realloc_only",
+      "arm": "release_startup",
+      "attempted": 300,
+      "successes": 187,
+      "p_pass": 0.6233333333333333,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 3,
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "package": "realloc_only",
+      "arm": "in_flight_hold_matched",
+      "attempted": 300,
+      "successes": 289,
+      "p_pass": 0.9633333333333334,
+      "status_counts": {
+        "contact": 300
+      }
+    },
+    {
+      "case_index": 3,
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "package": "realloc_only",
+      "arm": "in_flight_hold_immediate",
+      "attempted": 300,
+      "successes": 300,
+      "p_pass": 1.0,
+      "status_counts": {
+        "contact": 300
+      }
+    }
+  ],
+  "scenario_contrasts": [
+    {
+      "case_index": 0,
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "mechanism",
+      "contrast": "I-L",
+      "primary": true,
+      "a": "in_flight_hold_immediate",
+      "b": "release_startup",
+      "n": 300,
+      "both_safe": 2,
+      "only_a": 0,
+      "only_b": 160,
+      "neither": 138,
+      "discordant": 160,
+      "delta": -0.5333333333333333,
+      "pi_lower": 0.0,
+      "pi_upper": 0.03540987251129735,
+      "midp": 6.842277657836021e-49,
+      "verdict": "b_superior",
+      "interval_alpha": 0.00625,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 2,
+        "only_a": 0,
+        "only_b": 160,
+        "neither": 138,
+        "discordant": 160
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": 4.249526630898544,
+          "min_delta": -1.3095174905644935,
+          "max_delta": 9.688879200258839
+        },
+        "impact_tilt_rad": {
+          "mean_delta": 0.7740558759620346,
+          "min_delta": -2.300819827435845,
+          "max_delta": 2.965177125176926
+        },
+        "t_contact_s": {
+          "mean_delta": -2.0769416666666665,
+          "min_delta": -4.8115000000000006,
+          "max_delta": 0.01849999999999996
+        }
+      }
+    },
+    {
+      "case_index": 0,
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "mechanism",
+      "contrast": "H-L",
+      "primary": false,
+      "a": "in_flight_hold_matched",
+      "b": "release_startup",
+      "n": 300,
+      "both_safe": 6,
+      "only_a": 0,
+      "only_b": 156,
+      "neither": 138,
+      "discordant": 156,
+      "delta": -0.52,
+      "pi_lower": 0.0,
+      "pi_upper": 0.023369271591380247,
+      "midp": 1.0947644252537633e-47,
+      "verdict": "b_superior",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 6,
+        "only_a": 0,
+        "only_b": 156,
+        "neither": 138,
+        "discordant": 156
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": 4.197161864280397,
+          "min_delta": -1.3302851409965832,
+          "max_delta": 8.906074827746032
+        },
+        "impact_tilt_rad": {
+          "mean_delta": 0.8125768695499755,
+          "min_delta": -2.6908271746930215,
+          "max_delta": 2.9722553201734305
+        },
+        "t_contact_s": {
+          "mean_delta": -2.099201666666667,
+          "min_delta": -4.8925,
+          "max_delta": -0.021499999999999853
+        }
+      }
+    },
+    {
+      "case_index": 0,
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "mechanism",
+      "contrast": "I-H",
+      "primary": false,
+      "a": "in_flight_hold_immediate",
+      "b": "in_flight_hold_matched",
+      "n": 300,
+      "both_safe": 0,
+      "only_a": 2,
+      "only_b": 6,
+      "neither": 292,
+      "discordant": 8,
+      "delta": -0.013333333333333334,
+      "pi_lower": 0.03185402624994422,
+      "pi_upper": 0.6508557944128244,
+      "midp": 0.1796875,
+      "verdict": "not_distinguished",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 0,
+        "only_a": 2,
+        "only_b": 6,
+        "neither": 292,
+        "discordant": 8
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": 0.0523647666181479,
+          "min_delta": -7.413480182181882,
+          "max_delta": 8.569195628927169
+        },
+        "impact_tilt_rad": {
+          "mean_delta": -0.03852099358794082,
+          "min_delta": -2.5809793213208514,
+          "max_delta": 2.759141449673003
+        },
+        "t_contact_s": {
+          "mean_delta": 0.02226,
+          "min_delta": -1.4200000000000002,
+          "max_delta": 0.7949999999999999
+        }
+      }
+    },
+    {
+      "case_index": 0,
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "realloc_only",
+      "contrast": "I-L",
+      "primary": true,
+      "a": "in_flight_hold_immediate",
+      "b": "release_startup",
+      "n": 300,
+      "both_safe": 62,
+      "only_a": 0,
+      "only_b": 123,
+      "neither": 115,
+      "discordant": 123,
+      "delta": -0.41,
+      "pi_lower": 0.0,
+      "pi_upper": 0.045814248737842234,
+      "midp": 9.4039548065783e-38,
+      "verdict": "b_superior",
+      "interval_alpha": 0.00625,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 62,
+        "only_a": 0,
+        "only_b": 123,
+        "neither": 115,
+        "discordant": 123
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": 2.995731067818717,
+          "min_delta": -0.7465954125344672,
+          "max_delta": 8.90503248590037
+        },
+        "impact_tilt_rad": {
+          "mean_delta": 0.6455838731709499,
+          "min_delta": -1.9847151768746312,
+          "max_delta": 2.721670671798936
+        },
+        "t_contact_s": {
+          "mean_delta": -2.15896,
+          "min_delta": -4.830500000000001,
+          "max_delta": 0.10050000000000003
+        }
+      }
+    },
+    {
+      "case_index": 0,
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "realloc_only",
+      "contrast": "H-L",
+      "primary": false,
+      "a": "in_flight_hold_matched",
+      "b": "release_startup",
+      "n": 300,
+      "both_safe": 32,
+      "only_a": 0,
+      "only_b": 153,
+      "neither": 115,
+      "discordant": 153,
+      "delta": -0.51,
+      "pi_lower": 0.0,
+      "pi_upper": 0.02382199129343554,
+      "midp": 8.758115402030107e-47,
+      "verdict": "b_superior",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 32,
+        "only_a": 0,
+        "only_b": 153,
+        "neither": 115,
+        "discordant": 153
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": 4.16144517680786,
+          "min_delta": -0.5396086693098461,
+          "max_delta": 9.109338312961906
+        },
+        "impact_tilt_rad": {
+          "mean_delta": 0.8499195071674125,
+          "min_delta": -2.382496276820432,
+          "max_delta": 3.039836193489299
+        },
+        "t_contact_s": {
+          "mean_delta": -2.3240233333333338,
+          "min_delta": -4.9495000000000005,
+          "max_delta": 0.08450000000000002
+        }
+      }
+    },
+    {
+      "case_index": 0,
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "realloc_only",
+      "contrast": "I-H",
+      "primary": false,
+      "a": "in_flight_hold_immediate",
+      "b": "in_flight_hold_matched",
+      "n": 300,
+      "both_safe": 22,
+      "only_a": 40,
+      "only_b": 10,
+      "neither": 228,
+      "discordant": 50,
+      "delta": 0.1,
+      "pi_lower": 0.6628168916165114,
+      "pi_upper": 0.8996977625274295,
+      "midp": 1.4737715885004832e-05,
+      "verdict": "a_superior",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 22,
+        "only_a": 40,
+        "only_b": 10,
+        "neither": 228,
+        "discordant": 50
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": -1.1657141089891438,
+          "min_delta": -7.645247628335763,
+          "max_delta": 7.45953590302488
+        },
+        "impact_tilt_rad": {
+          "mean_delta": -0.20433563399646265,
+          "min_delta": -2.5702755703948448,
+          "max_delta": 2.590787569878009
+        },
+        "t_contact_s": {
+          "mean_delta": 0.16506333333333334,
+          "min_delta": -3.4530000000000003,
+          "max_delta": 3.0065
+        }
+      }
+    },
+    {
+      "case_index": 1,
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "package": "mechanism",
+      "contrast": "I-L",
+      "primary": true,
+      "a": "in_flight_hold_immediate",
+      "b": "release_startup",
+      "n": 300,
+      "both_safe": 0,
+      "only_a": 0,
+      "only_b": 55,
+      "neither": 245,
+      "discordant": 55,
+      "delta": -0.18333333333333332,
+      "pi_lower": 0.0,
+      "pi_upper": 0.09956613857003926,
+      "midp": 2.7755575615628914e-17,
+      "verdict": "b_superior",
+      "interval_alpha": 0.00625,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 0,
+        "only_a": 0,
+        "only_b": 55,
+        "neither": 245,
+        "discordant": 55
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": 2.1671044120657728,
+          "min_delta": -1.650500907507146,
+          "max_delta": 8.743626329219458
+        },
+        "impact_tilt_rad": {
+          "mean_delta": 0.39784572550658626,
+          "min_delta": -2.5643381974007364,
+          "max_delta": 2.665374906864068
+        },
+        "t_contact_s": {
+          "mean_delta": -0.22400666666666666,
+          "min_delta": -1.9785,
+          "max_delta": 0.0625
+        }
+      }
+    },
+    {
+      "case_index": 1,
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "package": "mechanism",
+      "contrast": "H-L",
+      "primary": false,
+      "a": "in_flight_hold_matched",
+      "b": "release_startup",
+      "n": 300,
+      "both_safe": 0,
+      "only_a": 0,
+      "only_b": 55,
+      "neither": 245,
+      "discordant": 55,
+      "delta": -0.18333333333333332,
+      "pi_lower": 0.0,
+      "pi_upper": 0.06487076082542464,
+      "midp": 2.7755575615628914e-17,
+      "verdict": "b_superior",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 0,
+        "only_a": 0,
+        "only_b": 55,
+        "neither": 245,
+        "discordant": 55
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": 2.215908330896952,
+          "min_delta": -1.6598207726155678,
+          "max_delta": 8.71197448235711
+        },
+        "impact_tilt_rad": {
+          "mean_delta": 0.5894214040057605,
+          "min_delta": -2.131404326800394,
+          "max_delta": 2.946119670469394
+        },
+        "t_contact_s": {
+          "mean_delta": -0.21561333333333332,
+          "min_delta": -2.0195,
+          "max_delta": 0.0814999999999999
+        }
+      }
+    },
+    {
+      "case_index": 1,
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "package": "mechanism",
+      "contrast": "I-H",
+      "primary": false,
+      "a": "in_flight_hold_immediate",
+      "b": "in_flight_hold_matched",
+      "n": 300,
+      "both_safe": 0,
+      "only_a": 0,
+      "only_b": 0,
+      "neither": 300,
+      "discordant": 0,
+      "delta": 0.0,
+      "pi_lower": null,
+      "pi_upper": null,
+      "midp": 1.0,
+      "verdict": "no_discordant_pairs",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 0,
+        "only_a": 0,
+        "only_b": 0,
+        "neither": 300,
+        "discordant": 0
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": -0.04880391883117913,
+          "min_delta": -5.0322558561707895,
+          "max_delta": 2.2475717101321466
+        },
+        "impact_tilt_rad": {
+          "mean_delta": -0.1915756784991743,
+          "min_delta": -2.68414434572157,
+          "max_delta": 2.3373260235928135
+        },
+        "t_contact_s": {
+          "mean_delta": -0.008393333333333315,
+          "min_delta": -0.04299999999999993,
+          "max_delta": 0.16799999999999993
+        }
+      }
+    },
+    {
+      "case_index": 1,
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "package": "realloc_only",
+      "contrast": "I-L",
+      "primary": true,
+      "a": "in_flight_hold_immediate",
+      "b": "release_startup",
+      "n": 300,
+      "both_safe": 1,
+      "only_a": 0,
+      "only_b": 114,
+      "neither": 185,
+      "discordant": 114,
+      "delta": -0.38,
+      "pi_lower": 0.0,
+      "pi_upper": 0.04934048314171424,
+      "midp": 4.81482486096809e-35,
+      "verdict": "b_superior",
+      "interval_alpha": 0.00625,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 1,
+        "only_a": 0,
+        "only_b": 114,
+        "neither": 185,
+        "discordant": 114
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": 3.0040550384919795,
+          "min_delta": -1.0795386192138432,
+          "max_delta": 8.18909672266283
+        },
+        "impact_tilt_rad": {
+          "mean_delta": 0.6414422135192865,
+          "min_delta": -2.119204082518264,
+          "max_delta": 2.9575984290941144
+        },
+        "t_contact_s": {
+          "mean_delta": -0.56611,
+          "min_delta": -2.6050000000000004,
+          "max_delta": 0.11949999999999994
+        }
+      }
+    },
+    {
+      "case_index": 1,
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "package": "realloc_only",
+      "contrast": "H-L",
+      "primary": false,
+      "a": "in_flight_hold_matched",
+      "b": "release_startup",
+      "n": 300,
+      "both_safe": 0,
+      "only_a": 0,
+      "only_b": 115,
+      "neither": 185,
+      "discordant": 115,
+      "delta": -0.38333333333333336,
+      "pi_lower": 0.0,
+      "pi_upper": 0.031568195988247116,
+      "midp": 2.407412430484045e-35,
+      "verdict": "b_superior",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 0,
+        "only_a": 0,
+        "only_b": 115,
+        "neither": 185,
+        "discordant": 115
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": 3.2495853321684005,
+          "min_delta": -0.789428533670586,
+          "max_delta": 8.78067573987458
+        },
+        "impact_tilt_rad": {
+          "mean_delta": 0.7316127196538045,
+          "min_delta": -2.1403315568975643,
+          "max_delta": 2.89920353060608
+        },
+        "t_contact_s": {
+          "mean_delta": -0.586735,
+          "min_delta": -2.607,
+          "max_delta": 0.038000000000000034
+        }
+      }
+    },
+    {
+      "case_index": 1,
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "package": "realloc_only",
+      "contrast": "I-H",
+      "primary": false,
+      "a": "in_flight_hold_immediate",
+      "b": "in_flight_hold_matched",
+      "n": 300,
+      "both_safe": 0,
+      "only_a": 1,
+      "only_b": 0,
+      "neither": 299,
+      "discordant": 1,
+      "delta": 0.0033333333333333335,
+      "pi_lower": 0.025,
+      "pi_upper": 1.0,
+      "midp": 0.5,
+      "verdict": "not_distinguished",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 0,
+        "only_a": 1,
+        "only_b": 0,
+        "neither": 299,
+        "discordant": 1
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": -0.24553029367642126,
+          "min_delta": -6.1168086208264265,
+          "max_delta": 1.7787943514161517
+        },
+        "impact_tilt_rad": {
+          "mean_delta": -0.09017050613451788,
+          "min_delta": -2.7424994814923944,
+          "max_delta": 2.4394812484909543
+        },
+        "t_contact_s": {
+          "mean_delta": 0.020625000000000004,
+          "min_delta": -0.03200000000000003,
+          "max_delta": 0.9635000000000002
+        }
+      }
+    },
+    {
+      "case_index": 2,
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "mechanism",
+      "contrast": "I-L",
+      "primary": true,
+      "a": "in_flight_hold_immediate",
+      "b": "release_startup",
+      "n": 300,
+      "both_safe": 73,
+      "only_a": 48,
+      "only_b": 0,
+      "neither": 179,
+      "discordant": 48,
+      "delta": 0.16,
+      "pi_lower": 0.8867666987676067,
+      "pi_upper": 1.0,
+      "midp": 3.552713678800501e-15,
+      "verdict": "a_superior",
+      "interval_alpha": 0.00625,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 73,
+        "only_a": 48,
+        "only_b": 0,
+        "neither": 179,
+        "discordant": 48
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": -0.7981205808885189,
+          "min_delta": -5.094196831681477,
+          "max_delta": 1.115886247434724
+        },
+        "impact_tilt_rad": {
+          "mean_delta": -0.07065024175947407,
+          "min_delta": -2.7401698253274076,
+          "max_delta": 2.314661141442778
+        },
+        "t_contact_s": {
+          "mean_delta": 0.7588533333333334,
+          "min_delta": -0.012499999999999956,
+          "max_delta": 3.843
+        }
+      }
+    },
+    {
+      "case_index": 2,
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "mechanism",
+      "contrast": "H-L",
+      "primary": false,
+      "a": "in_flight_hold_matched",
+      "b": "release_startup",
+      "n": 300,
+      "both_safe": 73,
+      "only_a": 33,
+      "only_b": 0,
+      "neither": 194,
+      "discordant": 33,
+      "delta": 0.11,
+      "pi_lower": 0.8942371899254207,
+      "pi_upper": 1.0,
+      "midp": 1.1641532182693481e-10,
+      "verdict": "a_superior",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 73,
+        "only_a": 33,
+        "only_b": 0,
+        "neither": 194,
+        "discordant": 33
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": -0.5601287640603797,
+          "min_delta": -3.755729285590113,
+          "max_delta": 1.0710854213338363
+        },
+        "impact_tilt_rad": {
+          "mean_delta": -0.03495773275480125,
+          "min_delta": -1.7764226453709282,
+          "max_delta": 2.018404604799529
+        },
+        "t_contact_s": {
+          "mean_delta": 0.5736933333333334,
+          "min_delta": -0.010000000000000009,
+          "max_delta": 3.1525
+        }
+      }
+    },
+    {
+      "case_index": 2,
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "mechanism",
+      "contrast": "I-H",
+      "primary": false,
+      "a": "in_flight_hold_immediate",
+      "b": "in_flight_hold_matched",
+      "n": 300,
+      "both_safe": 106,
+      "only_a": 15,
+      "only_b": 0,
+      "neither": 179,
+      "discordant": 15,
+      "delta": 0.05,
+      "pi_lower": 0.7819806390894659,
+      "pi_upper": 1.0,
+      "midp": 3.0517578125e-05,
+      "verdict": "a_superior",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 106,
+        "only_a": 15,
+        "only_b": 0,
+        "neither": 179,
+        "discordant": 15
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": -0.237991816828139,
+          "min_delta": -2.517182123928733,
+          "max_delta": 0.5522139407033464
+        },
+        "impact_tilt_rad": {
+          "mean_delta": -0.03569250900467282,
+          "min_delta": -1.8629676916625455,
+          "max_delta": 2.158409864489979
+        },
+        "t_contact_s": {
+          "mean_delta": 0.18516000000000005,
+          "min_delta": -0.3700000000000001,
+          "max_delta": 1.9450000000000003
+        }
+      }
+    },
+    {
+      "case_index": 2,
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "realloc_only",
+      "contrast": "I-L",
+      "primary": true,
+      "a": "in_flight_hold_immediate",
+      "b": "release_startup",
+      "n": 300,
+      "both_safe": 121,
+      "only_a": 27,
+      "only_b": 0,
+      "neither": 152,
+      "discordant": 27,
+      "delta": 0.09,
+      "pi_lower": 0.80763785647559,
+      "pi_upper": 1.0,
+      "midp": 7.450580596923828e-09,
+      "verdict": "a_superior",
+      "interval_alpha": 0.00625,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 121,
+        "only_a": 27,
+        "only_b": 0,
+        "neither": 152,
+        "discordant": 27
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": -0.5038000698742754,
+          "min_delta": -4.428852528576939,
+          "max_delta": 1.0219094069708587
+        },
+        "impact_tilt_rad": {
+          "mean_delta": -0.13499575582052406,
+          "min_delta": -2.0926778336217744,
+          "max_delta": 1.8849482268676128
+        },
+        "t_contact_s": {
+          "mean_delta": 0.6985766666666666,
+          "min_delta": -0.02750000000000008,
+          "max_delta": 3.7625
+        }
+      }
+    },
+    {
+      "case_index": 2,
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "realloc_only",
+      "contrast": "H-L",
+      "primary": false,
+      "a": "in_flight_hold_matched",
+      "b": "release_startup",
+      "n": 300,
+      "both_safe": 121,
+      "only_a": 18,
+      "only_b": 0,
+      "neither": 161,
+      "discordant": 18,
+      "delta": 0.06,
+      "pi_lower": 0.8146980318621477,
+      "pi_upper": 1.0,
+      "midp": 3.814697265625e-06,
+      "verdict": "a_superior",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 121,
+        "only_a": 18,
+        "only_b": 0,
+        "neither": 161,
+        "discordant": 18
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": -0.2848383607196961,
+          "min_delta": -4.429518689162779,
+          "max_delta": 0.9381042030806688
+        },
+        "impact_tilt_rad": {
+          "mean_delta": -0.0807318013057606,
+          "min_delta": -1.73408104621527,
+          "max_delta": 1.9074558309281087
+        },
+        "t_contact_s": {
+          "mean_delta": 0.48941166666666663,
+          "min_delta": -0.025500000000000078,
+          "max_delta": 2.3569999999999993
+        }
+      }
+    },
+    {
+      "case_index": 2,
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.11",
+      "package": "realloc_only",
+      "contrast": "I-H",
+      "primary": false,
+      "a": "in_flight_hold_immediate",
+      "b": "in_flight_hold_matched",
+      "n": 300,
+      "both_safe": 137,
+      "only_a": 11,
+      "only_b": 2,
+      "neither": 150,
+      "discordant": 13,
+      "delta": 0.03,
+      "pi_lower": 0.5455289443234423,
+      "pi_upper": 0.9807933280174715,
+      "midp": 0.012939453125,
+      "verdict": "a_superior",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 137,
+        "only_a": 11,
+        "only_b": 2,
+        "neither": 150,
+        "discordant": 13
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": -0.2189617091545793,
+          "min_delta": -4.075947205359049,
+          "max_delta": 1.0651330122069718
+        },
+        "impact_tilt_rad": {
+          "mean_delta": -0.05426395451476348,
+          "min_delta": -1.9364756101301286,
+          "max_delta": 2.143729706383525
+        },
+        "t_contact_s": {
+          "mean_delta": 0.209165,
+          "min_delta": -0.1905000000000001,
+          "max_delta": 2.401
+        }
+      }
+    },
+    {
+      "case_index": 3,
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "package": "mechanism",
+      "contrast": "I-L",
+      "primary": true,
+      "a": "in_flight_hold_immediate",
+      "b": "release_startup",
+      "n": 300,
+      "both_safe": 176,
+      "only_a": 124,
+      "only_b": 0,
+      "neither": 0,
+      "discordant": 124,
+      "delta": 0.41333333333333333,
+      "pi_lower": 0.9545466934764608,
+      "pi_upper": 1.0,
+      "midp": 4.70197740328915e-38,
+      "verdict": "a_superior",
+      "interval_alpha": 0.00625,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 176,
+        "only_a": 124,
+        "only_b": 0,
+        "neither": 0,
+        "discordant": 124
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": -1.1980956031605483,
+          "min_delta": -3.495577782409825,
+          "max_delta": 0.5042246468204039
+        },
+        "impact_tilt_rad": {
+          "mean_delta": -0.23664592313499055,
+          "min_delta": -0.7198472382971591,
+          "max_delta": 0.10981885761148533
+        },
+        "t_contact_s": {
+          "mean_delta": 1.101505,
+          "min_delta": 0.5190000000000001,
+          "max_delta": 1.5474999999999999
+        }
+      }
+    },
+    {
+      "case_index": 3,
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "package": "mechanism",
+      "contrast": "H-L",
+      "primary": false,
+      "a": "in_flight_hold_matched",
+      "b": "release_startup",
+      "n": 300,
+      "both_safe": 176,
+      "only_a": 123,
+      "only_b": 0,
+      "neither": 1,
+      "discordant": 123,
+      "delta": 0.41,
+      "pi_lower": 0.9704543744729276,
+      "pi_upper": 1.0,
+      "midp": 9.4039548065783e-38,
+      "verdict": "a_superior",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 176,
+        "only_a": 123,
+        "only_b": 0,
+        "neither": 1,
+        "discordant": 123
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": -1.1047981846897168,
+          "min_delta": -2.7720885086099485,
+          "max_delta": 0.5003037761768756
+        },
+        "impact_tilt_rad": {
+          "mean_delta": -0.1900019337286073,
+          "min_delta": -0.5108399777925953,
+          "max_delta": 0.6157692385727778
+        },
+        "t_contact_s": {
+          "mean_delta": 0.6066466666666667,
+          "min_delta": 0.134,
+          "max_delta": 0.9055
+        }
+      }
+    },
+    {
+      "case_index": 3,
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "package": "mechanism",
+      "contrast": "I-H",
+      "primary": false,
+      "a": "in_flight_hold_immediate",
+      "b": "in_flight_hold_matched",
+      "n": 300,
+      "both_safe": 299,
+      "only_a": 1,
+      "only_b": 0,
+      "neither": 0,
+      "discordant": 1,
+      "delta": 0.0033333333333333335,
+      "pi_lower": 0.025,
+      "pi_upper": 1.0,
+      "midp": 0.5,
+      "verdict": "not_distinguished",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 299,
+        "only_a": 1,
+        "only_b": 0,
+        "neither": 0,
+        "discordant": 1
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": -0.09329741847083137,
+          "min_delta": -2.3319362092357423,
+          "max_delta": 0.431716164357844
+        },
+        "impact_tilt_rad": {
+          "mean_delta": -0.04664398940638327,
+          "min_delta": -0.6720005600015746,
+          "max_delta": 0.04356960760538943
+        },
+        "t_contact_s": {
+          "mean_delta": 0.4948583333333333,
+          "min_delta": 0.030000000000000027,
+          "max_delta": 1.092
+        }
+      }
+    },
+    {
+      "case_index": 3,
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "package": "realloc_only",
+      "contrast": "I-L",
+      "primary": true,
+      "a": "in_flight_hold_immediate",
+      "b": "release_startup",
+      "n": 300,
+      "both_safe": 187,
+      "only_a": 113,
+      "only_b": 0,
+      "neither": 0,
+      "discordant": 113,
+      "delta": 0.37666666666666665,
+      "pi_lower": 0.9502339244283476,
+      "pi_upper": 1.0,
+      "midp": 9.62964972193618e-35,
+      "verdict": "a_superior",
+      "interval_alpha": 0.00625,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 187,
+        "only_a": 113,
+        "only_b": 0,
+        "neither": 0,
+        "discordant": 113
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": -0.866188188865216,
+          "min_delta": -3.6042923036237835,
+          "max_delta": 0.10079747771368475
+        },
+        "impact_tilt_rad": {
+          "mean_delta": -0.22623388414230278,
+          "min_delta": -0.8835070418860992,
+          "max_delta": 0.05746394013222562
+        },
+        "t_contact_s": {
+          "mean_delta": 1.0280150000000001,
+          "min_delta": 0.4075,
+          "max_delta": 1.6165
+        }
+      }
+    },
+    {
+      "case_index": 3,
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "package": "realloc_only",
+      "contrast": "H-L",
+      "primary": false,
+      "a": "in_flight_hold_matched",
+      "b": "release_startup",
+      "n": 300,
+      "both_safe": 187,
+      "only_a": 102,
+      "only_b": 0,
+      "neither": 11,
+      "discordant": 102,
+      "delta": 0.34,
+      "pi_lower": 0.964480673342116,
+      "pi_upper": 1.0,
+      "midp": 1.9721522630525295e-31,
+      "verdict": "a_superior",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 187,
+        "only_a": 102,
+        "only_b": 0,
+        "neither": 11,
+        "discordant": 102
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": -0.7812208648330652,
+          "min_delta": -2.772191386709874,
+          "max_delta": 0.09733725566031326
+        },
+        "impact_tilt_rad": {
+          "mean_delta": -0.1841379550899298,
+          "min_delta": -0.686578275589601,
+          "max_delta": 0.06603166609407252
+        },
+        "t_contact_s": {
+          "mean_delta": 0.58319,
+          "min_delta": 0.12850000000000006,
+          "max_delta": 0.994
+        }
+      }
+    },
+    {
+      "case_index": 3,
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "package": "realloc_only",
+      "contrast": "I-H",
+      "primary": false,
+      "a": "in_flight_hold_immediate",
+      "b": "in_flight_hold_matched",
+      "n": 300,
+      "both_safe": 289,
+      "only_a": 11,
+      "only_b": 0,
+      "neither": 0,
+      "discordant": 11,
+      "delta": 0.03666666666666667,
+      "pi_lower": 0.7150858470818455,
+      "pi_upper": 1.0,
+      "midp": 0.00048828125,
+      "verdict": "a_superior",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 289,
+        "only_a": 11,
+        "only_b": 0,
+        "neither": 0,
+        "discordant": 11
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": -0.08496732403215075,
+          "min_delta": -2.416816630199915,
+          "max_delta": 0.013252485993045182
+        },
+        "impact_tilt_rad": {
+          "mean_delta": -0.04209592905237295,
+          "min_delta": -0.4891099888011307,
+          "max_delta": 0.11684585640223863
+        },
+        "t_contact_s": {
+          "mean_delta": 0.44482499999999997,
+          "min_delta": -0.06300000000000017,
+          "max_delta": 1.2395
+        }
+      }
+    }
+  ],
+  "secondary_package_contrasts": [
+    {
+      "case_index": 0,
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.11",
+      "arm": "release_startup",
+      "primary": false,
+      "a": "mechanism",
+      "b": "realloc_only",
+      "n": 300,
+      "both_safe": 162,
+      "only_a": 0,
+      "only_b": 23,
+      "neither": 115,
+      "discordant": 23,
+      "delta": -0.07666666666666666,
+      "pi_lower": 0.0,
+      "pi_upper": 0.1481851289152244,
+      "midp": 1.1920928955078125e-07,
+      "verdict": "b_superior",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 162,
+        "only_a": 0,
+        "only_b": 23,
+        "neither": 115,
+        "discordant": 23
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": 0.7851782295605422,
+          "min_delta": -0.41911443775517476,
+          "max_delta": 6.165473820017894
+        },
+        "impact_tilt_rad": {
+          "mean_delta": 0.02747864484753291,
+          "min_delta": -2.5575613707230405,
+          "max_delta": 2.356493995224866
+        },
+        "t_contact_s": {
+          "mean_delta": -0.5128383333333333,
+          "min_delta": -3.4715,
+          "max_delta": 0.02150000000000052
+        }
+      }
+    },
+    {
+      "case_index": 0,
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.11",
+      "arm": "in_flight_hold_matched",
+      "primary": false,
+      "a": "mechanism",
+      "b": "realloc_only",
+      "n": 300,
+      "both_safe": 4,
+      "only_a": 2,
+      "only_b": 28,
+      "neither": 266,
+      "discordant": 30,
+      "delta": -0.08666666666666667,
+      "pi_lower": 0.008178134460656369,
+      "pi_upper": 0.22073540152296167,
+      "midp": 4.628673195838928e-07,
+      "verdict": "b_superior",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 4,
+        "only_a": 2,
+        "only_b": 28,
+        "neither": 266,
+        "discordant": 30
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": 0.820894917033078,
+          "min_delta": -4.559869133052464,
+          "max_delta": 6.211503554514215
+        },
+        "impact_tilt_rad": {
+          "mean_delta": -0.009863992769904118,
+          "min_delta": -2.279478465243532,
+          "max_delta": 2.429243037535797
+        },
+        "t_contact_s": {
+          "mean_delta": -0.28801666666666664,
+          "min_delta": -3.6029999999999998,
+          "max_delta": 0.875
+        }
+      }
+    },
+    {
+      "case_index": 0,
+      "class": "one_out",
+      "cell": "h6_vz0_w2_d0.11",
+      "arm": "in_flight_hold_immediate",
+      "primary": false,
+      "a": "mechanism",
+      "b": "realloc_only",
+      "n": 300,
+      "both_safe": 1,
+      "only_a": 1,
+      "only_b": 61,
+      "neither": 237,
+      "discordant": 62,
+      "delta": -0.2,
+      "pi_lower": 0.00040826837745732656,
+      "pi_upper": 0.08662101220691953,
+      "midp": 1.3877787807814457e-17,
+      "verdict": "b_superior",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 1,
+        "only_a": 1,
+        "only_b": 61,
+        "neither": 237,
+        "discordant": 62
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": 2.03897379264037,
+          "min_delta": -2.9878377368414544,
+          "max_delta": 9.660031719745106
+        },
+        "impact_tilt_rad": {
+          "mean_delta": 0.1559506476386177,
+          "min_delta": -2.3971526109686683,
+          "max_delta": 2.350651679938176
+        },
+        "t_contact_s": {
+          "mean_delta": -0.4308199999999999,
+          "min_delta": -2.976,
+          "max_delta": 0.38249999999999984
+        }
+      }
+    },
+    {
+      "case_index": 1,
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "arm": "release_startup",
+      "primary": false,
+      "a": "mechanism",
+      "b": "realloc_only",
+      "n": 300,
+      "both_safe": 55,
+      "only_a": 0,
+      "only_b": 60,
+      "neither": 185,
+      "discordant": 60,
+      "delta": -0.2,
+      "pi_lower": 0.0,
+      "pi_upper": 0.059629492286166874,
+      "midp": 8.673617379884035e-19,
+      "verdict": "b_superior",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 55,
+        "only_a": 0,
+        "only_b": 60,
+        "neither": 185,
+        "discordant": 60
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": 1.4451208192457423,
+          "min_delta": -0.004889998461625522,
+          "max_delta": 7.26384645139442
+        },
+        "impact_tilt_rad": {
+          "mean_delta": 0.17100063348508893,
+          "min_delta": -1.1307099024402647,
+          "max_delta": 1.3602415255456166
+        },
+        "t_contact_s": {
+          "mean_delta": -0.38419833333333336,
+          "min_delta": -1.3809999999999998,
+          "max_delta": -0.011500000000000066
+        }
+      }
+    },
+    {
+      "case_index": 1,
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "arm": "in_flight_hold_matched",
+      "primary": false,
+      "a": "mechanism",
+      "b": "realloc_only",
+      "n": 300,
+      "both_safe": 0,
+      "only_a": 0,
+      "only_b": 0,
+      "neither": 300,
+      "discordant": 0,
+      "delta": 0.0,
+      "pi_lower": null,
+      "pi_upper": null,
+      "midp": 1.0,
+      "verdict": "no_discordant_pairs",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 0,
+        "only_a": 0,
+        "only_b": 0,
+        "neither": 300,
+        "discordant": 0
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": 0.4114438179742937,
+          "min_delta": -1.358771786707015,
+          "max_delta": 4.9219451762490385
+        },
+        "impact_tilt_rad": {
+          "mean_delta": 0.028809317837044966,
+          "min_delta": -2.3540740117871817,
+          "max_delta": 2.617458257519332
+        },
+        "t_contact_s": {
+          "mean_delta": -0.013076666666666667,
+          "min_delta": -0.1884999999999999,
+          "max_delta": 0.022499999999999964
+        }
+      }
+    },
+    {
+      "case_index": 1,
+      "class": "one_out",
+      "cell": "h6_vz-1.5_w2_d0.3",
+      "arm": "in_flight_hold_immediate",
+      "primary": false,
+      "a": "mechanism",
+      "b": "realloc_only",
+      "n": 300,
+      "both_safe": 0,
+      "only_a": 0,
+      "only_b": 1,
+      "neither": 299,
+      "discordant": 1,
+      "delta": -0.0033333333333333335,
+      "pi_lower": 0.0,
+      "pi_upper": 0.975,
+      "midp": 0.5,
+      "verdict": "not_distinguished",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 0,
+        "only_a": 0,
+        "only_b": 1,
+        "neither": 299,
+        "discordant": 1
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": 0.6081701928195359,
+          "min_delta": -3.4848932551778065,
+          "max_delta": 5.412227817548333
+        },
+        "impact_tilt_rad": {
+          "mean_delta": -0.07259585452761144,
+          "min_delta": -2.5962624034865773,
+          "max_delta": 2.5337355366810916
+        },
+        "t_contact_s": {
+          "mean_delta": -0.042094999999999994,
+          "min_delta": -0.9430000000000003,
+          "max_delta": 0.07650000000000001
+        }
+      }
+    },
+    {
+      "case_index": 2,
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.11",
+      "arm": "release_startup",
+      "primary": false,
+      "a": "mechanism",
+      "b": "realloc_only",
+      "n": 300,
+      "both_safe": 73,
+      "only_a": 0,
+      "only_b": 48,
+      "neither": 179,
+      "discordant": 48,
+      "delta": -0.16,
+      "pi_lower": 0.0,
+      "pi_upper": 0.07397278534728025,
+      "midp": 3.552713678800501e-15,
+      "verdict": "b_superior",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 73,
+        "only_a": 0,
+        "only_b": 48,
+        "neither": 179,
+        "discordant": 48
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": 1.242559512916984,
+          "min_delta": -0.18194468192311675,
+          "max_delta": 4.433725705297635
+        },
+        "impact_tilt_rad": {
+          "mean_delta": 0.135665199239243,
+          "min_delta": -2.1514749235664934,
+          "max_delta": 2.0604333911569443
+        },
+        "t_contact_s": {
+          "mean_delta": -0.746445,
+          "min_delta": -3.0135000000000005,
+          "max_delta": -0.05499999999999994
+        }
+      }
+    },
+    {
+      "case_index": 2,
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.11",
+      "arm": "in_flight_hold_matched",
+      "primary": false,
+      "a": "mechanism",
+      "b": "realloc_only",
+      "n": 300,
+      "both_safe": 106,
+      "only_a": 0,
+      "only_b": 33,
+      "neither": 161,
+      "discordant": 33,
+      "delta": -0.11,
+      "pi_lower": 0.0,
+      "pi_upper": 0.10576281007457933,
+      "midp": 1.1641532182693481e-10,
+      "verdict": "b_superior",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 106,
+        "only_a": 0,
+        "only_b": 33,
+        "neither": 161,
+        "discordant": 33
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": 0.9672691095763001,
+          "min_delta": -0.324348345538076,
+          "max_delta": 4.138615815852916
+        },
+        "impact_tilt_rad": {
+          "mean_delta": 0.18143926779020234,
+          "min_delta": -2.0520373463568946,
+          "max_delta": 2.0047405600877606
+        },
+        "t_contact_s": {
+          "mean_delta": -0.6621633333333333,
+          "min_delta": -3.0425,
+          "max_delta": 0.08150000000000013
+        }
+      }
+    },
+    {
+      "case_index": 2,
+      "class": "two_opposite",
+      "cell": "h6_vz0_w2_d0.11",
+      "arm": "in_flight_hold_immediate",
+      "primary": false,
+      "a": "mechanism",
+      "b": "realloc_only",
+      "n": 300,
+      "both_safe": 121,
+      "only_a": 0,
+      "only_b": 27,
+      "neither": 152,
+      "discordant": 27,
+      "delta": -0.09,
+      "pi_lower": 0.0,
+      "pi_upper": 0.12770286761543237,
+      "midp": 7.450580596923828e-09,
+      "verdict": "b_superior",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 121,
+        "only_a": 0,
+        "only_b": 27,
+        "neither": 152,
+        "discordant": 27
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": 0.9482390019027404,
+          "min_delta": -0.21491766017280156,
+          "max_delta": 4.726594413079348
+        },
+        "impact_tilt_rad": {
+          "mean_delta": 0.20001071330029296,
+          "min_delta": -2.2230500564873363,
+          "max_delta": 2.0711634865078397
+        },
+        "t_contact_s": {
+          "mean_delta": -0.6861683333333333,
+          "min_delta": -3.2649999999999997,
+          "max_delta": 0.06350000000000033
+        }
+      }
+    },
+    {
+      "case_index": 3,
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "arm": "release_startup",
+      "primary": false,
+      "a": "mechanism",
+      "b": "realloc_only",
+      "n": 300,
+      "both_safe": 159,
+      "only_a": 17,
+      "only_b": 28,
+      "neither": 96,
+      "discordant": 45,
+      "delta": -0.03666666666666667,
+      "pi_lower": 0.2376782447277982,
+      "pi_upper": 0.5345898873536272,
+      "midp": 0.10380535550410741,
+      "verdict": "not_distinguished",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 159,
+        "only_a": 17,
+        "only_b": 28,
+        "neither": 96,
+        "discordant": 45
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": 0.33020666920211017,
+          "min_delta": -1.2931423696048954,
+          "max_delta": 1.9562772564291115
+        },
+        "impact_tilt_rad": {
+          "mean_delta": 0.021731383935237488,
+          "min_delta": -0.31976086763423517,
+          "max_delta": 0.5162280064331572
+        },
+        "t_contact_s": {
+          "mean_delta": -0.12975666666666666,
+          "min_delta": -0.402,
+          "max_delta": 0.2015
+        }
+      }
+    },
+    {
+      "case_index": 3,
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "arm": "in_flight_hold_matched",
+      "primary": false,
+      "a": "mechanism",
+      "b": "realloc_only",
+      "n": 300,
+      "both_safe": 289,
+      "only_a": 10,
+      "only_b": 0,
+      "neither": 1,
+      "discordant": 10,
+      "delta": 0.03333333333333333,
+      "pi_lower": 0.6915028921812392,
+      "pi_upper": 1.0,
+      "midp": 0.0009765625,
+      "verdict": "a_superior",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 289,
+        "only_a": 10,
+        "only_b": 0,
+        "neither": 1,
+        "discordant": 10
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": 0.006629349345458785,
+          "min_delta": -1.1585379485517169,
+          "max_delta": 1.1374896775601966
+        },
+        "impact_tilt_rad": {
+          "mean_delta": 0.015867405296559955,
+          "min_delta": -0.23612019560236663,
+          "max_delta": 0.656346164090938
+        },
+        "t_contact_s": {
+          "mean_delta": -0.10629999999999998,
+          "min_delta": -0.40700000000000003,
+          "max_delta": 0.2755000000000001
+        }
+      }
+    },
+    {
+      "case_index": 3,
+      "class": "partial_authority",
+      "cell": "h1.5_vz0_w6_d0.11",
+      "arm": "in_flight_hold_immediate",
+      "primary": false,
+      "a": "mechanism",
+      "b": "realloc_only",
+      "n": 300,
+      "both_safe": 300,
+      "only_a": 0,
+      "only_b": 0,
+      "neither": 0,
+      "discordant": 0,
+      "delta": 0.0,
+      "pi_lower": null,
+      "pi_upper": null,
+      "midp": 1.0,
+      "verdict": "no_discordant_pairs",
+      "interval_alpha": 0.05,
+      "feasible_trim": {
+        "n": 300,
+        "both_safe": 300,
+        "only_a": 0,
+        "only_b": 0,
+        "neither": 0,
+        "discordant": 0
+      },
+      "continuous": {
+        "n_both_contact": 300,
+        "impact_speed_m_s": {
+          "mean_delta": -0.0017007450932218415,
+          "min_delta": -0.00651525044056267,
+          "max_delta": 0.00037208680986122733
+        },
+        "impact_tilt_rad": {
+          "mean_delta": 0.011319344942549638,
+          "min_delta": -0.0035371031239834275,
+          "max_delta": 0.06444391284335343
+        },
+        "t_contact_s": {
+          "mean_delta": -0.05626666666666667,
+          "min_delta": -0.554,
+          "max_delta": 0.22499999999999987
+        }
+      }
+    }
+  ]
+}

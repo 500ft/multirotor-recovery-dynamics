@@ -7,6 +7,13 @@ log is kept at
 
 ## Week of 2026-09-28
 
+- **09-30** OQ-016 resolved with a new registered comparison (scenario 02):
+  four cases, both packages, three scenarios, 300 fresh paired draws each,
+  7,200 trajectories. All eight primary comparisons of in-flight against
+  release/startup differ after a Bonferroni correction. Losing one rotor gets
+  worse (−18 to −53 points of landing pass rate); two opposite rotors and
+  reduced authority improve (+9 to +41 points). The registration was committed
+  before the run ([#53](https://github.com/500ft/multirotor-recovery-dynamics/pull/53)).
 - **09-30** Proposed finish line for the V995: bench thrust and power, logged
   releases with an airborne logger board, and a comparison with the model.
   Waiting for the owner to confirm. README rewritten

@@ -39,9 +39,15 @@ nothing to run a controller on.
   monitor, LIS3DH accelerometer) has firmware and host capture code. It has not
   run on hardware.
 - CAD: the load-cell end adapter is generated. The cradle and base-plate
-  generators are written and tested, and are waiting on five measurements.
+  generators are written and tested. They need the full measurement worksheet
+  below, which supplies the pending CAD parameters and identifies the delivered
+  load-cell mounting pattern.
 - The aircraft's mass is an owner estimate of about 50 g. It decides whether
   the purchased 1 kg load cell can resolve the forces involved at all.
+- OQ-016 is closed. The requested [scenario comparison](Analysis/current-results.md#scenario-comparison-with-selected-cases)
+  has run on its newly registered cases. They reveal differences between the
+  release/startup and in-flight assumptions. The physical current step remains
+  the worksheet below.
 
 ## What's left
 
@@ -62,4 +68,5 @@ nothing to run a controller on.
   plan and gates are kept in the repository but are not being built.
 - Reverse-engineering the stock board (OQ-011).
 - A custom recovery controller or recovery flights.
-- Further simulation refinement before measured inputs exist.
+- Further simulation refinement. The next model update follows the V995
+  measurements.

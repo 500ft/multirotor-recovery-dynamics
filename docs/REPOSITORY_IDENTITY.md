@@ -35,19 +35,16 @@ does not replace the authoritative protocol or task ledger.
 
 ## Visual provenance
 
-The README lead image, [`media/hero.jpg`](media/hero.jpg), is AI-generated
-concept art of a guarded micro-UAV. It does not depict a flight test or the
-stock V995 platform.
+The README leads with the simulated recovery envelope,
+[`Figures/release_recovery_envelope.png`](../Figures/release_recovery_envelope.png).
+It is a simulation result with estimated inputs; its generator and inputs are
+in the [figure guide](data-and-figures.md). Once the V995 has been measured, a
+plot of measured thrust or a logged release should replace it.
 
-[`media/project-overview.svg`](media/project-overview.svg) is an original,
-editable conceptual diagram created for the repository presentation. It contains
-no measured values, synthetic plots or purported hardware photographs.
-Sources for its relationships: [Current results](../Analysis/current-results.md) and [bench preparation](../cad/bench/fixture-preparation.md).
-
-Each stage carries an explicit text label. Meaning does not depend on red/green
-color differences. The diagram has an SVG title and description; its caption and
-the adjacent README text state the evidence limits. Existing analytical figures
-retain their original files, generators and provenance contracts.
+[`media/project-overview.svg`](media/project-overview.svg) is an editable
+diagram of the project. It contains no measured values. Each stage has a text
+label, so the meaning doesn't depend on colour, and the SVG has a title and
+description for screen readers.
 
 ## Keeping navigation reproducible
 

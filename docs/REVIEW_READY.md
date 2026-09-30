@@ -50,7 +50,7 @@ Prepared 2026-09-05; software handoff completed 2026-09-06. Physical validation 
 - Artifact: local Python source/CLI and replay evidence, not a registry release or deployment.
 - Scope: measured-authority evidence admission and claims; no controller, dynamics, thresholds, estimates, or physical results changed.
 
-Roadmap: [SPRINT_ROADMAP.md](SPRINT_ROADMAP.md).
+Roadmap: [SPRINT_ROADMAP.md](https://github.com/500ft/multirotor-recovery-dynamics/blob/a1d5bf944247e55688d18af85cfe9efab1591b13/docs/SPRINT_ROADMAP.md).
 Status authority: [SPRINT_TASKS.csv](SPRINT_TASKS.csv).
 Checkpoints: [SPRINT_PROGRESS.md](SPRINT_PROGRESS.md).
 

@@ -2,8 +2,8 @@
 
 Can a small drone that is thrown, dropped or loses a motor get itself level
 again before it hits the ground? This repository models that recovery in
-simulation, and is now moving to bench and flight measurements on a stock
-Veeniix V995 micro-quad.
+simulation. The owner has yet to choose whether to close the simulation study
+or continue with bench characterization of the stock Veeniix V995 micro-quad.
 
 [![CI](https://github.com/500ft/multirotor-recovery-dynamics/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/500ft/multirotor-recovery-dynamics/actions/workflows/ci.yml)
 ![Evidence: simulation and nominal CAD](https://img.shields.io/badge/evidence-simulation_%2B_nominal_CAD-475569)
@@ -24,13 +24,13 @@ fall, how much torque the motors can produce, the battery's state, where the
 mass sits, and what any guard adds. A controller that looks good in one
 nominal case can still fail across realistic variation, so the model runs
 Monte Carlo sweeps over those variations and judges each case against a
-survivable-landing criterion.
+declared landing criterion.
 
-The simulation work used a designed 130–165 g vehicle with estimated and catalog
-inputs. The physical platform is now a stock V995 with its original board and
-transmitter. Its flight-ready mass still needs to be weighed, and the bench and
-CAD work target that aircraft. The V995 has its own
-parameter register and its own gates.
+The historical simulated aircraft was never built. Its mass, propulsion and
+other inputs came from estimates and catalog specifications. The available
+physical aircraft is a stock V995 with its original board and transmitter. It
+cannot run the simulated controller: no usable command or firmware interface
+has been established. Its flight-ready mass still needs to be weighed.
 
 ## Simulation results
 
@@ -39,11 +39,33 @@ All of these use estimated inputs. None has been checked against hardware.
 | Question | Result |
 | --- | --- |
 | Does the vehicle recover with the placeholder torque estimate? | 4% of trials at a 2 rad/s tumble, once part tolerances are included |
-| With a four-motor mixer model and a revised controller? | 300 of 300 in the reported sweep (a prediction, not a test) |
-| Does a guard around the airframe help recovery? | No. In paired trials the guarded design lost 69 of the 76 cases where the two designs differed; it adds mass and rim inertia it doesn't earn back |
-| Does a parachute help at these heights? | No. With inflation time modelled it saves 0 of 2,000 in every case; it needs about 10.5 m of drop, and the tallest case is 6 m |
-| One rotor out? | Marginal at 2 rad/s tumble, unrecoverable at 6 rad/s |
-| Two adjacent rotors out? | Nothing survives in any tested case |
+| With a four-motor mixer model and a revised controller? | 300/300 across the three reported tumble rates, with assumed arm length and datasheet thrust |
+| Does a guard around the airframe help recovery? | Guard contribution unresolved: the variants change mass, inertia, impact-speed limits, tilt limits and controller settings together |
+| Does a parachute help at these heights? | No landing passes in the stored sweep; the assumed delay before useful drag exceeds the available fall time |
+| One rotor out? | Landing passes depend on the release/startup case; see the [stored outcomes](Data/survivable_set_results.json) |
+| Two adjacent rotors out? | No landing passes in the tested release/startup cases |
+
+The [stored recovery results](Data/monte_carlo_results.json) give the placeholder
+percentage at 2 rad/s and the mixer total across 1, 2 and 3 rad/s. Both the
+mixer model and controller changed, so this comparison does not isolate the
+mixer's contribution.
+
+The [guard comparison](Analysis/survivable_set.py) changes the vehicle and
+landing thresholds together with the controller's minimum thrust while inverted.
+Paired trials therefore compare complete configurations; they do not establish
+the guard's separate contribution.
+
+The [parachute model](Analysis/survivable_set.py) assumes a nominal 0.8 s
+before deployment and 0.6 s of inflation with no useful drag. For a drop from
+rest, the ballistic distance over that 1.4 s is `g * t² / 2 ≈ 9.6 m`, already
+beyond the tested maximum of 6 m. This explains the
+[stored parachute outcomes](Data/survivable_set_results.json) under those timing
+assumptions. It is not a general minimum height for other parachutes or arbitrary
+initial velocities.
+
+The [landing verdict](Analysis/survivable_set.py) uses impact vertical speed and
+tilt only. It omits lateral impact speed, spin and physical damage criteria, so
+passing it does not establish crash survival.
 
 The rotor-out results above use a release/startup scenario that cuts all four
 motors during detection and startup. A new comparison ran 7,200 trajectories
@@ -86,13 +108,13 @@ regeneration and the pinned CadQuery environment.
 
 ## What's next
 
-Fill the [measurement worksheet](evidence/v995-fixture-measurements/README.md):
-27 rows in one unpowered bench session, covering the delivered load cell,
-the aircraft (including its flight-ready mass) and the bench. Then build the
-cradle and measure thrust and power against throttle. After that comes an
-airborne logger board to record what the stock controller does when the drone
-is released. The [roadmap](ROADMAP.md) has the steps; its finish line is a
-proposal waiting for the owner to confirm.
+The owner must choose between closing the simulation study and V995-only bench
+characterization (D3). If bench work is selected, the
+[27-row measurement worksheet](evidence/v995-fixture-measurements/README.md)
+remains its unpowered prerequisite. It covers the delivered load cell, aircraft
+mass and geometry, and bench dimensions. See the [roadmap](ROADMAP.md) for the
+pending scope choice. Logger development, release trials and a new aircraft
+are not authorized by this correction.
 
 ## Safety and limits
 
@@ -102,8 +124,6 @@ and [operating constraints](Safety/README.md) first.
 
 - Mass properties, propulsion, guard response and recovery have not been
   measured. A passing test or a good simulated sweep does not change that.
-- The stock V995 board has no known command or telemetry interface, so a
-  custom recovery controller can't run on it.
 
 ## Documentation
 

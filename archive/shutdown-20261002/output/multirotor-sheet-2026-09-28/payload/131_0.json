@@ -1,0 +1,1 @@
+[["tier", "max_recoverable_rate_rad_s", "max_recoverable_rate_deg_s", "envelope_edge", "max_torque_n_m", "max_thrust_n", "available_height_m"], ["best", 34.5, 1976.70439320134, "gyro_limit", 0.006, 5.0, 3.0], ["nominal", 3.5, 200.53522829578813, "failure", 0.004, 4.2, 3.0], ["worst", 1.0, 57.29577951308232, "failure", 0.0025, 3.5, 3.0]]

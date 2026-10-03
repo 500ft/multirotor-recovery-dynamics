@@ -1,0 +1,925 @@
+{
+  "purpose": "Shutdown preservation only. Historical work; no research resumed.",
+  "base_commit": "7c31c13",
+  "requested_branch": "wip/multirotor-recovery-dynamics-20261002",
+  "files": [
+    {
+      "original_path": "/Users/redhose/output/multirotor-recovery-dynamics_CAD-FEA-PCB-plan_2026-09-29.txt",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-recovery-dynamics_CAD-FEA-PCB-plan_2026-09-29.txt",
+      "bytes": 23578,
+      "sha256": "d7b4f79a46ab8d5424596b9ae775a016ec1cf9bc214f1970f2c8ce0c95a4a475"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-recovery-dynamics_literature-critique_2026-09-24.txt",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-recovery-dynamics_literature-critique_2026-09-24.txt",
+      "bytes": 34128,
+      "sha256": "1ba142b0004b175465a9955ef90e41551cb973fe6eb9ecabe68d38ad6f84c29d"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-recovery-dynamics_same-day-closeout_2026-09-25.txt",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-recovery-dynamics_same-day-closeout_2026-09-25.txt",
+      "bytes": 33156,
+      "sha256": "b64c7935e728d4b66addeb0e8eeab17ff94b7d879cefe7d3c062ea9182de1cac"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-recovery-dynamics_v995-board-research_2026-09-21.txt",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-recovery-dynamics_v995-board-research_2026-09-21.txt",
+      "bytes": 7950,
+      "sha256": "79045fb8f9a76c25eaa5e0d12f15b36c3203da39f1ba51c353a73296f1aa6e29"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-recovery-dynamics_week-plan_2026-09-19_to_2026-09-25.txt",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-recovery-dynamics_week-plan_2026-09-19_to_2026-09-25.txt",
+      "bytes": 57993,
+      "sha256": "e2147761139195e2e2ea71842b9a8ac75bfff5505650bb56469187bbe28c3c36"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-recovery-dynamics_week-plan_2026-09-20_hardware-revision.txt",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-recovery-dynamics_week-plan_2026-09-20_hardware-revision.txt",
+      "bytes": 52287,
+      "sha256": "5906f547ac28f4f8df9443b39a5f12b344c7bdd7e83fe95732c9273dad2b35fb"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-recovery-dynamics_study-reference.pdf",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-recovery-dynamics_study-reference.pdf",
+      "bytes": 46301,
+      "sha256": "f9c311ff812bdd0bc47838fdda69c0c921a29f6cc46cf4b2a4906e5439a55816"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/build_payload.py",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/build_payload.py",
+      "bytes": 24346,
+      "sha256": "1bc85eaa9a7cd587e4f31011aa32d5bd986638a0e43d67fbc315333b9a99ea1c"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/100_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/100_0.json",
+      "bytes": 2253,
+      "sha256": "8111df945db88e931611aa2bbfb7fd0f56baefd5793f568e319046e3a6d1c2b8"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/101_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/101_0.json",
+      "bytes": 340,
+      "sha256": "1421041298089e02638a7d7f4cb28828d5695e377baf906c166637c2a030f57f"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/102_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/102_0.json",
+      "bytes": 13391,
+      "sha256": "dad26ddad419d8ed8aa1c8f1384726ecf29c9dd2ad1fad833ae6f2531dfbbd03"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/103_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/103_0.json",
+      "bytes": 1622,
+      "sha256": "69127ae261cc0c18441f90dc2707c891827749363c80ac772741ce895c440b9e"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/104_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/104_0.json",
+      "bytes": 1102,
+      "sha256": "cda2cd8b8a8d57859f81f3bf326c5abb5af80003a44581bdcf4f9869d6c79252"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/105_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/105_0.json",
+      "bytes": 4509,
+      "sha256": "d119db234f6006bb755900e7eb51e7def69b58ac863de6b6d3f085f8a4f02089"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/106_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/106_0.json",
+      "bytes": 8230,
+      "sha256": "ee7b3c451cac70249706d7968708febbf2a2492bb4cb083711409eecefbab1bb"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/107_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/107_0.json",
+      "bytes": 3266,
+      "sha256": "faab91b4bd596e24516f9533280e0b4578c58b58f1367ade3674d5db5b6c95e8"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/108_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/108_0.json",
+      "bytes": 1997,
+      "sha256": "00b26170bfeb0e20e4d8f11f6541c4d29832d4d703df3321fbecc04f93049cae"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/109_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/109_0.json",
+      "bytes": 3117,
+      "sha256": "f498dd5ae82acc88ba645461073bb10fad60d8cb48c180d1ee44eea359ade18f"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/110_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/110_0.json",
+      "bytes": 5636,
+      "sha256": "c3f8ae98d1968df79e7fc349e176f9b2ea5af72e63fb6610c787f4e59b4aa342"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/111_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/111_0.json",
+      "bytes": 4683,
+      "sha256": "7fe7caadee570d0ccf05e990eb9a65274fd751ddfa80d70c41b5d51b0cace17c"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/112_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/112_0.json",
+      "bytes": 2141,
+      "sha256": "20f8b0403c397a6163bf494866f772ff41a588464dbbf29b5bfa2952c25cf878"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/113_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/113_0.json",
+      "bytes": 4234,
+      "sha256": "d0eed24dbf02181b627dffc614dd5aa50fc03dd4c7bf0259cce597330586824f"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/114_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/114_0.json",
+      "bytes": 2272,
+      "sha256": "bd6518543e4b9146c8b176a99c1b4b61ee93ef4f134e6f9f7a1a9ea444b5838b"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/115_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/115_0.json",
+      "bytes": 2491,
+      "sha256": "eda233a4f82c8ee8cb5c3c982da7ab3d9743995cee156d4873c3062ba8989d33"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/116_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/116_0.json",
+      "bytes": 4187,
+      "sha256": "1aac2bd6a18d7951d3b3e73e767f866a2bf6326184d77a01dc93a495779f96db"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/117_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/117_0.json",
+      "bytes": 187,
+      "sha256": "d1cff5b1e72b801dea8f77f264da1c06b3fb51ee182eca7fdd780ff471fb9b4b"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/118_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/118_0.json",
+      "bytes": 327,
+      "sha256": "31bd778903a88192290cfbc89e223cfc8479b60e4a8885366ca14728ab42d80b"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/119_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/119_0.json",
+      "bytes": 36333,
+      "sha256": "0a5e3fefdfefbc6e18255856919a4fb49390f1b0bf7ef7104f09df7c80c4525f"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/120_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/120_0.json",
+      "bytes": 13485,
+      "sha256": "87db93b29727053efdf48eb401142d16ceeb8724a10c4ce12ec862a745f6c4cd"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/121_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/121_0.json",
+      "bytes": 25112,
+      "sha256": "b2c8f53991bdc505ef3bcc5c069feb38caa19eb5df5c91b2b08843d387696dfe"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/122_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/122_0.json",
+      "bytes": 36671,
+      "sha256": "8dfbc7a874bbbf1490b23262d7aa3038e76b92e6d3d4f0fe320ed5773a264d27"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/123_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/123_0.json",
+      "bytes": 13438,
+      "sha256": "883f40ca0579cb28227c2ddc3f1f1c46144fd6517068c53bf920bf6d72a53268"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/124_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/124_0.json",
+      "bytes": 19163,
+      "sha256": "d1e4a9bb1cce9a194537489a23e8fee3c7f8b537aac791556579a9fbd55c41f1"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/125_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/125_0.json",
+      "bytes": 833,
+      "sha256": "413582897b6cdc67d192d0e74433c50381ad6a52bdc1f264f40e40985b548988"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/126_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/126_0.json",
+      "bytes": 49848,
+      "sha256": "c3b434ea65ac146285a75efcabf326989c8ac5525c27ac9dc0820cad20ab00b7"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/127_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/127_0.json",
+      "bytes": 863,
+      "sha256": "81cc7585957c9f3fb6ab7800a1cb7784ba7a2b4c98e0f47767e59b96c4baa504"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/128_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/128_0.json",
+      "bytes": 1735,
+      "sha256": "4361e0a37935c164c492ff8e1601af5ad321bef8de3e54d84fc30974861fdf7a"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/129_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/129_0.json",
+      "bytes": 1957,
+      "sha256": "2affe25d000f98eef45a934344f307733b9291f6c7940c6d1747f1aec5bf8639"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/130_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/130_0.json",
+      "bytes": 1173,
+      "sha256": "57c0d3e1904cdfc732ac00d6bfe48e40123310fd8afb4895746b1f1331550ae4"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/131_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/131_0.json",
+      "bytes": 338,
+      "sha256": "ba683ed1aeac08e0d1bc6c95f5452edd50f78729fb0cbce73b466ed4c75a9878"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/132_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/132_0.json",
+      "bytes": 15467,
+      "sha256": "1f6c3b20af8fea636d25561f0724c8ed5eec7b3aa666095335a3400cf2b14791"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/133_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/133_0.json",
+      "bytes": 1493,
+      "sha256": "76d7b583e51be2e0274a58241d1270c63c9bf4119ea66b21ac9d32c6e479b821"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/134_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/134_0.json",
+      "bytes": 613,
+      "sha256": "39dd0f173ce34ff2fd46eb3f3af6c4e5bd43d2f04973feea5be25deaf1410c80"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/135_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/135_0.json",
+      "bytes": 59522,
+      "sha256": "cc1375c06c1e41c6a6b9ba6a287b89bf1519d5563190742e5a93b77c8a3472e1"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/135_10200.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/135_10200.json",
+      "bytes": 72864,
+      "sha256": "e2be21de8a2ab2f47ecffd42b3f0ed28d283f1a9f24dc1b7912799359778a5ad"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/135_10800.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/135_10800.json",
+      "bytes": 63367,
+      "sha256": "14a844fcbe5469c9c2237f5a466597aca907a482b4e115b747e0eaa4972f71c6"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/135_11400.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/135_11400.json",
+      "bytes": 63379,
+      "sha256": "85381760862866848089433621165f89dafac695e00b96c32833120195ec30e6"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/135_1200.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/135_1200.json",
+      "bytes": 67909,
+      "sha256": "01a80a4555288c4d6edd91335d5d8a799619ebd81c4830a14bee636608d0eaeb"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/135_12000.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/135_12000.json",
+      "bytes": 106,
+      "sha256": "f13abd964e430ca879cd5ee5a42dfdaab7e2dfd9683154d28a82a317e2841d33"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/135_1800.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/135_1800.json",
+      "bytes": 68469,
+      "sha256": "a18ca5942f646ce9d9e6e62002b82c6580b08b37a917ad6df566eaa7cbe2153d"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/135_2400.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/135_2400.json",
+      "bytes": 69102,
+      "sha256": "2aaf022873af318bd2d145bed571d89889204f6b778c62f6a71b7e4f72f2ee27"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/135_3000.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/135_3000.json",
+      "bytes": 70462,
+      "sha256": "0523a0182295f2941399c7497018d9c8a703a474b3c05a4a52e9093ed78e0b24"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/135_3600.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/135_3600.json",
+      "bytes": 70648,
+      "sha256": "e7098479b2b51bd319159e28805316fed378285a2f336b982931fa71e0e51ddc"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/135_4200.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/135_4200.json",
+      "bytes": 71082,
+      "sha256": "9288038dcf7ec8d42a29cf91a123f519e62920555a28d357423b838fc930df91"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/135_4800.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/135_4800.json",
+      "bytes": 72127,
+      "sha256": "fa77fb829fef045019a0120dfb07cd5962ab25f28f670a15a7d1c31cbbc2af61"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/135_5400.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/135_5400.json",
+      "bytes": 72343,
+      "sha256": "0fa0657c2a6f4394eb7ec0b2bf4af08e58b6abf77f84a1a76a3b8024c790bdee"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/135_600.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/135_600.json",
+      "bytes": 61486,
+      "sha256": "28395d08c267e73610ee7be0b8f0d4ad90d3fa530560cf19cd57c7a8ae99360b"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/135_6000.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/135_6000.json",
+      "bytes": 73001,
+      "sha256": "dcc638a128532b29a674c6184f555b8b5de54c5f88344eeccbcb3c4ce0124ca8"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/135_6600.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/135_6600.json",
+      "bytes": 73077,
+      "sha256": "ef3e041bd4c6ad96dc2f38bdceb08398808a20e4fb2c2ece5b8ba1686d6f3cd8"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/135_7200.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/135_7200.json",
+      "bytes": 73575,
+      "sha256": "695e947a75216f4905f914553295fab3954332cf4dcf36207427e6e7b4becae6"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/135_7800.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/135_7800.json",
+      "bytes": 73151,
+      "sha256": "067751070aac18b7780b6492cd6f8e23ebbca9482af1a0c222ed9615a86e9587"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/135_8400.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/135_8400.json",
+      "bytes": 72844,
+      "sha256": "b6eeee3fed48d5ac75c38a709b2920a77c58e92aee26d794cf80600d1962cade"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/135_9000.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/135_9000.json",
+      "bytes": 73578,
+      "sha256": "ce8b0132337c29d62d99d3fc4d975698322a6ae80244835f9d9cafeef093ebda"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/135_9600.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/135_9600.json",
+      "bytes": 70023,
+      "sha256": "7b8102050065a754e664c24bc5d32f7b63883e6fc80f1d1caee10fd39d933464"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/136_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/136_0.json",
+      "bytes": 1698,
+      "sha256": "e0ec7df2949d45f9b4159a2d653862871a91df6a3236eedffa53bdc7776e1356"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/137_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/137_0.json",
+      "bytes": 637,
+      "sha256": "1b825d2999a5fe67b84587439dffe085aa5874553479c6bbe3dd90dad4c44821"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/138_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/138_0.json",
+      "bytes": 8875,
+      "sha256": "aaa01232eb7b1d811715100d231bc9e6a8044e0a3eebaed51278e5de7f9f0dca"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/139_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/139_0.json",
+      "bytes": 889,
+      "sha256": "010b7a99c9d793cc7977030ce9ab316d11d9354e38cf369d5d253bc1276eea05"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/140_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/140_0.json",
+      "bytes": 13122,
+      "sha256": "61e2d8d7910f0017cc6b46dc90eca5a287e00641c0e94b841883d417df1767da"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/141_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/141_0.json",
+      "bytes": 2298,
+      "sha256": "e9e5bc09822af6568fb50a80a2e311d39e95dcfe3fd385b9ea66e6cafe9af5f8"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/142_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/142_0.json",
+      "bytes": 1641,
+      "sha256": "494c1bbdde06d4599814477012d9f776eb39f38b1e97812acf668863766256a9"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/143_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/143_0.json",
+      "bytes": 5722,
+      "sha256": "4667eca5e337ed406a95b135c067996fbe52d93da1488fd201fa36693d8c3555"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/144_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/144_0.json",
+      "bytes": 2994,
+      "sha256": "d1ad8fb2e215d4873558529b1e2050269022a904da84a35e37203737490c7e01"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/145_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/145_0.json",
+      "bytes": 4018,
+      "sha256": "a5139d9f5743c63e2c4c164ef185c90c9d89e1950981ce6e30798efa918798bb"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/146_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/146_0.json",
+      "bytes": 1381,
+      "sha256": "d8cfdc83973f7b946da09523fc5ebf7623697c02711e892386e27eb9d1bc9493"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/147_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/147_0.json",
+      "bytes": 59126,
+      "sha256": "35ccf0225cf2ae3052a42ba095cf57e7f0dcebbd73adcd6aaadfddecce69648c"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/148_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/148_0.json",
+      "bytes": 37230,
+      "sha256": "8ebf2bd484ff683c35f6756332277dc499b4ae3fde149dad8600cef7f65f47a1"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/149_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/149_0.json",
+      "bytes": 152038,
+      "sha256": "76cd9dda5534c1beb61b001d19eabed1349de925849a02f572e3769e088065c3"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/150_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/150_0.json",
+      "bytes": 21887,
+      "sha256": "5b4804cbd0e08623ae0ab6d4b3b07917fbcf1846c620979067d0429904296f48"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/151_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/151_0.json",
+      "bytes": 4208,
+      "sha256": "9a86db4f916cf541641f2dbf0e21cc2da117eb8d7999bc6990fa75f808b7cc94"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/152_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/152_0.json",
+      "bytes": 211604,
+      "sha256": "04c9613b28fe3efa4db68d7043ec68dbfd775cd86b43407082fc622309fb5925"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/153_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/153_0.json",
+      "bytes": 2376,
+      "sha256": "7203efb46be0159208e10876978e3036695008601b51ddaac3e4dcfcb9d79729"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/154_0.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/154_0.json",
+      "bytes": 2978,
+      "sha256": "33d4272a89813b60a44e15e61e26d620bf23cd252fb5eec927e6ed96b208a3ce"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/payload/manifest.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/payload/manifest.json",
+      "bytes": 19480,
+      "sha256": "60d849160da2fdfb8508399f3a4aba5d95424c9cc7b7e23b428ec2999af64da0"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/100.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/100.png",
+      "bytes": 52190,
+      "sha256": "3c4e3cbe220c017f999a7657bdcd535f14d5137355faa70276e38cf26dd7d0cf"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/101.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/101.png",
+      "bytes": 32297,
+      "sha256": "154a9f51ed016c228f879b4839a61dd24ed19ebe834475baa83194bc771b283e"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/102.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/102.png",
+      "bytes": 94366,
+      "sha256": "6430d6bf7643df763f5d24241410008c6a591a180377a4ed2b8cb6f0a91c53b3"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/103.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/103.png",
+      "bytes": 32807,
+      "sha256": "4b4c3f1ba42891f942d8f00a66cac9a497094f6177c415266e8b068a0794958e"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/104.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/104.png",
+      "bytes": 20915,
+      "sha256": "53ccfa286977d57f73584424ef9001226ef58f14faac40327719312a3f9d4ccc"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/105.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/105.png",
+      "bytes": 35117,
+      "sha256": "e4c885b72022c955c62c52a98f6115f2178dd6a3b95d533c41219f6500684755"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/106.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/106.png",
+      "bytes": 77249,
+      "sha256": "9112f4ad9b9b9a67f4b0b0d94d47d058abd057a9691f783a8028c0785b9a3e89"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/107.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/107.png",
+      "bytes": 31410,
+      "sha256": "5f0473bb4c482fe7db4856f358c97a85c5a2123bd1be85347aa5666dc6d4cb21"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/108.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/108.png",
+      "bytes": 46101,
+      "sha256": "ad4eb7eb27dd5c27eace6a2780c3da106558e1a2a9e9da4c88a6a5d85fb982cb"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/109.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/109.png",
+      "bytes": 43452,
+      "sha256": "e9a4a9d66739efcd7243935b60a3935ecb3b399718cfe865b2ef22e8fc79b76c"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/110.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/110.png",
+      "bytes": 45393,
+      "sha256": "0686e176ec913adaf9e677f355372cb34f6035fabd648943e9b08ba64cc751de"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/111.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/111.png",
+      "bytes": 42294,
+      "sha256": "a8a3b3a4cd34caab9a579d7076249132a131ff723b55b631b348c71d71d5b7ff"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/112.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/112.png",
+      "bytes": 45436,
+      "sha256": "44dbf84b1a8bca2344133e9d1c4ab0268c1cee35762f6daaed10258d8697b452"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/113.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/113.png",
+      "bytes": 29207,
+      "sha256": "4d603168afece8c1ac49a60ea2815a267248ede194bc1d1a41874b635e74dfb8"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/114.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/114.png",
+      "bytes": 33465,
+      "sha256": "936c15e4d8948c202198d8e8bd76e158174ac2c170ff08da3f1557fe4ee9ced9"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/115.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/115.png",
+      "bytes": 21232,
+      "sha256": "5dbb17f75d70401d210efc21f75fca182e127888d8cb7e778024dde24d895ea2"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/116.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/116.png",
+      "bytes": 54619,
+      "sha256": "83b90fd65c7f39c35a728fe59429f7cfe070f976e1b27207495cf31a2cbcc162"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/117.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/117.png",
+      "bytes": 5748,
+      "sha256": "e0ceb8d036655352d9ddb37d8a5f83c25f4d549ca175b6c0fd9a3291680af345"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/118.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/118.png",
+      "bytes": 10578,
+      "sha256": "e0de95161b532c6badbede2e56086adda8e868c2d189115167e6b3f3ab9897a5"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/119.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/119.png",
+      "bytes": 39350,
+      "sha256": "ec2c5221390ab41aa12f68b52231d5267502460ea1720702c2dcf311f24dbbb7"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/120.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/120.png",
+      "bytes": 37964,
+      "sha256": "fa885267b5aca449d4d504a44778c1bf7c18bde5d45aea240a666be055ea32fc"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/121.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/121.png",
+      "bytes": 32639,
+      "sha256": "e83798278bfed90f7753fa328e8c0d678e32df9434f1a33c7968676b5649ceea"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/122.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/122.png",
+      "bytes": 39350,
+      "sha256": "ec2c5221390ab41aa12f68b52231d5267502460ea1720702c2dcf311f24dbbb7"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/123.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/123.png",
+      "bytes": 37964,
+      "sha256": "fa885267b5aca449d4d504a44778c1bf7c18bde5d45aea240a666be055ea32fc"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/124.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/124.png",
+      "bytes": 32999,
+      "sha256": "0e3467870d02c4f254f871cad79e2c55e9c06c9c049d47085fe22eabb005d324"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/125.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/125.png",
+      "bytes": 29601,
+      "sha256": "f4830530e231434d33ead2b1e49b2e511ddc022d97737460aaf1f91087e18263"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/126.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/126.png",
+      "bytes": 35024,
+      "sha256": "88f2567861209ffcca31cf64aabf4e6538cef91bd95c136fa2dfb23ff0da596e"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/127.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/127.png",
+      "bytes": 24937,
+      "sha256": "310db0b0369761b5501e8b3214fd68e9d1fc20e7eca5ace678296eb71031d840"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/128.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/128.png",
+      "bytes": 29176,
+      "sha256": "204bd2c7b22ff347dc312b95badf1477a4bdc4cdff43fadb883dc2dd518df67c"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/129.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/129.png",
+      "bytes": 36901,
+      "sha256": "43d93e497eea899a5f964a2b7de5c72b865e0604179316aeb68e4c7e5a6608b5"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/130.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/130.png",
+      "bytes": 28168,
+      "sha256": "980603008639ceb22df6ca94cb13d3d825070449c099abf2d46b06f1fcd68008"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/131.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/131.png",
+      "bytes": 19653,
+      "sha256": "33d2045eca15c41ae7abe75e938f9d4a090ca709c79e6e110023a1dd582a8947"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/132.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/132.png",
+      "bytes": 72610,
+      "sha256": "aa14422439123a8d9ab0de6d137510054e27229818fca2332ad04e99eb24916e"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/133.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/133.png",
+      "bytes": 14090,
+      "sha256": "0f6b45c8ceeae7b744ccf38abf55040af54259cbb43c2ae4c1ba1795156e24f7"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/134.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/134.png",
+      "bytes": 15928,
+      "sha256": "2d11e970bb8f40b7780ab34b69ac442fd95ced0f43b4f73a9360a315579a2b82"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/135.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/135.png",
+      "bytes": 22932,
+      "sha256": "97633c8126c805abbfda04a6b8760428bef2fb0707c1ef5e8aa163806e8ba1d9"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/136.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/136.png",
+      "bytes": 37073,
+      "sha256": "1fc04d8227f943f272b6243d429e65e101c2f888640d272e7e01297807e1aa0b"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/137.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/137.png",
+      "bytes": 15451,
+      "sha256": "aefbc6883cdca3756512fe89ad1ef33bf67c0a58fd8c02aab7f0860829b60c68"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/138.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/138.png",
+      "bytes": 20460,
+      "sha256": "ff5bc752d7ed42bf169e900f9a43d77d16d495d90d5c99716c783a76c6e14df6"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/139.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/139.png",
+      "bytes": 31008,
+      "sha256": "8dcf9a3555f8c6b8c79fa7a06bf714bd795e501b82dc8c755eaae625a4a3dbc1"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/140.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/140.png",
+      "bytes": 23245,
+      "sha256": "922cfc12706fcf5f8db6febcf1eb7ed6a7eb8af7911282531c8997162985ee40"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/141.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/141.png",
+      "bytes": 28623,
+      "sha256": "348e12355b9f41f38fe28db0d7e7841804596aa7f898657518b30256f2b6963a"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/142.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/142.png",
+      "bytes": 27384,
+      "sha256": "ead20d8adf8bf5e40b5baeab859e47e951cde0a6d622b5a3c89675f90790bd3c"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/143.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/143.png",
+      "bytes": 26759,
+      "sha256": "b63a23c88ab651c50a0efa8a3ef29ae0ce8d2fb85d06e37cdfdec06823c74db2"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/144.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/144.png",
+      "bytes": 21473,
+      "sha256": "7965129c813d410eb472333c9086a012bdbfc4127a2d1523ce71599c91f35e7f"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/145.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/145.png",
+      "bytes": 123546,
+      "sha256": "6682dcb12cfe0b269845daf67731f2188ed1d9b92df48852534184709281bf54"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/146.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/146.png",
+      "bytes": 27869,
+      "sha256": "4e704b6513d5579ba2d5cba85b3eee6624e82cf366b82a99668b6a42e00bcefe"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/147.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/147.png",
+      "bytes": 74915,
+      "sha256": "983ae9da2aacaff2b62d4d2a88bcc30f9923913d99547d190a993748df022012"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/148.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/148.png",
+      "bytes": 35112,
+      "sha256": "7849032208fbe55f0a4e58b5f8fb28fdca4e9a587f06d4cc279526944bc43cab"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/149.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/149.png",
+      "bytes": 17757,
+      "sha256": "f659b3744800c2f48864123920ebbe62fea6755b16b095d5f6bf9d8057406836"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/150.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/150.png",
+      "bytes": 163112,
+      "sha256": "04118b8c9d82f5ce905c21208fdf002391883805e606b20e70cea4864f76a51d"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/151.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/151.png",
+      "bytes": 47299,
+      "sha256": "091606c22a77de402b8f4f9de3291175407d21c5e128258bd339d9d16752a375"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/152.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/152.png",
+      "bytes": 27856,
+      "sha256": "8cd1e055144d482c11c71e49762a9d805d84a8300b8b8bf062e7ba50e2967e08"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/153.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/153.png",
+      "bytes": 138336,
+      "sha256": "fe977234a71cc5474bcc3c536e40900a0817587cc780e671fe4f4cb5b1ba59b0"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/154.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/154.png",
+      "bytes": 43259,
+      "sha256": "9e51b351b2f1b409d50b615d0d3ef58fcfcbb6236654a1ba5b223eccd0021478"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/montage-0.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/montage-0.png",
+      "bytes": 446715,
+      "sha256": "7c7a34cee8bdf94f9d2799fa3875ce253516d170324dd09bd6a500a402f00921"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/montage-10.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/montage-10.png",
+      "bytes": 284135,
+      "sha256": "3c2d0ba806efac825467973a0ae1a7ee61188370cd90fcb5962e6f58494a0e68"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/montage-20.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/montage-20.png",
+      "bytes": 280856,
+      "sha256": "674fea41234e244194aff107d2ece0a27b4782b39f5b0a9ce9017cef096bbad3"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/montage-30.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/montage-30.png",
+      "bytes": 239801,
+      "sha256": "c2e0e9b9fba9463af50ac2d25ff45d32ac3c0fca98b65254b219feff20d2cabf"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/montage-40.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/montage-40.png",
+      "bytes": 280882,
+      "sha256": "b741fac88b2e4806f9e8393489edc67a274b9424b4783fd33c434a10834c84d2"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/montage-50.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/montage-50.png",
+      "bytes": 248714,
+      "sha256": "69472b683dbed8cb899b461c921771627f7ed02be2fbc08021ba84134f72d31b"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/scenario-chart.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/scenario-chart.png",
+      "bytes": 43950,
+      "sha256": "51d0da8edcf94f4e11e407f8da68a1d39cbf63149af9c47a81c8b65f713f4bd8"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/previews/study-chart.png",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/previews/study-chart.png",
+      "bytes": 48090,
+      "sha256": "09e51bafc158eb77b5b0e9bff32da3baa1ce7953b9b5c3343d916a64928faeff"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/render.mjs",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/render.mjs",
+      "bytes": 1233,
+      "sha256": "3c5911e165a3ec8bd95fd05f33aa41dbc46518d1f8aded727adf9a428a934cb2"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/verification-final-summary.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/verification-final-summary.json",
+      "bytes": 188,
+      "sha256": "157175db9a7fd9cacb38ec58b63fa378550703ea996628a8a9d671d796e1b6c9"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/verification-final.xlsx",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/verification-final.xlsx",
+      "bytes": 1318298,
+      "sha256": "96e6ec5b31eebb0da7048bc9614ca1b70abad159f01ad0efd5eacbed5d7d5317"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/verification-summary.json",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/verification-summary.json",
+      "bytes": 287,
+      "sha256": "a5f71ff678b32e75e626424b8fed0b937ed009200c115e9bb757aab800a52a3d"
+    },
+    {
+      "original_path": "/Users/redhose/output/multirotor-sheet-2026-09-28/verification.xlsx",
+      "preserved_path": "archive/shutdown-20261002/output/multirotor-sheet-2026-09-28/verification.xlsx",
+      "bytes": 1250969,
+      "sha256": "253ee9dff5cbee7f0179e4aeb2a8d5c261c067bd56659bb679365a3ae107bc96"
+    },
+    {
+      "original_path": "192.168.1.10:C:\\Users\\admin\\Desktop\\Projects\\multirotor-recovery-dynamics\\SelfStablizingDrone.SLDPRT",
+      "preserved_path": "archive/shutdown-20261002/cad-host/SelfStablizingDrone.SLDPRT",
+      "bytes": 47931,
+      "sha256": "fa02d33716be6bf2fd07233355bb4eb5387e3b2f265e4fe7f907f1724ea55747"
+    }
+  ]
+}

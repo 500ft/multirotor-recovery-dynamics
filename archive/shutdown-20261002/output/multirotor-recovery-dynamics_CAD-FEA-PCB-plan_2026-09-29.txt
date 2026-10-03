@@ -1,0 +1,385 @@
+MULTIROTOR RECOVERY DYNAMICS — CAD, FEA AND LOGGER PCB HANDOFF
+Date: 2026-09-29
+Repository: 500ft/multirotor-recovery-dynamics
+Planning baseline inspected: origin/main, 79f7f3b, including V995 fixture PR #41.
+Owner decision: first PCB is a sensor/logger; retain the stock flight controller.
+Scope: engineering plan, not released manufacturing files or a completed analysis.
+
+1. WHAT WE ARE BUILDING
+
+Build a whole-aircraft force measurement fixture and a removable airborne logger
+for the stock Veeniix V995. The purchased load cells and acquisition modules stay
+on the bench. The flying board measures motion and battery voltage and stores
+time-stamped data. It does not command the stock flight controller or motors.
+
+Keep the manufacturer battery and charging arrangement: 3.7 V, 180 mAh battery,
+supplied charging cable and specified adapter. Do not add charging circuitry to
+the first logger. The owner's approximately 50 g aircraft mass is an estimate;
+measure flight-ready mass before assigning payload, thrust or structural limits.
+
+The stock board's processor, firmware, signal levels and control interface remain
+unidentified. A pad label or two-wire motor photograph does not establish a usable
+flight-controller interface. Reserve optional expansion pads; leave them unconnected.
+
+2. CORRECTIONS TO THE EXISTING CAD PLAN
+
+The current cad/v995 package contains an adapter generator and conditional cradle
+and base generators. The populated adapter dimensions are candidates/design
+choices, not an accepted assembly. Five pending parameters prevent full generation:
+aircraft_capture_width, aircraft_capture_length, cradle_wall_height,
+bench_anchor_spacing and bench_anchor_hole_diameter.
+
+A. The open U-shaped cradle needs a positive uplift restraint. A floor and side
+walls locate the aircraft but do not hold it down when thrust exceeds weight.
+Add a removable crossbar, strap or body-capture feature. Attach it entirely to the
+loaded side of the cell. A strap attached to the bench creates a parallel force
+path and invalidates the reading whenever it carries force. Do not clamp fragile
+guards or rotor arms without establishing their allowable contact load.
+
+B. Define fixed-end and loaded-end adapters separately. The candidate 80 mm cell
+drawing has different M4 and M5 end threads; its association with the delivered
+4540 cell is unconfirmed. The present 4.5 mm clearance-hole adapter cannot simply
+be copied onto both ends. Verify the actual cell, both patterns, thread depth and
+permitted mounting direction. The purchased 5 kg cell is not a drop-in substitute.
+
+C. Current plate/wall thicknesses and the 2 mm relief are design choices. Check
+load, deformation, fastener engagement and sensing-section clearance before
+calling them adequate. Computational geometry tolerances are not shop tolerances.
+
+D. Filling five missing parameters unblocks generation; it does not establish
+retention, structural adequacy, manufacturing fit or measurement accuracy.
+
+3. CAD WORK PACKAGES, IN BUILD ORDER
+
+CAD-01 — Aircraft reference assembly and coordinate system.
+Create simplified body, stock guards, battery, motor centres, rotor swept volumes,
+landing contacts and connector envelopes. Model the actual configuration used in
+tests. Record the body axes, capture station, rotor plane and sensor axes. Measure
+flight-ready mass and estimate/measure CG using a documented method. Detailed
+internal motor or stock PCB models are unnecessary; accurate envelopes suffice.
+Deliver: reference assembly, dimension/evidence sheet and measured keep-outs.
+FEA: none for an envelope model.
+
+CAD-02 — Delivered load-cell reference and both end interfaces.
+Record overall dimensions, fixed/loaded ends, hole coordinates, threads, usable
+engagement, cable exit and sensing-section keep-out. Include screws, washers and
+spacers in the model. Use separate fixed-end and loaded-end parts if needed.
+Deliver: verified interface drawings and parameter rows with source/uncertainty.
+FEA: adapters and joints; do not infer cell capacity from an idealised solid model.
+
+CAD-03 — Aircraft cradle and positive retention.
+Locate the fuselage repeatably without obstructing rotors, guards, battery access
+or antenna. Use broad contact pads, a repeatable stop and removable retention.
+Include retention hardware, contact surfaces and assembly clearance. Define the
+installed preload or tightening method so repeated installation is reproducible.
+Deliver: cradle, restraint, pads, fastener stack and interference review.
+FEA: uplift, gravity, eccentricity, restraint bending and attachment pullout.
+
+CAD-04 — Fixed-end pedestal, base and bench anchors.
+Maintain a clear sensing section. Locate the assembly on the actual bench/clamp
+pattern. Keep mounting loads out of the cell's sensing region. Include tool access,
+hardware stack and anti-rotation features where required.
+Deliver: base/pedestal, anchor layout, assembly drawing and installation method.
+FEA: bending/stiffness and joints; hand checks for slipping and overturning.
+
+CAD-05 — Calibration loading attachment.
+Provide a repeatable load point on the intended axis. Account for attachment mass,
+force direction and any pulley friction. Establish a traceable method for the
+direction used in testing, including force reversal where applicable. The jig must
+not touch a stationary surface and bypass the cell.
+Deliver: calibration accessory and a diagram of the calibration load path.
+FEA: hand calculation first; analyse any slender or highly loaded attachment.
+
+CAD-06 — Clearance-controlled overload stops, if the cell protection assessment
+requires them. Stops remain disengaged over the entire valid measurement range,
+including tolerance and elastic deflection. A stop-contact event invalidates the
+force record. Size the stop structure for its own specified load; do not imply
+that adding a stop makes a dynamic overload safe for the cell.
+Deliver: gap/tolerance stack and contact-state definition.
+FEA: contact/stop load case if this option is adopted.
+
+CAD-07 — Bench electronics tray and cable management.
+Mount QT Py, NAU7802, INA260 and the relevant connectors; locate load-cell analogue
+wiring away from motor power loops. Include strain relief and a flexible service
+loop across moving interfaces. Characterise cable force through zero/repositioning
+checks; a cable can act as an unwanted spring.
+Deliver: tray/enclosure, wiring route and connector labels. Usually no FEA needed.
+
+CAD-08 — Airborne PCB outline, mount and protection.
+Co-design PCB outline, component heights and mounting points with the fuselage.
+Keep mass close to the measured CG. Avoid the antenna, rotor/guard envelopes,
+battery removal path and heat sources. Prefer a short, stiff, removable IMU mount;
+soft foam can introduce motion that is not aircraft motion. Evaluate isolation
+only after measuring the vibration problem it is intended to solve.
+Deliver: board outline, STEP envelope, mount, axis marking, mass/CG budget and
+connector/programming access. Check added mass including wires and retention.
+FEA: mounting tabs/retention; modal analysis only if vibration evidence warrants it.
+
+CAD-09 — Complete assembly, drawings and inspection package.
+Assemble all hardware and purchased-part envelopes. Check interference, fastener
+access, load path, prop clearance, cable routing and assembly sequence. Drawings
+must specify datums, fits, tolerances, material and print/build orientation.
+Deliver: native CAD, STEP, BOM, drawings, inspection sheet and assembly instructions.
+
+CAD-10 — Later experimental accessories, each with a defined experiment.
+Possible items: IMU orientation fixture, optical timing target/breakbeam brackets,
+CG/inertia measurement jig and a controlled release fixture. Replacement guards,
+impact absorbers or parachute brackets require a selected recovery mechanism and
+payload allocation first. Retain the stock guards for the initial fixture/logger.
+
+4. STRUCTURAL AND FEA PLAN
+
+Define load cases before meshing. The force path is:
+aircraft -> cradle/retention -> loaded cell end -> sensing beam -> fixed cell end
+-> pedestal/base -> bench anchors.
+
+With downward positive, a screening vertical reaction is:
+Rz = (m_aircraft + m_loaded_fixture) g + F_external,z - Tz.
+Include signed inertial/transient loads for the relevant case. A retention preload
+internal to the aircraft/cradle system is not an additional net external load,
+although it does load local parts and contacts. Taring changes the display, not the
+cell's physical load. Moments follow M = sum(r cross F); an offset e gives T*e.
+Approximately 50 g corresponds to 0.490 N weight, not maximum thrust.
+
+Required load cases:
+LC1: installed dead weight, motor off.
+LC2: specified maximum credible steady thrust and resulting load reversal.
+LC3: eccentric thrust, lateral force and torque envelope with stated sources.
+LC4: restraint installation, handling and cable loads.
+LC5: overload-stop contact, only if adopted and with a specified load/event.
+LC6: logger mount inertia using measured or explicitly proposed acceleration.
+
+FEA-01: loaded adapter + cradle + retention. Resolve bending, contact pressure,
+joint bearing, slip and screw/insert pullout. Inspect deflection and rotor clearance.
+FEA-02: pedestal/base/anchors. Resolve load-cell mount rotation and deformation,
+fastener reactions, bearing and anchorage. Include bench/clamp compliance when it
+affects the result. Do not fix an entire plate face that is only locally clamped.
+FEA-03: logger mount. Check retention and clearance under the stated acceleration;
+compare mount stress to material/process allowables. Use hand checks where adequate.
+FEA-04: modal analysis, conditional. Use realistic mass and constraints; compare
+with measured excitation. Blade passage frequency is blade count * RPM / 60.
+Motor RPM and structural damping must be measured or bracketed. A modal model alone
+does not establish force measurement bandwidth or an isolation benefit.
+FEA-05: impact protection, deferred. Impact involves contact, deformation, material
+rate effects and possibly failure. Linear static FEA cannot certify a crash design.
+
+For each structural study deliver:
+- Geometry revision, material/process evidence, units, contacts, joints and loads.
+- Hand calculation for the dominant load path and order of magnitude.
+- At least three systematically refined meshes in the critical region.
+- Proposed numerical checks: reaction imbalance <=1% of applied force/moment
+  scales, and <5% change in the chosen convergent displacement/stress metric over
+  the final two meshes. These are numerical checks, not physical acceptance limits.
+- Investigate singular corner/contact peaks; do not use a non-convergent maximum
+  nodal stress as a strength claim.
+- Separate strength, stiffness, joint integrity and measurement error conclusions.
+- Explicit allowable loads, safety factors and clearance/rotation budgets with
+  their sources. Unknown limits remain unresolved, rather than receiving PASS.
+- For printed parts, process/orientation evidence and coupon or component checks;
+  an isotropic bulk material value is only a screening assumption.
+
+Follow 500ft/engineering-audit/docs/cad_agent_briefing.md: parameterised native
+SOLIDWORKS features, independent geometry oracle, parameter re-drive, reopen and
+STEP round-trip checks. Keep the project parameter register canonical. The briefing
+demonstrates a linear-static FEA route; automated assemblies, drawings and a fully
+independent FEA oracle are not established capabilities. Plan manual review where
+automation is incomplete.
+
+5. AIRBORNE LOGGER PCB — REQUIRED FUNCTIONS AND CANDIDATE PARTS
+
+This is a Rev A architecture. Component families below are researched candidates;
+package, footprint, passives and final procurement BOM require schematic review.
+
+U1: RP2040 MCU. Reuses experience with the purchased QT Py. Needs the complete
+Raspberry Pi reference support circuit: boot QSPI flash, clock network, power and
+core-regulator decoupling, reset/boot provisions, SWD and USB support if used.
+Select boot flash from the hardware guide's supported configurations. A small
+dedicated boot device plus separate log storage makes timing behaviour clearer.
+
+U2: LSM6DSOX six-axis IMU candidate. Provides acceleration AND angular velocity.
+The bought LIS3DH is acceleration-only and cannot directly measure body rates.
+Use SPI, a data-ready interrupt and sensor FIFO. Supply VDD/VDDIO at a supported
+3.3 V level and copy the manufacturer's decoupling/application requirements.
+Place on a mechanically stable region, away from the switching regulator and
+mounting stress. Mark axes on silkscreen and record the board-to-body transform.
+
+U3: dedicated serial log flash; W25Q64JV, 64 Mbit/8 MiB, is a candidate.
+Use a compatible 3.3 V package, local decoupling and defined control-pin states.
+Pre-erase before capture and use RAM buffering; measure worst-case page programming
+latency and prove that it cannot stall IMU servicing. Consider separate SPI buses
+if measured contention cannot be handled with FIFO/buffers.
+
+U4: 3.3 V regulator from the 1S battery. TPS63031 buck-boost is a candidate with a
+1.8-5.5 V input range. Select the inductor, capacitors, enable network and layout
+from its datasheet for the measured peak load. Switch current rating is not an
+output-current guarantee. Test rail droop during motor starts and flash writes.
+Set low-voltage behaviour appropriate to the battery/stock system; the regulator's
+minimum input rating is not permission to discharge the battery that far.
+
+Battery input: verified mating connector/polarity, suitable reverse-polarity
+protection, local bulk capacitance and an off/enable provision. The logger branch
+is parallel to the stock controller's supply. Do not route motor current through
+the small logger PCB or duplicate battery charging.
+
+Battery measurement: resistor divider + RC filter into MCU ADC. Determine divider
+ratio from maximum credible battery voltage including tolerances; keep the ADC
+within its input range. Account for ADC reference variation, source impedance and
+off-state leakage. Calibrate against a DMM; voltage alone is not precise state of
+charge. Never connect the battery directly to a 3.3 V GPIO/ADC.
+
+Programming/download: SWDIO, SWCLK, GND, target voltage sense, RUN and BOOT access.
+Prefer pads and a removable programming dock if a permanent USB connector consumes
+too much payload. If USB-C is fitted, include the correct USB device resistors,
+CC pull-downs, ESD protection and routing from the relevant reference design.
+Define USB/battery power handling explicitly before schematic release. A simple
+Rev A option is USB data only with a battery-powered target; a service supply may
+power the battery-input connector only with the battery disconnected. Never allow
+USB 5 V to feed the stock battery. An automatic dual-source design needs a reviewed
+power-path circuit and adds components/mass.
+
+Other required items: one low-current status LED with resistor; accessible power,
+ground and bus test pads; mounting holes or a defined adhesive/retention interface;
+board identity/revision and axis labels. Add a ground-referenced sync input pad for
+bench work. Leave UART expansion pads unconnected to the stock controller.
+
+Do not populate load-cell ADC, full-size purchased breakouts, motor drivers, radio,
+GPS, magnetometer or barometer on Rev A without a specific measurement requirement.
+An IMU cannot by itself provide reliable absolute altitude or touchdown velocity.
+Add an external reference measurement if those quantities are needed for validation.
+
+6. PROPOSED AIRBORNE CONNECTION MAP
+
+POWER:
+Stock battery + -> stock controller + (existing path retained).
+Stock battery + -> protected logger branch -> U4 -> 3V3.
+Stock battery - -> stock controller ground and logger ground.
+3V3 -> U1 reference power network, U2 VDD/VDDIO, U3 and boot flash.
+Battery + -> divider/filter -> U1 ADC input.
+Manufacturer charger -> stock battery by the original charging procedure.
+
+SIGNALS, provisional RP2040 GPIO allocation (verify package pins in schematic):
+GPIO2 / SPI0 SCK -> IMU SCK and log-flash CLK.
+GPIO3 / SPI0 TX  -> IMU SDI and log-flash DI.
+GPIO0 / SPI0 RX  <- IMU SDO and log-flash DO.
+GPIO1           -> IMU CS, inactive high by defined pull-up.
+GPIO5           -> log-flash CS, inactive high by defined pull-up.
+GPIO4           <- IMU INT1/data-ready.
+GPIO6           -> status LED through resistor.
+GPIO7           <- optional 3.3 V sync input, with defined idle state/protection.
+GPIO26 / ADC0   <- battery divider/filter.
+Dedicated QSPI pins -> boot flash; separate from the log-flash SPI wiring above.
+Dedicated SWD pins -> programming pads.
+Dedicated USB pins -> download connector/dock via reference support network.
+RUN/BOOT network -> accessible programming controls per RP2040 hardware guide.
+
+This allocation is a design proposal, not a verified routed pinout. Confirm GPIO
+multiplexing, boot states, pin numbering, footprints and unpowered behaviour before
+layout. Shared MISO requires both slaves to release the line while deselected.
+
+7. REUSE THE PURCHASED HARDWARE ON THE BENCH
+
+No second custom PCB is required to start. A bench carrier can be a later convenience.
+QT Py RP2040: timestamp acquisition and send records to the host.
+NAU7802: bridge excitation/readout for one selected load cell.
+INA260: whole-aircraft battery voltage/current/power at a defined measurement point.
+LIS3DH: bench/fixture acceleration; label location and axes, not aircraft gyro data.
+IR breakbeam: event timing; establish its physical meaning and detection uncertainty.
+
+Proposed wiring using BOARD LABELS, not raw RP2040 GPIO numbers:
+- QT Py STEMMA SDA1/SCL1 -> NAU7802 SDA/SCL, 3V/GND, address 0x2A.
+- QT Py side SDA/SCL -> INA260 SDA/SCL (default 0x40) and LIS3DH SDA/SCL
+  (0x18 or 0x19 depending address configuration), with compatible 3.3 V logic.
+- A0, configured digital input -> NAU7802 DRDY.
+- A1, digital input -> breakbeam output, with a 3.3 V pull-up and common ground.
+- A2, digital input -> LIS3DH INT1 if used.
+- A3, digital input -> INA260 ALERT if used, with appropriate pull-up.
+- Cell E+/E- -> excitation terminals; signal pair -> A+/A-. Determine actual
+  wire functions from the delivered cell documentation/verification, not colour.
+- Battery + -> INA260 IN+; INA260 IN- -> stock controller +.
+- Battery - -> stock controller - and measurement ground as required.
+
+IN+ and IN- are the series current path, not battery positive and negative. Power
+the INA260 logic from its supported logic rail. Decide whether the logger branch
+is upstream or downstream of this shunt: that determines whether its consumption
+is included. Use current-rated connectors/wire, not logic jumper wires, for motors.
+Measure harness/shunt voltage drop because it can alter the aircraft under test.
+
+QT Py STEMMA and side I2C pins are different buses; configure both explicitly.
+Check the aggregate pull-up resistance from all breakouts. The purchased single
+STEMMA cable is not sufficient to wire the complete system without other wiring.
+NAU7802 provides selectable rates up to 320 samples/s; 24-bit output does not mean
+24-bit system accuracy or 1 kHz force bandwidth. Extra ADC inputs do not imply two
+simultaneous conversion channels. Record the installed breakout revision.
+
+8. DATA AND ELECTROMECHANICAL REQUIREMENTS
+
+Record trial_id, board/firmware revision, monotonic acquisition timestamp, sequence
+number, acceleration, angular rate, battery voltage, sensor range/rate configuration,
+overflow/clipping flags and calibration identifier. Preserve raw values and units.
+Timestamp acquisition/data-ready events; a host USB receipt time is not the sample
+time. Use FIFO sample timing correctly when reading batches.
+
+Proposed sizing example, not a frozen requirement: a 32-byte record at 1 kHz is
+32 kB/s. An 8 MiB log device stores roughly 262 s before metadata/reserved space.
+Select an actual supported IMU output rate and design anti-aliasing for the intended
+measurement bandwidth. Test sustained capture, missed samples and write latency.
+
+Synchronise bench and flight streams using a defined common event/timebase and
+measure offset/drift. A wired sync pad is useful on the bench; it is not a wireless
+flight synchronisation solution. Optical events/LED timing require a measured
+latency and a reference recording method. Do not silently align unrelated clocks.
+
+Keep a payload budget for board, components, mount, wire and retention. As a scale
+example only, 5% of an actual 50 g vehicle would be 2.5 g; this is not an approved
+payload allowance. Establish the allowance from measured aircraft mass, hover/thrust
+margin, electrical draw and flight behaviour. Recheck CG after installation.
+
+9. EXECUTION AND ACCEPTANCE ORDER
+
+Step 1: capture dimensions/mass and verify cell interfaces. Record three repositioned
+readings for critical dimensions plus tool resolution, datum, photographs and source.
+Step 2: freeze the reference assembly and complete CAD-02 through CAD-04, including
+positive retention, cell clearance and the real bench anchors.
+Step 3: define signed loads/allowables and perform hand checks plus FEA-01/02.
+Step 4: finish drawings, hardware stack, inspection and calibration accessory.
+Step 5: prototype the logger acquisition/storage behaviour before committing its
+PCB outline. Demonstrate sustained capture and six-axis measurements on the bench.
+Step 6: co-design the airborne board/mount using the measured payload envelope.
+Step 7: complete schematic ERC, independent pin/power review, layout DRC, footprint
+checks, 3D interference check and BOM availability check before fabrication.
+Step 8: bring up a manufactured board with current-limited power; verify rails,
+boot/programming, IMU identity/axes, flash capture, voltage calibration and resets.
+Then verify motor-on power/noise behaviour on the retained, instrumented aircraft.
+Step 9: weigh the full installation, check CG/clearances and establish the limits
+of the first flight measurement campaign. Do not infer recovery capability from a
+successful static thrust test or logger boot.
+
+For handoff, produce three reviewable packages: (1) fixture CAD/drawings and FEA,
+(2) logger schematic/BOM/connection map, (3) board-and-mount integration plus test
+results. Pending measurements remain explicit parameters. No guessed dimension,
+unrun analysis or unverified hardware interface is labelled complete.
+
+10. SOURCE REFERENCES
+
+Project package:
+https://github.com/500ft/multirotor-recovery-dynamics/tree/main/cad/v995
+Shared CAD/FEA handoff:
+https://github.com/500ft/engineering-audit/blob/main/docs/cad_agent_briefing.md
+QT Py pinout and distinct I2C buses:
+https://learn.adafruit.com/adafruit-qt-py-2040/pinouts
+NAU7802 breakout and chip documentation:
+https://learn.adafruit.com/adafruit-nau7802-24-bit-adc-stemma-qt-qwiic/pinouts
+https://www.nuvoton.com/export/resource-files/en-us--DS_NAU7802_DataSheet_EN_Rev2.6.pdf
+INA260 and LIS3DH breakout connections:
+https://learn.adafruit.com/adafruit-ina260-current-voltage-power-sensor-breakout/pinouts
+https://learn.adafruit.com/adafruit-lis3dh-triple-axis-accelerometer-breakout/pinouts
+Breakbeam interface:
+https://learn.adafruit.com/ir-breakbeam-sensors/arduino
+RP2040 hardware design:
+https://datasheets.raspberrypi.com/rp2040/hardware-design-with-rp2040.pdf
+LSM6DSOX:
+https://www.st.com/resource/en/datasheet/lsm6dsox.pdf
+TPS63031:
+https://www.ti.com/lit/ds/symlink/tps63031.pdf
+W25Q64JV:
+https://www.winbond.com/hq/product/code-storage-flash/qspi-nor/w25q-jv/?__locale=en&partNo=W25Q64JVSFIQG

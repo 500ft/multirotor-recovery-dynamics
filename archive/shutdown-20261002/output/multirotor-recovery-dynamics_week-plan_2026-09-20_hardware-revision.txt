@@ -1,0 +1,854 @@
+MULTIROTOR RECOVERY DYNAMICS
+HARDWARE-BASED WEEK PLAN AND CLAUDE HANDOFF — REVISION 2
+Prepared: September 20, 2026
+Updated: September 21, 2026 — manufacturer specifications accepted; board research
+and engineering-audit CAD briefing incorporated.
+Remaining planning window: September 20–25; six work sessions, shiftable.
+Repository: https://github.com/500ft/multirotor-recovery-dynamics
+Scope of this deliverable: planning only. No firmware, CAD or experiments executed.
+
+SEPTEMBER 25 COMPLETION SEQUENCE
+For today's scenario-model and documentation closeout, read
+multirotor-recovery-dynamics_same-day-closeout_2026-09-25.txt first. It critiques
+the proposed ordering, supplies a concrete idealized fault registration, and
+separates required verification from optional model/statistics upgrades. It does
+not replace the physical R2–R6 prerequisites or mark those experiments complete.
+
+SEPTEMBER 24 LITERATURE AMENDMENT
+Read multirotor-recovery-dynamics_literature-critique_2026-09-24.txt alongside this
+plan. It corrects research framing and evidence claims using the updated repo
+(origin/main 97e432f), distinguishes installed configurations from runtime actions,
+and supplies an eight-hour Claude planning sequence. R2–R6 remain conditional on
+actual completed work; elapsed dates do not establish completion. The independent
+USB-powered bench logger need not wait for identification of the V995 stock PCB.
+The accepted manufacturer charger/battery specifications and CAD briefing stand.
+
+READ THIS FIRST
+==============
+
+The Owner has components and a usable bench. On September 20 they supplied two
+purchase-list photos and a photo of the actual drone they intend to instrument.
+This changes the critical path. This week should establish a reliable measurement
+system and identify what can be measured and controlled on that drone.
+
+The main deliverable is a reproducible bench record linking force, electrical
+power, acceleration and event timing, with calibration and stated limitations.
+The next control-development decision should follow from those measurements and
+the stock flight controller's actual capabilities.
+
+This file supersedes the SCHEDULE and HARDWARE ASSUMPTIONS of:
+  multirotor-recovery-dynamics_week-plan_2026-09-19_to_2026-09-25.txt
+Retain that file's detailed simulation critique as a backlog. Do not attempt both
+full weekly schedules. The earlier paired 576-run simulation pilot is deferred.
+The week is not complete merely because sensors print numbers, nor does a working
+logger demonstrate autonomous recovery, motor-loss tolerance or survivability.
+
+Instructions to Claude:
+  Read current repo instructions and reconcile current branches before changing
+  anything. Preserve historical studies, Owner decisions and raw evidence. Reuse
+  existing analysis and evidence conventions. Build one reviewable slice at a time.
+  The Owner performs physical work; Claude prepares code, drawings and procedures,
+  and reviews returned records. This handoff is not a record of physical approval.
+  Do not infer a merge, purchase, firmware replacement or hardware operation from
+  an unchecked task. Follow the Owner's execution instructions at handoff.
+  For CAD/FEA work, also read the Owner-designated cross-project briefing:
+  500ft/engineering-audit -> docs/cad_agent_briefing.md.
+  Section 15 records how to apply it here without importing another vehicle's
+  geometry or changing this project's evidence register.
+
+
+1. WHAT THE PHOTOS ESTABLISH
+===========================
+
+Evidence P1: /Users/redhose/Downloads/IMG_3886.HEIC, purchase list, page 1.
+Evidence P2: /Users/redhose/Downloads/IMG_3887.HEIC, purchase list, page 2.
+Evidence P3: /Users/redhose/Downloads/IMG_3883.HEIC, exposed drone electronics.
+Photos were visually inspected. Item identities below are readable purchase-list
+entries, supported by the Owner's statement that these are the items bought.
+They do not establish delivered PCB revisions, calibration, dimensions or function.
+
+Qty  Adafruit PID  Readable item                                      Role
+1    4538          NAU7802 24-bit ADC, STEMMA QT/Qwiic                 Bench force ADC
+1    4900          QT Py RP2040                                      Acquisition MCU
+1    4226          INA260 voltage/current/power sensor                Electrical data
+1    2809          LIS3DH three-axis accelerometer, +/-2/4/8/16 g      Motion data
+1    2168          IR break-beam pair, 5 mm LEDs                      External event gate
+1    4540          Four-wire 1 kg load cell                           Force candidate
+1    4541          Four-wire 5 kg load cell                           Alternate candidate
+1    4210          STEMMA QT/Qwiic JST SH 4-pin cable, 100 mm          MCU-to-ADC link
+1    1951          Female/female jumper set, 20 x 75 mm               Logic connections
+1    1957          Male/male jumper set, 20 x 150 mm                  Logic connections
+
+The invoice product thumbnails are not delivered-board photographs. In particular,
+do not identify the NAU7802 or LIS3DH revision from those thumbnails.
+
+P3 visibly establishes four guarded, three-blade rotors, a central populated PCB,
+and motor wiring. The visible two-wire connections suggest brushed motors; that
+is an engineering inference to confirm, not an established model specification.
+Owner clarification on September 20: the drone is a Veeniix V995, around 50 g.
+Record the model as OWNER_IDENTIFIED and the mass as OWNER_ESTIMATE, not a scale
+measurement. Battery/configuration inclusion in that estimate remains unspecified.
+Veeniix's indexed manufacturer FAQ lists a 3.7 V, 180 mAh battery for the V995;
+use that manufacturer specification for planning. The Owner explicitly accepts
+the manufacturer's charger specification: 5 V DC, 2 A adapter supplying the
+provided charging cable. No further label-confirmation task is needed for these
+catalog specifications. Keep their source as MANUFACTURER_SPECIFICATION. The
+charger input and flight battery are separate electrical interfaces. [S12]
+Exact flight-ready mass, motor part numbers, firmware and accessible control/
+telemetry interfaces remain unverified. The public product description establishes
+stock remote-control functions, not a programmable external control API. [S12]
+Prop A/B markings do not establish the project's motor numbering or spin direction.
+There is no scale reference suitable for accepting dimensions from this photo.
+
+When publishing evidence, transcribe product rows and relevant hardware labels.
+The invoice contains unrelated personal/payment/shipping details; those have no
+engineering purpose in the public repository and should not be copied into it.
+
+
+2. CHANGES TO THE EARLIER PLAN
+============================
+
+Issue | Why it matters | Severity | Fix | Strong approach
+
+Different actual drone | Old hardware limits may not apply | Major |
+  Identify the platform before adaptation | Separate legacy design and actual
+  demonstrator profiles, each with its own evidence and allowed claims.
+
+Purchased cells differ from Phidgets candidate | Fixture geometry and calibration
+  are different | Major | Rebuild the cell-interface candidate sheet around
+  PIDs 4540/4541 | Select the lowest capacity that meets installed load and
+  measurement requirements; preserve the earlier candidate as historical research.
+
+Adding every purchased item onboard | Unnecessary mass and wiring can consume
+  the drone's unknown payload margin | Major | Keep force instrumentation and
+  beam gate on the bench | Consider an onboard logger only after mass/power review.
+
+No identified programmable control interface | Sensing does not provide motor
+  authority | Major | Record telemetry and command capabilities separately |
+  Treat the drone as a stock controlled plant until documented access is proven.
+
+Accelerometer mistaken for full IMU | Recovery study requires angular-rate data |
+  Major | Mark gyroscope/attitude observability unresolved | First investigate
+  accessible stock telemetry; add an IMU only if that leaves a real measurement gap.
+
+Force ADC mistaken for fast impact instrumentation | Sample rate, filter delay,
+  fixture dynamics and overload affect transient readings | Major |
+  Validate static force first | Report only the bandwidth and force range tested.
+
+Unverified power connections | Could damage hardware or short the battery |
+  Critical if attempted | Separate logic supply, current path and drone power |
+  Produce a named-pin wiring sheet and verify with a current-limited dummy load.
+
+Historical simulation transferred to new vehicle | Motor type, inertia, voltage,
+  geometry and stock controls are not interchangeable | Major |
+  Keep old results attached to their original model | Calibrate only quantities
+  the new experiments actually identify.
+
+The useful software critiques from the old plan remain valid: protect results,
+make trials replayable, distinguish release/startup from in-flight motor failure,
+use actual touchdown states, separate controller effects from plant changes,
+and distinguish simulated confidence from physical reliability. Their full
+implementation is no longer the primary allocation for these six sessions.
+
+
+3. PROPOSED MEASUREMENT ARCHITECTURE
+==================================
+
+Mechanical load path:
+  Drone or test article -> documented cradle/load interface -> selected load cell
+  -> fixed bracket -> bench attachment.
+
+Force signal path:
+  Load-cell bridge -> NAU7802 -> QT Py -> USB -> computer raw run directory.
+
+Electrical signal path:
+  INA260 -> QT Py -> same logger clock/run ID.
+
+Motion signal path:
+  LIS3DH on the test article -> QT Py -> same logger clock/run ID.
+
+Event signal path:
+  External beam emitter/receiver -> QT Py digital input -> event record.
+
+Initial placement:
+  Bench: load cell(s), NAU7802, QT Py, INA260, beam gate and computer.
+  Test article: only LIS3DH and its required secured wiring when acceleration of
+  the article is the measurement. The load-cell cradle is a restraint, not payload.
+  A later onboard package might contain QT Py + LIS3DH + validated power/storage.
+  That is conditional on measured mass, CG, supply and recording feasibility.
+  USB-tethered data is bench data; a USB cable changes the dynamics of free flight.
+
+Use one load cell at a time for the first calibrated chain. New NAU7802 Rev C
+boards expose A and B differential inputs; earlier boards expose only A. Confirm
+the actual terminal labels. Two inputs share the conversion chain, so they do not
+provide simultaneous independent force samples. Dual-cell operation would need
+channel identities, settling, excitation-load and timing checks. It is unnecessary
+for the first week's default experiment. [S1, S2]
+
+Recommended initial cell: 1 kg, CONDITIONAL on the installed load budget and
+demonstrated resolution. Its nominal mass-equivalent rating corresponds to about
+9.81 N using standard gravity; the 5 kg rating corresponds to about 49.0 N. Those
+are calculated conversions, not test results or impact ratings. Adafruit advises
+capacity of at least twice intended maximum load; use that as an initial selection
+screen while assessing preload, dynamic excursions, off-axis load and fixture
+strength separately. A tare removes an offset from the data, not physical load.
+Do not automatically prefer the 5 kg cell because its number is larger. [S3, S4]
+
+The vendor lists different nominal lengths for the two cells, 80 mm and 75 mm.
+This alone rules out assuming one interchangeable mounting drawing. Inspect the
+delivered bodies and source drawings before accepting any hole locations. [S3, S4]
+
+Planning-scale calculation using the Owner's approximate 50 g mass:
+  Hover-equivalent weight = 0.050 kg * 9.80665 m/s^2 = about 0.49 N.
+  This is about 5% of the 1 kg cell range and 1% of the 5 kg cell range.
+  Therefore the relevant question is demonstrated low-force resolution, not just
+  overload capacity. Maximum thrust is still unknown and is not equal to weight.
+  An added 2 g / 5 g / 10 g package would add about 4% / 10% / 20% to a 50 g
+  baseline. These are calculated mass fractions, not approved payload allowances.
+  The listed 29 g nominal 1 kg cell alone would add about 58%; it belongs in the
+  bench apparatus. [S3] Weigh the delivered electronics, mount, wires and power
+  hardware before proposing an onboard package; do not assume catalog board mass
+  represents the complete installation.
+
+
+4. ELECTRICAL DESIGN THAT CLAUDE SHOULD MAKE CONCRETE
+==================================================
+
+Prepare a connection table with: source board/pin, destination board/pin, voltage,
+signal direction, bus identity, wire/connector, source reference and verification.
+This is a proposed topology, to be checked against the actual board revisions.
+
+E1. Start with USB power for the QT Py on the bench and 3.3 V sensor logic.
+    The QT Py STEMMA connector uses I2C1; its labeled SDA/SCL pads use I2C0.
+    In CircuitPython, use board.STEMMA_I2C() for that connector; board.I2C()
+    selects the other bus. In Arduino the connector is Wire1. [S5]
+    Proposed allocation: NAU7802 via the purchased QT cable on I2C1; INA260 and
+    LIS3DH via headers on I2C0. Do not bridge the two buses accidentally.
+    Expected addresses: NAU7802 0x2A, INA260 default 0x40, LIS3DH 0x18 or 0x19.
+    Confirm scans and device identity/configuration; an address ACK alone is not
+    proof that the intended sensor is present. [S1, S6, S8]
+
+E2. Power the INA260 logic from 3.3 V so its SDA/SCL pullups match the MCU.
+    For an eventual high-side measurement:
+      battery positive -> INA260 Vin+ -> internal shunt -> Vin- -> drone positive;
+      battery negative -> drone negative, with a reviewed common logic reference.
+    Vcc powers the sensor electronics; it is not the motor-power input. Vin+ and
+    Vin- are opposite ends of the series shunt, NOT battery positive and negative.
+    Identify the VBus sensing node: the Adafruit board normally ties it to Vin+.
+    Name the logged voltage accordingly, rather than claiming motor-terminal
+    voltage after wiring losses. [S6]
+    Keep motor current out of breadboards, QT cables and logic jumper wires.
+    Select power leads/connectors using the actual current, connector and battery
+    evidence. The INA260 chip's 15 A headline does not rate the full harness. [S7]
+
+E3. Connect bridge excitation to E+/E- and differential signal to A+/A- using
+    verified cell wiring, not color alone. Verify load sign with a known load.
+    Budget bridge current I_exc = V_exc / R_bridge. At a 3.3 V ADC supply, choose
+    a supported excitation setting with LDO headroom; the NAU7802 data sheet
+    requires supply at least 0.3 V above its regulated analog output. A 2.4 V
+    starting setting is a proposal to check against the delivered bridge and
+    required sensitivity. Record excitation, gain, rate and calibration. [S2]
+    ADC internal calibration is not calibration of force in newtons.
+
+E4. Use the beam receiver's open-collector output with a pullup to MCU 3.3 V.
+    Confirm clear/blocked polarity empirically. If the optics are supplied from
+    5 V, the signal pullup still belongs at 3.3 V for this MCU. [S9]
+    Reserve an unused digital pin after the complete pin map is reviewed.
+    Beam sensing marks a crossing; it does not command a motor cut or mechanically
+    define release unless a separate verified arrangement establishes that link.
+
+E5. Inventory a USB data cable, header soldering requirements, insulation, mounting
+    hardware and suitable power connectors. One QT cable does not interconnect
+    all listed boards. Use existing headers/jumpers where suitable; identify exact
+    missing connections before proposing purchases. Secure connections before
+    vibrating tests; loose bench jumpers are not an airborne harness.
+
+E6. Leave drone power untouched until connector polarity, accessible rail,
+    current budget and grounding scheme are known. Do not carry over the previous
+    7.0 V propulsion test setting or assume a 5 V accessory output on this drone.
+    Use the accepted V995 manufacturer specification: 3.7 V/180 mAh battery and
+    5 V DC/2 A charger-adapter input. Retire the earlier battery-label verification
+    task. Board rail identification remains necessary for an accessory connection.
+    A future battery-powered QT Py needs a specific regulator/protection design,
+    mass and voltage-range checks. USB operation does not establish that design.
+
+
+5. SIX-SESSION SCHEDULE
+======================
+
+Budget: approximately 25 hours of Claude/engineering preparation, implementation
+and review, plus approximately 8 hours of Owner bench work, which may overlap.
+Fabrication and missing equipment can extend elapsed time. These are estimates.
+No session is presumed completed merely because its proposed date has passed.
+
+Session/date   Work package                                Agent h   Owner h
+1 / Sep 20     R1 platform identity and experiment scope       3        1
+2 / Sep 21     R2 wiring and acquisition bring-up              5        2
+3 / Sep 22     R3 force fixture and calibration                5        2
+4 / Sep 23     R4 synchronized multi-sensor recording          4        1
+5 / Sep 24     R5 bounded characterization or bench fallback   5        1
+6 / Sep 25     R6 evidence integration and next decision       3        1
+                                                             --       --
+                                                             25        8
+
+If fixture completion exceeds this window, finish the electronics and calibration
+analysis using appropriate static loads on a suitable installed calibration mount.
+Do not rush a rotating-prop experiment to satisfy a date. Calibration without a
+powered drone is already a substantial first-week deliverable.
+
+
+6. R1 — IDENTIFY THE ACTUAL PLATFORM AND THE FIRST QUESTION
+=========================================================
+
+R1.1 Capture current repo/branch/PR state before editing. The earlier inspection
+     was September 19: main eb5cf959703f9323a7996d07cd5fb9e92dbf65a2,
+     A2 candidate 03d6b4969740cfb232753853bcfc399e425b8151. These are historical
+     references, not a claim that the remote has remained unchanged today.
+     Local checkout: /Users/redhose/SelfStabilizingDrone. Read docs/DAY4_PLAN.md,
+     cad/bench/source-candidates.md, cad/bench/fixture-definition.md and the
+     measured-authority-gate evidence contract from the actual working baseline.
+
+R1.2 Transcribe P1/P2 into the evidence inventory; assign IDs to the physical
+     boards/cells on receipt inspection. Record revision, assembled headers,
+     condition and label evidence. Separate PURCHASE_REPORTED, INSPECTED,
+     FUNCTION_CHECKED and CALIBRATED states. These states are not interchangeable.
+
+R1.3 Record the Owner-identified Veeniix V995; verify the unit's label/revision.
+     Owner records connector polarity, PCB markings,
+     motor wire count/type, flight-ready mass with battery, body axes and rotor
+     center locations. Weigh the proposed sensor/wiring/mount package separately.
+     Measure accessible interfaces without changing prop fits or motor wiring.
+     Use the original canopy/configuration for a stock baseline or record every
+     removed part; the exposed photo is not proof of the normal flight configuration.
+
+R1.4 Create a capability table: stock manual control; telemetry readout; command
+     input; firmware source/flashing; per-motor command; emergency stop behavior.
+     Mark each documented/tested/unknown/unavailable with evidence. Seeing a PCB
+     or test pad does not establish UART, SWD, MAVLink or ArduPilot compatibility.
+     Do not use QT Py GPIO as motor drivers. If brushed motors are confirmed,
+     brushless ESC/DShot procedures from the old design do not apply directly.
+     Read the accompanying V995 board-research note dated September 21. Inspect
+     the central chip, underside and exposed CLK-marked pad group before expanding
+     the interface search. A clock label is a lead, not a demonstrated SWD port.
+
+R1.5 Define two separate platform identities: the historical designed micro-UAV
+     and this actual demonstrator. Preserve the old EX1103/Gemfan/Kakute/2S
+     assumptions with the historical model. Identify the smallest existing config
+     mechanism that can represent a new platform, without overwriting frozen
+     studies or building a generic hardware-abstraction framework this week.
+     Analysis/hardware_resources.py specifically validates the locked Kakute
+     resource allocation; its PASS cannot validate the photographed stock PCB.
+
+R1.6 Choose the first measured question:
+     Preferred: Can this acquisition chain resolve repeatable axial force and
+     electrical power under documented static/steady bench conditions?
+     Conditional next: What does the complete stock drone produce under repeatable
+     operator commands, and is a small logger package plausible by mass and CG?
+     Later: Can an accessible controller execute a defined recovery intervention?
+     The first two questions remain useful if the third is currently inaccessible.
+
+Acceptance: identified inventory plus a platform capability sheet, with unknowns
+explicit; one selected measurement question; no unverified control capability.
+
+
+7. R2 — BRING UP A SMALL, RELIABLE ACQUISITION SYSTEM
+===================================================
+
+R2.1 Implement the E1–E6 wiring sheet. Owner checks power-off continuity/polarity
+     and supplied board revisions. Bring up USB/MCU alone, then one sensor at a
+     time, then combine. Use a suitable current-limited dummy load for electrical
+     measurement verification before connecting the drone's power circuit.
+
+R2.2 Use one maintainable acquisition stack. Default proposal: CircuitPython on
+     QT Py, existing Adafruit/CedarGrove drivers, and a small host capture script.
+     Pin firmware/library versions. If measured buffering/timing cannot meet the
+     declared rates, document that result before choosing a C++ implementation.
+     Do not port the flight controller as part of logger bring-up.
+
+R2.3 Implement raw acquisition before plots. Save device timestamps, sequence
+     numbers and configuration alongside raw readings. Use nonblocking scheduling
+     or bounded timeouts; an unavailable ADC must not freeze the beam/event logger.
+     Use data-ready status where available; repeated polls are not new samples.
+     Record startup/reset epochs and distinguish sensor failure from a real zero.
+
+R2.4 Initial proposed settings, to verify with readback and sustained timing:
+     NAU7802: one channel, 80 samples/s; compare 10 samples/s for static noise.
+     LIS3DH: 100 samples/s; +/-2 g for static checks; choose a documented wider
+       range before a dynamic test and repeat applicable scale checks.
+     INA260: target approximately 100 fresh records/s only if configured conversion
+       times and averaging permit it; report actual rate and measurement window.
+     Beam: edge capture with recorded polarity and timestamp basis.
+     These are engineering starting settings, not validated performance claims.
+     NAU7802's supported output-rate options are documented in S10; LIS3DH modes
+     and ranges in S11; INA260 timing configuration in S7.
+
+R2.5 Demonstrate a 10-minute stationary record. Acceptance target: no unexplained
+     sequence gaps, time reversal, silent resets or falsely fresh samples. Report
+     measured rate, p50/p95/max time interval and every detected drop/overflow.
+     Deliberately exercise a stopped sensor read, host interruption and MCU reset
+     in a nonpowered bench setup. Capture must mark incomplete runs rather than
+     silently splice clock epochs or reuse the last value as fresh data.
+
+R2.6 Provide a one-command host capture workflow and one-command offline replay.
+     Use a new run directory; refuse accidental overwrite. Keep raw files immutable
+     after capture and derive processed files separately. Reuse the old plan's
+     W02 principles without implementing the entire simulation runner overhaul.
+
+Acceptance: saved replayable data from each sensor, explicit timing/error states,
+a completed wiring record and a demonstrated reset/disconnect behavior.
+
+
+8. R3 — CALIBRATE INSTALLED FORCE, NOT JUST ADC COUNTS
+===================================================
+
+R3.1 Draw the free-body diagram for the selected load direction. Define fixed end,
+     loaded end, force application point, preload, clearance and load sign. Show
+     every restraint/cable force. The intended measurement component must pass
+     through the cell; another rigid support must not bypass it. The sensing
+     section must remain free to deform. A load cell operating in bending can
+     still implement the repo's direct-force route; do not confuse its internal
+     mechanism with an external force-multiplying lever.
+
+R3.2 Resolve the installed load budget before selecting 1 kg versus 5 kg. Include
+     article/adapter weight, expected force direction, maximum credible applied
+     force and disturbance loads. Check mount and bench attachment separately.
+     An unknown thrust maximum must be bounded before a powered test, not used
+     as a reason to assume the maximum is small. Keep spinning-prop work conditional
+     on the actual fixture review, remote stop and facility arrangements.
+
+R3.3 Verify cell geometry, threads, usable engagement and load direction from the
+     delivered part/drawing. Do not reuse Phidgets dimensions, motor-hole patterns
+     or prop-hub tolerances. A whole-drone cradle uses different interfaces from
+     the earlier single EX1103 motor fixture; document the scope explicitly.
+
+R3.4 Establish a reference-mass record and installed calibration procedure.
+     Record reference values/uncertainty, fixture, instrument IDs, conditions,
+     excitation, gain, rate, raw sign and stabilization rule. If reference masses
+     are not characterized, label the result a provisional scale check; it does
+     not satisfy traceable force evidence. A kitchen scale's display resolution
+     alone is not its uncertainty.
+
+R3.5 Proposed sequence after the fixture/load range is established:
+       warm up and record at least 60 seconds unloaded;
+       zero plus five nonzero loads spanning the intended measurement range;
+       three ascending/descending cycles, repositioning each load independently;
+       at least 10 seconds of settled data per point;
+       two held-out loads within range, excluded from fitting;
+       a 60-second zero check at the end.
+     The range refers to the intended experiment, not automatically full cell
+     capacity. Record settling duration and save pre-settling data. Include the
+     actual load direction; do not extrapolate a compression-only check into
+     tension or reverse loading without evidence.
+
+R3.6 Fit and inspect:
+       F_ref [N] = m_ref [kg] * g [m/s^2]
+       F_est [N] = k [N/count] * counts + b [N]
+     Use standard gravity 9.80665 m/s^2 only with that convention recorded and
+     its relevance to the intended accuracy assessed. Check residuals, independent
+     holdouts, hysteresis, zero drift, repeated mounting and off-axis sensitivity.
+     Preserve separate calibration IDs for each cell/configuration/mounting.
+     Changing gain, excitation, mounting or load path requires a new validity check.
+
+R3.7 Define useful resolution BEFORE evaluating results. Proposed exploratory
+     target: resolve a 5% difference relative to a documented reference force
+     F_ref_use. Require the expanded uncertainty of the intended force difference
+     to be no more than half that effect, 0.025 * F_ref_use. This is a proposed
+     engineering discrimination target, not an existing repo release threshold.
+     Until F_ref_use and the uncertainty budget are justified, report absolute
+     uncertainty/noise and leave the target undecided. Include reference, scale,
+     repeatability, drift and mounting contributions; do not use sample SD alone.
+     Account for correlation when two readings share calibration errors. More
+     samples reduce some random error, not unknown systematic bias.
+     As a planning example only, using the estimated 50 g hover-equivalent force
+     of 0.49 N gives a 5% effect of about 0.0245 N and a proposed expanded
+     difference-uncertainty target of about 0.0123 N (1.25 gram-force). Replace
+     the reference with the measured configuration and declared experimental
+     question before judging a calibration against this target.
+
+R3.8 Publish the calibration plot, residuals, usable range and exclusions. Report
+     PASS_FOR_STATED_STATIC_USE / PROVISIONAL / INADEQUATE with the named basis.
+     Static calibration does not validate high-frequency thrust response or impact
+     peak measurement. Do not use the 5 kg cell as a crash sensor by default.
+
+Acceptance: either a documented installed calibration adequate for its stated
+range and resolution, or a specific quantified shortfall and next corrective step.
+
+
+9. R4 — VALIDATE MOTION, ELECTRICAL AND EVENT MEASUREMENTS
+=======================================================
+
+R4.1 LIS3DH: collect six stationary orientations (+/- each axis), about 10 seconds
+     each. Check axis map, sign, offsets and scale against gravity, with mounting
+     alignment uncertainty noted. Record the sensor-to-body orientation. Retain
+     raw DC acceleration; a high-pass-only stream cannot support gravity checks.
+     Flag saturation per axis and all range/mode changes. [S8, S11]
+
+R4.2 INA260: compare zero and at least two known dummy-load operating points to
+     suitable voltage/current references, with their uncertainty recorded. Check
+     current direction, units, conversion configuration and sensing-node identity.
+     Prefer a characterized resistive load/reference arrangement over putting an
+     unfamiliar handheld current input directly into the drone circuit.
+     Compare electrical power P = V * I using time-aligned readings. Energy is
+     the time integral of power; use actual sample intervals and explicit gaps.
+
+R4.3 Beam: log at least 30 manually controlled block/clear cycles and compare the
+     observed transitions to a separate count. Acceptance for this exercise: no
+     unexplained missing/extra transition. That does not establish a failure rate
+     or submillisecond accuracy. Check actual spacing and ambient-light conditions.
+     The listed response time is under 2 ms; software timestamps add uncertainty.
+     Use this device for coarse event timing, not assumed propeller RPM. [S9]
+
+R4.4 Define t_event, t_ready/t_read and host receipt time separately. All MCU
+     records share one monotonic clock, but ADC/filter latency still differs.
+     Bound software timestamp uncertainty and document unresolved sensor delay.
+     For a force/beam comparison, use a known load engaging the fixture while an
+     attached flag crosses a measured beam location; retain the physical timing
+     offset rather than treating both signals as an instantaneous common event.
+
+R4.5 Analyze observability before promising new outputs:
+     - LIS3DH gives specific force, not angular rate. Gravity direction can aid
+       static tilt; arbitrary acceleration and free fall prevent that shortcut.
+     - With a body-to-world rotation R, at the CG:
+         f_body = transpose(R) * (a_world - g_world).
+       An offset sensor also feels angular-acceleration and centripetal terms.
+       Record its position; without angular data, do not claim to remove them.
+     - One axial cell measures one force component. Aggregate drone thrust is
+       not four individual thrusts and does not establish roll/pitch/yaw torque.
+     - One current sensor in the battery lead measures aggregate draw.
+     - One beam supplies one crossing event. Speed from blockage duration needs
+       known geometry/orientation; a full trajectory needs additional observations.
+     - No purchased sensor in this list establishes calibrated motor RPM or
+       motor temperature. Missing channels in the old evidence contract stay missing.
+
+R4.6 Deliver an aligned plot with force, voltage/current/power, acceleration and
+     event markers only for quantities present in that run. Expose missing data,
+     uncertainty, clipping and filter settings. Interpolation is a derived view;
+     it must not create apparently measured samples in the raw record.
+
+Acceptance: a replayable multi-sensor record with validated signs/units, an explicit
+clock/latency model and a table stating what each measurement can support.
+
+
+10. R5 — CHARACTERIZE THE STOCK DRONE WITH A BOUNDED QUESTION
+===========================================================
+
+Proceed to a powered, restrained characterization only when the selected fixture,
+load capacity, battery interface, operator stop method and calibration support it.
+These are practical prerequisites for this experiment, not a new blanket approval
+workflow. Existing repo approvals apply to the relevant fixture/release scope.
+
+R5.1 Choose one branch using the actual capabilities:
+     A. Repeatable stock command available: whole-vehicle axial force and total
+        power in the reviewed restraint. Keep the original controller in command.
+     B. No suitable powered fixture/control record: finish repeated static loads,
+        sensor latency/noise checks and package mass/CG assessment. This is the
+        default fallback and still completes the acquisition milestone.
+     C. Documented per-motor access exists: draft a separate motor-characterization
+        protocol. Its existence does not itself authorize motor-failure injection.
+
+R5.2 For branch A, define three reproducible command settings within an established
+     operating envelope, with three separate repetitions of each setting: nine
+     short trials, each with pre/post zero and a documented steady window.
+     Do not choose arbitrary PWM percentages or full throttle from this photo.
+     Record transmitter input/mode as actually observed. An operator label is
+     not measured motor duty cycle or a precisely timed command transition.
+     Set run duration, rest and electrical/thermal stop limits from the identified
+     system. If required limits or observations are unavailable, use branch B.
+
+R5.3 Record battery state/loaded voltage, configuration, baseline mass, fixture,
+     command evidence, ambient conditions and run order. Balance setting order
+     where practical to expose battery depletion; retain voltage as a covariate.
+     Separate operator command delay, stock controller behavior and motor response.
+     If the stock controller fights the restraint or produces unstable behavior,
+     stop that characterization and reassess what plant is being measured.
+     Record rotor-plane distance to nearby surfaces and fixture obstructions.
+     Downwash interaction, recirculation and the guards can affect restrained
+     force; do not label this curve free-air performance without assessing them.
+
+R5.4 Calculate steady force, electrical power and force/power ratio with units and
+     uncertainty. N/W is a performance ratio, not dimensionless propulsive
+     efficiency. Report repeat-to-repeat spread and battery effects. Do not fit
+     four individual motor curves from one aggregate thrust trace.
+     A restrained thrust/weight ratio is preliminary evidence about static lift
+     margin, not proof of stable payload flight or recovery authority.
+
+R5.5 Assess the smallest useful logger package:
+       m_total = m_stock + sum(m_added) - sum(m_removed)
+       r_CG = sum(m_i * r_i) / sum(m_i)
+     Use the same body datum and all battery/wire/mount masses. Record rotor
+     clearance, attachment and power/storage requirements. Compare stock and
+     proposed configurations explicitly. No universal payload percentage is
+     assumed. If mass or control margin is unproven, retain bench instrumentation.
+
+R5.6 Map evidence into a new platform profile only where justified:
+       mass -> measured mass, with configuration;
+       rotor coordinates -> measured geometry, with datum;
+       aggregate force/power -> measured system envelope in the stated restraint;
+       individual thrust limit, inertia, yaw drag, motor lag -> UNKNOWN unless
+         separately identifiable from the available protocol.
+     Never divide maximum total force by four and call it a validated surviving-
+     motor limit. Do not insert the old assumed 60 mm radius, 2S voltage or drag
+     coefficients into this drone's measured profile without an explicit EST label.
+
+R5.7 Prepare a comparison through the measurement process: sample/filter simulator
+     predictions at the observed bandwidth, transform acceleration into the sensor
+     frame and compare like quantities. Label this a planned comparison if key
+     plant/state information is missing. A static thrust test cannot validate the
+     simulated three-dimensional recovery trajectory or touchdown probability.
+
+Acceptance: a small reproducible characterization with bounded claims, or a
+completed nonpowered fallback packet that identifies the exact next missing step.
+
+
+11. R6 — CONNECT THE EVIDENCE TO THE REPOSITORY'S NEXT DECISION
+============================================================
+
+R6.1 Write a concise weekly findings report: what is known; what failed; applicable
+     platform/configuration; uncertainty; raw run IDs; next highest-value action.
+     Include negative/invalid runs with reasons. Keep provisional values visibly
+     separate from accepted parameters. Do not edit historical simulated results
+     to imply they used this hardware.
+
+R6.2 Reconcile Day 4 decisions without automatically signing them:
+     D1: Recommend direct axial force for initial characterization if its reviewed
+         load path works. Buying cells does not choose the measurement route.
+     D2: Replace the active recommendation with the appropriate owned Adafruit
+         cell and NAU7802 chain, conditional on load/resolution/calibration evidence.
+         Preserve the Phidgets packet as an earlier unselected candidate.
+     D3: If the whole-drone cradle retains stock props, an EX1103/Gemfan press-fit
+         decision does not block that specific experiment. The original fixture's
+         fit requirement remains unresolved for its own scope. No global N/A shortcut.
+     D4: Supply actual cell/cradle/bench interfaces for the new test article. Do not
+         fill EX1103 mounting rows with unrelated stock-drone dimensions.
+     D5: Review the geometry for the exact article and fixture being proposed.
+     D6: Update REVIEW_READY material with evidence actually obtained and its scope.
+
+R6.3 Accepted numeric fixture inputs still belong in cad/bench/parameters.csv,
+     with source and the repo's generated input-request/contract checks. Raw
+     inventory/calibration observations are evidence, not a competing register.
+     If the current schema cannot distinguish these two fixtures/platforms,
+     propose the smallest explicit profile/schema extension before importing
+     conflicting values. Keep pending inputs pending until that scope is resolved.
+
+R6.4 Keep the old authority/release claims scoped. One drone with four installed
+     motors is not the earlier six-motor sample. This package lacks demonstrated
+     per-motor thrust/RPM/temperature and angular-rate evidence. A whole-drone
+     force curve cannot pass the original torque-authority gate by substitution.
+     Existing release refusals remain informative; a new demonstrator experiment
+     gets its own stated objective rather than a rewritten historical pass rule.
+
+R6.5 Select next week's branch:
+     - Measurement works, control interface inaccessible: extend characterization
+       and write a controller-integration feasibility decision; keep using this
+       drone for useful experiments. Do not promise a firmware retrofit yet.
+     - Measurement and suitable telemetry/command access work: design one bounded
+       intervention, including state estimation and command/stop latency evidence.
+     - Measurement quality inadequate: improve fixture, reference or acquisition
+       first. Show which error dominates rather than buying sensors speculatively.
+
+R6.6 Run checks appropriate to the implemented files and record actual exits/counts.
+     Do not reuse historical test totals. Close the week with raw evidence,
+     calibration/replay instructions and a reviewable change set; merging follows
+     the Owner's applicable instructions, not this planning document alone.
+
+Acceptance: someone other than the collector can reconstruct the supported finding,
+identify its physical platform and repeat the analysis from preserved raw records.
+
+
+12. MINIMUM ARTIFACTS AND DATA CONTRACT
+======================================
+
+Claude should first inspect existing conventions; the following new paths are
+proposals, not files that already exist:
+  docs/bench-acquisition.md                 Wiring, procedure, sampling and limits
+  firmware/bench_logger/                    QT Py source and pinned environment
+  Analysis/capture_bench.py                 Host capture; no-overwrite behavior
+  Analysis/analyze_bench.py                 Calibration and run-quality analysis
+  evidence/week-2026-09-20/hardware-inventory.csv
+  evidence/week-2026-09-20/platform-capabilities.md
+  evidence/week-2026-09-20/interface-observations.csv
+  evidence/week-2026-09-20/calibrations/<calibration_id>/
+  evidence/week-2026-09-20/runs/<run_id>/
+  evidence/week-2026-09-20/README.md          Findings and reproducibility index
+
+A compact capture format is sufficient: separate raw sensor/event CSV streams
+plus one JSON manifest. Do not force asynchronous sensors into fake synchronized
+rows. Keep units explicit; convert library mA/mW outputs to A/W deliberately.
+
+Manifest fields:
+  schema_version, run_id, purpose, platform_id, configuration_id, operator/date,
+  repository_commit, firmware_build, library_versions, sensor_ids/revisions,
+  bus/pin map reference, selected cell/channel, calibration IDs, fixture version,
+  sample rates/ranges/gain/excitation/filter settings, clock/timestamp semantics,
+  reference instruments, battery state, command-source description, validity,
+  missing channels, warnings and hashes of final raw files.
+
+Common raw-record fields:
+  run_id, epoch_id, sensor_id, seq, t_device_us, timestamp_kind, raw_value(s),
+  units_or_encoding, status. Host receipt time is additional, not a replacement
+  for device time. A reset creates a new epoch. Status includes clipping, stale,
+  read error and overflow where detectable. Do not invent a sensor sequence counter
+  if hardware lacks one; distinguish MCU record count from proven sample count.
+
+Processed records reference raw inputs and the exact calibration/processing
+revision. Every derived quantity has a unit and validity statement. Missing values
+stay missing; zero is a measurement, not a placeholder. Export strict JSON.
+
+Meaningful acceptance tests for Claude's implementation:
+  - Preserved synthetic capture replays with correct sign, units and timestamps.
+  - Known synthetic force mapping recovers scale/offset within test tolerance;
+    mismatched cell/calibration/configuration is rejected.
+  - Reset, duplicate, reordered, missing and stale records are visible to the
+    run-quality report; an invalid run cannot produce an unqualified PASS.
+    Exercise clock-counter rollover if the chosen device timer wraps.
+  - Raw output paths cannot overwrite a prior run silently.
+  - Integration of constant power over known irregular timestamps gives expected
+    energy; gaps trigger a declared exclusion/bound rather than silent filling.
+  - Hardware demonstration covers the 10-minute capture and calibration checks;
+    mocked driver success does not stand in for those physical observations.
+
+
+13. WHAT IS DEFERRED, AND WHAT WOULD UNLOCK IT
+============================================
+
+Full W03–W06 simulator revisions and the 576-run diagnostic: retain the old plan's
+specifications, but schedule them after the hardware profile and measurement
+question are clear. Fix immediately misleading statements in any new report.
+
+Autonomous recovery or motor-loss injection: needs identified control access,
+appropriate state observability, verified intervention/stop behavior, a compatible
+plant model and a separately scoped physical protocol.
+
+Free-flight onboard logging: needs demonstrated payload/CG margin, secured mount,
+validated power, recording capacity and operation without a force-producing tether.
+An external flash/logging or wireless approach is a design decision, not a capability
+established merely by owning QT Py. Benchmark duration/storage before selecting it.
+
+Impact/drop validation: needs impact-appropriate sensing, geometry and event
+definition, bounded timing, the applicable facility and a prospective statistical
+protocol. +/-16 g can still saturate; load-cell capacity and ADC word length do not
+establish useful impact bandwidth. Start with non-impact calibration work.
+
+Rotational recovery metrics: need gyro/attitude evidence from accessible onboard
+telemetry or another justified instrument. Check existing interfaces first.
+
+Additional purchases: first establish which references, mounting materials,
+connectors, USB cable, dimensional tools and electrical instruments are already
+accessible. This receipt is not evidence that unlisted equipment is absent.
+No component price research or shopping list is required to begin R1/R2.
+
+Minimum useful completion if time contracts to about 10 hours:
+  R1 platform/capability record; E1/E2/E3 wiring; one load cell + NAU7802 + QT Py
+  raw capture; installed static scale check/calibration according to available
+  references; replay and uncertainty/gap report. Add other sensor streams next.
+
+
+14. SOURCE NOTES
+================
+
+Hardware sources below were checked September 20, 2026. They support catalog and
+interface statements, not the revision or performance of the Owner's delivered
+parts. Equations, experiment choices and acceptance proposals are engineering
+analysis in this handoff; they are not vendor-certified procedures.
+
+[S1] Adafruit NAU7802 product and pinouts; Rev C second-channel exposure.
+https://www.adafruit.com/product/4538
+https://learn.adafruit.com/adafruit-nau7802-24-bit-adc-stemma-qt-qwiic/pinouts
+
+[S2] Nuvoton NAU7802 data sheet Rev 1.7, distributed by Adafruit; conversion
+architecture and analog-regulator requirements. Vendor-site fetch failed; this
+manufacturer-authored copy linked from Adafruit's Downloads page was read.
+https://cdn-learn.adafruit.com/assets/assets/000/111/947/original/NAU7802_Data_Sheet_V1.7.pdf?1653414853=
+
+[S3] Adafruit PID 4540, 1 kg cell; mounting/calibration guidance and nominal body.
+https://www.adafruit.com/product/4540
+
+[S4] Adafruit PID 4541, 5 kg cell; mounting/calibration guidance and nominal body.
+https://www.adafruit.com/product/4541
+
+[S5] Adafruit QT Py RP2040 pinouts; separate I2C buses and power interfaces.
+https://learn.adafruit.com/adafruit-qt-py-2040/pinouts
+
+[S6] Adafruit INA260 pinouts; supply, shunt, VBus and default address.
+https://learn.adafruit.com/adafruit-ina260-current-voltage-power-sensor-breakout/pinouts
+
+[S7] Texas Instruments INA260 data sheet Rev C; chip limits and timing settings.
+https://www.ti.com/lit/ds/symlink/ina260.pdf
+
+[S8] Adafruit LIS3DH guide; accelerometer role, addresses and interface variants.
+https://learn.adafruit.com/adafruit-lis3dh-triple-axis-accelerometer-breakout?view=all
+
+[S9] Adafruit PID 2168; open-collector output, supply and response time.
+https://www.adafruit.com/product/2168
+
+[S10] Adafruit NAU7802 driver example; supported output-rate options.
+https://learn.adafruit.com/adafruit-nau7802-24-bit-adc-stemma-qt-qwiic/arduino
+
+[S11] STMicroelectronics LIS3DH data sheet; modes, ranges and sensor behavior.
+https://www.st.com/resource/en/datasheet/lis3dh.pdf
+
+[S12] Veeniix V995 manufacturer product page and FAQ. Search-indexed primary
+page content was available; direct page extraction returned no text. Listed
+battery and charger specifications are accepted for planning by Owner instruction.
+https://veeniix.com/toys/V995?product_id=22&title=Products
+
+
+15. CAD/FEA WORKFLOW — OWNER-DESIGNATED ENGINEERING-AUDIT BRIEFING
+===============================================================
+
+Read on September 21 through GitHub:
+https://github.com/500ft/engineering-audit/blob/main/docs/cad_agent_briefing.md
+Inspected Git blob SHA: 530550e230f7b9de8dc350a60e6dd19eb1d94c31
+Recheck the current document before starting a future CAD task. Also read its
+docs/host_setup.md for host setup, and docs/solidworks_api_findings.md before
+writing SOLIDWORKS COM calls. This reference is now part of this project's handoff.
+
+The briefing reports proven native SOLIDWORKS part authoring, parameter re-drive,
+CadQuery geometry comparisons, STEP round trips and an initial MAPDL static solve.
+These are capabilities documented in engineering-audit, not work performed on
+the V995 or its fixture. Keep shared machinery in engineering-audit and drone
+deliverables in multirotor-recovery-dynamics. The RoboRacer mast and its frozen
+contract belong to autonomous-racing-systems and must not become drone inputs.
+
+Application to the V995 cell mount, cradle and any later sensor mount:
+  1. Retain cad/bench/parameters.csv as this project's accepted fixture register.
+     Generate a versioned JSON job input with source/evidence states from accepted
+     rows. Both CAD authoring and the independent geometry oracle read that same
+     input. The JSON is a reproducible job snapshot, not a second editable register.
+     Keep provisional designer choices explicit and separate from measured values.
+  2. Write a hand-checked closed-form or independently built geometry oracle before
+     authoring each part. Check volume, envelope, critical hole positions and load
+     interfaces; equal volume alone cannot prove holes are in the right places.
+  3. Author native features when using SOLIDWORKS. Verify API signatures and enum
+     values, probe plane orientation, inspect each return value, and record volume
+     after each feature. A clean rebuild or plausible preview is not acceptance.
+  4. Change a named design variable to a second admissible value, rebuild and
+     compare against the newly computed expected geometry. Verify positions and
+     clearances as well as size. Restore the intended baseline after the test.
+  5. Export STEP and re-import through CadQuery, checking the same geometry contract
+     with a stated numerical tolerance. Historical near-machine-precision volume
+     agreement is not a machining tolerance or proof of physical fit.
+  6. If an input or oracle is missing, report the scope as provisional/unverified.
+     Preserve the project's pending-input and release behavior.
+
+Planning implications of the briefing's known gaps:
+  - Assembly documents/mates and dimensioned drawing automation are unproven.
+    Do not budget a finished native assembly or manufacturing drawing set as an
+    already available feature. Separate part verification from assembly clearance.
+  - Some feature positions are authored coordinates, not driven dimensions. Extend
+    the parameter-change check to bolt/slot locations when those dimensions vary.
+  - FEA currently has no independent acceptance oracle. Before structural claims,
+    add a suitable analytic benchmark, reaction-force/moment balance, boundary-
+    condition review and mesh-convergence evidence. A completed solve is insufficient.
+    Apply the V995 fixture's own loads, materials and supports; do not transfer the
+    example plate's stress/displacement values into this design.
+  - Host timing varies substantially. Use a completion/result check with a bounded
+    long deadline and progress polling; launcher return does not mean CAD finished.
+
+Evidence acquisition routes remain distinct. Vendor drawings close vendor-drawing
+rows, physical measurement closes measurement rows, and design choices are tagged
+provisional until the relevant inspection. If an acquisition route changes, record
+the prospective amendment. The accepted charger manufacturer specification is a
+catalog electrical value, not a fabricated physical-measurement entry.
+
+END OF HANDOFF

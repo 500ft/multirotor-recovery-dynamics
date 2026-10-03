@@ -1,0 +1,1 @@
+[["component", "mass_best_g", "mass_nominal_g", "mass_worst_g", "cg_x_mm", "cg_y_mm", "cg_z_mm", "Ixx_kg_m2", "Iyy_kg_m2", "Izz_kg_m2", "Ixy_kg_m2", "Ixz_kg_m2", "Iyz_kg_m2", "basis", "source", "status"], ["REPLACE_WITH_CAD_EXPORT", "", "", "", "", "", "", "", "", "", "", "", "", "estimated", "CAD model required", "PENDING"]]

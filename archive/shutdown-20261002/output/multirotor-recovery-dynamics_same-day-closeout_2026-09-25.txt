@@ -1,0 +1,537 @@
+MULTIROTOR RECOVERY DYNAMICS
+CRITIQUE AND SAME-DAY COMPLETION HANDOFF FOR CLAUDE
+September 25, 2026 | Planning only; no implementation or experiment performed here
+
+RECOMMENDATION
+==============
+Prioritize C04, but put reproducibility and scenario verification ahead of its
+headline rerun. Complete the independent documentation corrections today. Keep
+the historical results frozen. Treat allocator replacement, controller changes,
+new uncertainty distributions and non-inferiority claims as separately registered
+changes, not ingredients silently added to the scenario correction.
+
+The original list is several days of serial work, even by its own estimates.
+The way to finish a useful package today is a bounded scenario correction with
+evidence, plus closure of cheap documentation items. A deadline cannot turn an
+unmeasured parameter into evidence or make an unfinished sweep complete.
+
+This handoff makes implementation choices concrete enough to review. They are
+recommendations for Claude under the owner's implementation instructions, not
+claims that the owner has approved a physical fault model or experiment. No need
+to wait for a V995 board identity to improve a labelled hypothetical simulation.
+
+CURRENT BASELINE
+================
+Remote refs fetched September 25:
+  origin/main = cf09d1f (PR #36 merged; paired statistics #35 also merged).
+  PR #37 OPEN, head a0b9aac6c532902701b8bca7dcc7706d30b494a2,
+    branch docs/scope-consistency-20260924.
+PR #37 names release_startup, corrects package/policy wording and records the
+remaining critique items. Its description reports 149 tests; that count is the
+author's report, not a test result produced by this planning review.
+
+Use current repository instructions. Integrate #37 through the owner's normal
+review workflow; do not duplicate its changes or silently claim it is merged.
+If it remains open, start the implementation branch from its exact head and
+record that dependency. Rebase once it merges, then check the final diff and CI.
+Do not leave the paired-statistics work described as merely proposed: it merged.
+
+1. CRITIQUE OF THE PROPOSED ORDER
+================================
+
+MAJOR: C04 does not gate everything.
+It gates interpreting results as an in-flight fault. It does not block the
+observability contract, source corrections, replay infrastructure, or independent
+USB-powered acquisition. Avoid turning one model question into a global stop.
+
+MAJOR: do not replace PREREGISTERED-ASSUMED with a regulatory analogy.
+An analogy adds context; it does not change evidence status. Retain numerical
+thresholds and their assumption label, adding a dated explanatory paragraph.
+The cited sections do not themselves supply a 1.83–3.12 m/s band. In the official
+2025 edition inspected, 27.725 specifies a 13-inch drop or a justified lesser
+height of at least 8 inches; 27.727 uses 1.5 times the chosen height. The nominal
+13/19.5-inch free-fall equivalents are approximately 2.55/3.12 m/s. These are
+landing-gear tests, not verified V995 survival speeds or tilt limits. Do not
+describe them as a standard this toy drone satisfies. [S1, S2]
+
+MAJOR: five decisions are insufficient.
+Also specify initial-state/trim consistency, actuator state and response,
+controller memory, timing origins, fault identity available to the controller,
+actual versus commanded wrench, control/sample clocks and outcome definitions.
+The contract below resolves the minimum needed for a narrow first implementation.
+
+MAJOR: holding command is not the only possible in-flight behavior.
+A stock controller can keep reacting to measured motion before identifying a
+failed rotor. A held-command mode is an open-loop interval chosen to isolate an
+effect. It is neither guaranteed conservative nor a validated V995 behavior.
+Name it in_flight_loss/command_hold. Leave nominal-feedback-before-detection as
+a separate follow-on rather than pretending command_hold is the whole correction.
+
+MAJOR: move W02 and event checks before the decisive sweep.
+Trial identities, exact grid coverage, actual event times and paired inputs are
+what make a scenario delta interpretable. Do not rerun first and add them later.
+
+MAJOR: separate the allocator oracle from changing the allocator objective.
+An oracle can audit the existing objective today. Dimensionless normalization
+changes the tradeoff and may change results; it is not a neutral cleanup. Keep
+that modification outside the first scenario-effect comparison.
+
+MAJOR: the old touchdown-error bound is not universal.
+g*dt is a ballistic one-step estimate, not a global bound when thrust, drag and
+angular acceleration act. Nor does a small speed error guarantee zero label
+flips for trials arbitrarily near a threshold. Handle touchdown consistently
+before new outcome comparisons and record an old/new sensitivity check.
+
+MAJOR: a margin cannot be preregistered for results already inspected.
+Estimate paired differences now. Choose a physically meaningful non-inferiority
+margin only for a future protocol, before its decisive results. A fresh seed does
+not erase knowledge of the same model's previous results. A retrospective margin
+analysis must be labelled exploratory. Tango is not required to fix C04. [S3]
+
+MAJOR: bench blockers are too broad.
+Chip photographs and stock motor access block board integration, not a QT Py on
+USB reading a standalone load cell. Mass/rotor locations gate V995 modelling and
+fixtures; battery polarity gates drone-power connection. Missing reference masses
+gate traceable force calibration. Each missing item should block its own task.
+
+MINOR: a JSON field rename is not an owner decision that must stall science.
+Recommendation: retain legacy policy/best_action keys for compatibility today;
+state package-ranking semantics in metadata, docs and figures, as #37 proposes.
+No second alias or broad schema migration is needed. Check consumers before any
+later rename. This recommendation is not a merge authorization.
+
+AGREE: defer the new spin-locked controller.
+First establish scenario, actuators and measurement semantics. Its status as
+known prior work means cite it when adopted. A patent mention is not an engineering
+dependency or a substitute for reviewing applicability.
+
+2. RECOMMENDED REGISTRATION: PRECISE WITHOUT CLAIMING HARDWARE KNOWLEDGE
+=====================================================================
+Proposed study ID: DR-SS-SCENARIO-01, after checking the ID is unused.
+Primary objective: quantify the change caused by retaining healthy-rotor thrust
+during the pre-reconfiguration interval, then separate the effect of removing
+the historical motor-start delay. This is simulation on the historical design
+profile, not measured V995 performance.
+
+R01. Fault abstraction.
+Use idealized complete rotor effectiveness loss: selected rotors lose thrust
+AND their modeled reaction torque at t_fault=0. No airframe mass/inertia jump,
+ejected object impulse, rotor angular-momentum impulse, locked-rotor drag change,
+windmilling, voltage transient or controller brownout is modeled.
+Call this idealized_effectiveness_loss, not experimentally validated motor stop.
+It may serve as the simplest fault model while hardware mechanism remains unknown.
+Do not select propeller loss, physical motor seizure or power loss silently.
+
+R02. Separate failure mechanism from failed indices.
+Keep one_out, two_adjacent and two_opposite as topology labels. They identify
+which outputs disappear; they do not identify why. Preserve partial_authority's
+existing meaning: a 60% per-motor CAP on all four, not automatically a multiplicative
+60% thrust effectiveness. A cap can leave hover commands unaffected; an
+effectiveness multiplier cannot. Do not conflate these in the new mode.
+An all-power-off analytic control is useful, but it need not become a new
+production allocator class today; the present allocator rejects zero survivors.
+
+R03. Pre-fault actuator state.
+Solve a healthy FOUR-rotor equilibrium for each dispersed vehicle/configuration:
+  sum(f_trim) = m*g;
+  B_moment*f_trim + modeled CG moment + modeled bias = 0;
+  0 <= f_trim_i <= healthy rotor cap_i.
+Use the same coordinate conventions and bias model as the dynamics. For the
+perfect symmetric anchor, f_trim_i=m*g/4. With nonzero CG/bias, equal thrust is
+not automatically a trim. Register numerical feasibility tolerances in SI after
+checking condition numbers, before looking at study outcomes.
+If a sample has no feasible healthy trim, record trim_infeasible. Do not resample
+silently. Report attempted N, feasible N and conditional outcome denominators.
+For an unconditional population summary, count inability to establish the defined
+pre-fault state separately and state how it enters the declared estimand.
+
+R04. Initial motion: two cohorts, different claims.
+Anchor cohort: level, zero angular/linear velocity, healthy trim, fault at zero.
+Matched diagnostic cohort: retain the historical sampled tilt, nonzero tumble
+and vertical speed at t=0, while initializing actuators from level healthy trim.
+Label the latter prescribed upset at fault; it is not steady trimmed hover.
+It isolates scenario mechanics using the same starting motion as the old map.
+Do not claim the sampled states are a distribution of naturally occurring faults.
+A later pre-roll can generate reachable states under the nominal controller.
+
+R05. Healthy motors before detection.
+For command_hold, healthy commands equal their pre-fault values through t_switch.
+Derive body force AND all three moments from the realized rotor vector. Retaining
+3/4 of collective but applying zero roll/pitch/yaw torque is not rotor-loss physics.
+Disturbance/CG moments and body drag continue under their declared model.
+Keep command, realized thrust and actuator bound/effectiveness as separate concepts.
+
+R06. Event clocks and detection.
+Set fault onset to zero. Register detection delay as fault onset -> fault identity
+available. Assume correct identity at detection for this study; missed/wrong
+detection is out of scope, not established performance. Fault-aware allocation
+starts at t_switch. A known future fault mask must not reach nominal control
+before this event. With command_hold the mask affects plant outputs immediately,
+but controller decisions only after the switch.
+Split integration steps at events or use an equivalent exact event schedule.
+Log requested and realized times. Test a delay not divisible by dt.
+
+R07. Actuator response.
+First corrected mode: instantaneous commanded-thrust tracking after the switch,
+explicitly an ideal-actuation case. Healthy motors are already running; do not
+apply the release motor-start dead time to them. Failed outputs stay zero.
+Retain all legacy timing in the default release_startup path for historical
+compatibility. Omit an unidentified V995 lag parameter from the primary claim.
+Follow-on: distinguish a commanded speed lag from a thrust lag; if thrust is
+proportional to speed squared, their transients differ. A lag sensitivity case
+needs a specified state equation, initialization and whether it applies to
+healthy response, failed spin-down or both. It is not a second arbitrary delay.
+
+R08. Controller memory at transition.
+Initialize the recovery integral state explicitly (recommend zero for the matched
+study to preserve the old transition controller), retain actual motion/actuator
+state, and record any resulting command jump. This is a reset-controller baseline,
+not proof of a seamless stock-controller handover. A nominal-feedback/pre-roll
+variant must explicitly define integrator transfer or reset and anti-windup.
+
+R09. Outputs.
+Keep three concepts separate: regulation, contact before regulation, and touchdown
+proxy/damage. For this day's scenario study, primary outcome remains the frozen
+touchdown proxy. Report trajectory diagnostics without inventing a new approved
+reduced-attitude acceptance threshold. Name unregistered regulation success
+unavailable. The existing norm(omega)<0.3 settling detector cannot judge spinning
+equilibria; do not reuse it as a new success flag.
+Capture touchdown t, position, velocity vector, quaternion, angular velocity,
+rotor outputs, and reason for termination. Physical damage remains unmeasured.
+Non-contact timeout and numerical failure are separate from contact-proxy failure;
+retain any historical combined rule in an explicitly named legacy result.
+
+R10. Causal scope.
+Keep controller gains, allocator version, parameter draws, package definitions,
+guard criteria, drag coefficient and outcome criterion fixed across scenario
+arms. This does not resolve OQ-013 or make the package comparison causal evidence
+of guard benefit. Results quantify the registered scenario contrast only.
+
+3. THREE COMPARISON ARMS: AVOID ANOTHER COMBINED-CHANGE RESULT
+===========================================================
+L — legacy release_startup:
+  no thrust until td + tm; legacy recovery controller then starts.
+H — in_flight_loss/command_hold, matched switch time:
+  failed outputs zero, healthy outputs held; recovery begins at td + tm.
+  tm is retained ONLY as an artificial matched transition delay in this arm.
+I — in_flight_loss/command_hold, no startup dead time:
+  same held outputs; recovery begins at td.
+
+Compare H-L to isolate the pre-switch actuator-history change, including its
+force and moment consequences. Compare I-H for transition timing. Compare I-L
+for the combined corrected-mode effect. Neither contrast guarantees improvement:
+retained thrust can slow descent while unbalanced moments worsen attitude.
+Do not register 'failure rate must decrease' as a test or acceptance condition.
+
+Use identical physical initial states/nuisance draws per trial. Measurement-noise
+realizations must be indexed by absolute simulation time, not by the number of
+times an active controller requested noise. Otherwise later activation shifts
+the entire noise sequence and damages the intended paired contrast.
+
+Legacy preservation:
+  Keep a regression fixture/output from the pinned baseline under original
+  numerics, noise semantics, seed mapping and touchdown reader.
+  Evaluate L/H/I with one common corrected measurement/event framework for the
+  scenario comparison. If those corrections change the L results, report that
+  bridge separately from the H-L change. Do not overwrite old JSON or silently
+  compare a newly corrected I endpoint against old L endpoint arithmetic.
+
+4. MINIMUM IMPLEMENTATION AND VERIFICATION CONTRACT
+===================================================
+These are tasks for Claude, not changes made by this planning session.
+
+A. Registration and output identity before the runner changes.
+Prefer one scenario-contract document plus the existing critique status file.
+Extend existing result records with scenario, fault abstraction, controller and
+allocator IDs, uncertainty profile, clocks and resolved transition times. Avoid
+building a generalized experiment framework.
+
+W02 minimum: stable base trial index independent of worker/chunk arrangement;
+physical-draw identity separate from evaluated scenario/package/controller;
+one replayable record including seed version and configuration digest. Shared
+environment draws do not include the action or scenario in their RNG identity.
+Store per-trial outcomes needed for pairing; compact CSV/JSONL is sufficient.
+Changing chunk size must not change which physical cases were simulated.
+Historical seed mapping remains replayable under its named version.
+
+Coverage must compare exact expected keys and trial counts, not merely total
+row count. Detect missing, duplicate, unexpected and mismatched-pair identities.
+Never infer 'primary' solely because a row has enough trials; check registered
+class/cell membership. On partial completion output INCOMPLETE, not a kill or
+successful study verdict. Use explicit per-study output directories for all
+runs, including convergence. Smoke results cannot replace committed evidence.
+
+B. Actuator path.
+Represent the four realized rotor thrusts so the pre-switch interval can use the
+same wrench map as post-switch dynamics. Expose or factor the map in a small
+reviewable way. Do not maintain two inconsistent copies. Log individual thrusts
+around transitions, total force and moments, and commanded versus achieved
+values. Preserve the default legacy call behavior and its regression baseline.
+
+C. Meaningful tests, before the headline sweep.
+1. Perfect healthy hover: f_i=mg/4, zero net acceleration/moment (apart from
+   numerical tolerance), no invented detection outage on a no-fault control.
+2. Ideal one-out at level hover immediately after failure: collective=3mg/4,
+   initial vertical acceleration=-g/4 with drag initially zero. Moment equals
+   the missing rotor's wrench with the correct signs. CG/bias zero in this anchor.
+3. Two-out ideal anchor: collective=mg/2, initial vertical acceleration=-g/2;
+   adjacent and opposite masks produce their distinct moment signatures.
+4. All outputs zero analytic anchor: ballistic vertical motion with drag disabled;
+   this is a plant test, not evidence that all-power loss is supported by the FTC.
+5. Partial CAP case: any requested f below the reduced cap is unchanged. Test a
+   multiplicative effectiveness fault separately if one is added later.
+6. During command_hold: no healthy actuator resets, no extra startup blanking,
+   no fault-aware control action before detection, failed outputs remain zero.
+7. td=0; td longer than time to contact; td between integration grid points;
+   simultaneous switch/contact with explicitly defined contact precedence.
+8. Trim with CG/bias; infeasible trim recorded, not silently replaced by equal
+   thrust or removed from the denominator.
+9. Pair replay under different worker counts and chunk sizes; shuffled result
+   completion order must not change pair alignment.
+10. Missing/duplicate row, stale parameter manifest, numerical failure, and legacy
+    smoke/convergence output isolation. Fail clearly rather than emit a verdict.
+
+D. Touchdown and convergence.
+Retain the states bracketing the first ground crossing. Estimate the crossing
+fraction and interpolate velocity/angular velocity and orientation with a valid
+normalized shortest-arc quaternion interpolation; avoid Euler-angle interpolation.
+For ground crossing within an event-split step, respect that step's force history.
+Use an analytic falling-body case and dt, dt/2, dt/4 to verify the contact estimate.
+Interpolation is an approximation to the continuous solution, not exact physics.
+
+Run noise-free convergence first, then use a fixed physical control/sensor clock
+and common exogenous noise history while changing only the dynamics integration
+step. Changing the controller update rate alongside dt tests a different system.
+Archive separate clocks; do not require the minimum sensor period to equal dt.
+Report endpoint differences, classification flips, event-time differences and
+timeouts. A classification close to a threshold remains resolution-sensitive;
+do not hide it behind the spacing between alternative thresholds.
+
+5. ALLOCATOR AUDIT: WHAT TO DO TODAY AND WHAT TO KEEP SEPARATE
+===========================================================
+The current apply() is two rounds of weighted least squares with saturation
+pinning, not the direction-preserving operation claimed by its module text.
+It may pin a rotor that an optimum would release. A better reference is useful.
+
+For the small bounded quadratic problem, enumerate each actuator as lower-bound,
+free or upper-bound (at most 3^4=81 states). Fix bound variables, solve free
+variables for the SAME declared weighted objective, reject infeasible candidates,
+and retain the lowest objective among admissible candidates. Include all-bound
+candidates, rank-deficient free systems and zero-width failed-actuator bounds.
+Compare objective value and achieved wrench, not rotor vectors when the optimum
+is nonunique. Compare against an independent constrained solver or analytically
+known small cases before trusting this reference.
+
+Critical distinction: finite torque weight 10 is a soft weighted objective, not
+strict lexicographic attitude priority. The oracle must not silently change it.
+Also, an 81-case minimum-norm LS sketch is not a general solver proof: handle
+degenerate/nullspace cases or validate that boundary enumeration covers them.
+
+Audit max_collective separately. It calls a least-squares compromise 'balanced'
+even when exact zero-roll/pitch trim does not exist. Distinguish the sum of rotor
+caps, the zero-moment collective maximum, and the thrust reachable along a
+dynamic spinning trajectory. Zero static trim does not prove flight impossible.
+Do not replace an absent static trim ceiling with zero thrust for every dynamic
+command. Do not fix that problem inside the scenario-only causal contrast without
+an extra version and bridge comparison.
+
+Disposition rule for today's audit:
+  - Bounds/sign/force-accounting violation: stop the decisive rerun and fix with
+    explicit baseline/new evidence; label the affected scenario result incomplete.
+  - Bounded but suboptimal weighted solution: retain the known allocator for the
+    scenario contrast and quantify the limitation. Queue objective/solver upgrade
+    as its own registered study. Do not require an optimal allocator to answer a
+    narrowly conditional scenario question.
+
+Dimensionless normalization later:
+Declare force and moment reference scales and physical priorities. If the goal
+is to preserve today's objective, transform weights inversely to unit/scale
+changes and prove invariance. If the priorities change, call it an algorithm
+change. Never choose scales from zero post-fault authority (division by zero).
+
+6. STATISTICS: THE REFERENCE EXISTS; THE MARGIN STILL NEEDS A PURPOSE
+==================================================================
+Tango's paper is available as a primary record [S3]. PropCIs documents scoreci.mp
+for matched-pair difference intervals [S4], with source available [S5]. This
+removes the literature lookup blocker; it does not prove every edge case works.
+
+Important source detail: its point estimate is (c-b)/n. For this project's
+Delta=P(A passes)-P(B passes), pass counts so c=n10 (A only) and b=n01 (B only),
+or transform the interval sign correctly. Do not assume an argument named b
+means 'A only'. Pin the package/source version used for reference outputs.
+
+Validation packet for a later implementation:
+  * documentation example, b=40,c=20,n=160, conf.level=.95;
+  * swap b/c -> endpoints become (-upper,-lower);
+  * b=c=0, n=300 -> nonzero uncertainty, never [0,0] by shortcut;
+  * b=0,c=1,n=300 and its reversal;
+  * b=0,c=n and b=n,c=0;
+  * balanced discordance and very sparse discordance;
+  * invalid counts, b+c>n, n<=0 and invalid confidence levels.
+Generate gold outputs by running the independently sourced R implementation;
+do not transcribe numbers from memory or translate one formula twice and call
+that independent verification. Investigate undefined endpoint evaluations.
+Declare numerical tolerances, sidedness and failure behavior.
+
+Keep point estimate Delta, marginal bounds and existing discordant counts usable
+today even if this interval fails validation. Mark the new interval unavailable
+instead of blocking the scenario fix. Adding an effect interval does not require
+choosing delta. A later NI claim needs an engineering loss tolerance and the
+appropriately sided bound, selected before its decisive analysis; an ordinary
+two-sided 95% interval is not the same convention as a one-sided 95% NI bound.
+
+7. C06/C08/C10: FINISH THE DOCUMENTATION WITHOUT NEW MODEL ASSUMPTIONS
+====================================================================
+Add the observability table to docs/bench-acquisition.md:
+  aggregate axial force -> installed cell + calibrated ADC, fixture axis;
+  bus current and voltage -> INA260, node/averaging/timing declared;
+  specific force -> LIS3DH, sensor axes, range, mounting offset;
+  beam crossing -> edge timestamp, geometry/polarity, response uncertainty;
+  per-motor force, angular rate, full attitude, trajectory, fault identity and
+    damage -> unavailable unless a separate evidence source is established.
+Columns: quantity, source, frame/node, timestamp meaning, rate/filter age, range,
+uncertainty/calibration, availability and permitted claim. Missing is not zero.
+Include contact-state fields and static-versus-impact-bandwidth limitations.
+
+For C10, label current bounds as conditional Monte Carlo sampling bounds. Add
+a parameter provenance table: measured variation / measurement uncertainty /
+assumed dispersion / scenario bracket. Preserve old uniform distributions in
+the old study and in the matched scenario contrast so inputs remain comparable.
+Replacing them with brackets changes the experiment; register that separately.
+A scenario range has no implied probability or confidence level.
+
+Update critique status carefully:
+  interpretation/documentation resolved is not the same as model corrected;
+  software verified is not the same as hardware validated;
+  C04 remains partly open if spinning regulation metrics are only specified;
+  C05 remains interpretation-corrected while OQ-013 is unresolved;
+  C09 interval/reporting improvements do not establish non-inferiority;
+  no dynamic damage threshold becomes measured through a citation amendment.
+
+8. RUN PLAN, COMPUTE BUDGET AND SAME-DAY ORDER
+============================================
+One implementation session can pursue the following order. Estimates are work
+budgets, not promises; tests and measured run times govern what is actually done.
+No parallel agents or additional maintainers are assumed.
+
+0:00–0:45 — Pin #37/main, register R01–R10 and L/H/I, archive legacy baseline.
+0:45–1:45 — W02 identity/coverage/output isolation needed for the new comparison.
+1:45–4:45 — Implement the bounded C04 actuator/event path and analytic tests.
+4:45–5:45 — Contact handling and noise-free convergence; establish common clocks
+             for matched noisy runs. Do not start a decisive noisy sweep without it.
+5:45–6:30 — Run the 288-trial diagnostic, inspect all rejection/failure causes,
+             estimate the complete run time and launch the registered rerun.
+While the sweep runs — C06/C08/C10 tables, landing analogy correction, result
+             captions, legacy policy-key decision and status reconciliation.
+Remaining work window — allocator audit/reference-interval packet if the above
+             is sound; never insert their behavior changes into a running study.
+Final 60 minutes — verify results/coverage/checks, review diff, prepare focused
+             PR descriptions and a completed/open evidence table for the owner.
+
+Diagnostic design (new, exploratory):
+  2 failure classes: one_out and two_adjacent;
+  2 existing primary state cells;
+  2 existing packages;
+  3 scenario arms L/H/I;
+  12 paired physical draws;
+  1 frozen controller/plant bundle: current A2 as a named bundle.
+Total = 288 simulated trajectories, plus deterministic no-fault/partial-cap
+anchors and the separate numerical bridge checks. A2's feedforward and drag
+remain unchanged across these arms; this does not estimate their separate effects.
+
+Register this diagnostic before executing it. It validates plumbing and reveals
+effect direction under this limited slice; it is not a powered full-grid verdict.
+If the registered primary precision run uses N=300 for the same design, it has
+7200 trajectories. Benchmark representative long and short trajectories before
+launching it. Report its Monte Carlo uncertainty; N=300 is not a guarantee of
+detecting a useful difference. Historical counts are not a sample-size derivation.
+
+Use matched case indices and report package-specific I-L, H-L, I-H differences,
+contact speed/descent summaries, numerical failures, trim infeasibility, gyro
+clipping and classifications. Do not pool heterogeneous cells into a single
+physical reliability rate. Do not count the same trials under three thresholds
+as independent replications. If a full registered run does not finish, publish
+the completed diagnostic and the exact unfinished scope, without calling it a
+completed full-grid rerun.
+
+The 3x2 feedforward/drag factorial is a separate follow-on, not today's prerequisite.
+Freeze corrected scenario and plant first; then compare FF off/on at each drag
+value. Include zero drag only as a diagnostic case, not measured reality. Pair
+within each contrast and call the result an interaction/sensitivity study.
+
+9. REVIEWABLE CHANGE PACKAGES
+=============================
+Keep history and ownership simple:
+  A. #37 scope/labels, as already open, plus any independently reviewable doc
+     follow-up. No figure/JSON renaming migration today.
+  B. Scenario correction: registration, minimum runner reliability, actuator/event
+     path, contact/clock support, tests, isolated result artifacts and delta report.
+     If machinery fixes are substantial, land them as a prerequisite commit/PR
+     with its own legacy bridge rather than hiding them inside scenario results.
+  C. Optional allocator/interval work: separate behavioral scope with its own
+     validation. Do not make B wait for a mathematical method it does not require.
+
+Run tests appropriate to modified files and all required repo checks. Record
+actual commands, versions, SHA and exits, not the previous PR's test count.
+Inspect the final diff, generated labels and exact result grid. A screenshot of
+a passing chart is not a coverage check. PR publication/merge follows the owner's
+implementation authorization; this planning handoff performs neither.
+
+Definition of a completed same-day scenario package:
+  [ ] Legacy remains reproducible and explicitly labelled.
+  [ ] New mode has registered fault/state/timing semantics.
+  [ ] Healthy actuators persist; missing rotor force and moments appear at fault.
+  [ ] Analytic/event/replay/coverage/contact checks pass.
+  [ ] Matched L/H/I evidence and numerical bridge are complete for the declared
+      scope, with uncertainty and no missing trial identities.
+  [ ] C06/C08/C10 documentation and assumed-criterion status are corrected.
+  [ ] Delta report states what changed, what stayed fixed and what remains unknown.
+  [ ] Remaining physical or methodological items have exact closure conditions.
+
+Items that cannot honestly be called completed by this software package:
+physical V995 fault characterization; stock-board control access; measured guard
+benefit; measured impact tolerance; validated motor lag; new controller adoption;
+physical non-inferiority; the full factorial if it was not run. These remain open
+with concrete dependencies, not renamed 'done' to meet the date.
+
+10. OWNER INPUTS: REQUEST EACH ONLY WHEN ITS DEPENDENT TASK IS READY
+=================================================================
+No owner input is needed to draft the idealized simulation registration or to
+complete the literature/observability correction. Owner acceptance determines
+whether that abstraction becomes the chosen research scope; it is not inferred
+as a claim about the drone's actual failure mechanism.
+
+Independent bench logger: needs its own available boards, USB/data cable, reviewed
+wiring and safe bench supplies; calibration additionally needs load references.
+V995 fixture/profile: needs mass, geometry, rotor locations and actual interfaces.
+Drone electrical connection: needs polarity, accessible node and current path.
+Stock-board programming/control: needs identified chip/interfaces and demonstrated
+command access. A sensor-only branch remains useful while this is unknown.
+Guard/impact claims: need OQ-010/OQ-013 evidence and a declared physical protocol.
+CAD automation: inspect actual host/session prerequisites when a CAD task exists;
+do not prescribe Windows automatic login merely as a planning checkbox.
+
+CAD source remains mandatory for future CAD work:
+  500ft/engineering-audit -> docs/cad_agent_briefing.md
+Use its native-feature/oracle/re-drive/STEP verification workflow and this
+project's canonical accepted parameter register. No CAD work is needed to close
+the scenario-model correction. Manufacturer charger specifications remain accepted.
+
+SOURCES CHECKED FOR THIS AMENDMENT
+================================
+[S1] Official 2025 CFR edition, 27.725; consulted for the historical analogy,
+not as a statement of current operational authorization:
+https://www.govinfo.gov/content/pkg/CFR-2025-title14-vol1/pdf/CFR-2025-title14-vol1-sec27-725.pdf
+[S2] Same edition, 27.727:
+https://www.govinfo.gov/content/pkg/CFR-2025-title14-vol1/pdf/CFR-2025-title14-vol1-sec27-727.pdf
+[S3] Tango 1998, primary publication record:
+https://pubmed.ncbi.nlm.nih.gov/9595618/
+[S4] PropCIs 0.3-0, scoreci.mp documentation:
+https://search.r-project.org/CRAN/refmans/PropCIs/html/scoreci.mp.html
+[S5] CRAN package source mirror, inspected for count/sign convention, not executed:
+https://raw.githubusercontent.com/cran/PropCIs/master/R/scoreci.mp.R
+[S6] PR #37, read live on September 25:
+https://github.com/500ft/multirotor-recovery-dynamics/pull/37
+
+Supporting research and the larger rationale remain in:
+multirotor-recovery-dynamics_literature-critique_2026-09-24.txt.

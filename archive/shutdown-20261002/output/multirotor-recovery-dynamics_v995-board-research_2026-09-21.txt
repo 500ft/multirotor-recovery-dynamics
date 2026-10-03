@@ -1,0 +1,144 @@
+VEENIIX V995 — CONTROL-BOARD RESEARCH AND NEXT INVESTIGATION
+Prepared: September 21, 2026
+Project: 500ft/multirotor-recovery-dynamics
+Scope: desk research and visual inspection; no electrical probing or firmware work.
+
+RESULT
+======
+
+There are useful board-level leads, but the MCU, inertial sensor and programming
+protocol are not identified reliably yet. The most useful next evidence is clear
+chip marking and underside photography, followed by a documented pad map.
+
+Owner decision: use the manufacturer charger specification, 5 V DC / 2 A adapter
+input with the supplied charging cable, and the listed 3.7 V / 180 mAh flight
+battery specification. The weekly plan no longer asks to reconfirm these labels.
+
+DIRECT OBSERVATIONS FROM THE OWNER'S PHOTO
+==========================================
+
+Source: /Users/redhose/Downloads/IMG_3883.HEIC. Inspected the full photo and a
+cropped/rotated viewing copy; no synthetic sharpening or generated detail used.
+
+1. A compact central PCB has the motor leads soldered directly to it. Two-wire
+   connections support a brushed-motor interpretation, pending electrical/part
+   identification. The exact switching devices and motor topology are not mapped.
+
+2. A square IC and an adjacent metal package are visible near the middle. Their
+   roles and part numbers cannot be established confidently from this image.
+   In particular, do not call the visible square IC the flight MCU merely because
+   it is prominent; it could be another subsystem. The board's underside may
+   contain the controller, RF circuitry or inertial sensor.
+
+3. Near the power-switch end are small exposed circular pads. The marking CLK
+   appears legible; nearby markings are partly obstructed. This is a useful
+   candidate factory test/programming interface. It does not establish SWD, JTAG,
+   UART, I2C, voltage level, firmware read access or an external control API.
+
+4. The board edge carries an A20-containing marking and a date-like string that
+   appears to read 23-05-06. Some characters are obscured. Preserve these only as
+   partial visual search leads, not an accepted full board part number/revision.
+
+5. The supplied photo shows one populated side. It does not establish a complete
+   component list, exposed gyro bus or sensor supply rail.
+
+DOCUMENTARY LEADS
+=================
+
+A. Veeniix describes V995 stock remote-control functions including altitude hold,
+   headless mode and automatic maneuvers. Those functions show that control logic
+   exists, but do not establish that custom firmware or external sensor integration
+   is supported. The manufacturer download page inspected lists apps for other
+   product families; it did not provide a V995 SDK, schematic or firmware image.
+   Sources:
+   https://veeniix.com/toys/V995?product_id=22&title=Products
+   https://www.veeniix.com/support/downloads
+
+B. The V995 manual's hosting/index page associates it with U46C-022. UDIRC's own
+   catalog has a Firefly U46C, and CML's own parts catalog lists a U46C receiver
+   board under UDI-I22-07. This is a POSSIBLE related-platform search path.
+   It is not proof that the V995 uses that exact board, radio protocol or firmware.
+   No replacement-board interchangeability is established; no purchase proposed.
+   Primary UDIRC product and CML catalog sources:
+   https://b2b.udirc.com/portfolio/u46c/
+   https://www.cmldistribution.co.uk/product/UDI-I22-07/udi-rc-u46c-receiver-board
+   Index lead, not independent proof of OEM identity:
+   https://device.report/manual/20701008
+
+C. The index also associates FCC ID 2BBLM-V995. Attempts to obtain a corresponding
+   internal-photo exhibit through public mirrors did not yield an accessible
+   exhibit. Do not claim an FCC teardown or schematic was inspected. The manual
+   PDF's extracted text includes V995 and IC 33721-V995 identifiers. PDF page
+   screenshots failed, and a local fetch returned HTML rather than a usable PDF.
+   Thus this research does not claim a complete visual inspection of that manual.
+
+D. Searches for V995/U46C firmware, MCU identity, board markings and interfaces
+   did not yield a verified matching open firmware target or board schematic.
+   This is a search result with limits, not proof that the board cannot be changed.
+
+WHAT THIS MEANS FOR THE PROJECT
+==============================
+
+The V995 can remain the stock physical test article while QT Py independently
+collects measurements. Connecting additional sensors to QT Py does not make the
+V995 controller consume those measurements. Controlled recovery needs a demonstrated
+path from measured state to a command the aircraft actually accepts.
+
+Three possible development paths, to choose after identification:
+  1. Independent instrumentation: preserve stock control and collect experimental
+     evidence. This is the currently supported planning path.
+  2. Stock-board integration: feasible only if an actual telemetry/control/programming
+     interface, logic levels and software support are established. Read-only
+     telemetry and command authority are separate capabilities.
+  3. Controller replacement: a later design decision involving motor drivers, IMU,
+     radio/override, power and mass. It is a substantial vehicle revision, not a
+     simple sensor installation or an already authorized implementation.
+
+NEXT BOARD TASKS — PROPOSED 90-MINUTE IDENTIFICATION PASS
+=======================================================
+
+B01 / Owner / about 15 minutes
+  Capture sharply focused, perpendicular close-ups of the central IC, pad group,
+  full board marking and the underside if accessible without forcing connections.
+  Keep the original prop/motor positions and wire routing recorded. Transcribe
+  every IC line and logo exactly, using question marks for unreadable characters.
+  Desired result: actual markings instead of guesses from an enlarged overview.
+
+B02 / Claude / about 30 minutes after readable markings arrive
+  Match the exact marking/package to manufacturer data sheets. Separate MCU,
+  RF device, inertial sensor, pressure sensor if present, regulator and drivers.
+  Cross-check package/pin count and surrounding circuit; a similar search string
+  is not a component identification. Bound the search instead of spending the
+  entire week looking for undocumented firmware.
+
+B03 / Owner with appropriate tools + Claude review / about 30 minutes
+  Produce a power-off continuity map for known ground, battery input, exposed pads
+  and identified chip pins. Label observations separately from inferred nets.
+  Powered rail/logic measurements are a subsequent defined operation after the
+  relevant terminals and motor behavior are understood. Do not attach a programmer
+  based solely on the letters CLK. Preserve stock firmware and operation.
+
+B04 / Claude / about 15 minutes
+  Return a capability decision: component identities, candidate interface, source
+  pinout, measured voltage if available, access status and smallest next test.
+  If unresolved, finish independent logger work; report precisely which chip/net
+  prevents controller integration. Do not present unknown access as impossible.
+
+DELIVERABLE
+===========
+
+A board map with photographs/markings, component roles, source links, pad/net
+evidence and the resulting choice among the three development paths. No confirmed
+schematic, flashable target or direct sensor interface is claimed by this note.
+
+CAD CONTEXT FOR FOLLOW-ON MOUNTS
+==============================
+
+Use the Owner-designated briefing:
+  500ft/engineering-audit -> docs/cad_agent_briefing.md
+  https://github.com/500ft/engineering-audit/blob/main/docs/cad_agent_briefing.md
+Read on September 21; Git blob 530550e230f7b9de8dc350a60e6dd19eb1d94c31.
+Its independent geometry verification, parameter re-drive and STEP round-trip
+requirements are incorporated into section 15 of the updated weekly plan.
+Board/carrier/fixture dimensions still need their own evidence; a photo lead
+does not become a manufacturing dimension.

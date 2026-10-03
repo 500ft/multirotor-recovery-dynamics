@@ -1,0 +1,553 @@
+MULTIROTOR RECOVERY DYNAMICS
+LITERATURE CRITIQUE, RESEARCH AMENDMENTS AND CLAUDE HANDOFF
+September 24, 2026 | Planning only
+
+DECISION
+========
+Keep the instrumentation-first V995 plan. Change the scientific framing and
+several evidence claims before commissioning another large simulation sweep.
+The strongest direction is a measured, configuration-specific recovery boundary
+with explicit sensing and altitude limits. A comparison of different aircraft
+designs is useful, but it is not automatically an executable recovery policy.
+
+Research question for this review:
+What can published fault-tolerant-control, sensing and impact experiments justify
+about a low-altitude recovery study on the stock, approximately 50 g Veeniix V995,
+and which assumptions must be corrected before its results are interpretable?
+
+This is an amendment to the September 20 hardware-revision handoff. It preserves
+the manufacturer's accepted charger/battery specifications, the bought parts,
+the planning-only scope, and the engineering-audit CAD briefing. No new purchase,
+hardware operation, firmware replacement, release approval or experiment is
+authorized by an unchecked task here. Claude should execute under the owner's
+separate implementation instructions.
+
+1. BASELINE AND WHAT HAS ALREADY BEEN DONE
+========================================
+Fetched origin on September 24; inspected files directly from remote refs without
+changing the checkout. Main: 97e432f. Relevant merged work includes:
+  - #22: Study A2.
+  - #24/#25: V995 identity/intake, proposed bench wiring and first audit fixes.
+  - #26: the September 22 literature review, six clusters and claim ledger.
+  - #34: parachute inflation amendment and regenerated results.
+Candidate branch inspected separately:
+  origin/fix/paired-comparison-20260923 at a083e80.
+Its paired results are not main's results at the inspected revision. No new
+simulation or test suite was run for this planning review.
+
+Read alongside this handoff:
+  literature/claim-ledger.md
+  literature/novelty-and-gaps.md
+  literature/notes/01-rotor-loss-fault-tolerant-control.md
+  literature/notes/03-parachute-and-descent-recovery.md
+  docs/specs/survivable-set/design.md and design-a2.md
+  docs/specs/survivable-set/review-2026-09-19.md
+  Analysis/survivable_set.py and sim_release_recovery.py
+  docs/bench-acquisition.md
+  evidence/week-2026-09-19/platform-capabilities.md
+
+Do not recreate the existing bibliography, intake forms or quick-run isolation
+fix. The current review is valuable, but resolving a DOI establishes that a paper
+exists; it does not establish that every inference drawn from it is supported.
+
+2. EVIDENCE SCREEN
+==================
+Included: primary research directly addressing failed-rotor dynamics, detection,
+estimation, transient recovery, identification or impact measurement. Adjacent
+work is included when it challenges a specific novelty or measurement claim.
+Excluded as quantitative support: marketing summaries, unexplained literature
+numbers, and thresholds borrowed across vehicle classes without a transfer model.
+
+Aboutness: 3 = core; 2 = relevant adjacent work. Evidence categories here are
+claim-specific: B = controlled physical experiment; C = simulation/HIL or a
+limited validation; U = relevant publication located but modality/details still
+unverified. No result below is graded as independent replication on the V995.
+Methods/statistics papers are assessed as methods, not forced into flight grades.
+
+Primary-source register (URLs are the sources actually inspected):
+
+[L1] Mueller & D'Andrea, ICRA 2014. Aboutness 3; B for one/two-opposite
+propeller loss, C for three lost propellers. Read author-hosted full paper.
+It establishes spinning reduced-attitude flight; the three-loss demonstration
+is simulated because required thrust exceeds the experimental vehicle's limit.
+The physical platform is 0.50 kg. This is not a universal recovery guarantee.
+https://hiperlab.berkeley.edu/wp-content/uploads/2018/05/2014_StabilityAndControlOfAQuadrocopterDespiteTheCompleteLossOfOneTwoOrThreePropellers.pdf
+
+[L2] Sun, Baert, Strack van Schijndel & de Visser, ICRA 2020, Upset Recovery
+Control. Aboutness 3; B for demonstrated toss recovery, C for sampled envelope.
+Read full paper. Its Monte Carlo starts at 50 m and 10 m/s horizontal speed;
+one successful simulated recovery loses over 30 m. Allocation constraining an
+undesirable angular-rate component improves recovery. It supports transient
+controller benchmarking, not a claim that arbitrary states recover within 3 m.
+https://arxiv.org/html/2002.09425
+
+[L3] Sun et al., RA-L 2021, Frames vs. Events. Aboutness 3; B, single-platform
+experiments. Read author-hosted full paper. High spin complicates both camera
+tracking and attitude estimation. Their estimator accounts for centripetal
+acceleration and IMU displacement. The custom controller/vision/range-sensor
+system is substantially different from the V995 and LIS3DH logger.
+https://rpg.ifi.uzh.ch/docs/RAL21_Sun.pdf
+
+[L4] Strack van Schijndel, Sun & de Visser, 2021 preprint / ICUAS 2023 final
+record. Aboutness 3; B. Read preprint full text and final institutional record.
+Sections V-B/V-C explicitly show detection-delay box plots across 26 failure
+flights, including outliers, and a reported delay interval. Inputs include RPM,
+gyro and acceleration. Thus a blanket claim that nobody characterizes detection
+delay variability is false. Replaying those flights under many tuning settings
+does not create independent new flight trials.
+https://arxiv.org/html/2102.06439
+https://research.tudelft.nl/en/publications/fast-loss-of-effectiveness-detection-on-a-quadrotor-using-onboard-2/
+
+[L5] Yeom et al., ICUAS 2024, Experimental System Design of an Active
+Fault-Tolerant Quadrotor. Aboutness 3; B. Read full preprint. It studies a 700 g
+platform, including transition altitude and mechanical changes to rotational
+drag. Use it to motivate a sensor/actuator/mechanics co-design comparison; its
+hardware and performance numbers are not V995 design values.
+https://arxiv.org/html/2404.06340v1
+
+[L6] Cintas & Ozyer, Control Engineering Practice 169, 106779, April 2026.
+Aboutness 3; U pending complete methods review. Publisher highlights explicitly
+report real flight on a sub-35 g UAV; abstract reports rotor-speed reduction and
+fault-tolerant hovering. Publisher search extract and author repository inspected;
+full article access failed. Complete rotor stoppage versus partial degradation,
+compute location, total instrumented mass and trial counts remain to be checked.
+This is a mandatory counterexample to broad claims that small-scale FTC is empty;
+it is not yet verified evidence of complete rotor-loss recovery at that mass.
+https://doi.org/10.1016/j.conengprac.2026.106779
+https://github.com/emrecintas/fault_tolerant_control
+
+[L7] Siotia et al., Scientific Reports 2026, 18189. Aboutness 2; C for the cited
+landing outcomes. Full publisher text read. Methods/results identify simulated
+and HIL recovery tests; the cited impact speeds are not physical drop measurements.
+Table 4 reports latency mean and standard deviation over 200 HIL runs. The text
+separates processing/persistence/trigger delay from deployment. Do not convert
+this evidence into a physically validated V995 inflation time or altitude floor.
+https://www.nature.com/articles/s41598-026-47045-0
+
+[L8] Eschmann et al., Data-Driven System Identification of Quadrotors Subject
+to Motor Delays, 2024. Aboutness 2; B. Full text read, including identification
+procedure. A fitted Crazyflie motor time constant is 0.072 s. It is a model
+parameter for that system, not a measured V995 dead time; model structure matters.
+https://arxiv.org/html/2404.07837v2
+
+[L9] Mili et al., From Bench to Flight, 2026 preprint. Aboutness 2; B for the
+reported controlled impacts, not replicated V995 evidence. Full text read.
+Their impact apparatus uses 6250 Hz analog acquisition and 1000 fps video,
+measuring force and rebound. This supports distinguishing contact dynamics from
+steady thrust measurement. Do not transfer their force limits or percentage
+improvements to this vehicle, or treat the preprint as a certification standard.
+https://arxiv.org/html/2602.05922v1
+
+[L10] Briod et al., A Collision-resilient Flying Robot, JFR 2014. Aboutness 2;
+B for the reported demonstrator, abstract/institutional description inspected.
+A protective cage coupled through a passive three-axis gimbal reduces transfer
+of collision-induced friction torques. This mechanism is not equivalent to rigid
+propeller rings. Benefits must be tied to actual construction and contact mode.
+https://doi.org/10.1002/rob.21495
+
+[L11] Fagerland, Lydersen & Laake, 2013 and 2014 paired-proportion methods.
+Core methodological relevance. Primary abstracts inspected. McNemar comparisons
+address discordant paired outcomes; effect-size intervals are a separate choice.
+Mid-p improves power in their evaluation but lacks a universal exact-level
+guarantee. These papers do not make independently sampled simulations invalid.
+https://doi.org/10.1186/1471-2288-13-91
+https://pubmed.ncbi.nlm.nih.gov/24648355/
+
+[L12] Sanchez-Cuevas, Heredia & Ollero, 2017, aerodynamic ground effect.
+Aboutness 2; B, primary publisher article inspected. Whole-vehicle proximity
+effects motivate documenting rotor-plane clearance and checking setup sensitivity.
+A literature clearance ratio is not proof that this particular bench is free
+of flow interference.
+https://doi.org/10.1155/2017/1823056
+
+Additional bounded leads, not fully reviewed:
+Ke, Cai & Quan, T-RO 2023, doi:10.1109/TRO.2023.3297048: author abstract reports
+outdoor multiple-failure experiments, including adjacent failures. Full PDF
+retrieval exceeded web-tool size. Retain as a precedent; do not describe every
+initial condition or hardware configuration as solved.
+https://arxiv.org/abs/2211.12972
+Rotor-Failure-Aware Quadrotors Flight in Unknown Environments, 2025 preprint:
+https://arxiv.org/html/2510.11306v1
+Read relevant planning/experimental sections. It combines diagnosis, constrained
+planning and FTC; any broad assertion that failure-aware planning is absent must
+account for it. It does not by itself settle this project's multi-action question.
+
+3. REQUIRED CHANGES, ORDERED BY CONSEQUENCE
+==========================================
+
+C01 — Separate design selection from actions available during flight. P0.
+Evidence: inspected action definitions; engineering inference, high confidence.
+
+The current realloc_only case removes guard mass/inertia, disables a control
+floor and uses a different landing criterion. The mechanism case retains them.
+An airborne vehicle cannot choose to have launched without its guard. Similarly,
+a carried parachute's mass remains present even when it is not deployed.
+
+Keep historical results as comparisons of complete design/control packages.
+For a new operational policy, define hardware configuration c before launch and
+allow only feasible actions A(c). Compare actions on the same mass, inertia,
+propulsion and installed protection. Evaluate architecture selection separately:
+  design comparison: compare c1 with c2 under declared policies;
+  runtime policy: pi_c(observed state, uncertainty) selects an action in A(c).
+
+Minimum amendment: list each configuration, installed devices, available actions,
+required observations and actuation access. A V995 action that requires unknown
+motor access is UNAVAILABLE, not merely a low-scoring action. Passive protection
+is part of c; it is not a command unless a deployment mechanism actually exists.
+
+Acceptance: every proposed runtime action can be executed by one fixed aircraft
+without changing installed mass, hardware or outcome definitions mid-comparison.
+No claim of a runtime policy from the existing mixed-configuration ranking.
+
+C02 — Correct the literature review's novelty claims. P0.
+Evidence: L4/L6 and the adjacent planning lead; high confidence on overstatement.
+
+Amend claim-ledger G2, novelty-and-gaps sections 2/4, and note 01 section 6.
+Replace 'empirically empty' with a search-bounded statement distinguishing partial
+degradation from complete loss and separating reported from verified experiments.
+Add L6 and record the unresolved details instead of claiming it proves more than
+its abstract. Remove the claim that detection-delay distributions are absent.
+Also remove unqualified 'never', 'nobody' and 'solved' from envelope/gap statements.
+
+Proposed positioning:
+  We investigate experimentally anchored recovery and landing-proxy boundaries
+  for a specified small-quadrotor configuration, including sensing limits,
+  actuator dynamics and detection delay. We distinguish design comparisons from
+  implementable action selection, and test whether conclusions survive model and
+  outcome uncertainty. Novelty of the complete combination remains under review.
+
+An exact confidence-interval formula is useful reporting practice; adding it to
+an existing controller does not alone establish a substantive research advance.
+Do not claim a 'first' this week. Keep a dated search log and a closest-work table.
+
+C03 — Repair parachute evidence provenance; do not tune another constant yet. P0.
+Evidence: L7 plus main's source/test, high confidence.
+
+Analysis/survivable_set.py calls the reference outcomes measured; the test
+test_reproduces_published_impact_speeds calls their reproduction validation.
+These descriptions need correction. Fitting a free inflation interval to a
+reference model's outputs is model-to-model calibration, not independent physical
+validation. A passing test preserves the chosen fit; it cannot validate reality.
+
+The existing test also supplies terminal_m_s=3.2 from a landing outcome. The
+paper's stated m=2 kg, Cd=1.2, A=1.5 m2, rho=1.225 kg/m3 instead give about
+4.22 m/s from sqrt(2mg/(rho*Cd*A)). This is an unresolved interpretation mismatch,
+not permission to silently replace a published value or tune until agreement.
+
+Keep the historical inflation revision and its result, labelled conditional on
+assumed timing/drag. Withdraw the universal 10–15 m floor and the claim that
+transferring the fitted delay to a smaller craft is proven conservative. Prescribe
+separate failure, trigger, deployment-start and full-drag timestamps before any
+future calibration. The current parachute branch does not use cell.delay_s;
+therefore its timing semantics need reconciliation with the active branches.
+
+For V995 planning: no characterized deployable system exists in the inventory.
+Mark parachute action UNAVAILABLE for this configuration. A hypothetical-device
+sensitivity study may remain separate; it is not a hardware capability.
+
+C04 — Make the failure scenario and recovery metric physically consistent. P0.
+Evidence: code inspection + L1/L2; high confidence on mismatch, uncertain outcome.
+
+The simulator still cuts all motors for detection+startup delay. That is a release
+startup scenario. In-flight loss requires healthy motors to retain their evolving
+states and follow the nominal controller until detection/reconfiguration. Specify
+whether failure is motor stop, propeller loss, effectiveness loss or power loss;
+these are not identical thrust/torque/drag or inertia transients.
+
+The generic settled detector requires norm(omega)<0.3 rad/s, incompatible with a
+deliberately spinning equilibrium. It is not the landing classifier used by the
+current study, so do not falsely claim it caused the current landing results.
+It does mean that detector cannot be reused as a spinning-recovery success flag.
+
+Define three different outcomes:
+  (a) reduced-attitude regulation: thrust/primary-axis error within a registered
+      band, bounded transverse rates, allowed spin within estimator range, held
+      for a registered dwell time;
+  (b) recovery before contact: (a) occurs with remaining clearance and feasible
+      vertical deceleration, recording altitude consumed and lateral excursion;
+  (c) landing/impact outcome: touchdown motion and separately observed damage.
+Thresholds belong to a new protocol; leave proposed values explicitly undecided.
+
+Simple scale check, not a flight prediction: drag-free time to ground from rest
+is 0.553/0.782/1.106 s at 1.5/3/6 m. For downward speed w0, it is
+  t_ground = (sqrt(w0^2 + 2*g*h) - w0)/g.
+Real thrust, drag and initial velocity change this. The comparison explains why
+an asymptotically stable controller can still fail a low-height recovery task.
+
+C05 — Do not attribute a guard's benefit to an arbitrary controller restriction. P0.
+Evidence: action definitions + mechanics inference, high confidence.
+
+The code links inverted motor operation to guard presence. In free air, inversion
+alone does not mechanically prevent an unguarded rotor from generating thrust.
+Contact, obstruction or an explicit operational rule might prevent it; none is
+represented by the simple quarter-collective switch itself.
+
+Before claiming the guard enables airborne recovery, write its causal mechanism:
+Does it prevent rotor contact? Preserve clearance under load? Decouple contact
+torque? Absorb deformation energy? Change drag? Each requires its own evidence.
+L10 supports one particular construction, not generic rigid rings.
+
+For a successor study use the same admissible airborne controller on both
+architectures; vary mass/inertia/aerodynamics/clearance explicitly. Then compare
+controller-floor enabled/disabled on one fixed architecture as a diagnostic.
+Label counterfactual hardware combinations and avoid physically impossible ones.
+Retain historical package comparison; it cannot isolate guard causation.
+
+C06 — Preserve bench instrumentation; add an observability contract. P1.
+Evidence: purchased inventory + L3/L4; high confidence.
+
+Write one row per desired output: quantity, sensor/source, frame, timing, range,
+uncertainty and availability. Current aggregate force/current, specific force and
+beam events cannot establish per-motor thrust, gyro rate, full attitude, trajectory
+or failure identity. Do not implement those plots with surrogate labels.
+
+For future attitude sensing, document sample/filter delay, per-axis gyro range,
+clipping and sensor position relative to CG. Rigid-body specific force includes
+alpha cross r and omega cross (omega cross r). Illustrative calculation:
+20 rad/s at 10 mm perpendicular offset gives 4 m/s2 centripetal acceleration.
+That is not gravity tilt. Mounting dimensions are therefore estimation inputs.
+
+Adding an event camera is not the default next purchase. First decide whether
+existing stock telemetry, external calibrated tracking, or a small logged IMU
+can answer the specific experiment; each has different mass and feedback limits.
+External tracking may supply ground truth without making control onboard-only.
+
+C07 — Correct the spin-scaling argument and identify dynamics separately. P1.
+Evidence: rigid-body equations; engineering derivation, high confidence.
+
+For an illustrative single-axis model:
+  Izz * dr/dt = tau_residual - c1*r - c2*abs(r)*r.
+Lower Izz speeds the transient if other terms are fixed. Terminal spin instead
+satisfies tau_residual = c1*r + c2*abs(r)*r; Izz cancels. A smaller aircraft does
+not necessarily have higher terminal spin solely because inertia is smaller.
+Geometry, residual reaction torque, drag and thrust must be scaled together.
+
+Specify separate unknowns: inertia tensor, reaction torque/thrust relationship,
+rotational drag, motor response, battery-dependent thrust and estimator limits.
+Static whole-drone axial force does not identify these separately. L8 is an
+analogue for choosing model form, not a V995 motor parameter to accept by default.
+Distinguish pure delay from first-order lag; a first-order response reaches 63%
+at one time constant and approximately 95% at three, not a delayed full step.
+
+C08 — Treat touchdown limits as an unvalidated proxy, not airframe survival. P1.
+Evidence: current criterion + L9; high confidence on missing validation.
+
+The 2.0/2.5 m/s and 30/60 degree thresholds are assumptions. Borrowing a manned
+aircraft landing-gear speed band does not validate them for a tiny plastic drone.
+Human-injury metrics also do not establish whether electronics/props/arms survive.
+
+Retain historical threshold values and report sensitivity. A new contact-state
+record should include vertical and lateral velocity, attitude, angular velocity,
+surface, contact location, configuration and specimen history. Store physical
+damage and post-event function independently from a kinematic proxy pass.
+Total pre-contact kinetic energy is
+  E = 0.5*m*(vx^2+vy^2+vz^2) + 0.5*omega^T*I*omega.
+Even this energy is not a universal damage criterion: load path and stopping
+distance matter. At assumed 50 g, translation at 2/2.5/3 m/s gives
+0.100/0.156/0.225 J; these are calculations, not tolerable-energy measurements.
+
+Do not promote the purchased static load-cell chain into an impact instrument.
+At 80 SPS, samples are 12.5 ms apart; even 320 SPS gives 3.125 ms spacing, before
+filter delay. Peak force needs demonstrated bandwidth, mechanical response and
+adequate samples over contact. First plan an unpowered contact/clearance study
+with an appropriate surrogate and observable outcomes; powered drops remain a
+different protocol. Repeated drops on one damaged specimen are not independent
+production-airframe trials. A one-afternoon pilot cannot validate reliability.
+
+C09 — Improve statistics without overstating what pairing proves. P1.
+Evidence: L11 plus candidate a083e80, high confidence on interpretation.
+
+Keep useful candidate work: paired tables, discordant counts, explicit
+no_discordant_pairs, historical criteria preserved. Correct these interpretations:
+  - Independent Monte Carlo draws are a valid design. They are not 'paired by
+    construction' merely because both actions sample the same distribution.
+  - Common random numbers can improve precision, depending on covariance. They
+    do not retroactively prove earlier overlap was manufactured.
+  - For estimates A/B, Var(A-B)=Var(A)+Var(B)-2*Cov(A,B). State the coupling.
+  - McNemar's conditional win proportion among discordant trials is not the
+    unconditional landing-success improvement. Report Delta=(n10-n01)/N too.
+  - Zero discordant observations does not prove equivalent true probabilities.
+  - Two one-sided 95% limits on ONE proportion form an at-least-90% central exact
+    interval. Limits belonging to TWO DIFFERENT actions do not constitute a
+    central interval for their difference. Amend claim-ledger E1 accordingly.
+
+Check physical trial identity, not just equal seeds: shared nuisance draws and
+noise at common physical times; action-specific random streams kept separate;
+pairing through chunk merging verified. Don't pair parachute RNG draws with
+vehicle draws merely because their seed prefixes match.
+
+The candidate A/A2 comparison still changes controller and drag simultaneously.
+Better pairing cannot identify a feedforward effect from that bundled contrast.
+The 192 comparisons also reuse related outcomes across criteria/cells; pooled
+significance is not evidence from 192 independent physical experiments. Keep
+pooling descriptive, report per-cell effects and address multiplicity prospectively.
+
+C10 — Bound what 'the boundary' means. P1.
+Evidence: study domain + engineering inference; high confidence.
+
+The current map is conditional on limited tilt/tumble axes, failure location,
+assumed parameter distributions and a landing proxy. Monte Carlo confidence
+bounds quantify finite sampling under that model, not model error or real-world
+vehicle reliability. More samples shrink only the first of those uncertainties.
+
+Separate observational variation (e.g. repeated noisy readings), specimen/condition
+variation (e.g. battery state), and unknown parameters/model choices. Until data
+support a probability distribution for an unknown parameter, report a scenario
+bracket rather than silently declaring it uniformly distributed.
+
+An executable selector observes estimates, not true simulation state or the exact
+instant a hidden failure began. Include state uncertainty and diagnosis confidence;
+evaluate across plausible hypotheses or abstain when action preference changes.
+Retain an oracle policy only as a labelled performance upper benchmark.
+Do not infer the failure class or actual detection delay from a single beam.
+
+4. DEVELOPMENT PROPOSALS WORTH KEEPING
+=====================================
+These are project proposals, not claims of unoccupied literature.
+
+P1. Separate boundaries for estimation, actuation, altitude and contact.
+Output, for each trial: controller version, scenario, sensor clipping/staleness,
+allocation residual/saturation, regulation time, maximum descent, ground-contact
+state and outcome status. A failed landing should have a traceable cause rather
+than only a binary label. Classify simultaneous causes without forcing a unique
+root cause. This tells the next bench measurement what uncertainty to reduce.
+
+P2. A 'minimum required height' comparison with uncertainty.
+For fixed configuration, initial motion and executable policy, estimate height
+needed to meet the declared proxy. Retain the existing sparse grid as historical.
+Use additional heights to check whether success is monotone before proposing
+bisection; contact/controller timing can invalidate that assumption. Independent
+held-out conditions should test an estimated boundary, not only its interior.
+
+P3. Measurement priorities based on whether they change the decision.
+For each uncertain input, vary it over a physically justified bracket and count
+which predeclared conclusions/actions change. Prioritize measurements that resolve
+those reversals. Do not assign a prior distribution solely to compute a polished
+expected-value score. Start with control access, usable force resolution and
+mounted mass; these determine whether a dynamic experiment is possible at all.
+
+P4. Benchmark before controller innovation.
+Once scenario/allocation/timing are coherent, specify reproduction of one
+published reduced-attitude reference in its stated regime. Compare on identical
+plant/observations/limits against the existing controller. Use matched seeds for
+precision, then independently sampled held-out cases for robustness. Add new
+controllers only after the benchmark works or its transfer failure is explained.
+Do not start RL, onboard vision or a full NMPC stack to compensate for missing
+motor authority or state measurements.
+
+5. CONCRETE NEXT WORK: TWO PLANNING SESSIONS, THEN CONDITIONAL EXECUTION
+=====================================================================
+There are two calendar days left in the old September 20–25 window. Do not assume
+any physical work happened because its planned date passed. These eight hours of
+Claude work replace research expansion; they do not add a second full weekly
+schedule. Hardware execution follows the existing R2–R6 dependencies.
+
+T1 — Baseline and amendment sheet. 45 minutes. Depends: none.
+Refresh refs, identify merged/candidate work, read local instructions. Add dated
+interpretation amendments rather than silently rewriting frozen studies. Map
+C01–C10 to existing files and each claim's evidence category.
+Done: every changed assertion has a source or an explicitly identified inference;
+existing completed fixes are not scheduled again.
+
+T2 — Closest-work and evidence corrections. 90 minutes. Depends: T1.
+Amend the existing literature files for L4/L6/L7 and the spin-scaling error.
+For L6 use a bounded full-methods/code search: injected fault type, remaining
+rotor capability, flight-ready mass, compute location, sensing and results. If
+details remain unavailable, finish with U status and the exact unresolved claim.
+Relabel the parachute fit/test as model calibration and document the timing and
+terminal-speed discrepancy. No new parameter fitting in this task.
+Done: no 'measured' label for simulated landing outcomes; no absolute small-drone
+or latency-distribution gap claim.
+
+T3 — Configuration/action and outcome contracts. 90 minutes. Depends: T1.
+Add to the current study review: hardware configurations, executable actions,
+observable inputs, scenario timelines and three outcome definitions from C04.
+Draft a successor study ID without changing frozen results. List numerical
+threshold decisions explicitly; do not fabricate approvals.
+Done: the same aircraft can physically execute every action in a runtime
+comparison, and recovery/landing/damage are distinct fields.
+
+T4 — Sensing and bench-readiness amendment. 75 minutes. Depends: T3.
+Extend docs/bench-acquisition.md with the C06 observability table and a one-page
+procedure for checking usable force resolution, timestamp age and saturation.
+Resolve platform-capabilities.md's apparent requirement for board close-ups before
+R2: the independent USB-powered bench chain need not wait for stock-board identity.
+Board-dependent wiring/control work still does. Preserve owner-approved charger
+specifications; don't ask for label reconfirmation.
+Done: standalone acquisition can proceed once its own wiring/calibration inputs
+are ready; unknown stock telemetry is not blocking unrelated bench work.
+
+T5 — Paired-comparison interpretation review. 60 minutes. Depends: T1/T3.
+Review candidate a083e80 under C09. Prepare wording and a small analytical check
+table: identical outcomes; only A wins; only B wins; swapped action labels;
+missing/truncated pairs; known marginal improvement. Require trial identity in
+the later implementation, not a test that only checks equal seed strings.
+Done: effect magnitude, conditional discordant probability and p-value are named
+separately; combined controller/plant effects are not called controller causation.
+
+T6 — Specify one affordable physical study and its fallback. 90 minutes.
+Depends: T4 and returned hardware status; procedure only until bench prerequisites.
+Primary: calibrated, repeatable axial force/electrical power, retaining original
+R3 calibration and R5 bounded-command protocol. Add clearance/condition records.
+If reviewed adjustable geometry is available, propose a small setup-sensitivity
+pilot: two rotor-plane clearances x three command levels x three repeats = 18
+steady records, blocked by battery/configuration with order balanced. Preselect
+admissible geometry; never move fixtures while powered. Record floor/wall/ceiling
+distances, rotor diameter, stock-controller behavior and pre/post zero.
+With no RPM measurement or direct command control this estimates whole-system
+setup sensitivity, not a fixed-RPM aerodynamic correction. Do not 'correct' thrust
+by dividing by voltage or importing a paper's ratio. Analyze matched conditions
+and show raw data. Two heights cannot prove all boundary effects absent.
+Fallback: complete static calibration and sensor timing checks; return a specific
+uncertainty/fixture blocker rather than dummy powered data.
+Done: raw records, units, calibration, uncertainty, exclusions and a claim no
+broader than the measurement. A dynamic-impact study is a separate later protocol.
+
+T7 — Consolidate the next decision. 30 minutes. Depends: T2–T6.
+Use existing review/evidence documents. Publish one status table: supported,
+conditional, unavailable, or unmeasured. Choose exactly one next branch:
+  A: improve acquisition if it cannot resolve the desired effect;
+  B: characterize stock whole-drone force/power if instrumentation is ready;
+  C: specify a control-access experiment if board interfaces are established;
+  D: specify unpowered protection/contact characterization if protection is the
+     immediate question and appropriate specimens/measurement are available.
+Done: one justified next experiment, its required evidence and an explicit stop
+condition. Do not claim the current session performed any of these experiments.
+
+6. CAD, VALIDATION AND REPORTING BOUNDARIES
+=========================================
+For every future cradle, sensor mount or guard, read:
+  500ft/engineering-audit -> docs/cad_agent_briefing.md
+  https://github.com/500ft/engineering-audit/blob/main/docs/cad_agent_briefing.md
+Apply its independent geometry oracle, parameter re-drive and STEP round-trip
+workflow. Critical interfaces need position/clearance checks; equal volume alone
+does not validate them. Keep accepted inputs in this project's canonical register.
+
+Geometry validation, static FEA, impact prediction and physical survival are
+different evidence levels. A linear-elastic static solve does not establish
+impact absorption, buckling, contact duration, damping or fracture. Use surrogate
+coupons/load-path tests before proposing destructive complete-aircraft trials.
+Do not import RoboRacer mast geometry or constraints from the shared briefing.
+
+For any later physical reliability claim, plan independent experimental units,
+condition coverage, uncertainty and stopping rules before collecting the decisive
+data. Illustration: zero failures in 59 independent, identically distributed
+trials yields a one-sided exact 95% lower success bound above 0.95. Ten successes
+or repeatedly dropping one progressively damaged vehicle do not establish that
+claim. This calculation is not a demand for 59 drops this week.
+
+Final strength assessment:
+  Strong support: spinning FTC is established on research platforms; sensing,
+  actuator limits, transients and contact outcomes need separate treatment.
+  Strong repo-specific corrections: action/configuration conflation, overstated
+  novelty, simulated parachute evidence labelled measured, incompatible generic
+  settled metric, and overinterpretation of statistical pairing.
+  Still unknown: stock-board access, actual V995 dynamics, instrumented mass,
+  real contact tolerance and whether a useful low-height recovery region exists.
+  Not established by this review: a universal minimum recovery height, a suitable
+  new board, a validated controller for this drone, or a globally novel method.
+
+Recommended end-of-week result: a corrected scientific claim ledger and one
+credible measurement workflow, with a configuration-specific successor study
+ready to implement. That is a stronger foundation than another sweep of an
+unvalidated action model.

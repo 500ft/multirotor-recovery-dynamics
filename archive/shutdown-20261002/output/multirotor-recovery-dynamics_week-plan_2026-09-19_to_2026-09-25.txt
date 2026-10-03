@@ -1,0 +1,1028 @@
+MULTIROTOR RECOVERY DYNAMICS
+ONE-WEEK DEVELOPMENT PLAN AND CLAUDE HANDOFF
+REVISION NOTICE — September 20, 2026:
+The hardware photos change this week's priorities. Use the replacement schedule
+and hardware plan in the adjacent file:
+  multirotor-recovery-dynamics_week-plan_2026-09-20_hardware-revision.txt
+The detailed simulation critique below remains a backlog; do not execute both
+full schedules or carry its old platform assumptions onto the photographed drone.
+
+Prepared: 2026-09-19
+Planning window: September 19–25, 2026; seven work sessions that may be shifted.
+Status: proposed implementation plan; components and a usable bench available.
+Updated after Owner clarification: 2026-09-19. Specific equipment, calibration,
+fixture readiness and D1–D6 decisions still require their own records.
+
+READ THIS FIRST — INSTRUCTIONS FOR CLAUDE
+
+Work on 500ft/multirotor-recovery-dynamics. Read this entire handoff before
+changing code. Reconcile the repository and PR state before executing a task:
+some work described below may have advanced since this snapshot. Preserve user
+edits and source evidence. Implement the smallest independently reviewable slice,
+run its acceptance checks, and report what changed and what remains unresolved.
+
+The priority this week is to make the propulsion-loss study trustworthy enough
+to guide the next controller and hardware decision. In parallel, use the available
+components and bench to obtain the identities and non-powered interface records
+needed for fixture definition. Start W07 in the first session; do not leave usable
+hardware idle while completing the entire software sequence. Do not spend the week
+producing another large sweep with the same unresolved modeling assumptions.
+
+The deliverable from the planning assistant is this text file only. No project
+implementation, experiment, new PR, approval or physical measurement was performed
+while preparing it. The user will give this file to Claude for review and building.
+This document proposes software work; it does not fill D1–D6 or approve hardware.
+Follow the user's execution instructions when they hand it over. Do not infer
+permission to merge, buy parts, contact people or operate hardware from this file.
+
+Recommended order:
+  In parallel from session 1: W07 hardware inventory and non-powered inspection.
+  1. Review the current A2 candidate and capture an exact baseline.
+  2. Protect results from accidental overwrite and make trials replayable.
+  3. Resolve what physical event the simulator actually represents.
+  4. Check impact calculations, numerical behavior and motor allocation.
+  5. Separate controller effects from assumed plant effects in a paired study.
+  6. Repair the interpretation of uncertainty, policy choices and drop tests.
+  7. Review the returned bench records and advance the accepted Day 4 slices.
+  8. Deliver reproducible evidence and one clearly justified next development.
+
+Do not build a new control architecture until the relevant modeling and allocation
+checks pass. A negative result with a defensible cause is a useful weekly result.
+
+
+1. VERIFIED STARTING POINT
+==========================
+
+Repository: https://github.com/500ft/multirotor-recovery-dynamics
+Existing local checkout: /Users/redhose/SelfStabilizingDrone
+The directory retains the repository's former name.
+
+Owner update on September 19: "Components and a usable bench available."
+This establishes access. It does not identify which components, how many motors,
+the cell/ADC/instruments, their calibration status, or a completed thrust fixture.
+Do not ask the Owner again whether any hardware or bench is available. Ask only
+for the missing specifics in W07 and record returned observations separately.
+
+Remote main inspected:
+  eb5cf959703f9323a7996d07cd5fb9e92dbf65a2
+
+Candidate A2 head inspected:
+  03d6b4969740cfb232753853bcfc399e425b8151
+  branch: study/survivable-set-a2
+
+Verified on September 19:
+  - PR #19 is closed.
+  - PR #20 is merged. It contains the revised Day 4 plan plus an evidence
+    record, a source-candidate packet and a fixture gap inventory.
+  - PR #21 is merged. It adds Study A/B: survivable landing estimates and
+    action selection after partial propulsion loss.
+  - PR #22 is open. Its base is still study/survivable-set-a, although #21
+    has merged. Its analysis-tests check succeeded on the inspected head.
+  - PR #22 adds A2, an allocator/descent revision, convergence output and a
+    proposed drop-test prediction. These are candidate changes, not main.
+  - D1–D6 remain pending in the inspected main and A2 branch.
+  - cad/bench/owner-inputs.md and cad/bench/measurement-route.json do not yet
+    exist in either inspected revision.
+
+Do not repeat completed work:
+  cad/bench/source-candidates.md already contains the Phidgets candidate,
+  unavailable motor-mount information and nominal prop-hub information.
+  cad/bench/fixture-definition.md already contains the gap inventory.
+  evidence/task-day4-2026-09-15/README.md already records T00/T01/T11.
+  docs/DAY4_PLAN.md already defines the bench decision loop.
+
+Read in this order:
+  README.md
+  docs/DAY4_PLAN.md
+  cad/bench/source-candidates.md
+  cad/bench/fixture-definition.md
+  docs/specs/survivable-set/design.md
+  Analysis/failure_allocation.py
+  Analysis/survivable_set.py
+  Analysis/run_survivable_set.py
+  Analysis/sim_release_recovery.py
+  docs/specs/measured-authority-gate/design.md
+  docs/specs/measured-authority-gate/evidence-contract.md
+
+Read these additionally from the A2 candidate if not yet merged:
+  docs/specs/survivable-set/design-a2.md
+  docs/specs/survivable-set/drop-test-prediction.md
+  Analysis/current-results.md
+  Data/survivable_set_convergence.json
+
+Existing tests passed historically, and PR #22 has a green hosted check. This
+planning review did not rerun the repository suites. Claude must record current
+counts and exits rather than reuse the earlier 91, 129 or CAD test totals.
+
+
+2. WHAT WOULD MAKE THIS A STRONG WEEK
+====================================
+
+By the end of the week, aim to answer these questions with inspectable artifacts:
+
+  A. Are the poor rotor-out outcomes caused primarily by the controller, the
+     allocator, the assumed detection/actuator behavior, or the scenario itself?
+  B. Does gyroscopic feedforward change the outcome when the plant, random
+     realization, initial state and landing criterion are held fixed?
+  C. Which apparent wins or failures depend on uncertain drag, impact tolerance
+     or guard assumptions, and which survive those changes?
+  D. What precise information is still needed to define the thrust stand, who
+     can supply it, and which useful work is independent of that information?
+
+Minimum weekly deliverables:
+  - A source-referenced review of PR #22 and the confirmed defects/limitations.
+  - A replayable trial record and a runner that cannot overwrite full results
+    during smoke/quick work.
+  - An explicit scenario definition, impact event and failure-diagnostic record.
+  - A bounded matched controller/plant diagnostic, or a documented reason it
+    cannot yet run correctly.
+  - Correct statistical language and a proposed prospective validation protocol.
+  - One consolidated bench input packet with actual available-part identities,
+    returned non-powered interface/anchor observations, and precise remaining gaps.
+  - A short end-of-week decision memo choosing the next controller/measurement.
+
+What is deliberately not promised this week:
+  complete vehicle CAD; a released stand without interfaces; a new flight stack;
+  a full rotor-out flight controller; hardware recovery; calibrated measurements;
+  a universal survivable set; or a statistically validated physical success rate.
+
+Planning allowance, not an elapsed-time guarantee:
+  25 focused engineering/Claude hours, plus approximately 2–3 hours of Owner
+  inventory, non-powered inspection and decisions. This Owner allowance is a first
+  intake session, not a promise to complete every measurement or calibration.
+  Computer runtime is separate and must be benchmarked. Components and bench access
+  are confirmed; exact equipment and measurement capability remain to be identified.
+  If the user supplies different capacity, reduce optional work first.
+
+Seven sessions:
+  Sep 19: W01 baseline/review; start W07 inventory/inspection packet.       4 h
+  Sep 20: W07 returned-input review; W02 output protection and replay.      4 h
+  Sep 21: W03 event semantics; start W04 numerical checks.                 4 h
+  Sep 22: finish W04; start W05 matched diagnostic.                        4 h
+  Sep 23: W05 paired pilot, interpretation and measurement priorities.     4 h
+  Sep 24: W06 statistics and prospective physical-validation draft.        3 h
+  Sep 25: W08 integration, interpretation and next-step recommendation.   2 h
+
+W07 starts immediately and can continue while computations run. It does not depend
+on the controller diagnostic. If its records close the fixture prerequisites,
+replace optional W05 expansion with the accepted Day 4 geometry-definition slice;
+do not silently add fixture construction to the same 25-hour allowance.
+Calendar dates may move; dependencies do not.
+
+
+3. FINDINGS THAT DETERMINE THE ORDER
+===================================
+
+These are source-inspection findings, not claims of new experimentally reproduced
+failures. Where a behavior needs a runtime counterexample, the work order requires
+one before fixing it.
+
+F01 — A2 changes the controller AND the simulated plant.
+  At the candidate head, survivable_set._realloc_trial sets yaw drag only for a2
+  and simultaneously enables spin_aware. A-vs-A2 therefore cannot isolate the
+  feedforward contribution. It may be reported as a combined-model comparison,
+  but not as a controlled estimate of the controller change. Source: candidate
+  Analysis/survivable_set.py and docs/specs/survivable-set/design-a2.md.
+
+F02 — A flight-failure study reuses a release/startup transient.
+  simulate() sets all thrust and control torque to zero until detection latency
+  plus motor-start latency. Healthy motors are also off during this interval.
+  That is a definite modeled sequence, but it is not automatically the sequence
+  of an already flying quad suffering one motor failure. Quantify its effect;
+  do not label the assumption conservative without qualification. Source:
+  Analysis/sim_release_recovery.py, passive_time and motors_on branches.
+
+F03 — Quick runs write to the same result paths as full runs.
+  In the candidate main(), --quick changes trial counts and the note, but data
+  still goes to Data/survivable_set_results{,_a2}.json. This can replace a full
+  result with a smoke-sized result. Separate these paths before further runs.
+
+F04 — Impact quantities are taken from the sample before the crossing.
+  simulate() logs state, advances one step, then detects ground contact;
+  _realloc_trial reads the last logged velocity/tilt. That sample precedes the
+  actual crossing. Bound the error and introduce an explicit touchdown event.
+
+F05 — The convergence evidence is narrower than the claims it could support.
+  Candidate run_convergence checks 12 trials, mechanism=True, a2, two classes,
+  two primary cells; its summary checks speed deltas and landed agreement.
+  It does not summarize criterion flips, tilt deltas, range violations or all
+  relevant failure classes. Also, noise is drawn every integration step: halving
+  dt changes the stochastic process even when the initial seed is reused.
+
+F06 — The allocator's advertised behavior is internally inconsistent.
+  Its module text describes direction-preserving trim allocation, but apply()
+  implements a two-pass weighted solve and clipping. Compare the implementation
+  to a small independent bounded least-squares oracle before claiming optimality
+  or replacing the controller. The numerical priority currently weights N and
+  N*m residuals; document units before interpreting TORQUE_PRIORITY=10.
+  max_collective() also describes a balanced trim ceiling for two_adjacent,
+  where the module itself says exact positive-thrust roll trim is impossible.
+
+F07 — The proposed physical falsification rule is not a calibrated hypothesis test.
+  The candidate drop document calls at least one hard failure in ten drops a
+  falsification of a prediction with lower bound about 0.905. If the true success
+  probability were 0.05**(1/30) = 0.904966, the probability of at least one failure
+  in ten independent trials would be 1 - p**10 = 0.631597. An operational safety
+  stop may use a single failure; that is different from statistical falsification.
+  Also, a Monte Carlo confidence bound under assumed inputs is not a calibrated
+  interval for real-world performance. See W06 and primary source S2.
+
+F08 — Candidate Study C assumes facility and injection capabilities not established
+       by the inspected repository.
+  OQ-006 still asks what heights the actual enclosure supports. A simulation's
+  3 m height is not proof of a netted 3 m usable test volume. The state-machine
+  specification is not evidence of implemented motor-failure injection firmware.
+  Resolve these as prerequisites; do not turn the prediction into an operating plan.
+
+F09 — A ranking exists even when all available actions are poor.
+  policy_map() picks a best action in every populated cell. That is useful for
+  ranking but does not imply a supported survivable action. kill_criterion()
+  also returns its negative verdict for an empty/incomplete comparison set.
+  Missing evidence must not be reported as a completed mechanism rejection.
+
+F10 — The current domain is a restricted slice, not a full survivable set.
+  Initial tilt uses one axis, tumble uses a fixed diagonal axis by default, and
+  each named failure class uses fixed motor indices. Touchdown success checks
+  vertical speed and tilt while excluding lateral speed and angular impact.
+  Describe this as a conditional landing-proxy map. Do not silently replace its
+  criteria after seeing results; register a new diagnostic/validation extension.
+
+
+4. W01 — BASELINE, PR RECONCILIATION AND CLAIM AUDIT
+==================================================
+Priority: P0. Budget within the week: approximately 3 h.
+Dependencies: none. Can proceed without hardware or Owner choices.
+
+Files to read: the Section 1 list; .github/workflows/ci.yml;
+  Analysis/tests/test_survivable_set.py;
+  Analysis/tests/test_failure_allocation.py;
+  Controls/state_machine.json; Safety/README.md; OPEN_QUESTIONS.md.
+Proposed new file:
+  docs/specs/survivable-set/review-2026-09-19.md
+Proposed evidence folder:
+  evidence/week-2026-09-19/
+
+Small actions, each a separate 2–5 minute edit/review pass where feasible:
+  W01.1 Record main SHA, candidate SHA, dirty state, branch bases and PR status.
+        Do not assume #22 is merged because its CI is green.
+  W01.2 Read the current AGENTS.md and contribution rules; identify the Python
+        and CAD environments without upgrading or mixing their dependencies.
+  W01.3 Inspect #22's effective diff against current main. If its old stack base
+        is already merged, propose retargeting it to main; require a clean diff
+        and rerun checks after any actual retarget/rebase. Do not merge by default.
+  W01.4 Write a claim-to-code table for F01–F10: path/function, observation,
+        affected claim, proposed reproduction and disposition.
+  W01.5 Record the unchanged EST-REC-007 requirements separately from the newer
+        survivability study. They answer different questions.
+  W01.6 Run the applicable baseline checks once, capturing actual exits and test
+        totals. Use the candidate's existing --smoke only in an isolated checkout.
+  W01.7 Categorize each issue: confirmed code behavior, unverified hypothesis,
+        unsupported physical assumption, or wording correction.
+
+Acceptance:
+  Another reviewer can identify which revision generated every inspected result.
+  No historical artifact or preregistration has been rewritten. Unsupported
+  causal or physical claims are explicitly marked before new results are produced.
+
+
+5. W02 — OUTPUT ISOLATION AND TRIAL REPLAY
+========================================
+Priority: P0. Budget: approximately 3 h. Depends on W01.
+
+Modify existing:
+  Analysis/run_survivable_set.py
+  Analysis/survivable_set.py
+  Analysis/tests/test_survivable_set.py
+Add only if the tests become easier to maintain in their own module:
+  Analysis/tests/test_survivable_runner.py
+
+Proposed interface, not a command that exists today:
+  python -m Analysis.run_survivable_set --quick --workers 2
+      --output-dir /absolute/path/to/temporary-run
+
+Implementation guidance:
+  Use the existing argparse/Path/json pattern. No database, workflow framework
+  or experiment-tracking service is needed. Smoke mode keeps its no-write behavior.
+  Quick mode requires a scratch output directory and must refuse repository
+  production Data/Figures destinations. Full runs use a new explicit output
+  directory and must refuse to replace an existing run without a deliberate,
+  separately reviewed promotion step. Existing versioned results remain readable.
+
+  Each run writes a small manifest.json, results.json and optional trial JSONL
+  in its own directory. Preserve one authoritative trial record; plots and summaries
+  derive from it. Do not duplicate the same configuration independently in three files.
+
+  Manifest fields:
+    schema version; study/run ID; source SHA; dirty-source status/hash;
+    protocol/configuration hash; command; Python/NumPy versions;
+    seed scheme/version; scenario mode; controller settings; plant settings;
+    units; expected cell/action/variant coverage; requested/completed counts;
+    output hashes; evidence kind = simulation; quick/full diagnostic status.
+
+  Trial identity must be independent of worker and chunk scheduling. Use an
+  explicit numeric mapping of study, scenario, class, cell and trial IDs to a
+  NumPy SeedSequence. Avoid Python's randomized hash(). Do not include controller
+  variant in the paired vehicle/noise seed. Variant can identify an output row.
+  Use distinct substreams for vehicle draw, initial state and sensor noise so
+  adding a draw in one category does not shift the others. Source S1 supports the
+  deterministic-ID seeding mechanism; the chosen identity schema is our design.
+
+Small actions:
+  W02.1 Write a temporary-directory regression proving that --quick never changes
+        the committed production JSONs or figures. It should expose F03 first.
+  W02.2 Add and validate --output-dir and mode-specific destination rules.
+  W02.3 Write the manifest with strict JSON, using allow_nan=False. Represent
+        non-finite/non-landed outcomes through null fields plus explicit status.
+  W02.4 Define stable trial IDs and the seed mapping; add replay and duplicate-ID tests.
+  W02.5 Test the same tiny trial set with 1 and 2 workers and with chunk sizes
+        1 and 5. Compare sorted trial outcomes, not timestamps or file ordering.
+  W02.6 Tighten merge_rows validation to reject mixed variant/study/configuration
+        identities, duplicate IDs, impossible counts and missing required fields.
+  W02.7 Validate expected grid coverage before verdict generation. A truncated
+        run is INCOMPLETE, not a completed negative study.
+
+Acceptance:
+  A single trial can be replayed from manifest + trial ID. Scheduling does not
+  change it within the pinned environment. Quick/smoke work cannot overwrite full
+  results. Duplicate or incomplete trial sets cannot receive a complete-study verdict.
+  Do not promise bitwise identity across different hardware/library versions.
+
+
+6. W03 — DEFINE THE FAILURE EVENT AND LOG WHAT THE SIMULATOR DOES
+================================================================
+Priority: P0. Budget: approximately 3 h. Depends on W01; uses W02 identities.
+
+Modify existing:
+  Analysis/sim_release_recovery.py
+  Analysis/survivable_set.py
+  Analysis/tests/test_survivable_set.py
+Proposed new design file:
+  docs/specs/survivable-set/scenario-contract-v2.md
+
+First write a timeline for the existing behavior:
+  t=0: specified pose/rate/velocity, all propulsion off.
+  t=detect + motor_start: failed-actuator allocation and controller engage.
+  Later: simulated touchdown or horizon timeout.
+
+Label this existing mode release_startup. Preserve its default and historical
+results. It is not automatically an in-flight failure model.
+
+Propose a separate in_flight_loss mode only after the following are explicit:
+  - the pre-failure command and how it is obtained;
+  - the failed motor's residual thrust during detection;
+  - the healthy motors' behavior during detection;
+  - when fault-aware allocation begins;
+  - whether actuator response is instantaneous or a specified lag;
+  - how the initial state was reached and whether it is trim-consistent.
+
+For a bounded first software scenario, an explicit command_hold assumption is
+acceptable: take a documented pre-failure command, zero/cap failed actuators at
+t=0, hold the surviving commands until detection, then enable fault-aware control.
+That is a proposed simulation assumption, not measured ESC behavior. Compare it
+to release_startup rather than silently making it the new truth. No spin-up delay
+should be invented for healthy motors that were already running.
+
+Small actions:
+  W03.1 Add a written scenario table and label existing outputs release_startup.
+  W03.2 Build a tiny deterministic timeline test that inspects thrust before,
+        during and after detection. It should expose the all-off assumption.
+  W03.3 Specify command_hold and actuator timing fields; record unresolved lag
+        data as unknown. If that design is not accepted, keep this as a proposal
+        and continue the week's diagnostic on the explicitly labeled legacy mode.
+  W03.4 Add per-step or optional diagnostic logging of commanded/achieved thrust,
+        roll/pitch torque residual, per-motor thrust, body-rate components,
+        sensor clipping, height/velocity and mode transitions.
+  W03.5 Add trial summary fields: termination reason; touchdown time; peak tilt;
+        peak per-axis true/measured rate; clipped-sample duration; minimum height;
+        saturated-actuator duration; maximum torque-tracking residual.
+  W03.6 Add boundary tests for zero detection delay, an all-healthy control,
+        one failed actuator and the partial-authority case. Never invent a
+        physical PASS from the mode label.
+
+Acceptance:
+  Every new plot names the scenario it represents. A reviewer can see which
+  motors were active during latency. Gyro clipping is visible in the result and
+  cannot disappear behind a survivable-touchdown label. Distinguish a touchdown
+  proxy pass from an estimator-valid recovery; any operational decision needs
+  both its physical and estimator requirements.
+
+
+7. W04 — IMPACT, CONVERGENCE AND ALLOCATOR CHECKS
+===============================================
+Priority: P0. Budget: approximately 4 h. Depends on W01 and W03.
+
+Existing files:
+  Analysis/sim_release_recovery.py
+  Analysis/failure_allocation.py
+  Analysis/run_survivable_set.py
+  Analysis/tests/test_failure_allocation.py
+  Analysis/tests/test_survivable_set.py
+Suggested new test file, if useful:
+  Analysis/tests/test_survivable_numerics.py
+
+Part A: represent actual touchdown.
+  Introduce a study-specific touchdown record between the last above-ground and
+  first below-ground states. Interpolate time and translational state to the
+  crossing; obtain orientation through a documented normalized quaternion
+  interpolation or event substep. Keep that approximation visible. Do not use
+  the pre-crossing log sample as if it were the contact event.
+
+  Return vertical and lateral contact velocities, tilt, body-rate components,
+  translational kinetic energy and rotational kinetic energy. Useful formulas:
+    E_trans = 0.5 * m * (vx^2 + vy^2 + vz^2), in J.
+    E_rot   = 0.5 * omega.T * I * omega, in J.
+  These are diagnostic energies, not validated damage thresholds.
+  Preserve historical return fields for the frozen release-recovery consumer.
+
+Part B: isolate numerical error from sensor randomness.
+  Start with noise-free convergence at dt, dt/2 and dt/4, with the same initial
+  state, plant and control events. Then, if stochastic convergence is investigated,
+  use the same sensor-noise samples at fixed physical sample times. Reusing an
+  RNG seed while doubling draw count is not the same forcing history.
+
+  Include an all-healthy control, one_out, two_opposite, two_adjacent and
+  partial_authority. Select both a soft touchdown and a hard-impact diagnostic.
+  Report speed, tilt, time, angular-rate changes and criterion flips, not just
+  “landed at both resolutions.” For a boundary trial, report numerical ambiguity
+  whenever estimated numerical error overlaps a criterion; do not force a binary
+  physical claim. Predeclare any numerical tolerances before the diagnostic.
+  Proposed development targets, subject to the recorded convergence study:
+    contact-speed change <= 0.02 m/s; tilt change <= 0.5 degree;
+    no classification change for cases farther than these margins from a limit.
+  These are proposed software-resolution targets, not hardware requirements.
+
+Part C: independently check the allocator.
+  Use the small actuator count. In a test-only reference implementation, enumerate
+  lower-bound/free/upper-bound status for each healthy motor: at most 3^4 = 81
+  patterns. Solve each feasible free subproblem and select the feasible solution
+  with minimum residual under the CURRENT documented objective. This avoids
+  introducing a runtime optimization dependency merely to validate four motors.
+
+  First test the current objective without changing it. Separately propose a
+  dimensionless residual definition using explicit force and moment reference
+  scales. A numerical weight on N and N*m is tied to the chosen units; changing
+  those units must not inadvertently change the intended control priority.
+  Any objective change is a new allocator revision with paired comparisons.
+
+  Verify analytic anchors:
+    all healthy: feasible requested wrenches reproduce the target;
+    one_out: failed thrust is exactly zero and balanced trim uses the surviving
+      diagonal pair with collective ceiling 2*f_max;
+    two_opposite: attainable torque subspace is restricted;
+    two_adjacent: no positive-thrust exact zero-roll/pitch trim exists.
+  Do not call a least-squares compromise “balanced trim.” Keep a trim-feasibility
+  result separate from the physical sum-of-caps thrust limit.
+
+Small actions:
+  W04.1 Reproduce and record the pre-crossing contact discrepancy on a ballistic
+        test with known analytic impact speed.
+  W04.2 Implement the touchdown record and test ballistic and controlled-descent
+        limits without changing historical study thresholds.
+  W04.3 Add deterministic multi-resolution cases and a boundary-classification report.
+  W04.4 Implement the small test oracle and compare a fixed set of feasible,
+        saturated and rank-deficient wrench requests.
+  W04.5 Add failed-motor/cap checks and permutation/sign checks for rotated failure
+        locations. Test all four single-motor failures in the static allocator.
+  W04.6 Reconcile allocator documentation with actual behavior; if a counterexample
+        warrants a code fix, preserve the example and rerun its dynamics anchors.
+  W04.7 Record unresolved model issues rather than starting another controller
+        redesign in this work package.
+
+Acceptance:
+  Impact state has an explicit event definition. Numerical conclusions use common
+  forcing. Allocator limits and achieved wrenches are independently checked.
+  A simple code defect is repaired before its symptom is attributed to controls.
+
+
+8. W05 — MATCHED CONTROLLER/PLANT DIAGNOSTIC
+==========================================
+Priority: P1; the main new analytical development. Budget: approximately 5 h
+of active work, plus bounded measured compute time. Depends on W02–W04.
+
+Proposed new study ID: DR-SS-DIAG-01, provided the ID is unused at execution.
+This is a new exploratory diagnostic. It does not amend the frozen A/A2 results
+or become a preregistered confirmatory study merely because a plan exists.
+
+Existing files to extend minimally:
+  Analysis/survivable_set.py
+  Analysis/run_survivable_set.py
+  Analysis/tests/test_survivable_set.py
+Proposed new protocol:
+  docs/specs/survivable-set/diagnostic-01.md
+Output:
+  a separate run directory chosen through W02, never the old result filenames.
+
+Experimental factors:
+  Controller: gyroscopic feedforward OFF / ON.
+  Physical yaw-drag coefficient: 0, 6e-6, 1.2e-5 N*m*s^2.
+  The drag values are an illustrative zero/nominal/double sensitivity bracket
+  around the candidate's estimate. They are not measured limits or a probability
+  distribution. Both controllers get exactly the same drag value within a pair.
+
+Hold fixed within each pair:
+  allocator revision, descent rule, geometry, mass/inertia, initial state,
+  vehicle imperfections, sensor sample stream, integration settings, scenario
+  mode, landing criterion, motor failure and trial ID.
+
+Pilot design, proposed and to be recorded before execution:
+  Failure classes: one_out and two_opposite.
+  Cells, units (m, m/s, rad/s, s):
+    (3.0, 0.0, 2.0, 0.11)
+    (6.0, 0.0, 2.0, 0.11)
+    (3.0, 0.0, 6.0, 0.11)
+    (6.0, 0.0, 6.0, 0.11)
+  12 paired trials per class/cell/drag setting.
+  2 classes * 4 cells * 3 drag values * 12 trials * 2 controllers = 576 runs.
+  Use the guarded mass/inertia model for both controllers in this pilot. Score
+  both against each identical criterion as a sensitivity report; do not let one
+  controller receive an easier criterion. This isolates a controller comparison,
+  not the value of the guard. No parachute runs are needed for this question.
+
+Before the 576-run pilot:
+  Benchmark eight representative trials, including a full-horizon case. Estimate
+  compute cost from those timings and selected worker count. Default to two
+  workers on the user's computer until resource availability is established.
+  If the projected pilot exceeds a one-hour diagnostic compute allowance, use
+  a smaller predeclared diagnostic subset and label it accordingly. Do not alter
+  criteria or select only favorable cells to fit the allowance.
+
+Readouts:
+  - Paired change in contact vertical/lateral speed, tilt and angular energy.
+  - Counts: both proxy-pass; ON-only pass; OFF-only pass; neither pass.
+  - Per-axis gyro clipping, actuator saturation and allocation error.
+  - Failure reasons and criterion margins for each trial.
+  - Results by drag setting and scenario, never just a pooled average.
+
+Interpretation:
+  A difference between drag settings with feedforward fixed is a plant-sensitivity
+  finding. A difference between OFF and ON with drag fixed is a controller finding
+  conditional on that modeled plant. If an apparent gain occurs only at one
+  unmeasured drag value, prioritize identifying drag before claiming a robust gain.
+  Twelve pairs characterize the pipeline and large patterns; they do not prove
+  statistical equivalence or absence of a useful controller effect.
+
+Small actions:
+  W05.1 Freeze the diagnostic configuration, factors and pilot counts in the new file.
+  W05.2 Separate plant fields from controller flags in the trial call; keep the
+        existing variant aliases for historical replay.
+  W05.3 Use W02 trial identities to draw the vehicle once and feed the same
+        realization to both controllers. Test equality of paired input records.
+  W05.4 Add pairwise output summaries and failure categories before the pilot runs.
+  W05.5 Benchmark and record the chosen compute scope; run the bounded pilot.
+  W05.6 Produce a small controller-vs-drag comparison figure plus a trial ledger.
+        Label every figure SIMULATION / EST INPUTS / DIAGNOSTIC.
+  W05.7 Write the finding in terms of controller, plant, numerical behavior or
+        unresolved uncertainty. Include counterexamples, not just averages.
+
+Acceptance:
+  The controller effect can be separated from the assumed drag effect. Every
+  surprising trial has a replay command. A gain must survive the matched input
+  check before being described as a controller gain.
+
+Optional follow-up, only if W05 is sound and time remains:
+  Plan a held-out evaluation with new seeds and a specified effect size. Do not
+  tune gains on those trials. For paired binary outcomes, use a paired method
+  (e.g. an exact discordant-pair test with a stated inference target), not an
+  independent-proportions test that discards the pairing. Freeze the sample size
+  and multiplicity treatment before running it. Otherwise leave it for next week.
+
+
+9. W06 — STATISTICS, POLICY STATES AND STUDY C REPAIR
+===================================================
+Priority: P0 for misleading claims; P1 for new summaries. Budget: about 3 h.
+Depends on W01; integrate W02/W05 outcomes when available.
+
+Existing files:
+  Analysis/survivable_set.py
+  Analysis/tests/test_survivable_set.py
+  docs/specs/survivable-set/drop-test-prediction.md (candidate)
+  docs/specs/survivable-set/design.md
+  docs/specs/survivable-set/design-a2.md (candidate)
+  Analysis/current-results.md
+Proposed new correction/protocol files:
+  docs/specs/survivable-set/interpretation-amendment-2026-09-19.md
+  docs/specs/survivable-set/physical-validation-draft.md
+
+Correct distinctions first:
+  - “No demonstrated advantage” is not “the two actions are equivalent.”
+  - “Both actions fail under this model” does not identify the controller as
+    the sole cause without the allocator/scenario/plant checks.
+  - “Best of the available actions” is not “an adequately supported action.”
+  - A simulated Bernoulli confidence bound is conditional on model/distribution
+    assumptions; it does not include unknown model discrepancy in hardware.
+  - A separate one-sided 95% lower bound and one-sided 95% upper bound must be
+    labeled as such. Treating the pair as a 95% two-sided interval is incorrect;
+    using alpha=0.05 in both tails corresponds to the usual exact central 90%
+    construction, with discrete conservatism. Source S2.
+
+Proposed policy output, preserving the existing ranking:
+  preferred_action: best by the declared ranking, or null if data missing;
+  evidence_status: incomplete / insufficient_to_distinguish / separated;
+  proxy_support_status: threshold_not_registered / below_threshold / supported;
+  diagnostic_flags: both_actions_poor, estimator_invalid, numerical_boundary,
+    unavailable_hardware_action, or other explicitly defined findings;
+  available_actions: distinguish simulated concepts from physically available options.
+
+Do not select a new physical reliability threshold in code. Until a threshold is
+registered, use threshold_not_registered. The system may rank actions but must
+not label one safe. An absent physical parachute cannot be an operational option
+just because the hypothetical parachute action wins a simulation cell.
+
+For the four primary mechanism comparisons, retain the historical registered
+criterion as a historical decision rule. Do not retrospectively change its
+threshold to make a result pass. Any new family-wide confidence claim needs its
+own registered multiplicity control. A simple proposed conservative option is
+Bonferroni allocation across both directional bounds and all planned comparisons;
+state the exact family and alpha allocation before using it.
+
+Study C draft must explicitly contain:
+  population/unit of trial; initial-condition tolerances; actual facility evidence;
+  observables and instruments; objective landing/damage definition; synchronization;
+  fixed sample size and analysis; exclusions/missing data; safety-stop rules;
+  model-revision handling; and separate simulation vs hardware uncertainty.
+
+Reframe the candidate rule about “one failure in ten”:
+  Any hard failure can trigger a safety review under the operator's plan.
+  That is not automatically a statistical rejection. For illustration only,
+  assuming independent trials and a KNOWN p0=0.904966 success rate, the chance
+  of >=3 failures in ten is 0.061901 and >=4 is 0.010705. These values demonstrate
+  why a rejection rule must be calibrated. Do not adopt four failures as a physical
+  test authorization or pretend that a simulated lower bound establishes p0.
+  A real protocol must choose its own null, error rates and sample size prospectively.
+
+Preserve provenance: add a dated amendment identifying the source statement and
+why it is corrected. If the original prediction file receives a correction notice,
+link the amendment and retain the original prediction values/commit. Never claim
+that a later correction was frozen before the earlier simulation results.
+
+Small actions:
+  W06.1 Reproduce the binomial calculations using math.comb; add boundary tests
+        for any new statistical helper, including p=0, p=1 and n=0 handling.
+  W06.2 Add incomplete-grid and all-poor-action cases to the study tests.
+  W06.3 Implement scoped policy/verdict statuses; keep the ranking and historical
+        rule accessible without turning incomplete data into KILL.
+  W06.4 Add the interpretation amendment; remove unearned equivalence and unique-
+        cause language from new summaries.
+  W06.5 Draft the physical-validation protocol with explicit blanks for actual
+        facility, operators, instruments and criterion evidence.
+  W06.6 Link the revised interpretation from the current results/readme only to
+        the extent supported by completed verification.
+
+Acceptance:
+  Empty/truncated data is INCOMPLETE. The policy can say “no supported choice.”
+  Safety stopping and statistical inference are distinct. No facility or failure-
+  injection capability is asserted from a simulation specification.
+
+
+10. W07 — TURN AVAILABLE HARDWARE INTO ACCEPTED FIXTURE INPUTS
+=============================================================
+Priority: P0, starting in session 1 alongside software. Budget: about 2 h Agent
+preparation/review plus an initial 2–3 h Owner inventory/inspection session.
+Measurements are planned here, not claimed to have been made. If access, drawings
+or suitable instruments limit a particular observation, keep that observation
+pending and state the exact missing item.
+
+Use existing files rather than creating another numeric register:
+  docs/DAY4_PLAN.md — D1–D6 decisions and exact route rules.
+  cad/bench/source-candidates.md — candidate claims and unavailable information.
+  cad/bench/fixture-definition.md — gap inventory to extend.
+  cad/bench/parameters.csv — sole accepted numeric register.
+  cad/bench/input-requests.csv — generated request sheet.
+  cad/bench/fixture-contract.json — generated contract.
+  docs/specs/measured-authority-gate/evidence-intake.md — evidence readiness.
+Conditional existing planned deliverable:
+  cad/bench/owner-inputs.md — create only to record actual decisions/evidence.
+Proposed raw evidence, created only when returned by the person with access:
+  evidence/week-2026-09-19/hardware-inventory.csv
+  evidence/week-2026-09-19/interface-observations.csv
+  evidence/week-2026-09-19/bench-layout.md
+Raw observations are source evidence; they are not a second accepted parameter
+register. Keep accepted numeric inputs in cad/bench/parameters.csv.
+
+First physical-access session, performed by the Owner/person at the bench:
+
+  A. Identify what is actually present, approximately 20–30 minutes.
+    List motor model/KV/revision/count, prop variant, cell model/rating/revision,
+    bridge/ADC, controller/ESC, reference masses, force/voltage instruments and
+    dimensional tools. Mark each owned / accessible / absent / uncertain.
+    Record label/drawing references and existing calibration records. Distinguish
+    the six-motor sampling requirement from the number actually available.
+    No inventory entry is a claim of calibrated performance.
+
+  B. Record the existing bench, approximately 20–30 minutes.
+    Make a dimensioned sketch with an origin, axes, usable surface area, actual
+    anchor/clamp locations, edge distances, obstructions and available fixture
+    volume. Identify the load path into the bench and where cables/containment
+    could attach. Record units, tool identity/resolution, observer and date.
+    A sketch of anchor spacing does not establish stability or containment rating.
+
+  C. Inspect available mating parts without power, approximately 45–75 minutes.
+    Choose a consistent datum for motor, prop and cell interfaces. Record hole
+    count, coordinates/clocking, thread designation when established by a drawing
+    or suitable gauge, mounting-face geometry and known screw/washer stacks.
+    Use at least three independently repositioned readings for accessible key
+    dimensions as a first repeatability check. Save the readings, not just a mean.
+    Three readings do not establish a complete uncertainty budget. Do not infer
+    thread pitch from a caliper diameter or safe penetration from body length;
+    use the actual drawing/appropriate inspection method and leave ambiguity open.
+    If the cell is not present, record the motor/prop/bench information anyway.
+
+  D. Review and choose the next slice, approximately 20–30 minutes.
+    Claude maps records to D1–D4 and the fixture-definition gap table. Ask for
+    the actual route/fit/cell decisions only where still missing. Identify any
+    conflicts between delivered parts and candidate drawings. Return a compact
+    disposition: accepted for the named scope / needs clarification / pending.
+    Record the Owner's decision; do not manufacture a signature or approval.
+
+Arm geometry is a separate question: if an actual vehicle/frame with defined
+center and motor axes exists, record its radius independently. If there are only
+loose components, authority_arm_measured stays pending. A bench anchor spacing,
+stand lever or the assumed 60 mm design radius must never fill raw arm_m.
+
+An installed cell/calibration record, if one exists, should be inspected for
+identity, mounting/load direction, traceable reference, procedure and uncertainty
+coverage. If none exists, draft the calibration plan this week. Do not turn an
+ordinary workbench into a claim of a calibrated thrust facility.
+
+Return one concise packet with these questions, ordered by what they unlock:
+
+  B1 / D1: Is the intended route direct axial force or a lever arrangement?
+    Show the sensor load path for each in plain text. Retain direct axial force
+    as the earlier proposal, not an approved choice. Direct-force removes only
+    the stand calibration lever; it never removes vehicle arm measurement.
+
+  B2 / D2: Which exact cell/acquisition chain is being considered or already owned?
+    Need model/revision, both end drawings, operating directions/limits, bridge/ADC,
+    calibration reference and a design-load/uncertainty basis. Reuse the existing
+    Phidgets candidate entry; check current sources only for changed facts.
+    Do not research prices or order equipment unless the user requests procurement.
+
+  B3 / D4: What exact motor and prop revisions are available to inspect?
+    Request usable drawing/inspection records for mounting holes, threads, depth,
+    hub retention and screw/washer/adapter stacks. Do not infer fit from photos
+    or nominal shaft diameter. Actual bench anchors require access to that bench.
+
+  B4 / D3: What signed fit and retention requirement is intended?
+    Explain why an absolute diameter difference is not the whole fit requirement.
+    Record the engineering basis; leave the number blank if unresolved.
+
+  B5 / D5–D6: Who will review geometry, calibration/uncertainty and facility readiness?
+    Request named scope and actual availability, not a generic “approved.”
+
+Prepare two practical worksheets in the existing fixture-definition document:
+
+  Input return fields:
+    parameter/feature; component/revision; datum; units; value/raw readings;
+    source/drawing page; instrument/resolution; tolerance/uncertainty;
+    collector/date; reviewer/disposition; stage unlocked.
+
+  Measurement-to-model mapping:
+    thrust curves at registered voltage -> four-motor authority derivation;
+    actual vehicle radius -> raw arm_m, separate from stand geometry;
+    calibration/alignment/force/radius uncertainties -> torque uncertainty artifact;
+    guard mass and CAD inertia -> OQ-010 mechanism credit;
+    yaw drag/spin behavior -> OQ-010 model identification, later physical campaign;
+    impact response -> landing-proxy validation, separate approved study.
+
+Sensitivity-guided measurement priority is useful, but label it honestly:
+  Before calibrated probabilistic priors exist, rank “which conclusion changes
+  under the stated assumption bracket,” not an exact expected value of information.
+  W05 may show that drag identification matters more than more controller tuning.
+  That is a concrete reason to prioritize a measurement; it is not a substitute
+  for obtaining it.
+
+Small actions:
+  W07.1 Record the confirmed availability once; prepare the A–D intake session
+        and B1–B5 specifics with links to the existing decisions and sources.
+  W07.2 Add the inventory and raw-observation worksheets with units, datums,
+        instrument fields, source records and explicit absent/uncertain states.
+  W07.3 Add a symbolic stand load budget: thrust, projected dead load, cable force,
+        transient force, off-axis moment, motor reaction, base reactions.
+        Every absent numerical input remains absent.
+  W07.4 Add an uncertainty budget outline separating standard/expanded uncertainty,
+        coverage assumptions and correlated components. No guessed numeric accuracy.
+  W07.5 If actual answers arrive, record them with date/scope/source and implement
+        only the corresponding Day 4 slice. D1 can unlock route support alone.
+  W07.6 Regenerate derived files only after an accepted canonical change and run
+        the existing checks. Preserve refusal for unresolved physical requirements.
+  W07.7 Review returned raw readings and reconcile delivered revisions against
+        candidate sources. List conflicts before proposing an accepted value.
+  W07.8 Update the fixture gap table with the exact requirement each new record
+        closes. Identify remaining loads, fit limits and uncertainty decisions.
+  W07.9 If D1 is actually selected, hand Claude the corresponding Day 4 route
+        implementation slice; if complete D2–D5 evidence follows, assess geometry
+        readiness without skipping its existing dependencies.
+
+End-of-session acceptance:
+  A real inventory and bench-layout record exist, or each unavailable observation
+  has an explicit reason. Every claimed measured interface links to raw readings
+  and the instrument/datum. Missing information is narrower than “hardware needed.”
+  At least one next action is concrete: route implementation, identified missing
+  drawing, required instrument, fit decision or reviewed geometry-definition work.
+
+Current branch: components and usable bench available. Do not switch back to a
+generic no-hardware schedule. The next physical milestone is reviewed fixture
+definition, followed by appropriate fabrication/inspection and installed calibration.
+Powered thrust acquisition remains conditional on those prerequisites and the
+existing operator/facility checklist; availability alone does not complete them.
+
+
+11. W08 — INTEGRATION, REVIEW AND NEXT-WEEK DECISION
+===================================================
+Priority: P0 for delivery. Budget: about 2 h. Depends on the completed slices.
+
+Proposed final files:
+  evidence/week-2026-09-19/README.md
+  docs/specs/survivable-set/week-2026-09-19-decision.md
+
+The evidence record contains commands, actual exits, revision/config hashes,
+environment identity, test counts, replay instructions and limitations. Link the
+run directories/artifacts; do not paste tens of thousands of raw trial lines into
+the narrative. Keep a small set of reproducible counterexample IDs.
+
+The decision memo answers:
+  - Which findings F01–F10 were confirmed, repaired, deferred or rejected?
+  - Did OFF-vs-ON differ under the same modeled plant and paired inputs?
+  - Did the result depend more on drag, scenario latency, allocator behavior,
+    impact definition or the controller?
+  - What conclusions survive the uncertainty bracket?
+  - What one next task has the strongest evidential justification?
+
+Choose the next development using these triggers:
+  If allocator defects dominate: finish allocator validation before new controls.
+  If release_startup vs in_flight_loss dominates: identify/document real failure
+    timing before a broad controller claim.
+  If gains depend strongly on assumed yaw drag: plan identification and robust
+    bounds before claiming a universal rotor-out controller benefit.
+  If infrastructure is sound and both controllers fail across the bounded bracket:
+    propose a reduced-attitude/spinning-flight controller study with a new ID.
+  If a controller gain survives matched tests: freeze it and plan an untouched
+    evaluation; do not tune on evaluation trials.
+  If Owner inputs close geometry prerequisites: advance the Day 4 stand work order
+    through DR-CAD-06; otherwise keep the blocker packet current.
+
+Small actions:
+  W08.1 Run full applicable checks on the final code state.
+  W08.2 Replay one normal, one boundary and one failure/counterexample trial.
+  W08.3 Verify generated outputs came from the recorded code/configuration.
+  W08.4 Write the decision memo with one recommended successor and explicit triggers.
+  W08.5 Prepare reviewable commits/PR descriptions if the user's execution scope
+        authorizes them. Do not inherit merge permission from this planning file.
+
+
+12. OPTIONAL DEVELOPMENTS — PROMOTE ONLY AFTER THEIR TRIGGERS
+============================================================
+
+O1. Reduced-attitude controller design note.
+  Trigger: W03/W04 pass and W05 supports a control-family limitation.
+  Read the primary rotor-out control literature (S3) before specifying equations.
+  Define the controlled thrust/primary axis, sacrificed yaw objective, equilibrium
+  spin assumptions, feasible allocation, sensor limits and touchdown objective.
+  First deliver a mathematical design and one deterministic simulation anchor.
+  Do not describe the current gyroscopic feedforward term alone as that controller.
+  Full implementation and gain search are next-week work unless the user explicitly
+  expands the budget.
+
+O2. Separate the guard's contributions.
+  Trigger: the controller/plant comparison is clean and OQ-010 evidence is available
+  or clearly bounded. Run a small factor design separating mass/inertia, inverted
+  thrust-floor policy and landing criterion. The current mechanism-vs-reallocation
+  comparison is a system-package comparison; it does not identify which factor
+  creates a gain. An easier assumed landing threshold must not be called evidence
+  of physical energy absorption. Keep physical feasibility constraints visible.
+
+O3. Direction and failure-location coverage.
+  Trigger: matched pilot works and runtime budget remains. Add failure-location
+  rotations, initial yaw/tilt axes and tumble-direction samples under a separate
+  configuration. Report this as domain expansion; never silently reinterpret the
+  original fixed-axis result as a full-state survivable set.
+
+O4. Measurement-priority map.
+  Trigger: W05 exposes which assumed quantities move the conclusion. Produce a
+  table of parameter, bracket, affected verdict, measurable quantity, required
+  instrument and next source. Avoid probabilistic “information value” claims
+  without justified prior/likelihood models.
+
+O5. Runtime improvements.
+  Trigger: a measured profile shows a bottleneck that prevents the bounded study.
+  Optimize the dominant operation only, retaining replay and numerical checks.
+  No GPU migration, distributed scheduler, new dashboard or generic simulation
+  framework this week.
+
+
+13. VERIFICATION COMMANDS AND ENVIRONMENT RULES
+===============================================
+
+Use Python 3.11 and requirements.txt for analysis. The pinned CAD environment in
+cad/requirements.lock has a different NumPy pin; do not mix the two environments.
+Discover their actual locations on Claude's machine. Prior Mac paths are not
+portable requirements.
+
+Baseline/final analysis commands from repository root:
+  python -m unittest discover -s Analysis/tests -v
+  python tools/check_presentation.py . "Multirotor Recovery Dynamics" multirotor-recovery-dynamics
+  python tools/test_presentation.py
+  python cad/input_requests.py --check
+  python cad/fixture_contract.py --check
+  python cad/fixture_contract.py --release
+  python cad/ledger_validator.py live
+  git diff --check
+
+The current --release refusal is expected while inputs are missing. Capture its
+actual exit and reason; do not hide it with `|| true` or report it as a physical
+failure. Consistent generated files do not imply released geometry.
+
+Focused existing study checks:
+  python -m unittest Analysis.tests.test_failure_allocation Analysis.tests.test_survivable_set -v
+
+Candidate A2 smoke route, after confirming it exists in the selected revision:
+  python -m Analysis.run_survivable_set --smoke --workers 2
+
+Full CAD checks, only in its pinned environment:
+  python -m pytest cad/tests -q
+
+Run CAD geometry checks when CAD inputs/consumers change; an analysis-only change
+does not require redoing unrelated physical tooling. When reporting a CAD suite,
+state explicitly if geometry tests were skipped. Do not claim the full suite then.
+
+Proposed new runner commands/flags in this plan are requirements to implement;
+they are not asserted to exist today. Do not run the current --quick or full
+sweep against valuable tracked outputs before W02 isolates their destinations.
+
+Before promoting new result artifacts:
+  manifest complete; configuration frozen for that run; grid coverage complete;
+  no duplicate trials; strict JSON; provenance hashes verified; diagnostic mode
+  clearly labeled; numerical boundary cases reported; figures regenerated from
+  the correct result; old study accessible by commit and study ID.
+
+
+14. REQUIREMENT-TO-TASK MAP AND SCOPE CUTS
+=========================================
+
+R1 Current state and no repeated completed work ........ W01
+R2 Safe outputs, traceable and replayable trials ....... W02
+R3 Explicit failure event and estimator diagnostics ... W03
+R4 Correct impact/numerical/allocation behavior ....... W04
+R5 Controller effect separated from plant assumptions . W05
+R6 Honest statistics and actionable policy states .... W06
+R7 Bench evidence and actual Owner decisions .......... W07
+R8 Reproducible handoff and justified next step ........ W08
+
+If only 10 hours are available:
+  Finish W01, W02, the F02 scenario clarification and the F07/F08 Study C correction.
+  Prepare the early W07 intake and review returned records; trim extended review
+  depth to fit the allowance. Do not launch the controller pilot.
+
+If approximately 25 hours are available:
+  Aim for W01–W08 at the bounded diagnostic scale. Keep unresolved issues visible.
+
+If extra time is available:
+  Promote one optional development based on evidence. Prefer a small mathematical
+  controller design or measurement-priority map over an unbounded new sweep.
+
+When estimates overrun, cut full-size Monte Carlo runs, extra plots and optional
+controller work first. Preserve output protection, provenance, truthful inference
+and the physical evidence requirements. A blocker report with exact next inputs
+is preferable to a fabricated completion.
+
+
+15. PRIMARY SOURCES AND PROVENANCE
+===================================
+
+Repository snapshot and PRs:
+  Main at eb5cf959703f9323a7996d07cd5fb9e92dbf65a2:
+  https://github.com/500ft/multirotor-recovery-dynamics/tree/eb5cf959703f9323a7996d07cd5fb9e92dbf65a2
+  A2 candidate at 03d6b4969740cfb232753853bcfc399e425b8151:
+  https://github.com/500ft/multirotor-recovery-dynamics/tree/03d6b4969740cfb232753853bcfc399e425b8151
+  https://github.com/500ft/multirotor-recovery-dynamics/pull/20
+  https://github.com/500ft/multirotor-recovery-dynamics/pull/21
+  https://github.com/500ft/multirotor-recovery-dynamics/pull/22
+
+S1. NumPy 2.1 documentation — parallel random number generation.
+  https://numpy.org/doc/2.1/reference/random/parallel.html
+  Used for deterministic ID/SeedSequence design. Trial pairing and the proposed
+  manifest are project-specific design choices, not claims made by NumPy.
+
+S2. NIST/SEMATECH e-Handbook — confidence intervals for a binomial proportion.
+  https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm
+  Used for exact interval/tail interpretation. The ten-trial probability examples
+  were calculated directly from the binomial distribution during planning; they
+  do not establish hardware success probability or authorize experiments.
+
+S3. Mueller and D'Andrea (2014), “Stability and control of a quadrocopter despite
+  the complete loss of one, two, or three propellers.” Primary-literature lead:
+  https://www.research-collection.ethz.ch/handle/20.500.11850/91723
+  https://www.flyingmachinearena.ethz.ch/wp-content/publications/2014/mueIEEE14.pdf
+  Search metadata identified this work; direct full-text retrieval was unavailable
+  in this planning session. Claude must obtain and read the paper before using
+  specific controller equations or claiming its assumptions apply to this craft.
+
+Existing bench manufacturer/retailer sources are retained in
+cad/bench/source-candidates.md with their September 15 access dates and limitations.
+This plan did not re-verify product availability, pricing or delivered revisions.
+
+Final constraint: preserve the registered 7.0 V, collective grid, 0.020 N*m
+authority threshold and separate 962/1000 recovery gate. New exploratory studies
+must have their own identities; they cannot quietly redefine the existing gates.
+
+END OF HANDOFF

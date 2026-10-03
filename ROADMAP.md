@@ -5,68 +5,58 @@ This is the plan for finishing the project. Open questions are tracked in
 [docs/SPRINT_PROGRESS.md](docs/SPRINT_PROGRESS.md) and
 [docs/REVIEW_READY.md](docs/REVIEW_READY.md).
 
-## Finish line (proposed, owner to confirm)
+## Finish line pending owner scope choice
 
-The physical platform changed on 2026-09-27 to a stock Veeniix V995, and no
-finish line has been set for it since. This one follows the owner's two
-existing decisions: measure the whole aircraft on a load-cell cradle, and make
-the first PCB an airborne sensor/logger that leaves the stock flight controller
-in place.
+**Current step: D3.** The owner must choose whether to close the simulation
+study or continue with V995-only bench characterization. Neither choice has
+been made, and this result correction does not close the repository.
 
-The project is finished when:
+If bench work is selected, the finish is measured whole-aircraft thrust and
+electrical power against recorded transmitter settings and battery state, with
+calibration and uncertainty reported. These measurements describe the stock
+controller's behaviour on a fixture. Logger development, release trials and a
+new aircraft require a separate owner decision.
 
-1. the V995's thrust and electrical power against throttle have been measured
-   on the bench;
-2. the airborne logger has recorded the stock V995's angular rates and
-   acceleration through a few controlled releases, showing what the stock
-   controller actually does; and
-3. both are compared with the recovery model and written up, together with the
-   simulation study already in the repository.
+## Where it stands
 
-Recovery with a custom controller is not part of this version. The stock
-board has no known command or telemetry interface (OQ-011), so there is
-nothing to run a controller on.
-
-## Where it stands (2026-09-30)
-
-- The simulation study is complete on estimated inputs. The headline findings
-  are in [Analysis/current-results.md](Analysis/current-results.md):
-  - a guard on the airframe does not help; in paired trials it lost 69 of
-    the 76 cases where the two designs differed;
-  - a parachute never opens in time below about 10.5 m;
-  - with two adjacent rotors out, nothing survives in any tested case.
-- The bench chain (QT Py RP2040, NAU7802 load-cell amplifier, INA260 power
-  monitor, LIS3DH accelerometer) has firmware and host capture code. It has not
-  run on hardware.
-- CAD: the load-cell end adapter is generated. The cradle and base-plate
-  generators are written and tested. They need the full measurement worksheet
-  below, which supplies the pending CAD parameters and identifies the delivered
-  load-cell mounting pattern.
-- The aircraft's mass is an owner estimate of about 50 g. It decides whether
-  the purchased 1 kg load cell can resolve the forces involved at all.
-- OQ-016 is closed. The requested [scenario comparison](Analysis/current-results.md#scenario-comparison-with-selected-cases)
-  has run on its newly registered cases. They reveal differences between the
-  release/startup and in-flight assumptions. The physical current step remains
-  the worksheet below.
+- The [README result statements](README.md#simulation-results) have been corrected:
+  - the guard's contribution is unresolved because mass, inertia, impact-speed
+    limits, tilt limits and controller settings change together;
+  - the parachute outcome follows the assumed interval before useful drag;
+    the README derives the nominal rest-drop distance from the
+    [model parameters](Analysis/survivable_set.py), without claiming a general
+    deployment height;
+  - the landing verdict checks vertical speed and tilt, omitting lateral
+    impact, spin and physical damage criteria;
+  - the recovery comparison changes both mixer and controller. Its inputs and
+    counts remain in [the stored results](Data/monte_carlo_results.json).
+- The historical simulated aircraft was never built. The stock V995 cannot run
+  its controller because no usable command or firmware interface is established.
+- The bench chain has firmware and host capture code. It has not run on hardware.
+- The load-cell end adapter is generated. Cradle and base-plate generators need
+  the [measurement worksheet](evidence/v995-fixture-measurements/README.md),
+  including the delivered cell's mounting pattern and flight-ready aircraft mass.
+- OQ-016 is closed by the [stored scenario comparison](Data/scenario-02/results.json).
+  That comparison does not resolve the pending physical scope choice.
 
 ## What's left
 
-| # | Step | Who | Done when |
-|---|---|---|---|
-| 1 | Fill the [measurement worksheet](evidence/v995-fixture-measurements/README.md): 27 rows in one unpowered bench session. That covers the delivered load cell (15 rows, which also settles OQ-017), the aircraft including its flight-ready mass (7 rows) and the bench (5 rows) | Owner | Worksheet committed; the agent then fills `cad/v995/parameters.csv` and starts `Engineering Data/platform_v995.csv` for the mass. **Current step.** |
-| 2 | Decide whether the 1 kg cell is good enough at the measured mass | Agent | Screening updated with the real mass |
-| 3 | Generate the cradle and base plate, check them against the oracle, export STEP | Agent | Parts accepted |
-| 4 | Print the parts, wire the bench chain, and do the bring-up in [docs/bench-acquisition.md](docs/bench-acquisition.md), starting with the power-off continuity check. Calibrate with known masses | Owner | Calibration record committed |
-| 5 | Throttle sweep on the cradle with the stock transmitter | Owner, with agent analysis | Thrust and power against throttle committed |
-| 6 | Design the airborne logger PCB within the mass the V995 can carry | Agent designs, owner builds | Board logs rates and acceleration on the bench |
-| 7 | A few controlled releases with the logger fitted, inside the safety limits in [Safety/README.md](Safety/README.md) | Owner | Logs committed |
-| 8 | Compare both measurements with the model and write up the study | Agent | Report merged |
+Decide D3 first. The following work is conditional on selecting V995 bench
+characterization; the worksheet remains an optional bench prerequisite while
+that choice is pending.
 
-## Not in this version
+| Step | Who | Done when |
+|---|---|---|
+| Fill the [27-row unpowered measurement worksheet](evidence/v995-fixture-measurements/README.md) | Owner | Readings committed, including cell identification, aircraft mass and bench dimensions |
+| Check cell suitability and complete the fixture | Agent | Actual readings populate the parameter register; fixture geometry and load checks support building it |
+| Build and commission the bench chain using [the bring-up procedure](docs/bench-acquisition.md) | Owner | Calibration records cover the needed force range, tare, hysteresis, drift and side loads; stop if uncertainty exceeds the required force resolution |
+| Measure whole-aircraft thrust and power | Owner, with agent analysis | Results record transmitter settings, battery state and measurement uncertainty |
+| Write up the bench characterization | Agent | Report states the measured scope and limits |
 
-- The historical designed vehicle (EX1103 motors, Kakute H7, 7.0 V). Its
-  plan and gates are kept in the repository but are not being built.
+## Outside the authorized work
+
+- Building the historical designed aircraft or switching to a new aircraft.
 - Reverse-engineering the stock board (OQ-011).
-- A custom recovery controller or recovery flights.
-- Further simulation refinement. The next model update follows the V995
-  measurements.
+- A custom recovery controller, logger development or recovery flights.
+- Further simulation refinement or experiments before the owner chooses scope.
+- Repository closure or archival before an explicit owner decision.

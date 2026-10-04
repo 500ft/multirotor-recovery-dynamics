@@ -1,0 +1,711 @@
+{
+  "split": "development",
+  "runtime_s": 2.8011961670126766,
+  "python": "3.13.7",
+  "numpy": "2.5.3",
+  "machine": "arm64",
+  "code_commit": "7e005ee4c46e16fbee57c5e475dcef7b69637d6b",
+  "replay_code_sha256": "eea2a9883340166b697347150e842c64d5d09ddf97049a7a361425d48ce784c0",
+  "data_code_sha256": "c68a53492c58fd8c778444d967a9812fa46f0f180808a526ace6af177be1605e",
+  "source_sha256": "974a76b86cb8b4e870d91f03c8f3666cbfd7f00db025d7b6fe09351e14a40a10",
+  "split_sha256": "e791504225fe08484945d9becb164ee3b9b1868df36cd4dc7cf42bb87c6f64ee",
+  "protocol_sha256": "397837b252156b17fadf13bfea2350f9c117ac186156fca28e66cf84bb6a49f6",
+  "register_sha256": "06183cd872b8636ad1ab66704ff637ab99cca42eb9e8a2c4a2f68829929dc44e",
+  "inventory_sha256": "5daa19896980374f0c84135a8263d2e2b17b6944b5ca5b96af27ae67f7ff5798",
+  "frozen_model_sha256": null,
+  "flights": [
+    {
+      "flight": "datasets/dataset/A1b_multisine_sysid_rep1.csv",
+      "eligible_rows": 6463,
+      "excluded_rows": 761,
+      "excluded_by_reason_overlapping": {
+        "nonfinite_required": 0,
+        "ground_height": 761,
+        "motor_inactive": 550,
+        "pwm_out_of_range": 0,
+        "voltage_out_of_range": 0,
+        "quaternion_norm": 0,
+        "flight_edge": 200,
+        "time_gap": 0
+      },
+      "diagnostic_rows": 6452,
+      "candidate_windows": 144,
+      "eligible_windows": 129,
+      "excluded_windows": 15,
+      "actual_horizon_spans": {
+        "0.1": {
+          "min_s": 0.09999442100524902,
+          "max_s": 0.1000053882598877
+        },
+        "0.25": {
+          "min_s": 0.24999189376831055,
+          "max_s": 0.25001072883605957
+        },
+        "0.5": {
+          "min_s": 0.4999876022338867,
+          "max_s": 0.5000197887420654
+        }
+      },
+      "candidate_ranges": {
+        "cf21plus_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 7005,
+          "eligible_motor_voltage_min_v": 2.119995496747713,
+          "eligible_motor_voltage_max_v": 3.469896560540729
+        },
+        "thrust_upgrade_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 21071,
+          "eligible_motor_voltage_min_v": 2.119995496747713,
+          "eligible_motor_voltage_max_v": 3.469896560540729
+        },
+        "legacy_propellers_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 12507,
+          "eligible_motor_voltage_min_v": 2.119995496747713,
+          "eligible_motor_voltage_max_v": 3.469896560540729
+        }
+      },
+      "status": "evaluated"
+    },
+    {
+      "flight": "datasets/dataset/A1b_multisine_sysid_rep2.csv",
+      "eligible_rows": 6510,
+      "excluded_rows": 697,
+      "excluded_by_reason_overlapping": {
+        "nonfinite_required": 0,
+        "ground_height": 664,
+        "motor_inactive": 540,
+        "pwm_out_of_range": 0,
+        "voltage_out_of_range": 0,
+        "quaternion_norm": 0,
+        "flight_edge": 200,
+        "time_gap": 12
+      },
+      "diagnostic_rows": 6464,
+      "candidate_windows": 144,
+      "eligible_windows": 126,
+      "excluded_windows": 18,
+      "actual_horizon_spans": {
+        "0.1": {
+          "min_s": 0.09999561309814453,
+          "max_s": 0.100006103515625
+        },
+        "0.25": {
+          "min_s": 0.24999189376831055,
+          "max_s": 0.2500128746032715
+        },
+        "0.5": {
+          "min_s": 0.4999876022338867,
+          "max_s": 0.500023603439331
+        }
+      },
+      "candidate_ranges": {
+        "cf21plus_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 8164,
+          "eligible_motor_voltage_min_v": 1.1299331187961847,
+          "eligible_motor_voltage_max_v": 3.457383307
+        },
+        "thrust_upgrade_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 21104,
+          "eligible_motor_voltage_min_v": 1.1299331187961847,
+          "eligible_motor_voltage_max_v": 3.457383307
+        },
+        "legacy_propellers_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 13206,
+          "eligible_motor_voltage_min_v": 1.1299331187961847,
+          "eligible_motor_voltage_max_v": 3.457383307
+        }
+      },
+      "status": "evaluated"
+    },
+    {
+      "flight": "datasets/dataset/B7_oval_fast_rep1.csv",
+      "eligible_rows": 3432,
+      "excluded_rows": 781,
+      "excluded_by_reason_overlapping": {
+        "nonfinite_required": 0,
+        "ground_height": 771,
+        "motor_inactive": 554,
+        "pwm_out_of_range": 0,
+        "voltage_out_of_range": 0,
+        "quaternion_norm": 0,
+        "flight_edge": 202,
+        "time_gap": 11
+      },
+      "diagnostic_rows": 3384,
+      "candidate_windows": 84,
+      "eligible_windows": 64,
+      "excluded_windows": 20,
+      "actual_horizon_spans": {
+        "0.1": {
+          "min_s": 0.09999561309814453,
+          "max_s": 0.1000051498413086
+        },
+        "0.25": {
+          "min_s": 0.24999308586120605,
+          "max_s": 0.25000882148742676
+        },
+        "0.5": {
+          "min_s": 0.4999876022338867,
+          "max_s": 0.5000121593475342
+        }
+      },
+      "candidate_ranges": {
+        "cf21plus_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 2597,
+          "eligible_motor_voltage_min_v": 2.170121268940058,
+          "eligible_motor_voltage_max_v": 3.367634651270879
+        },
+        "thrust_upgrade_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 11832,
+          "eligible_motor_voltage_min_v": 2.170121268940058,
+          "eligible_motor_voltage_max_v": 3.367634651270879
+        },
+        "legacy_propellers_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 5405,
+          "eligible_motor_voltage_min_v": 2.170121268940058,
+          "eligible_motor_voltage_max_v": 3.367634651270879
+        }
+      },
+      "status": "evaluated"
+    },
+    {
+      "flight": "datasets/dataset/B7_oval_fast_rep2.csv",
+      "eligible_rows": 3448,
+      "excluded_rows": 779,
+      "excluded_by_reason_overlapping": {
+        "nonfinite_required": 0,
+        "ground_height": 779,
+        "motor_inactive": 550,
+        "pwm_out_of_range": 0,
+        "voltage_out_of_range": 0,
+        "quaternion_norm": 0,
+        "flight_edge": 200,
+        "time_gap": 0
+      },
+      "diagnostic_rows": 3437,
+      "candidate_windows": 84,
+      "eligible_windows": 68,
+      "excluded_windows": 16,
+      "actual_horizon_spans": {
+        "0.1": {
+          "min_s": 0.09999728202819824,
+          "max_s": 0.10000991821289062
+        },
+        "0.25": {
+          "min_s": 0.24999451637268066,
+          "max_s": 0.25001072883605957
+        },
+        "0.5": {
+          "min_s": 0.49999284744262695,
+          "max_s": 0.5000193119049072
+        }
+      },
+      "candidate_ranges": {
+        "cf21plus_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 2090,
+          "eligible_motor_voltage_min_v": 2.322274589788388,
+          "eligible_motor_voltage_max_v": 3.41456475
+        },
+        "thrust_upgrade_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 11874,
+          "eligible_motor_voltage_min_v": 2.322274589788388,
+          "eligible_motor_voltage_max_v": 3.41456475
+        },
+        "legacy_propellers_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 5327,
+          "eligible_motor_voltage_min_v": 2.322274589788388,
+          "eligible_motor_voltage_max_v": 3.41456475
+        }
+      },
+      "status": "evaluated"
+    },
+    {
+      "flight": "datasets/dataset/B7_oval_fast_rep3.csv",
+      "eligible_rows": 3454,
+      "excluded_rows": 773,
+      "excluded_by_reason_overlapping": {
+        "nonfinite_required": 0,
+        "ground_height": 773,
+        "motor_inactive": 545,
+        "pwm_out_of_range": 0,
+        "voltage_out_of_range": 0,
+        "quaternion_norm": 0,
+        "flight_edge": 200,
+        "time_gap": 0
+      },
+      "diagnostic_rows": 3443,
+      "candidate_windows": 84,
+      "eligible_windows": 68,
+      "excluded_windows": 16,
+      "actual_horizon_spans": {
+        "0.1": {
+          "min_s": 0.09999728202819824,
+          "max_s": 0.10000801086425781
+        },
+        "0.25": {
+          "min_s": 0.24999475479125977,
+          "max_s": 0.2500135898590088
+        },
+        "0.5": {
+          "min_s": 0.4999871253967285,
+          "max_s": 0.5000216960906982
+        }
+      },
+      "candidate_ranges": {
+        "cf21plus_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 1846,
+          "eligible_motor_voltage_min_v": 2.3839059112450918,
+          "eligible_motor_voltage_max_v": 3.3698002538120826
+        },
+        "thrust_upgrade_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 12151,
+          "eligible_motor_voltage_min_v": 2.3839059112450918,
+          "eligible_motor_voltage_max_v": 3.3698002538120826
+        },
+        "legacy_propellers_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 5134,
+          "eligible_motor_voltage_min_v": 2.3839059112450918,
+          "eligible_motor_voltage_max_v": 3.3698002538120826
+        }
+      },
+      "status": "evaluated"
+    },
+    {
+      "flight": "datasets/dataset/B7_oval_medium_rep1.csv",
+      "eligible_rows": 3457,
+      "excluded_rows": 769,
+      "excluded_by_reason_overlapping": {
+        "nonfinite_required": 0,
+        "ground_height": 769,
+        "motor_inactive": 554,
+        "pwm_out_of_range": 0,
+        "voltage_out_of_range": 0,
+        "quaternion_norm": 0,
+        "flight_edge": 200,
+        "time_gap": 1
+      },
+      "diagnostic_rows": 3446,
+      "candidate_windows": 84,
+      "eligible_windows": 68,
+      "excluded_windows": 16,
+      "actual_horizon_spans": {
+        "0.1": {
+          "min_s": 0.09999656677246094,
+          "max_s": 0.1000051498413086
+        },
+        "0.25": {
+          "min_s": 0.24999070167541504,
+          "max_s": 0.25000858306884766
+        },
+        "0.5": {
+          "min_s": 0.49999117851257324,
+          "max_s": 0.5000123977661133
+        }
+      },
+      "candidate_ranges": {
+        "cf21plus_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 2675,
+          "eligible_motor_voltage_min_v": 2.503730276222329,
+          "eligible_motor_voltage_max_v": 3.359621710595298
+        },
+        "thrust_upgrade_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 12090,
+          "eligible_motor_voltage_min_v": 2.503730276222329,
+          "eligible_motor_voltage_max_v": 3.359621710595298
+        },
+        "legacy_propellers_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 5709,
+          "eligible_motor_voltage_min_v": 2.503730276222329,
+          "eligible_motor_voltage_max_v": 3.359621710595298
+        }
+      },
+      "status": "evaluated"
+    },
+    {
+      "flight": "datasets/dataset/B7_oval_medium_rep2.csv",
+      "eligible_rows": 3447,
+      "excluded_rows": 780,
+      "excluded_by_reason_overlapping": {
+        "nonfinite_required": 0,
+        "ground_height": 780,
+        "motor_inactive": 560,
+        "pwm_out_of_range": 0,
+        "voltage_out_of_range": 0,
+        "quaternion_norm": 0,
+        "flight_edge": 201,
+        "time_gap": 0
+      },
+      "diagnostic_rows": 3436,
+      "candidate_windows": 84,
+      "eligible_windows": 68,
+      "excluded_windows": 16,
+      "actual_horizon_spans": {
+        "0.1": {
+          "min_s": 0.09999465942382812,
+          "max_s": 0.10000252723693848
+        },
+        "0.25": {
+          "min_s": 0.24998712539672852,
+          "max_s": 0.25000834465026855
+        },
+        "0.5": {
+          "min_s": 0.4999823570251465,
+          "max_s": 0.5000104904174805
+        }
+      },
+      "candidate_ranges": {
+        "cf21plus_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 2802,
+          "eligible_motor_voltage_min_v": 2.5407608728350923,
+          "eligible_motor_voltage_max_v": 3.3616190233261922
+        },
+        "thrust_upgrade_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 12707,
+          "eligible_motor_voltage_min_v": 2.5407608728350923,
+          "eligible_motor_voltage_max_v": 3.3616190233261922
+        },
+        "legacy_propellers_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 7368,
+          "eligible_motor_voltage_min_v": 2.5407608728350923,
+          "eligible_motor_voltage_max_v": 3.3616190233261922
+        }
+      },
+      "status": "evaluated"
+    },
+    {
+      "flight": "datasets/dataset/B7_oval_medium_rep3.csv",
+      "eligible_rows": 3443,
+      "excluded_rows": 787,
+      "excluded_by_reason_overlapping": {
+        "nonfinite_required": 0,
+        "ground_height": 787,
+        "motor_inactive": 578,
+        "pwm_out_of_range": 0,
+        "voltage_out_of_range": 0,
+        "quaternion_norm": 0,
+        "flight_edge": 202,
+        "time_gap": 0
+      },
+      "diagnostic_rows": 3432,
+      "candidate_windows": 84,
+      "eligible_windows": 68,
+      "excluded_windows": 16,
+      "actual_horizon_spans": {
+        "0.1": {
+          "min_s": 0.09999513626098633,
+          "max_s": 0.1000068187713623
+        },
+        "0.25": {
+          "min_s": 0.24999213218688965,
+          "max_s": 0.2500126361846924
+        },
+        "0.5": {
+          "min_s": 0.4999837875366211,
+          "max_s": 0.5000214576721191
+        }
+      },
+      "candidate_ranges": {
+        "cf21plus_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 2484,
+          "eligible_motor_voltage_min_v": 2.3638918204717925,
+          "eligible_motor_voltage_max_v": 3.347420968893152
+        },
+        "thrust_upgrade_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 12709,
+          "eligible_motor_voltage_min_v": 2.3638918204717925,
+          "eligible_motor_voltage_max_v": 3.347420968893152
+        },
+        "legacy_propellers_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 6900,
+          "eligible_motor_voltage_min_v": 2.3638918204717925,
+          "eligible_motor_voltage_max_v": 3.347420968893152
+        }
+      },
+      "status": "evaluated"
+    },
+    {
+      "flight": "datasets/dataset/B7_oval_slow_rep1.csv",
+      "eligible_rows": 0,
+      "excluded_rows": 211,
+      "excluded_by_reason_overlapping": {
+        "nonfinite_required": 0,
+        "ground_height": 211,
+        "motor_inactive": 211,
+        "pwm_out_of_range": 0,
+        "voltage_out_of_range": 0,
+        "quaternion_norm": 0,
+        "flight_edge": 202,
+        "time_gap": 0
+      },
+      "diagnostic_rows": 0,
+      "candidate_windows": 4,
+      "eligible_windows": 0,
+      "excluded_windows": 4,
+      "actual_horizon_spans": {
+        "0.1": null,
+        "0.25": null,
+        "0.5": null
+      },
+      "candidate_ranges": {
+        "cf21plus_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 0,
+          "eligible_motor_voltage_min_v": null,
+          "eligible_motor_voltage_max_v": null
+        },
+        "thrust_upgrade_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 0,
+          "eligible_motor_voltage_min_v": null,
+          "eligible_motor_voltage_max_v": null
+        },
+        "legacy_propellers_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 0,
+          "eligible_motor_voltage_min_v": null,
+          "eligible_motor_voltage_max_v": null
+        }
+      },
+      "status": "excluded_no_eligible_windows"
+    },
+    {
+      "flight": "datasets/dataset/B7_oval_slow_rep2.csv",
+      "eligible_rows": 3448,
+      "excluded_rows": 780,
+      "excluded_by_reason_overlapping": {
+        "nonfinite_required": 0,
+        "ground_height": 780,
+        "motor_inactive": 557,
+        "pwm_out_of_range": 0,
+        "voltage_out_of_range": 0,
+        "quaternion_norm": 0,
+        "flight_edge": 201,
+        "time_gap": 0
+      },
+      "diagnostic_rows": 3437,
+      "candidate_windows": 84,
+      "eligible_windows": 68,
+      "excluded_windows": 16,
+      "actual_horizon_spans": {
+        "0.1": {
+          "min_s": 0.09999537467956543,
+          "max_s": 0.10000467300415039
+        },
+        "0.25": {
+          "min_s": 0.24999380111694336,
+          "max_s": 0.25000739097595215
+        },
+        "0.5": {
+          "min_s": 0.4999873638153076,
+          "max_s": 0.5000095367431641
+        }
+      },
+      "candidate_ranges": {
+        "cf21plus_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 2522,
+          "eligible_motor_voltage_min_v": 2.570032385898873,
+          "eligible_motor_voltage_max_v": 3.2863579765757245
+        },
+        "thrust_upgrade_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 12299,
+          "eligible_motor_voltage_min_v": 2.570032385898873,
+          "eligible_motor_voltage_max_v": 3.2863579765757245
+        },
+        "legacy_propellers_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 5344,
+          "eligible_motor_voltage_min_v": 2.570032385898873,
+          "eligible_motor_voltage_max_v": 3.2863579765757245
+        }
+      },
+      "status": "evaluated"
+    },
+    {
+      "flight": "datasets/dataset/B7_oval_slow_rep3.csv",
+      "eligible_rows": 3447,
+      "excluded_rows": 779,
+      "excluded_by_reason_overlapping": {
+        "nonfinite_required": 0,
+        "ground_height": 779,
+        "motor_inactive": 550,
+        "pwm_out_of_range": 0,
+        "voltage_out_of_range": 0,
+        "quaternion_norm": 0,
+        "flight_edge": 200,
+        "time_gap": 0
+      },
+      "diagnostic_rows": 3436,
+      "candidate_windows": 84,
+      "eligible_windows": 68,
+      "excluded_windows": 16,
+      "actual_horizon_spans": {
+        "0.1": {
+          "min_s": 0.10001754760742188,
+          "max_s": 0.10002851486206055
+        },
+        "0.25": {
+          "min_s": 0.25005364418029785,
+          "max_s": 0.25006723403930664
+        },
+        "0.5": {
+          "min_s": 0.500105619430542,
+          "max_s": 0.5001339912414551
+        }
+      },
+      "candidate_ranges": {
+        "cf21plus_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 3268,
+          "eligible_motor_voltage_min_v": 2.1991577569130105,
+          "eligible_motor_voltage_max_v": 3.289977629652047
+        },
+        "thrust_upgrade_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 8175,
+          "eligible_motor_voltage_min_v": 2.1991577569130105,
+          "eligible_motor_voltage_max_v": 3.289977629652047
+        },
+        "legacy_propellers_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 5031,
+          "eligible_motor_voltage_min_v": 2.1991577569130105,
+          "eligible_motor_voltage_max_v": 3.289977629652047
+        }
+      },
+      "status": "evaluated"
+    },
+    {
+      "flight": "datasets/dataset/C4_battery_drain_rep1.csv",
+      "eligible_rows": 4685,
+      "excluded_rows": 8748,
+      "excluded_by_reason_overlapping": {
+        "nonfinite_required": 0,
+        "ground_height": 8748,
+        "motor_inactive": 2032,
+        "pwm_out_of_range": 1827,
+        "voltage_out_of_range": 0,
+        "quaternion_norm": 0,
+        "flight_edge": 200,
+        "time_gap": 0
+      },
+      "diagnostic_rows": 4674,
+      "candidate_windows": 268,
+      "eligible_windows": 92,
+      "excluded_windows": 176,
+      "actual_horizon_spans": {
+        "0.1": {
+          "min_s": 0.09999799728393555,
+          "max_s": 0.1000070571899414
+        },
+        "0.25": {
+          "min_s": 0.24999284744262695,
+          "max_s": 0.2500166893005371
+        },
+        "0.5": {
+          "min_s": 0.49999237060546875,
+          "max_s": 0.5000243186950684
+        }
+      },
+      "candidate_ranges": {
+        "cf21plus_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 3298,
+          "eligible_motor_voltage_min_v": 2.352698390495443,
+          "eligible_motor_voltage_max_v": 3.304398775
+        },
+        "thrust_upgrade_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 12392,
+          "eligible_motor_voltage_min_v": 2.352698390495443,
+          "eligible_motor_voltage_max_v": 3.304398775
+        },
+        "legacy_propellers_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 5775,
+          "eligible_motor_voltage_min_v": 2.352698390495443,
+          "eligible_motor_voltage_max_v": 3.304398775
+        }
+      },
+      "status": "evaluated"
+    },
+    {
+      "flight": "datasets/dataset/C4_battery_drain_rep2.csv",
+      "eligible_rows": 7644,
+      "excluded_rows": 1483,
+      "excluded_by_reason_overlapping": {
+        "nonfinite_required": 0,
+        "ground_height": 686,
+        "motor_inactive": 446,
+        "pwm_out_of_range": 0,
+        "voltage_out_of_range": 0,
+        "quaternion_norm": 0,
+        "flight_edge": 202,
+        "time_gap": 797
+      },
+      "diagnostic_rows": 2415,
+      "candidate_windows": 182,
+      "eligible_windows": 3,
+      "excluded_windows": 179,
+      "actual_horizon_spans": {
+        "0.1": {
+          "min_s": 0.09999275207519531,
+          "max_s": 0.09999775886535645
+        },
+        "0.25": {
+          "min_s": 0.24998784065246582,
+          "max_s": 0.24999022483825684
+        },
+        "0.5": {
+          "min_s": 0.4999706745147705,
+          "max_s": 0.49998998641967773
+        }
+      },
+      "candidate_ranges": {
+        "cf21plus_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 3113,
+          "eligible_motor_voltage_min_v": 2.6191191781515326,
+          "eligible_motor_voltage_max_v": 3.19549680643485
+        },
+        "thrust_upgrade_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 28381,
+          "eligible_motor_voltage_min_v": 2.6191191781515326,
+          "eligible_motor_voltage_max_v": 3.19549680643485
+        },
+        "legacy_propellers_firmware": {
+          "below_inversion_min_motor_samples": 0,
+          "above_command_max_motor_samples": 14356,
+          "eligible_motor_voltage_min_v": 2.6191191781515326,
+          "eligible_motor_voltage_max_v": 3.19549680643485
+        }
+      },
+      "status": "evaluated"
+    }
+  ]
+}

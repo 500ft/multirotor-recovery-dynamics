@@ -19,11 +19,17 @@ criterion does not establish absence of physical damage.
 
 ## Current step
 
-Phase 0 records the platform decision, retires the V995 work and supplies the
-[parameter register](Engineering%20Data/platform_crazyflie.csv). The next task
-is phase 1: make a reproducible baseline replay and freeze whole-flight splits.
-There is no committed Crazyflie replay result yet. The owner's exploratory
-single-flight comparison is development evidence, not a held-out result.
+Phase 1 has an executed [NanoBench baseline replay](docs/nanobench-baseline.md),
+frozen whole-flight assignments, documented source checks and development
+errors. The documented models accumulate substantial angular-motion error
+relative to persistence. Final-test predictions remain unexamined.
+
+G1 is incomplete for dynamic identification. The next task is to assess command
+imbalance, effective timing/bandwidth and usable excitation before selecting
+identifiable parameters and acceptance tolerances. Instrumented inertia,
+installed propellers and parts of the collection configuration remain unresolved;
+the replay records its assumptions. No identification, recovery simulation or
+SITL work is completed by this result.
 
 [Open questions](OPEN_QUESTIONS.md) track unresolved inputs. Historical aircraft
 results remain in [current-results](Analysis/current-results.md#historical-designed-aircraft).
@@ -36,8 +42,8 @@ estimating the larger campaigns. Agent work uses separate result PRs.
 
 | Phase | Work | Owner | Completion evidence |
 | --- | --- | --- | --- |
-| 0 | Adopt the Crazyflie platform; retain historical work; source parameters | Owner decision, agent implementation | This PR merged; inputs distinguish configurations and evidence types |
-| 1 | Pin NanoBench and replay documented motor models | Agent | Split manifest, acquisition command and hashes, source attribution, frame/command checks, per-flight baseline errors and short open-loop predictions |
+| 0 | Adopt the Crazyflie platform; retain historical work; source parameters | Owner decision, agent implementation | Complete; inputs distinguish configurations and evidence types |
+| 1 | Pin NanoBench and replay documented motor models | Agent | Replay complete under documented assumptions; [results and reproduction](docs/nanobench-baseline.md), frozen splits, acquisition hashes, source checks and development rollouts. G1 remains incomplete as stated above |
 | 2 | Identify only parameters the data can distinguish | Agent | Training-only fits; development checks; untouched final-test metrics; identifiability and residual analysis; comparison on the same protocol |
 | 3 | Transfer the checked model to recovery simulation | Agent | Motor and sensor limits, estimator and release-state assumptions, timestep check, and continuous contact/recovery metrics |
 | 4 | Run stock firmware in CrazySim | Agent | Pinned firmware/backend/configuration; boot, hover and release logs; motor outputs and supervisor transitions; intended sensing verified |

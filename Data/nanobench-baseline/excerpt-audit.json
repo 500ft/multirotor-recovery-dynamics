@@ -1,0 +1,155 @@
+{
+  "candidate": "cf21plus_firmware",
+  "source_record": "Analysis/tests/fixtures/nanobench/source.json",
+  "source_sha256": "fa4bc4d57cd9ad7b0e2f862e2e3adec7d10ba27bf2b28f11c26ad779cc519c1d",
+  "excerpt_sha256": "eb4f414198d52159ecab7b975dfaf8dab2d7390ec9676dfdfdc71095952dae97",
+  "selection": "Existing development excerpt, all rows for arithmetic check, first row for hand calculation, first interval and shortest frozen horizon for increments. No outcome-based selection.",
+  "scope": "Conditional arithmetic/convention diagnostic; no performance threshold or physical validation.",
+  "protocol_sha256": "397837b252156b17fadf13bfea2350f9c117ac186156fca28e66cf84bb6a49f6",
+  "register_sha256": "06183cd872b8636ad1ab66704ff637ab99cca42eb9e8a2c4a2f68829929dc44e",
+  "replay_sha256": "eea2a9883340166b697347150e842c64d5d09ddf97049a7a361425d48ce784c0",
+  "audit_sha256": "68932c5f0a6a560d1e6beb55269c4938e563a4817c6baa8928820b9315576d56",
+  "implementation_differences": {
+    "max_force_abs_difference_n": 1.3877787807814457e-16,
+    "max_torque_abs_difference_n_m": 1.8431436932253575e-18,
+    "max_alpha_abs_difference_rad_s2": 1.4210854715202004e-13
+  },
+  "first_row": {
+    "original_zero_based_row": 3000,
+    "pwm_m1_m4": [
+      57592.86895556,
+      57316.378609534,
+      56403.078455364,
+      51000.58847641
+    ],
+    "battery_voltage_v": 3.553228175,
+    "motor_voltage_v": [
+      3.1226154673377375,
+      3.1076244962899753,
+      3.0581064701966096,
+      2.7651900193173167
+    ],
+    "per_motor_thrust_n": [
+      0.12403933148179719,
+      0.12260619596899505,
+      0.11798776158437432,
+      0.094051430067844
+    ],
+    "torque_per_motor_n_m": [
+      [
+        -0.004034616411532741,
+        -0.004034616411532741,
+        -0.0008673940084250744
+      ],
+      [
+        -0.003988000938917505,
+        0.003988000938917505,
+        0.0008573722424076706
+      ],
+      [
+        0.003837777530413304,
+        0.003837777530413304,
+        -0.000825076016156949
+      ],
+      [
+        0.0030592025831381823,
+        -0.0030592025831381823,
+        0.0006576917655883175
+      ]
+    ],
+    "net_torque_n_m": [
+      -0.001125637236898758,
+      0.000731959474659886,
+      -0.00017740601658603535
+    ],
+    "measured_body_rate_rad_s": [
+      0.118816671,
+      -2.195848062,
+      -0.304521516
+    ],
+    "predicted_alpha_rad_s2": [
+      -80.77043541789297,
+      52.26291939053484,
+      -8.175392469402551
+    ],
+    "euler_first_interval_increment_rad_s": [
+      -0.8077228410644776,
+      0.52264115593829,
+      -0.08175579589286341
+    ],
+    "quaternion_pair_average_body_rate_rad_s": [
+      0.29219165083074905,
+      -1.7988342370199848,
+      -0.2713033433908302
+    ],
+    "gyro_pair_average_body_rate_rad_s": [
+      0.098187357,
+      -2.0999370595,
+      -0.2889174495
+    ]
+  },
+  "intervals": [
+    {
+      "end_excerpt_row": 1,
+      "elapsed_s": 0.010000228881835938,
+      "predicted_body_rate_increment_rad_s": [
+        -0.8077000183320999,
+        0.5234119384505047,
+        -0.08175579589286347
+      ],
+      "observed_body_rate_increment_rad_s": [
+        -0.041258628000000006,
+        0.19182200500000013,
+        0.03120813299999997
+      ],
+      "residual_rad_s": [
+        -0.7664413903320999,
+        0.3315899334505046,
+        -0.11296392889286344
+      ]
+    },
+    {
+      "end_excerpt_row": 10,
+      "elapsed_s": 0.09999680519104004,
+      "predicted_body_rate_increment_rad_s": [
+        -2.464212890687501,
+        -1.1519224756947453,
+        -0.8405841458417637
+      ],
+      "observed_body_rate_increment_rad_s": [
+        -1.609283778,
+        3.0458934820000003,
+        0.114022546
+      ],
+      "residual_rad_s": [
+        -0.8549291126875009,
+        -4.197815957694745,
+        -0.9546066918417637
+      ]
+    }
+  ],
+  "source_consistency": {
+    "euler_as_radians_quaternion_rmse_rad": [
+      2.840059521299493e-07,
+      2.9805279345342697e-07,
+      2.5012503099235506e-07
+    ],
+    "euler_as_declared_degrees_quaternion_rmse_rad": [
+      0.11415651482674032,
+      0.16613592933105661,
+      0.03573031532077328
+    ],
+    "finding": "Excerpt Euler values agree with quaternion-derived radians despite README degree labels. Replay does not use the Euler columns.",
+    "adjacent_voltage_changes": 58,
+    "voltage_note": "The released voltage changes between adjacent grid rows. The README forward-fill description cannot by itself establish the processing of this CSV; no resampling correction is inferred."
+  },
+  "excerpt_grid": {
+    "rows": 70,
+    "dt_min_s": 0.009998321533203125,
+    "dt_max_s": 0.010000944137573242,
+    "fractional_pwm_values": 280,
+    "interpretation": "Fractional PWM in an aligned product is not the original uint16 logging stream. Raw block times and interpolation weights are unavailable; grid spacing does not establish independent bandwidth."
+  },
+  "result": "Independent arithmetic agrees with replay to floating-point rounding; the short recorded rate increment differs substantially. No implementation correction established by this diagnostic.",
+  "runtime_s": 0.019342040992341936
+}

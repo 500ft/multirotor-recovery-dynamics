@@ -30,9 +30,14 @@ results. Runtime and environment are in the run record. The acquisition requires
 network access; replay and tests run offline after acquisition. No full flight
 CSV is committed. The small development excerpt used by tests has its own
 [source and row-range record](../Analysis/tests/fixtures/nanobench/source.json).
-NanoBench observations were collected by Syed Izzat Ullah and Jose Baca. The
-[upstream BSD license](../Data/nanobench-baseline/NANOBENCH_LICENSE.txt) applies
-to the excerpt and authors' metadata. Referenced Bitcraze firmware remains under
+NanoBench observations were collected by Syed Izzat Ullah and Jose Baca.
+Data reuse permission is explicit: the pinned README's
+[License section](https://github.com/syediu/nanobench-iros2026/blob/934a1ab92c458cad99c9278a5cb63bf68af6e56c/README.md#license)
+applies BSD-3-Clause to the dataset as well as the codebase.
+[Audit sources](../Data/nanobench-baseline/audit-sources.json) record that statement,
+retrieval dates and hashes separately from the software license designation.
+The [license terms](../Data/nanobench-baseline/NANOBENCH_LICENSE.txt) and attribution
+accompany the excerpt and metadata. Referenced Bitcraze firmware remains under
 its upstream GPL license; the acquisition cache preserves the source headers.
 
 ## Inventory and split
@@ -63,7 +68,7 @@ model errors. Only development files entered the replay.
 
 ## Signal interpretation
 
-The signal units come from the pinned
+The signal reference is the pinned
 [NanoBench column reference](https://github.com/syediu/nanobench-iros2026/blob/934a1ab92c458cad99c9278a5cb63bf68af6e56c/README.md#csv-column-reference).
 The metadata names collection firmware `2025.12.1`, resolved to
 `252b41341a078c29662ff7bd580985befce42a6c`. The register's candidate curves use
@@ -161,7 +166,9 @@ have no such counts. The dataset authors aligned clocks offline by whole-flight
 cross-correlation and resampled to a common grid. This preprocessing already
 uses future observations. The baseline introduces no fitted shift or scaling,
 and therefore evaluates the published aligned product rather than causal raw
-telemetry. The voltage column is documented as forward-filled.
+telemetry. The voltage column is documented as forward-filled, but the excerpt
+audit below finds adjacent-row changes in the distributed product; the processing
+that produced those values remains uncertain.
 
 The collection [sensor implementation](https://github.com/bitcraze/crazyflie-firmware/blob/252b41341a078c29662ff7bd580985befce42a6c/src/hal/src/sensors_bmi088_bmp3xx.c#L297-L349)
 applies calibration, alignment and low-pass filtering before logging. Its
@@ -177,16 +184,61 @@ propeller identity also remain unresolved. These gaps limit interpretation of
 torque and rapid transients; this run does not attribute the exploratory
 single-flight discrepancy to a cause.
 
+## Audit of the exposed development excerpt
+
+The [executed audit](../Data/nanobench-baseline/excerpt-audit.json) establishes
+no replay implementation defect. Explicit polynomial arithmetic, per-motor
+`r cross F` moments and componentwise Euler equations agree with the replay to
+floating-point rounding. The selected measured rate increment still differs
+substantially from the conditional prediction. The original error tables,
+figure, source manifest, split and protocol are unchanged. No new regression
+test was added because no implementation bug was reproduced.
+
+The diagnostic uses the existing development fixture. It checks arithmetic on
+the whole excerpt, then uses its first sample for the hand calculation, its
+first interval and the shortest frozen horizon for rate increments. These
+choices do not select favorable errors. The result records each motor's thrust
+and moment, net moment, measured initial rate, predicted acceleration and both
+observed and predicted increments. It also derives body rate from the first
+quaternion pair as a convention check without optimizing an axis map or shift.
+
+```sh
+python -m Analysis.audit_nanobench_excerpt --output ../nanobench-excerpt-audit.json
+```
+
+| Finding | Effect on this replay | Remaining evidence |
+| --- | --- | --- |
+| Collection logging stores motor PWM after the compensation/capping path; motor IDs and the SI mixer preserve the declared order | No duplicated compensation or reordered-motor defect found | Deployed build flags and custom patches are unrecorded |
+| Independent moment and angular-acceleration arithmetic agree with the implementation, while the short rate increment disagrees with observation | Preserve the conditional baseline; a residual alone cannot distinguish inertia, motor asymmetry, CG offset or timing | Installed geometry/inertia and actuator configuration, plus usable timing information |
+| Published Euler columns agree with quaternion-derived radians despite the README degree labels | This is a source unit-description defect; Euler columns are unused by the replay | Consumers must verify their own chosen columns; no source data were rewritten |
+| Aligned PWM values are fractional and voltage changes between adjacent grid rows | These values are processed inputs; the original integer PWM stream and voltage holds cannot be reconstructed from the grid alone | Raw block times, alignment offsets and collection/preprocessing code |
+
+The [source audit](../Data/nanobench-baseline/audit-sources.json) rechecks the
+collection driver, stabilizer, mixer, motor IDs, sensor processing and platform
+constants at their pinned revisions. The register's mass describes the dataset
+configuration; its inertia remains a stock-model prior. Source sensor filtering
+and recorded block counts constrain what can be inferred about fast dynamics,
+but neither identifies the effective post-interpolation bandwidth. No fitted
+lag, battery correction, inertia or motor gain is justified by this excerpt.
+
+Owner exercise: use the first fixture row and the registered `cf21plus_firmware` curve to
+calculate M4's motor voltage and thrust. Form its moment from its body position
+and reaction-torque sign, then sum all motor moments and apply Euler's equation.
+Multiply the initial angular acceleration by the first timestamp interval and
+compare it with the difference of the next two gyro rows. Check the independent
+arithmetic against `first_row` and `intervals` in the audit JSON. Explain why a
+correct calculation with the stated priors can still disagree with the measured
+increment. This is an estimation diagnostic with no invented acceptance threshold.
+
 ## Next decision
 
 Phase 1 has an executed conditional baseline. G1 remains incomplete for dynamic
-identification: assess command imbalance, effective timing/bandwidth and usable
-excitation before choosing a distinguishable parameter subset or error
-acceptance tolerances. The large angular-motion residual alone cannot separate
-inertia, actuator asymmetry, geometry and missing dynamics. Evidence that
-resolves the installed configuration and timing, followed by a model that
-improves development rollouts and passes a frozen held-out protocol, would
-change the present conclusion. No identification is included here.
+identification. The next task is to qualify the motor-command/gyro timing of the
+exposed development flight from public collection artifacts, recording which
+raw timestamps, offsets and build settings can be recovered. That evidence
+would determine whether a later torque/inertia identifiability analysis can
+separate model error from input timing. No fitting or final-test evaluation is
+included in this audit.
 
 The same evaluator can later compare the reserved split with a frozen fitted
 model. It requires `--split final_test`, `--frozen-model path.json` and

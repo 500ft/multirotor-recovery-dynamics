@@ -1,0 +1,79 @@
+{
+  "audited_pr_head": "5e605d2601351e4372f954499d57a398f81c65f6",
+  "files": [
+    {
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/syediu/nanobench-iros2026/934a1ab92c458cad99c9278a5cb63bf68af6e56c/LICENSE",
+      "sha256": "69901188c51f2f874baf81666074a9e8dfbeb581592a068ad60a10dd43a5de59",
+      "retrieved_utc": "2026-10-04T22:26:13.376138+00:00"
+    },
+    {
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/syediu/nanobench-iros2026/934a1ab92c458cad99c9278a5cb63bf68af6e56c/README.md",
+      "sha256": "dcdadfbc306d9218905e08e5710e1bd23f22522aa3d5d3d318821214404f8197",
+      "retrieved_utc": "2026-10-04T22:26:13.473935+00:00"
+    },
+    {
+      "path": "datasets/dataset/A1b_multisine_sysid_rep1_metadata.yaml",
+      "url": "https://raw.githubusercontent.com/syediu/nanobench-iros2026/934a1ab92c458cad99c9278a5cb63bf68af6e56c/datasets/dataset/A1b_multisine_sysid_rep1_metadata.yaml",
+      "sha256": "26468128c8e01c9b19e22ac2d4f5f532e489a4027420c5b51e1da94468160781",
+      "retrieved_utc": "2026-10-04T22:26:13.612687+00:00"
+    },
+    {
+      "path": "firmware/252b41341a078c29662ff7bd580985befce42a6c/src/drivers/src/motors.c",
+      "url": "https://raw.githubusercontent.com/bitcraze/crazyflie-firmware/252b41341a078c29662ff7bd580985befce42a6c/src/drivers/src/motors.c",
+      "sha256": "8522a000604b3db9ced770efecfdb4ab24bf7519919cbea692b89a73281bd368",
+      "retrieved_utc": "2026-10-04T22:26:13.753336+00:00"
+    },
+    {
+      "path": "firmware/252b41341a078c29662ff7bd580985befce42a6c/src/hal/src/sensors_bmi088_bmp3xx.c",
+      "url": "https://raw.githubusercontent.com/bitcraze/crazyflie-firmware/252b41341a078c29662ff7bd580985befce42a6c/src/hal/src/sensors_bmi088_bmp3xx.c",
+      "sha256": "c8d693ed773315964d45fd6037defee612753ace6a4dcbaf1bb4dc306082ba2c",
+      "retrieved_utc": "2026-10-04T22:26:13.856625+00:00"
+    },
+    {
+      "path": "firmware/252b41341a078c29662ff7bd580985befce42a6c/src/modules/interface/stabilizer_types.h",
+      "url": "https://raw.githubusercontent.com/bitcraze/crazyflie-firmware/252b41341a078c29662ff7bd580985befce42a6c/src/modules/interface/stabilizer_types.h",
+      "sha256": "a6c1dc47677b446d17c8ab595cba981f836f8823ac2ee1b85d2137bce5164079",
+      "retrieved_utc": "2026-10-04T22:26:13.981802+00:00"
+    },
+    {
+      "path": "firmware/252b41341a078c29662ff7bd580985befce42a6c/src/modules/src/power_distribution_quadrotor.c",
+      "url": "https://raw.githubusercontent.com/bitcraze/crazyflie-firmware/252b41341a078c29662ff7bd580985befce42a6c/src/modules/src/power_distribution_quadrotor.c",
+      "sha256": "07017878341e15cc2f70406f3a9cc5ea97cb77acf57aac369205154a3614b1d6",
+      "retrieved_utc": "2026-10-04T22:26:14.123353+00:00"
+    },
+    {
+      "path": "firmware/252b41341a078c29662ff7bd580985befce42a6c/src/modules/src/stabilizer.c",
+      "url": "https://raw.githubusercontent.com/bitcraze/crazyflie-firmware/252b41341a078c29662ff7bd580985befce42a6c/src/modules/src/stabilizer.c",
+      "sha256": "01a5e0dbbf4941db0d61f2920117f36294fd3c2ad59caa6354e19d7fe282b0c6",
+      "retrieved_utc": "2026-10-04T22:26:14.277009+00:00"
+    },
+    {
+      "path": "firmware/252b41341a078c29662ff7bd580985befce42a6c/src/platform/interface/platform_defaults_cf2.h",
+      "url": "https://raw.githubusercontent.com/bitcraze/crazyflie-firmware/252b41341a078c29662ff7bd580985befce42a6c/src/platform/interface/platform_defaults_cf2.h",
+      "sha256": "42d8bc5efb8d09755f0d224c71afe1d7433b77fe6888be5f6e926e7d11694451",
+      "retrieved_utc": "2026-10-04T22:26:14.539237+00:00"
+    },
+    {
+      "path": "firmware/252b41341a078c29662ff7bd580985befce42a6c/src/drivers/interface/motors.h",
+      "url": "https://raw.githubusercontent.com/bitcraze/crazyflie-firmware/252b41341a078c29662ff7bd580985befce42a6c/src/drivers/interface/motors.h",
+      "sha256": "46dd810f509803c245e1ec0f0e484d90e1c1727180fb40f32ed9bed6e8198a1e",
+      "retrieved_utc": "2026-10-04T22:26:14.718125+00:00"
+    }
+  ],
+  "data_license": {
+    "identifier": "BSD-3-Clause",
+    "scope": "Pinned NanoBench flight CSVs and metadata, explicitly included by the authors",
+    "evidence_file": "README.md",
+    "evidence_section": "License",
+    "statement": "This dataset and codebase are released under the BSD 3-Clause License.",
+    "terms_file": "LICENSE",
+    "attribution": "Copyright (c) 2026, Syed Izzat Ullah and Jose Baca"
+  },
+  "software_license": {
+    "nanobench": "BSD-3-Clause",
+    "bitcraze_firmware": "GPL-3.0 as stated in downloaded source headers"
+  },
+  "scope_note": "Data permission is verified from the explicit dataset statement, separately from the software license label. The original flight, source manifest, split and results remain unchanged. Raw logger streams beyond the distributed CSVs were not obtained."
+}

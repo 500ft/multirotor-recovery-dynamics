@@ -2,8 +2,9 @@
 
 ## Finish line
 
-The owner selected the Crazyflie family and a simulation-first study. No
-hardware or paid compute is purchased before G5. The project produces:
+The owner selected the Crazyflie family and a public-data-first investigation,
+with simulation before physical validation. No hardware or paid compute is
+purchased before G5. The project produces:
 
 1. A dynamics model checked on reserved whole NanoBench flights, with errors
    reported by flight, axis and prediction horizon.
@@ -24,12 +25,17 @@ frozen whole-flight assignments, documented source checks and development
 errors. The documented models accumulate substantial angular-motion error
 relative to persistence. Final-test predictions remain unexamined.
 
-G1 is incomplete for dynamic identification. The next task is to assess command
-imbalance, effective timing/bandwidth and usable excitation before selecting
-identifiable parameters and acceptance tolerances. Instrumented inertia,
-installed propellers and parts of the collection configuration remain unresolved;
-the replay records its assumptions. No identification, recovery simulation or
-SITL work is completed by this result.
+The [selected-excerpt audit](docs/nanobench-baseline.md#audit-of-the-exposed-development-excerpt)
+reproduces the short-rate mismatch and finds no implementation defect in the
+force/moment arithmetic. It verifies an explicit data-license grant and exposes
+Euler-unit and voltage-processing description issues. The original development
+result and blind split remain unchanged.
+
+G1 remains incomplete. One next task is to qualify motor-command/gyro timing for
+the exposed development flight from public collection artifacts, recording which
+raw timestamps, alignment offsets and build settings can be recovered. Unknown
+instrumented inertia and actuator configuration still limit later identification.
+No fitting, recovery simulation or SITL work is completed by this audit.
 
 [Open questions](OPEN_QUESTIONS.md) track unresolved inputs. Historical aircraft
 results remain in [current-results](Analysis/current-results.md#historical-designed-aircraft).

@@ -11,6 +11,9 @@ summarizes horizon-dependent error. Source, configuration and timing limits are
 listed with the replay. Final-test predictions remain unexamined, and no
 parameters were fitted. [G1 in the roadmap](../ROADMAP.md#current-step) remains
 incomplete for dynamic identification.
+The [selected-excerpt audit](../docs/nanobench-baseline.md#audit-of-the-exposed-development-excerpt)
+reproduces the mismatch without establishing a replay implementation defect.
+The original result remains unchanged.
 
 ## Historical designed aircraft
 

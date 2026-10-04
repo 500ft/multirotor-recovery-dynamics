@@ -1,0 +1,39 @@
+{
+  "horizons_s": [
+    0.1,
+    0.25,
+    0.5
+  ],
+  "start_stride_s": 0.5,
+  "integration_step_s": 0.005,
+  "diagnostic_trailing_mean_samples": 11,
+  "gravity_m_s2": 9.81,
+  "minimum_world_height_m": 0.25,
+  "minimum_pwm_active": 1000,
+  "battery_range_v": [
+    2.0,
+    4.3
+  ],
+  "quaternion_norm_tolerance": 0.02,
+  "maximum_grid_gap_s": 0.015,
+  "edge_trim_s": 1.0,
+  "curves": [
+    "cf21plus_firmware",
+    "thrust_upgrade_firmware",
+    "legacy_propellers_firmware"
+  ],
+  "mass_register_id": "CF-011",
+  "inertia_register_ids": [
+    "CF-020",
+    "CF-021",
+    "CF-022"
+  ],
+  "arm_register_id": "CF-048",
+  "pre_scoring_choices": "Frozen before comparison. Heights and stopped commands exclude ground/contact intervals; no residual-based trimming. Common eligible windows across models. Report all curve candidates without selecting installed hardware.",
+  "metrics": "Prediction minus observation: per-flight per-axis bias and RMSE for body specific force, filtered angular acceleration, position, world velocity and body angular rate; attitude geodesic RMSE; failures and row/window exclusions. No acceleration ratios or pooled-sample confidence intervals.",
+  "processing": "Keep published alignment, interpolation and upstream velocity derivation. No learned shifts/scales. Compare 11-sample trailing means for force; differentiate trailing-mean body gyro and compare with equally averaged Euler angular acceleration. Rate rollouts use unfiltered aligned gyro, Vicon position/velocity/quaternion only at starts. ZOH motor PWM and voltage on the published grid; no future state feedback.",
+  "baselines": "Three documented cubic curves with zero force at PWM=0 and nonnegative force otherwise, measured dataset mass, explicit unmodified stock-model inertia prior, firmware arm, curve-specific torque ratio, no drag or motor lag. Persistence uses constant world velocity and body angular rate, integrating attitude. Force persistence is previous aligned specific force; angular acceleration persistence is zero.",
+  "validity": "Empirical cubic calibration range and instrumented inertia are unresolved. Flag positive commands below firmware THRUST_MIN but do not treat THRUST_MAX as a physical cap. Retain these conditional predictions; report range counts. No fit, no acceptance claim, no explanation of the exploratory discrepancy.",
+  "final_test": "Not scored here. Later final evaluation must supply a frozen fitted-model JSON plus a frozen protocol hash; same evaluator reports both documented curves and fitted model on the reserved whole flights.",
+  "window_selection": "Use the published median grid interval to map nominal horizons/stride to sample counts. Exclude windows containing an invalid row or a gap above maximum_grid_gap_s; report actual elapsed spans. Use the same starts, eligible through the longest horizon, for all models and horizons. Whole-flight edge trimming only. Diagnostic masks require all rows in the trailing window, plus the previous row for differencing, to be eligible."
+}

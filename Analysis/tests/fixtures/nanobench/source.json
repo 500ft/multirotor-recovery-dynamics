@@ -1,0 +1,13 @@
+{
+  "source_path": "datasets/dataset/A1b_multisine_sysid_rep1.csv",
+  "source_revision": "934a1ab92c458cad99c9278a5cb63bf68af6e56c",
+  "source_sha256": "fa4bc4d57cd9ad7b0e2f862e2e3adec7d10ba27bf2b28f11c26ad779cc519c1d",
+  "zero_based_data_rows": [
+    3000,
+    3070
+  ],
+  "end_exclusive": true,
+  "excerpt_sha256": "eb4f414198d52159ecab7b975dfaf8dab2d7390ec9676dfdfdc71095952dae97",
+  "license": "../../../../Data/nanobench-baseline/NANOBENCH_LICENSE.txt",
+  "attribution": "NanoBench observations collected by Syed Izzat Ullah and Jose Baca, 2026."
+}

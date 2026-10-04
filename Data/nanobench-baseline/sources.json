@@ -1801,6 +1801,18 @@
       "bytes": 6300,
       "sha256": "2db2d9f3ceb3126d403aa22288af6676e2862d17f2ce55dfbcd53fa9c215209b",
       "url": "https://raw.githubusercontent.com/bitcraze/crazyflie-firmware/f6e0f0a3b526861328caf3296a7ecf00bb915d39/src/platform/interface/platform_defaults_cf2.h"
+    },
+    {
+      "path": "firmware/252b41341a078c29662ff7bd580985befce42a6c/src/hal/interface/sensors.h",
+      "bytes": 1937,
+      "sha256": "d543967424ae5d09a571ac2f345e93d66ed6ab7e304372c097bde7673d2fb077",
+      "url": "https://raw.githubusercontent.com/bitcraze/crazyflie-firmware/252b41341a078c29662ff7bd580985befce42a6c/src/hal/interface/sensors.h"
+    },
+    {
+      "path": "firmware/252b41341a078c29662ff7bd580985befce42a6c/src/config/config.h",
+      "bytes": 11529,
+      "sha256": "64634959846821504123ea39532d1a2a3181e1a32a7b3e592b04cf4c5f82fe0b",
+      "url": "https://raw.githubusercontent.com/bitcraze/crazyflie-firmware/252b41341a078c29662ff7bd580985befce42a6c/src/config/config.h"
     }
   ]
 }

@@ -1,5 +1,8 @@
 # SelfStabilizingDrone — revised CAD work orders
 
+Historical work for the earlier aircraft. The Crazyflie study follows the
+[roadmap](../ROADMAP.md); these old tasks and thresholds do not transfer to it.
+
 Amended 2026-09-06 after source review. Planning only: no CAD, fixture, fabrication or calibration result exists from this amendment.
 
 2026-09-08 update: [DR-CAD-01 input register](../cad/bench/design-inputs.md) is

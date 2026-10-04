@@ -1,5 +1,9 @@
 # V995 fixture measurement worksheet
 
+> **Retired 2026-10-04.** The platform is now the Bitcraze Crazyflie; see the
+> [roadmap](../../ROADMAP.md). This is kept as history. The 15 load-cell rows
+> and 5 bench rows still describe the bench; the 7 aircraft rows no longer apply.
+
 Fill [`measurement-worksheet.csv`](measurement-worksheet.csv) and the five pending
 register rows in `cad/v995/parameters.csv` can be populated, after which the
 cradle and base plate build on the next generator run.

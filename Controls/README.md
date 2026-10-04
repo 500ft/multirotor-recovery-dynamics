@@ -1,5 +1,8 @@
 # Control Architecture and Recovery State Machine
 
+Historical work for the earlier aircraft. The Crazyflie study follows the
+[roadmap](../ROADMAP.md); these old tasks and thresholds do not transfer to it.
+
 The machine-readable source is [state_machine.json](state_machine.json). Any firmware implementation and diagram must preserve these state names and transition guards.
 
 ## Architecture

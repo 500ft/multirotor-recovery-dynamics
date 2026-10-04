@@ -1,5 +1,8 @@
 # V995 whole-aircraft fixture
 
+> **Retired 2026-10-04.** The platform is now the Bitcraze Crazyflie; see the
+> [roadmap](../../ROADMAP.md). This is kept as history.
+
 **Platform decision (owner, 2026-09-27): the physical platform is fixed as the
 stock Veeniix V995** — stock motors, propellers, controller, battery and
 transmitter. All future physical work is based on this aircraft.

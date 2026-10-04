@@ -1,5 +1,8 @@
 # Executable Engineering Plan
 
+Historical work for the earlier aircraft. The Crazyflie study follows the
+[roadmap](../ROADMAP.md); these old tasks and thresholds do not transfer to it.
+
 This document is the implementation gate structure for the protected micro-UAV project. It separates completed repository infrastructure from physical evidence that must still be produced.
 
 ## Core Rules

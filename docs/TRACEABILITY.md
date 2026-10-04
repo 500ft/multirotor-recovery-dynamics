@@ -1,5 +1,10 @@
 # Traceability index
 
+Current Crazyflie decisions are the owner platform selection, documented
+[parameter register](../Engineering%20Data/platform_crazyflie.csv) and the
+[roadmap](../ROADMAP.md). The rows below preserve the historical vehicle audit;
+its gates are not Crazyflie acceptance criteria.
+
 One row per consequential decision: what it is, what requires it, where its
 reasoning lives, which canonical inputs it depends on, how it will be validated,
 and its current status. **The mathematics is not repeated here** — follow the link.
@@ -10,7 +15,7 @@ execution) · `blocked` (needs an input that does not exist) · `unresolved`.
 **No row is `measured` — no accepted physical measurement exists in this
 repository.**
 
-## Vehicle and propulsion
+## Historical vehicle and propulsion
 
 | Decision | Requirement | Reasoning lives in | Canonical inputs | Validation | Status |
 | --- | --- | --- | --- | --- | --- |
@@ -55,7 +60,10 @@ repository.**
 | Empirical 5th percentile, n=6 | audit Tier C | — | **`bare`**; is a minimum, not a confidence bound |
 | Bounds are conditional sampling bounds | [`design.md` §6c](specs/survivable-set/design.md) | — | `derived` |
 
-## Bench (V995 demonstrator)
+## Bench (V995 demonstrator, retired 2026-10-04)
+
+The platform is now the Bitcraze Crazyflie ([roadmap](../ROADMAP.md)). Rows below are kept as history.
+
 
 | Decision | Reasoning lives in | Validation | Status |
 | --- | --- | --- | --- |

@@ -1,4 +1,15 @@
-# Current Preliminary Results
+# Current results
+
+## Crazyflie
+
+The platform decision and [documented inputs](../Engineering%20Data/platform_crazyflie.csv)
+are recorded. No Crazyflie replay, identification or recovery result has been
+committed. The next result is the [NanoBench baseline replay](../ROADMAP.md#replay-and-identification).
+
+## Historical designed aircraft
+
+All results below use the earlier estimated aircraft. Their old bench gates
+are retained for reproduction and do not govern Crazyflie work.
 
 Generated from the locked Stage 1 catalog selection on June 21, 2026. These are
 not validated design results.
@@ -329,6 +340,6 @@ per-trial outcomes are in [`trials.jsonl`](../Data/scenario-02/trials.jsonl).
 
 The cases were selected using earlier simulation results and then evaluated
 with fresh draws. The conclusions apply to the historical model and its assumed
-landing limits. V995 measurements remain the next step in the
-[roadmap](../ROADMAP.md). The original `two_adjacent` impact-speed results remain
+landing limits. The next step in the [roadmap](../ROADMAP.md) is the
+Crazyflie model. The original `two_adjacent` impact-speed results remain
 in the earlier diagnostic; no additional study of that class is scheduled.

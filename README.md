@@ -1,40 +1,49 @@
 # Multirotor Recovery Dynamics
 
-Can a small drone that is thrown, dropped or loses a motor get itself level
-again before it hits the ground? This repository models that recovery in
-simulation. The owner has yet to choose whether to close the simulation study
-or continue with bench characterization of the stock Veeniix V995 micro-quad.
+A simulation-first study of Crazyflie tumble recovery. The next experiment
+replays recorded motor commands from public flights, checks the dynamics model,
+and establishes what can be identified before developing a recovery controller.
 
 [![CI](https://github.com/500ft/multirotor-recovery-dynamics/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/500ft/multirotor-recovery-dynamics/actions/workflows/ci.yml)
-![Evidence: simulation and nominal CAD](https://img.shields.io/badge/evidence-simulation_%2B_nominal_CAD-475569)
+![Evidence: documented inputs; replay pending](https://img.shields.io/badge/evidence-documented_inputs%3B_replay_pending-475569)
 [![License: MIT](https://img.shields.io/badge/license-MIT-0f766e)](LICENSE)
 
-[Results](#simulation-results) · [Roadmap](ROADMAP.md) ·
-[Quick start](#quick-start) · [Safety](#safety-and-limits)
+[Current work](#current-work) · [Roadmap](ROADMAP.md) ·
+[Historical results](#simulation-results) · [Quick start](#quick-start)
 
-![Simulated altitude loss and recoverable tumble rate across component tiers](Figures/release_recovery_envelope.png)
+## Current work
 
-*Simulated altitude lost against initial tumble rate, by component tier, with
-estimated inputs. [Figure provenance](docs/data-and-figures.md).*
+The owner selected the Crazyflie family. The
+[parameter register](Engineering%20Data/platform_crazyflie.csv) separates the
+instrumented NanoBench aircraft, stock hardware specifications and published
+model defaults. The [register guide](Engineering%20Data/README.md) explains the
+firmware's motor-voltage thrust curves and command limits.
 
-## About
+[NanoBench](https://github.com/syediu/nanobench-iros2026) supplies recorded motor
+commands, motion-capture state and onboard telemetry. The replay will check
+force and angular dynamics, then short open-loop predictions. Parameters will
+be fitted on training flights and evaluated on reserved whole flights.
+No Crazyflie prediction error or recovery result is released yet.
 
-Recovery depends on several things at once: how fast the drone detects the
-fall, how much torque the motors can produce, the battery's state, where the
-mass sits, and what any guard adds. A controller that looks good in one
-nominal case can still fail across realistic variation, so the model runs
-Monte Carlo sweeps over those variations and judges each case against a
-declared landing criterion.
+After identification, the study will compare stock and recovery firmware in
+CrazySim and examine feasible design variants. No purchase is authorized before
+the owner's final decision. The V995 fixture and the earlier designed-aircraft
+simulation are historical work.
 
-The historical simulated aircraft was never built. Its mass, propulsion and
-other inputs came from estimates and catalog specifications. The available
-physical aircraft is a stock V995 with its original board and transmitter. It
-cannot run the simulated controller: no usable command or firmware interface
-has been established. Its flight-ready mass still needs to be weighed.
+## Limits
+
+NanoBench covers ordinary flight and contains no tumble-recovery trials.
+Agreement there supports only the tested configuration and operating range.
+Recovery, design-variant performance and damage tolerance require separate
+physical evidence. Historical results below belong to a different aircraft.
 
 ## Simulation results
 
-All of these use estimated inputs. None has been checked against hardware.
+Historical results are retained here for reproduction.
+
+These results are for the historical designed aircraft (about 130–165 g, never
+built). All of them use estimated inputs, and none has been checked against
+hardware. The current platform has no committed replay result yet.
 
 | Question | Result |
 | --- | --- |
@@ -63,7 +72,7 @@ beyond the tested maximum of 6 m. This explains the
 assumptions. It is not a general minimum height for other parachutes or arbitrary
 initial velocities.
 
-The [landing verdict](Analysis/survivable_set.py) uses impact vertical speed and
+The historical [landing verdict](Analysis/survivable_set.py) uses impact vertical speed and
 tilt only. It omits lateral impact speed, spin and physical damage criteria, so
 passing it does not establish crash survival.
 
@@ -75,18 +84,17 @@ primary comparisons distinguish the scenarios. Losing one rotor gets worse by
 rotors improves by 9 to 16 points and reduced authority on all motors by 38 to
 41 points. These results use the historical estimated aircraft. See the [new scenario results](Analysis/current-results.md#scenario-comparison-with-selected-cases).
 
-## Hardware so far
+## Existing bench software and historical CAD
 
 - **Bench chain.** A QT Py RP2040 reads a load cell through an NAU7802
   amplifier, plus an INA260 power monitor and an LIS3DH accelerometer. Firmware
   and host capture code are written and tested on synthetic serial output. They
-  have not run on hardware yet. [Wiring and bring-up](docs/bench-acquisition.md).
-- **CAD.** The load-cell end adapter is generated and checked. The cradle that
-  holds the whole V995 on the load cell, and the base plate under it, have
-  working generators waiting on the [measurement worksheet](evidence/v995-fixture-measurements/README.md).
-  It has 15 load-cell rows, 7 aircraft rows and 5 bench rows. Those readings
-  supply five pending CAD parameters and confirm the delivered cell's mounting
-  pattern. [V995 fixture](cad/v995/README.md).
+  have not run on hardware yet. The chain is kept for per-motor thrust
+  measurements if a Crazyflie is bought. [Wiring and bring-up](docs/bench-acquisition.md).
+- **Retired V995 fixture.** The [V995 cradle generators](cad/v995/README.md) and
+  [measurement worksheet](evidence/v995-fixture-measurements/README.md) are kept
+  as history. The worksheet's 15 load-cell rows and 5 bench rows still describe
+  the bench.
 
 ## Quick start
 
@@ -108,30 +116,24 @@ regeneration and the pinned CadQuery environment.
 
 ## What's next
 
-The owner must choose between closing the simulation study and V995-only bench
-characterization (D3). If bench work is selected, the
-[27-row measurement worksheet](evidence/v995-fixture-measurements/README.md)
-remains its unpowered prerequisite. It covers the delivered load cell, aircraft
-mass and geometry, and bench dimensions. See the [roadmap](ROADMAP.md) for the
-pending scope choice. Logger development, release trials and a new aircraft
-are not authorized by this correction.
+The [roadmap](ROADMAP.md) defines the replay task, identification checks,
+compiled-firmware comparison and later purchase decision. The first deliverable
+is a reproducible baseline with a frozen split and per-flight error tables.
 
-## Safety and limits
+## Safety
 
-**Do not attempt recovery flights from the current state of this repository.**
-Work through the [bench checklist](Instrumentation/propulsion-bench-safety-checklist.md)
-and [operating constraints](Safety/README.md) first.
-
-- Mass properties, propulsion, guard response and recovery have not been
-  measured. A passing test or a good simulated sweep does not change that.
+Simulation work authorizes no powered test. The [safety plan](Safety/README.md)
+must be revised for the chosen aircraft, instrumentation and facility before
+hardware testing. The existing [bench checklist](Instrumentation/propulsion-bench-safety-checklist.md)
+is retained for future calibration work.
 
 ## Documentation
 
 | Document | What it covers |
 | --- | --- |
 | [Reading guide](docs/START_HERE.md) | Short review or full reproduction |
-| [Current results](Analysis/current-results.md) | Mass, guard, recovery and Monte Carlo results in full |
-| [Survivable-set design](docs/specs/survivable-set/design.md) | The paired study behind the guard and parachute results |
+| [Current results](Analysis/current-results.md) | Current Crazyflie status and historical simulation results |
+| [Historical survivable-set design](docs/specs/survivable-set/design.md) | The paired study behind the guard and parachute results |
 | [Literature review](literature/README.md) | What is established, what is open, and which claims the sources contradict |
 | [Engineering audit](docs/ENGINEERING_AUDIT.md) · [traceability](docs/TRACEABILITY.md) | Which numbers are derived and which are assumed |
 | [Data and figures](docs/data-and-figures.md) | Inputs and code for each plot |

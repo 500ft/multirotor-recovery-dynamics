@@ -10,7 +10,11 @@ this wiring, the settings in §3 and the fail-closed run semantics in §4b — t
 time, starting with the power-off continuity check. Analysis scripts that consume a
 completed run are a later slice.
 
-Platform: bench chain for the Veeniix V995 demonstrator
+Platform: bench chain built for the Veeniix V995 demonstrator, which was retired
+on 2026-10-04. The chain is kept for Crazyflie per-motor thrust work
+([roadmap](../ROADMAP.md)).
+
+Original platform note: bench chain for the Veeniix V995 demonstrator
 ([`evidence/week-2026-09-19/platform-capabilities.md`](../evidence/week-2026-09-19/platform-capabilities.md)).
 Nothing here touches the drone's power or board (E6).
 

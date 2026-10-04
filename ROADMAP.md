@@ -51,6 +51,22 @@ that needs a purchase and the release-test safety plan.
 | 7 | Design study: screening (Morris), then variance-based sensitivity (Sobol), over propeller, frame, battery and payload | Agent | Sensitivity results and trade-off plot |
 | 8 | Write up, then decide whether to buy a Crazyflie 2.1+ for flight tests (OQ-020) | Agent, then owner | Report merged; purchase decision recorded |
 
+## Decision points
+
+| Gate | After step | Continue if | Otherwise |
+|---|---|---|---|
+| G1 | 2 | The documented thrust model is close enough for identification to correct | Narrow the scope to attitude dynamics |
+| G2 | 3 | Held-out error is comparable to NanoBench's published system-identification baselines | Revise the model structure first |
+| G3 | 4 | CrazySim runs on an available machine or in CI | Port the firmware logic into the Python simulation |
+| G4 | 5 | The controller recovers across the target envelope in software-in-the-loop | Report a negative result with the reasons |
+| G5 | 8 | A specific prediction is worth testing and the release safety plan is ready | Finish as a model study |
+
+## After a purchase (not scheduled)
+
+Per-motor thrust on the bench chain (worksheet load-cell and bench rows),
+bifilar-pendulum inertia, then low releases over a net: stock firmware first,
+then the recovery module, compared with the registered prediction.
+
 ## Not in this version
 
 - Flight tests or any purchase, until step 8.

@@ -1,5 +1,8 @@
 # Executable Analysis
 
+Historical work for the earlier aircraft. The Crazyflie study follows the
+[roadmap](../ROADMAP.md); these old tasks and thresholds do not transfer to it.
+
 These tools provide reproducible preliminary calculations. They do not replace CAD, bench testing, 3-D simulation, or physical validation.
 
 Run all checks:

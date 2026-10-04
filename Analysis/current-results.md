@@ -1,4 +1,15 @@
-# Current Preliminary Results
+# Current results
+
+## Crazyflie
+
+The platform decision and [documented inputs](../Engineering%20Data/platform_crazyflie.csv)
+are recorded. No Crazyflie replay, identification or recovery result has been
+committed. The next result is the [NanoBench baseline replay](../ROADMAP.md#replay-and-identification).
+
+## Historical designed aircraft
+
+All results below use the earlier estimated aircraft. Their old bench gates
+are retained for reproduction and do not govern Crazyflie work.
 
 Generated from the locked Stage 1 catalog selection on June 21, 2026. These are
 not validated design results.

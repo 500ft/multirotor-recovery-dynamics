@@ -1,4 +1,4 @@
-# Start here — Multirotor Recovery Dynamics
+# Start here: Multirotor Recovery Dynamics
 
 The [README](../README.md) is the overview and the [roadmap](../ROADMAP.md) is
 the plan. This guide is for reading the work quickly or rerunning it.
@@ -7,13 +7,13 @@ the plan. This guide is for reading the work quickly or rerunning it.
 
 | If you have | Read |
 | --- | --- |
-| Two minutes | [README results](../README.md#simulation-results), then [current results](../Analysis/current-results.md) |
+| Two minutes | [Current work](../README.md#current-work), then the [roadmap](../ROADMAP.md) |
 | Half an hour | The [survivable-set design](specs/survivable-set/design.md), then one figure traced through [data and figures](data-and-figures.md) |
 | A review to do | The [review index](REVIEW_READY.md) |
 | The current platform | The [Crazyflie platform register](../Engineering%20Data/platform_crazyflie.csv) and the [roadmap](../ROADMAP.md) |
 | Bench hardware | The [bench wiring and bring-up](bench-acquisition.md); the retired [V995 fixture notes](../cad/v995/README.md) are history |
 
-## Two vehicles, kept apart
+## Configurations
 
 The simulation work used a designed 130–165 g vehicle (EX1103 motors, Kakute H7
 flight controller, 2S battery). It was never built. Its numbers live in
@@ -37,9 +37,8 @@ python -m unittest discover -s Instrumentation/tests -v
 ```
 
 The full analysis suite takes a few minutes. [CI](../.github/workflows/ci.yml)
-runs the same sequence. Real inputs belong in the parameter registers
-([designed vehicle](../cad/bench/parameters.csv), [V995](../cad/v995/parameters.csv)),
-never in the derived request sheet.
+runs the same sequence. Crazyflie inputs belong in its [platform register](../Engineering%20Data/platform_crazyflie.csv).
+The designed-vehicle and V995 input checks remain historical regression checks.
 
 ## CAD — pinned environment
 
@@ -53,9 +52,8 @@ python -m pytest cad/tests -q
 ```
 
 The [CAD workflow](../.github/workflows/cad-geometry.yml) regenerates the
-geometry and uploads it for inspection. For the V995, only the load-cell end
-adapter builds today; the cradle and base plate build once the worksheet is
-filled.
+geometry and uploads it for inspection. The V995 geometry is retained as a historical fixture; completing it is
+outside the Crazyflie roadmap.
 
 ## Regenerating the simulations
 

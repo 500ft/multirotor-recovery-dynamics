@@ -1,5 +1,10 @@
 # Data and figure production
 
+The Crazyflie replay has no committed outputs yet. Its inputs are in the
+[platform register](../Engineering%20Data/platform_crazyflie.csv); the
+[roadmap](../ROADMAP.md) defines the next result. Existing plots and commands
+below describe the historical designed aircraft.
+
 This guide distinguishes simulated outputs, deterministic calculations, catalog
 inputs, planned measurements, and explanatory diagrams.
 

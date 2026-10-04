@@ -1,75 +1,166 @@
 # Roadmap
 
-This is the plan for finishing the project. Open questions are tracked in
-[OPEN_QUESTIONS.md](OPEN_QUESTIONS.md); work history is in
-[docs/SPRINT_PROGRESS.md](docs/SPRINT_PROGRESS.md) and
-[docs/REVIEW_READY.md](docs/REVIEW_READY.md).
+## Finish line
 
-## Finish line (owner decision, 2026-10-04)
+The owner selected the Crazyflie family and a simulation-first study. No
+hardware or paid compute is purchased before G5. The project produces:
 
-The platform is the Bitcraze Crazyflie. The project finishes as a model study
-checked against public flight data:
+1. A dynamics model checked on reserved whole NanoBench flights, with errors
+   reported by flight, axis and prediction horizon.
+2. A recovery-controller comparison using compiled Crazyflie firmware in
+   CrazySim, with the intended onboard sensing and the same plant in both arms.
+3. A feasible design comparison with coupled mass, inertia, propulsion and
+   battery assumptions, followed by a purchase decision.
 
-1. A rigid-body and rotor model of the Crazyflie 2.1, identified on training
-   flights from the public [NanoBench dataset](https://github.com/syediu/nanobench-iros2026)
-   and checked on held-out whole flights.
-2. A tumble-recovery controller written as a Crazyflie firmware module and
-   tested in software-in-the-loop with [CrazySim](https://github.com/gtfactslab/CrazySim).
-   Landing is judged on vertical and horizontal speed, tilt and impact energy.
-3. A design study over propeller, frame size, battery and payload, with inertia
-   taken from CAD mass properties and a sensitivity analysis.
+NanoBench contains ordinary flight, not tumbling. Its instrumented vehicle is
+one configuration; a stock 2.1+ is another. Recovery and variant performance
+remain predictions until independent flights test them. Passing a landing
+criterion does not establish absence of physical damage.
 
-NanoBench has hover, excitation and tracking flights, with no tumbling. The
-model is validated in normal flight; recovery results are model predictions
-until flown. Flight tests on a Crazyflie 2.1+ are a separate, later decision
-that needs a purchase and the release-test safety plan.
+## Current step
 
-## Where it stands
+Phase 0 records the platform decision, retires the V995 work and supplies the
+[parameter register](Engineering%20Data/platform_crazyflie.csv). The next task
+is phase 1: make a reproducible baseline replay and freeze whole-flight splits.
+There is no committed Crazyflie replay result yet. The owner's exploratory
+single-flight comparison is development evidence, not a held-out result.
 
-- The documented values, each with its source, are in the
-  [platform register](Engineering%20Data/platform_crazyflie.csv). None is
-  measured by this project. Two published thrust maps disagree (OQ-019).
-- NanoBench's vehicle flew at a measured 40.85 g with markers and a charging
-  deck, above the 27 g stock mass. Validation uses that configuration.
-- The V995 is retired: its main chips are unmarked and no programming route was
-  found (OQ-011). Its CAD and worksheet are kept as history.
-- The [simulation results in the README](README.md#simulation-results) are for
-  the historical designed aircraft, which was never built.
-- The bench chain is untested hardware, kept for per-motor thrust measurement
-  if a Crazyflie is bought.
+[Open questions](OPEN_QUESTIONS.md) track unresolved inputs. Historical aircraft
+results remain in [current-results](Analysis/current-results.md#historical-designed-aircraft).
 
-## What's left
+## Phases
 
-| # | Step | Who | Done when |
-|---|---|---|---|
-| 1 | Record the platform decision and the documented parameter register | Agent | Merged |
-| 2 | Load NanoBench and replay its recorded motor commands through the existing rigid-body model with the documented parameters | Agent | Open-loop prediction error per flight committed. **Current step** |
-| 3 | Identify mass-property and rotor parameters on training flights, with mass fixed at the measured 40.85 g; check on held-out whole flights (OQ-018, OQ-019) | Agent | Held-out error table; identified values added to the register |
-| 4 | Set up CrazySim and record the stock firmware's response to a release with tumble (OQ-021) | Agent | Stock behaviour recorded |
-| 5 | Write and test a recovery controller as a firmware module in CrazySim; add horizontal speed and impact energy to the landing verdict | Owner and agent | Recovery envelope in software-in-the-loop |
-| 6 | CAD envelope from Bitcraze's published files (board outline, motor mounts, propeller and motor mockups); model the design variants | Owner | Variant mass properties committed |
-| 7 | Design study: screening (Morris), then variance-based sensitivity (Sobol), over propeller, frame, battery and payload | Agent | Sensitivity results and trade-off plot |
-| 8 | Write up, then decide whether to buy a Crazyflie 2.1+ for flight tests (OQ-020) | Agent, then owner | Report merged; purchase decision recorded |
+The owner's ten-week outline is a planning estimate. Advance on the evidence
+below; record runtime after the first replay and SITL smoke run before
+estimating the larger campaigns. Agent work uses separate result PRs.
 
-## Decision points
+| Phase | Work | Owner | Completion evidence |
+| --- | --- | --- | --- |
+| 0 | Adopt the Crazyflie platform; retain historical work; source parameters | Owner decision, agent implementation | This PR merged; inputs distinguish configurations and evidence types |
+| 1 | Pin NanoBench and replay documented motor models | Agent | Split manifest, acquisition command and hashes, source attribution, frame/command checks, per-flight baseline errors and short open-loop predictions |
+| 2 | Identify only parameters the data can distinguish | Agent | Training-only fits; development checks; untouched final-test metrics; identifiability and residual analysis; comparison on the same protocol |
+| 3 | Transfer the checked model to recovery simulation | Agent | Motor and sensor limits, estimator and release-state assumptions, timestep check, and continuous contact/recovery metrics |
+| 4 | Run stock firmware in CrazySim | Agent | Pinned firmware/backend/configuration; boot, hover and release logs; motor outputs and supervisor transitions; intended sensing verified |
+| 5 | Implement a recovery controller and compare it with stock | Owner and agent | Reproducible paired scenarios; final scenarios held out from tuning; stock, supervisor-only and controller-change arms |
+| 6 | Build a component mass and geometry model | Owner with agent support | Configuration-specific mass, CG and inertia; component sources and uncertainty; comparison to flight-identified quantities |
+| 7 | Compare feasible design variants | Agent | Coupled configuration table, screening and stable rankings; any further sensitivity analysis justified by the question |
+| 8 | Write up results and decide whether to buy | Agent, then owner | Reproduction instructions, failed cases and limitations, report and accurate portfolio/resume; G5 decision |
+| 9 | Characterize the purchased configuration and test predictions | Owner | Installed thrust calibration, independent inertia estimate, sensing/logging qualification, approved staged tests, predicted-versus-measured outcomes |
 
-| Gate | After step | Continue if | Otherwise |
-|---|---|---|---|
-| G1 | 2 | The documented thrust model is close enough for identification to correct | Narrow the scope to attitude dynamics |
-| G2 | 3 | Held-out error is comparable to NanoBench's published system-identification baselines | Revise the model structure first |
-| G3 | 4 | CrazySim runs on an available machine or in CI | Port the firmware logic into the Python simulation |
-| G4 | 5 | The controller recovers across the target envelope in software-in-the-loop | Report a negative result with the reasons |
-| G5 | 8 | A specific prediction is worth testing and the release safety plan is ready | Finish as a model study |
+Run a small phase-4 installation/boot smoke test during phase 1 or 2 to expose
+integration problems early. Complete its scientific stock comparison after
+phase 3. Phase 6 may run alongside identification once the configurations are
+specified. The remaining phases stay sequential.
 
-## After a purchase (not scheduled)
+## Replay and identification
 
-Per-motor thrust on the bench chain (worksheet load-cell and bench rows),
-bifilar-pendulum inertia, then low releases over a net: stock firmware first,
-then the recovery module, compared with the registered prediction.
+- Pin the dataset revision, license, file hashes, firmware constants and
+  metadata. Document every excluded recording. The previously inspected
+  excitation flight belongs to development; identify it before freezing the
+  split. If its identity cannot be recovered, reserve a different flight family
+  and disclose the exposure. Final-test errors are evaluated once the model and
+  processing choices are frozen; inspecting them earlier makes them development.
+- Verify motor order, rotation signs, quaternion order, body/world axes,
+  units, timing and whether the logged command is PWM after battery
+  compensation. Do not compensate a signal twice. Apply a motor-voltage curve
+  only after establishing that input meaning and its applicable range.
+- Compare body specific force with body specific force. For body-to-world R,
+  `a_world = R @ f_body + g_world`; do not compare accelerometer g units directly
+  with world vertical acceleration or use a mean ratio near zero as the score.
+- Report force residuals and roll/pitch/yaw rate predictions. Angular
+  acceleration is a filtered derivative diagnostic with its processing stated.
+  Short open-loop rollouts start from measured state, then propagate without
+  feeding truth back. State how drag models obtain velocity; never feed future
+  truth into a scored prediction.
+- Choose numeric horizons, metrics, filters, fit bounds and practical error
+  tolerances on training/development data before final evaluation. Compare the
+  unmodified documented model, the fitted model and a simple persistence
+  baseline. Compare NanoBench results only when inputs, targets, horizons,
+  splits and normalization match; otherwise label the comparison descriptive.
+- Fix dataset mass to the published measurement. Check excitation and parameter
+  correlations before fitting inertia, thrust gain, torque gain, drag or lag.
+  Angular data can constrain torque/inertia ratios without separating the two.
+  Fit a reduced model or retain external priors when parameters are inseparable.
+  Interpolated telemetry does not provide its nominal grid's full bandwidth;
+  do not infer motor lag below the effective sampling/timing resolution.
+- Fit alignment, scaling and other learned processing on training data. Use
+  whole-flight resampling for intervals and distinguish parameter uncertainty
+  from model error. A bootstrap cannot repair weak excitation or extrapolation.
+  A residual reduction does not prove battery sag, deck airflow or drag caused
+  the discrepancy.
 
-## Not in this version
+## Recovery and design comparison
 
-- Flight tests or any purchase, until step 8.
-- The V995 bench study and fixture.
-- Building the historical designed aircraft (EX1103 motors, Kakute H7).
-- Rotor-out and parachute studies on the Crazyflie.
+Phase 3 specifies the release envelope and a recoverability bound from gravity,
+actuator authority, delay and available height before controller tuning. Track
+height loss, time to controlled flight, horizontal/vertical contact velocity,
+attitude, spin and translational/rotational impact energy. Define any binary
+thresholds and their basis before the final campaign; physical damage limits
+remain unmeasured. Include initial translation, rotation, attitude, motor state,
+battery state and estimator initialization. Ground contact must stop the
+free-flight model or enter a separately justified contact model.
+
+Phase 4 logs the firmware supervisor, arming, estimator and motor path. The
+[CrazySim source](https://github.com/gtfactslab/CrazySim/tree/3ec8b55da4bff887da542a9f314da825460e65be)
+includes external pose and optional sensor models. Confirm the active inputs;
+keep external-pose diagnostic runs separate from onboard-only recovery.
+Account for gyro range, accelerometer limits and optical-flow/range validity
+when tilted. A Python port can support algorithm experiments, but it cannot
+complete the compiled-firmware milestone. Prefer another existing machine or
+supported backend before narrowing that milestone.
+
+Phase 5 preserves an independent disarm path and crash handling. A supervisor
+change must not silently disable all tumble protection. Test uncommanded motion,
+ordinary landing, invalid sensors and link loss as well as intended releases.
+An out-of-tree app is preferred where supported; record any necessary firmware
+patch explicitly. Compare firmware arms under identical sensing and plant
+parameters so safety-policy changes cannot masquerade as controller gains.
+
+Phase 6 keeps the dataset vehicle, stock purchase candidate and proposed
+variants separate. Matching total mass alone cannot validate inertia. CAD and
+identification are independent checks only to the extent their inputs are
+independent. Propeller/motor options are discrete hardware combinations; frame
+size, arm, mass, inertia, clearance and drag must change together.
+
+Phase 7 starts with feasible configurations and paired scenario screening.
+Separate design choices, controller tuning and uncertain physical parameters.
+Use Sobol indices only for justified input distributions and dependencies;
+report convergence and computational cost. The dataset's listed battery
+telemetry is voltage, with no current channel. It cannot by itself identify an
+electrical-energy model or endurance for new batteries. Battery-drain analysis
+may describe the recorded configuration; variant endurance needs additional
+power/capacity evidence and otherwise remains an explicit estimate or is omitted.
+
+## Decision gates
+
+| Gate | When | Evidence needed | If missing |
+| --- | --- | --- | --- |
+| G1 | After replay | Frames, timing, command semantics and usable excitation established; development metrics defined | Repair ingestion; narrow to observable quantities before fitting |
+| G2 | After identification | Final-test errors meet predeclared use tolerances; baseline comparison and identifiable parameter subset reported | Report the miss; revise using development data and obtain a new holdout before another final claim |
+| G3 | Before recovery-controller claims | Compiled firmware runs repeatably with known plant and sensor inputs | Use another available backend/host, or report algorithm-only simulation with the firmware milestone incomplete |
+| G4 | After controller comparison | Held-out paired scenarios show a useful improvement within the stated model and sensing limits | Diagnose the limiting physics/policy and report unsuccessful cases without inventing a hardware verdict |
+| G5 | After write-up | Owner approves an exact configuration, full test budget, a worthwhile registered prediction and a staged safety/measurement plan | Finish this stage as a model study; later hardware work remains an option |
+
+## Cost, safety and publication
+
+Phases 0-8 use public data, open-source tools and existing machines. No hardware,
+subscriptions or paid runners are authorized. Public-repository standard
+[GitHub-hosted runners](https://docs.github.com/en/billing/concepts/product-billing/github-actions)
+have free compute usage; larger runners and excess storage can incur charges.
+Keep jobs bounded, use standard runners, and retain only necessary artifacts.
+
+Design the emergency-stop and sensing requirements during simulation. Before
+phase 9, revise the [safety plan](Safety/README.md) for the actual aircraft and
+facility. A net alone does not qualify the setup. Flow and logging decks are
+options to evaluate for mass, sensor validity and bandwidth, not a committed
+shopping list. Bench calibration and installed instrumentation precede releases.
+
+Every PR updates this roadmap only when the current step or finish line changes.
+The [register guide](Engineering%20Data/README.md) defines input provenance;
+identified values never erase their published sources. Result numbers live in
+machine-readable outputs; README and resume can quote completed results with
+scope. Historical plots stay labeled with their original aircraft. No recovery
+validation or endurance claim is published before its supporting work exists.
+
+Rotor-out, parachute development, the V995 fixture and fabrication of the old
+designed aircraft are outside this version.

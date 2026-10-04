@@ -1,5 +1,8 @@
 # Test Data
 
+Historical work for the earlier aircraft. The Crazyflie study follows the
+[roadmap](../ROADMAP.md); these old tasks and thresholds do not transfer to it.
+
 Do not commit fabricated or manually edited measurement results.
 
 Use this structure:

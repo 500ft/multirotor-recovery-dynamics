@@ -1,5 +1,8 @@
 # Design Report: Protected Throwable Micro-UAV
 
+Historical work for the earlier aircraft. The Crazyflie study follows the
+[roadmap](../ROADMAP.md); these old tasks and thresholds do not transfer to it.
+
 ## Summary
 
 This report defines a small guarded quadcopter platform intended to learn, test, and document the path toward a throwable micro-UAV. The long-term dream is a drone that can be tossed, dropped, or released, detect the airborne event, stabilize in midair, and follow a designated target. The engineering path is staged so the dangerous behavior is delayed until the hardware, controls, sensor logging, and safety systems are proven.

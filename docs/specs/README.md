@@ -1,5 +1,8 @@
 # Specifications
 
+Historical work for the earlier aircraft. The Crazyflie study follows the
+[roadmap](../../ROADMAP.md); these old tasks and thresholds do not transfer to it.
+
 A plain index of the files in this folder. They keep their original wording on
 purpose: a preregistration is only useful if it is unchanged since it was
 frozen, and dated records describe what was true at the time. For the current

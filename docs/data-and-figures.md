@@ -92,7 +92,7 @@ seeds, machinery revisions, and the mechanism kill criterion. The drop-test
 prediction registered before any hardware drop lives in
 [`drop-test-prediction.md`](specs/survivable-set/drop-test-prediction.md). Scope limits and the status of the 2026-09-24 external critique are in [`critique-2026-09-24-status.md`](specs/survivable-set/critique-2026-09-24-status.md) — note that the `policy` field ranks **design packages**, not in-flight actions.
 
-## Bench acquisition (V995 demonstrator, planned)
+## Bench acquisition (V995 demonstrator, retired 2026-10-04)
 
 Wiring and settings: [`docs/bench-acquisition.md`](bench-acquisition.md). Firmware
 ([`Instrumentation/firmware/code.py`](../Instrumentation/firmware/code.py)) and the

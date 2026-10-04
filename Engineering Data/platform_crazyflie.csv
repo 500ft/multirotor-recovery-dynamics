@@ -1,0 +1,27 @@
+id,platform,parameter,value,unit,state,source,locator,notes
+CF-001,cf21plus,takeoff_mass,29,g,MANUFACTURER_SPECIFICATION,https://www.bitcraze.io/products/crazyflie-2-1-plus/,Specifications,Not measured by this project
+CF-002,cf21plus,size_w_h_d,92 x 92 x 29,mm,MANUFACTURER_SPECIFICATION,https://www.bitcraze.io/products/crazyflie-2-1-plus/,Specifications,Motor-to-motor and including motor mount feet
+CF-003,cf21plus,max_payload,15,g,MANUFACTURER_SPECIFICATION,https://www.bitcraze.io/products/crazyflie-2-1-plus/,Specifications,
+CF-004,cf21plus,flight_time_stock_battery,7,min,MANUFACTURER_SPECIFICATION,https://www.bitcraze.io/products/crazyflie-2-1-plus/,Specifications,
+CF-005,cf21plus,main_mcu,STM32F405 (Cortex-M4 168 MHz),,MANUFACTURER_SPECIFICATION,https://www.bitcraze.io/products/crazyflie-2-1-plus/,Specifications,
+CF-006,cf21plus,radio_power_mcu,nRF51822,,MANUFACTURER_SPECIFICATION,https://www.bitcraze.io/products/crazyflie-2-1-plus/,Specifications,
+CF-007,cf21plus,imu,BMI088,,MANUFACTURER_SPECIFICATION,https://www.bitcraze.io/products/crazyflie-2-1-plus/,Specifications,
+CF-008,cf21plus,barometer,BMP388,,MANUFACTURER_SPECIFICATION,https://www.bitcraze.io/products/crazyflie-2-1-plus/,Specifications,
+CF-009,cf21plus,change_from_cf21,upgraded battery and propellers,,MANUFACTURER_SPECIFICATION,https://www.bitcraze.io/products/crazyflie-2-1-plus/,Product description,Bitcraze states up to 15% improved flight performance; part numbers not listed
+CF-010,cf21,takeoff_mass_stock,27,g,PUBLISHED_VALUE,https://arxiv.org/abs/2603.09908,Platform section,NanoBench paper
+CF-011,cf21_nanobench,flying_mass_instrumented,40.85,g,PUBLISHED_MEASUREMENT,https://github.com/syediu/nanobench-iros2026,README Overview,Stock airframe plus retroreflective markers and the wireless-charging deck; use this mass for NanoBench validation
+CF-012,cf21_nanobench,battery,250 mAh single-cell LiPo,,PUBLISHED_VALUE,https://arxiv.org/abs/2603.09908,Platform section,
+CF-013,cf21_nanobench,motors,7 x 16 mm coreless DC,,PUBLISHED_VALUE,https://arxiv.org/abs/2603.09908,Platform section,
+CF-014,cf21_nanobench,propeller_diameter,46,mm,PUBLISHED_VALUE,https://arxiv.org/abs/2603.09908,Platform section,Paper describes four-blade propellers; confirm blade count before use
+CF-015,cf21_nanobench,combined_peak_thrust_at_4v2,0.6,N,PUBLISHED_VALUE,https://arxiv.org/abs/2603.09908,Platform section,Paper says approximately; thrust-to-weight roughly 2.2 at 27 g
+CF-016,cf2x_model,mass,0.027,kg,LITERATURE_MODEL,https://github.com/utiasDSL/gym-pybullet-drones/blob/7ebad1ecabd2/gym_pybullet_drones/assets/cf2x.urdf,cf2x.urdf properties and inertial,Starting value for the simulation only
+CF-017,cf2x_model,arm,0.0397,m,LITERATURE_MODEL,https://github.com/utiasDSL/gym-pybullet-drones/blob/7ebad1ecabd2/gym_pybullet_drones/assets/cf2x.urdf,cf2x.urdf properties,
+CF-018,cf2x_model,kf,3.16e-10,N per rpm^2,LITERATURE_MODEL,https://github.com/utiasDSL/gym-pybullet-drones/blob/7ebad1ecabd2/gym_pybullet_drones/assets/cf2x.urdf,cf2x.urdf properties,Rotor speed in revolutions per minute as used by gym-pybullet-drones
+CF-019,cf2x_model,km,7.94e-12,N m per rpm^2,LITERATURE_MODEL,https://github.com/utiasDSL/gym-pybullet-drones/blob/7ebad1ecabd2/gym_pybullet_drones/assets/cf2x.urdf,cf2x.urdf properties,
+CF-020,cf2x_model,ixx,1.4e-5,kg m^2,LITERATURE_MODEL,https://github.com/utiasDSL/gym-pybullet-drones/blob/7ebad1ecabd2/gym_pybullet_drones/assets/cf2x.urdf,cf2x.urdf inertial,
+CF-021,cf2x_model,iyy,1.4e-5,kg m^2,LITERATURE_MODEL,https://github.com/utiasDSL/gym-pybullet-drones/blob/7ebad1ecabd2/gym_pybullet_drones/assets/cf2x.urdf,cf2x.urdf inertial,
+CF-022,cf2x_model,izz,2.17e-5,kg m^2,LITERATURE_MODEL,https://github.com/utiasDSL/gym-pybullet-drones/blob/7ebad1ecabd2/gym_pybullet_drones/assets/cf2x.urdf,cf2x.urdf inertial,
+CF-023,cf2x_model,thrust_to_weight,2.25,,LITERATURE_MODEL,https://github.com/utiasDSL/gym-pybullet-drones/blob/7ebad1ecabd2/gym_pybullet_drones/assets/cf2x.urdf,cf2x.urdf properties,
+CF-024,cf2x_model,prop_radius,0.0231348,m,LITERATURE_MODEL,https://github.com/utiasDSL/gym-pybullet-drones/blob/7ebad1ecabd2/gym_pybullet_drones/assets/cf2x.urdf,cf2x.urdf properties,The file cites Förster 2015 (ETH research collection 20.500.11850/214143) and arXiv 1608.05786 as origins
+CF-025,cf2x_bitcraze_2015,thrust_vs_rpm_fit,1.0942e-07*rpm^2 - 2.1059e-04*rpm + 1.5417e-01,g,PUBLISHED_VALUE,https://www.bitcraze.io/documentation/repository/crazyflie-firmware/master/functional-areas/pwm-to-thrust/,RPM to thrust,2015 bench with a power supply at 3.30-4.01 V; the page does not say whether thrust is per motor or total (OQ-019)
+CF-026,cf2x_bitcraze_2015,max_thrust_total,58,g,PUBLISHED_VALUE,https://www.bitcraze.io/documentation/repository/crazyflie-firmware/master/functional-areas/pwm-to-thrust/,Measurements,About 58 g at 93.75% PWM

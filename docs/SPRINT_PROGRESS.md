@@ -5,6 +5,10 @@ plan is in the [roadmap](../ROADMAP.md). The earlier, longer version of this
 log is kept at
 [commit 246d163](https://github.com/500ft/multirotor-recovery-dynamics/blob/246d163dcd8ce25242baee585e6ea1d05a53e7f4/docs/SPRINT_PROGRESS.md).
 
+## Week of 2026-10-04
+
+- **10-04** Platform changed to the Bitcraze Crazyflie (owner decision). Added the documented parameter register `Engineering Data/platform_crazyflie.csv`; retired the V995 (unmarked chips; OQ-011 closed); new finish line uses the public NanoBench flights and CrazySim; OQ-018 to OQ-021 opened.
+
 ## Week of 2026-09-28
 
 - **09-30** OQ-016 resolved with a new registered comparison (scenario 02):

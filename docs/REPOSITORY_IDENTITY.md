@@ -38,8 +38,8 @@ does not replace the authoritative protocol or task ledger.
 The README leads with the simulated recovery envelope,
 [`Figures/release_recovery_envelope.png`](../Figures/release_recovery_envelope.png).
 It is a simulation result with estimated inputs; its generator and inputs are
-in the [figure guide](data-and-figures.md). Once the V995 has been measured, a
-plot of measured thrust or a logged release should replace it.
+in the [figure guide](data-and-figures.md). Once the Crazyflie model has
+been checked against real flights, a plot of that comparison should replace it.
 
 [`media/project-overview.svg`](media/project-overview.svg) is an editable
 diagram of the project. It contains no measured values. Each stage has a text

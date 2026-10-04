@@ -329,6 +329,6 @@ per-trial outcomes are in [`trials.jsonl`](../Data/scenario-02/trials.jsonl).
 
 The cases were selected using earlier simulation results and then evaluated
 with fresh draws. The conclusions apply to the historical model and its assumed
-landing limits. V995 measurements remain the next step in the
-[roadmap](../ROADMAP.md). The original `two_adjacent` impact-speed results remain
+landing limits. The next step in the [roadmap](../ROADMAP.md) is the
+Crazyflie model. The original `two_adjacent` impact-speed results remain
 in the earlier diagnostic; no additional study of that class is scheduled.

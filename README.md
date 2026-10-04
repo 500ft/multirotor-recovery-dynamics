@@ -2,8 +2,10 @@
 
 Can a small drone that is thrown, dropped or loses a motor get itself level
 again before it hits the ground? This repository models that recovery in
-simulation. The owner has yet to choose whether to close the simulation study
-or continue with bench characterization of the stock Veeniix V995 micro-quad.
+simulation. The platform is now the Bitcraze Crazyflie, a 27–29 g nano-quad
+whose parameters and firmware are published and whose real flights are in a
+public motion-capture dataset, so the model can be checked against real flights
+before any hardware is bought.
 
 [![CI](https://github.com/500ft/multirotor-recovery-dynamics/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/500ft/multirotor-recovery-dynamics/actions/workflows/ci.yml)
 ![Evidence: simulation and nominal CAD](https://img.shields.io/badge/evidence-simulation_%2B_nominal_CAD-475569)
@@ -27,14 +29,20 @@ Monte Carlo sweeps over those variations and judges each case against a
 declared landing criterion.
 
 The historical simulated aircraft was never built. Its mass, propulsion and
-other inputs came from estimates and catalog specifications. The available
-physical aircraft is a stock V995 with its original board and transmitter. It
-cannot run the simulated controller: no usable command or firmware interface
-has been established. Its flight-ready mass still needs to be weighed.
+other inputs came from estimates and catalog specifications.
+
+The platform is now the Crazyflie. Its documented values, each with its source,
+are in the [platform register](Engineering%20Data/platform_crazyflie.csv). The
+public [NanoBench dataset](https://github.com/syediu/nanobench-iros2026) holds
+172 motion-capture flights of a Crazyflie 2.1, flown at a measured 40.85 g with
+markers and a charging deck. The stock V995 is retired: its main chips are
+unmarked and no programming route was found.
 
 ## Simulation results
 
-All of these use estimated inputs. None has been checked against hardware.
+These results are for the historical designed aircraft (about 130–165 g, never
+built). All of them use estimated inputs, and none has been checked against
+hardware. They are not Crazyflie results.
 
 | Question | Result |
 | --- | --- |
@@ -80,13 +88,12 @@ rotors improves by 9 to 16 points and reduced authority on all motors by 38 to
 - **Bench chain.** A QT Py RP2040 reads a load cell through an NAU7802
   amplifier, plus an INA260 power monitor and an LIS3DH accelerometer. Firmware
   and host capture code are written and tested on synthetic serial output. They
-  have not run on hardware yet. [Wiring and bring-up](docs/bench-acquisition.md).
-- **CAD.** The load-cell end adapter is generated and checked. The cradle that
-  holds the whole V995 on the load cell, and the base plate under it, have
-  working generators waiting on the [measurement worksheet](evidence/v995-fixture-measurements/README.md).
-  It has 15 load-cell rows, 7 aircraft rows and 5 bench rows. Those readings
-  supply five pending CAD parameters and confirm the delivered cell's mounting
-  pattern. [V995 fixture](cad/v995/README.md).
+  have not run on hardware yet. The chain is kept for per-motor thrust
+  measurements if a Crazyflie is bought. [Wiring and bring-up](docs/bench-acquisition.md).
+- **Retired V995 fixture.** The [V995 cradle generators](cad/v995/README.md) and
+  [measurement worksheet](evidence/v995-fixture-measurements/README.md) are kept
+  as history. The worksheet's 15 load-cell rows and 5 bench rows still describe
+  the bench.
 
 ## Quick start
 
@@ -108,13 +115,12 @@ regeneration and the pinned CadQuery environment.
 
 ## What's next
 
-The owner must choose between closing the simulation study and V995-only bench
-characterization (D3). If bench work is selected, the
-[27-row measurement worksheet](evidence/v995-fixture-measurements/README.md)
-remains its unpowered prerequisite. It covers the delivered load cell, aircraft
-mass and geometry, and bench dimensions. See the [roadmap](ROADMAP.md) for the
-pending scope choice. Logger development, release trials and a new aircraft
-are not authorized by this correction.
+Replay NanoBench's recorded motor commands through the existing rigid-body
+model with the documented parameters, and report the open-loop error per
+flight. Then identify the parameters on training flights and check them on
+held-out flights. The [roadmap](ROADMAP.md) has the full sequence, ending with
+a recovery controller tested on the real firmware in simulation and a design
+study. Buying a Crazyflie for flight tests is a later decision.
 
 ## Safety and limits
 
@@ -124,6 +130,9 @@ and [operating constraints](Safety/README.md) first.
 
 - Mass properties, propulsion, guard response and recovery have not been
   measured. A passing test or a good simulated sweep does not change that.
+- NanoBench covers hover, excitation and trajectory tracking, with no tumbling.
+  A model validated on it is validated in normal flight; recovery results stay
+  model predictions until flown.
 
 ## Documentation
 

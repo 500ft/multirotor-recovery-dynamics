@@ -10,7 +10,8 @@ the plan. This guide is for reading the work quickly or rerunning it.
 | Two minutes | [README results](../README.md#simulation-results), then [current results](../Analysis/current-results.md) |
 | Half an hour | The [survivable-set design](specs/survivable-set/design.md), then one figure traced through [data and figures](data-and-figures.md) |
 | A review to do | The [review index](REVIEW_READY.md) |
-| Hardware to set up | [V995 fixture notes](../cad/v995/README.md), the [measurement worksheet](../evidence/v995-fixture-measurements/README.md) and the [bench wiring and bring-up](bench-acquisition.md) |
+| The current platform | The [Crazyflie platform register](../Engineering%20Data/platform_crazyflie.csv) and the [roadmap](../ROADMAP.md) |
+| Bench hardware | The [bench wiring and bring-up](bench-acquisition.md); the retired [V995 fixture notes](../cad/v995/README.md) are history |
 
 ## Two vehicles, kept apart
 
@@ -19,10 +20,10 @@ flight controller, 2S battery). It was never built. Its numbers live in
 `Engineering Data/`, `cad/bench/` and the analysis code, with its own gates
 (7.0 V, six motors, 0.020 N·m).
 
-The physical platform since 2026-09-27 is a stock Veeniix V995, about 50 g.
-It has its own register in `cad/v995/` and no values are copied from the
-designed vehicle. Its first measured values will go into a new
-`Engineering Data/platform_v995.csv`.
+The platform since 2026-10-04 is the Bitcraze Crazyflie. Its documented values,
+each with its source, are in `Engineering Data/platform_crazyflie.csv`, and no
+values are copied from the designed vehicle. The stock V995 (2026-09-27 to
+2026-10-04) is retired; its register in `cad/v995/` is kept as history.
 
 ## Software checks — Python 3.11
 

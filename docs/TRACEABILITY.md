@@ -55,7 +55,10 @@ repository.**
 | Empirical 5th percentile, n=6 | audit Tier C | — | **`bare`**; is a minimum, not a confidence bound |
 | Bounds are conditional sampling bounds | [`design.md` §6c](specs/survivable-set/design.md) | — | `derived` |
 
-## Bench (V995 demonstrator)
+## Bench (V995 demonstrator, retired 2026-10-04)
+
+The platform is now the Bitcraze Crazyflie ([roadmap](../ROADMAP.md)). Rows below are kept as history.
+
 
 | Decision | Reasoning lives in | Validation | Status |
 | --- | --- | --- | --- |

@@ -31,11 +31,13 @@ force/moment arithmetic. It verifies an explicit data-license grant and exposes
 Euler-unit and voltage-processing description issues. The original development
 result and blind split remain unchanged.
 
-G1 remains incomplete. One next task is to qualify motor-command/gyro timing for
-the exposed development flight from public collection artifacts, recording which
-raw timestamps, alignment offsets and build settings can be recovered. Unknown
-instrumented inertia and actuator configuration still limit later identification.
-No fitting, recovery simulation or SITL work is completed by this audit.
+The [executed timing qualification](docs/nanobench-g1.md) could not recover raw
+motor/gyro block times, applied offsets or deployed build settings from the
+checked public sources. It reproduces the exposed excerpt's audit and stops
+before fitting. G1 remains incomplete; G2 has no final-test evaluation.
+The IDSIA alternative has processed motor-speed fields, but its reuse terms and
+causal timing need clarification. Owner action: review the
+[unsent license/data request](docs/idsia-data-request.txt) for possible outreach.
 
 [Open questions](OPEN_QUESTIONS.md) track unresolved inputs. Historical aircraft
 results remain in [current-results](Analysis/current-results.md#historical-designed-aircraft).
@@ -49,7 +51,7 @@ estimating the larger campaigns. Agent work uses separate result PRs.
 | Phase | Work | Owner | Completion evidence |
 | --- | --- | --- | --- |
 | 0 | Adopt the Crazyflie platform; retain historical work; source parameters | Owner decision, agent implementation | Complete; inputs distinguish configurations and evidence types |
-| 1 | Pin NanoBench and replay documented motor models | Agent | Replay complete under documented assumptions; [results and reproduction](docs/nanobench-baseline.md), frozen splits, acquisition hashes, source checks and development rollouts. G1 remains incomplete as stated above |
+| 1 | Pin NanoBench and replay documented motor models | Agent | Replay and [public-source timing qualification](docs/nanobench-g1.md) executed; frozen splits and original development results preserved. Collection timing/configuration remains unresolved, so G1 is incomplete |
 | 2 | Identify only parameters the data can distinguish | Agent | Training-only fits; development checks; untouched final-test metrics; identifiability and residual analysis; comparison on the same protocol |
 | 3 | Transfer the checked model to recovery simulation | Agent | Motor and sensor limits, estimator and release-state assumptions, timestep check, and continuous contact/recovery metrics |
 | 4 | Run stock firmware in CrazySim | Agent | Pinned firmware/backend/configuration; boot, hover and release logs; motor outputs and supervisor transitions; intended sensing verified |

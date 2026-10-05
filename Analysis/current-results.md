@@ -14,6 +14,10 @@ incomplete for dynamic identification.
 The [selected-excerpt audit](../docs/nanobench-baseline.md#audit-of-the-exposed-development-excerpt)
 reproduces the mismatch without establishing a replay implementation defect.
 The original result remains unchanged.
+The [public-source timing qualification](../docs/nanobench-g1.md) reproduces that
+audit and records the missing collection timing/configuration. Conditional
+identification stopped before fitting. The alternative-data inspection and
+unsent request are recorded with that result.
 
 ## Historical designed aircraft
 

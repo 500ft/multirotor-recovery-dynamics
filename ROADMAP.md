@@ -2,8 +2,9 @@
 
 ## Finish line
 
-The owner selected the Crazyflie family and a simulation-first study. No
-hardware or paid compute is purchased before G5. The project produces:
+The owner selected the Crazyflie family and a public-data-first investigation,
+with simulation before physical validation. No hardware or paid compute is
+purchased before G5. The project produces:
 
 1. A dynamics model checked on reserved whole NanoBench flights, with errors
    reported by flight, axis and prediction horizon.
@@ -19,11 +20,22 @@ criterion does not establish absence of physical damage.
 
 ## Current step
 
-Phase 0 records the platform decision, retires the V995 work and supplies the
-[parameter register](Engineering%20Data/platform_crazyflie.csv). The next task
-is phase 1: make a reproducible baseline replay and freeze whole-flight splits.
-There is no committed Crazyflie replay result yet. The owner's exploratory
-single-flight comparison is development evidence, not a held-out result.
+Phase 1 has an executed [NanoBench baseline replay](docs/nanobench-baseline.md),
+frozen whole-flight assignments, documented source checks and development
+errors. The documented models accumulate substantial angular-motion error
+relative to persistence. Final-test predictions remain unexamined.
+
+The [selected-excerpt audit](docs/nanobench-baseline.md#audit-of-the-exposed-development-excerpt)
+reproduces the short-rate mismatch and finds no implementation defect in the
+force/moment arithmetic. It verifies an explicit data-license grant and exposes
+Euler-unit and voltage-processing description issues. The original development
+result and blind split remain unchanged.
+
+G1 remains incomplete. One next task is to qualify motor-command/gyro timing for
+the exposed development flight from public collection artifacts, recording which
+raw timestamps, alignment offsets and build settings can be recovered. Unknown
+instrumented inertia and actuator configuration still limit later identification.
+No fitting, recovery simulation or SITL work is completed by this audit.
 
 [Open questions](OPEN_QUESTIONS.md) track unresolved inputs. Historical aircraft
 results remain in [current-results](Analysis/current-results.md#historical-designed-aircraft).
@@ -36,8 +48,8 @@ estimating the larger campaigns. Agent work uses separate result PRs.
 
 | Phase | Work | Owner | Completion evidence |
 | --- | --- | --- | --- |
-| 0 | Adopt the Crazyflie platform; retain historical work; source parameters | Owner decision, agent implementation | This PR merged; inputs distinguish configurations and evidence types |
-| 1 | Pin NanoBench and replay documented motor models | Agent | Split manifest, acquisition command and hashes, source attribution, frame/command checks, per-flight baseline errors and short open-loop predictions |
+| 0 | Adopt the Crazyflie platform; retain historical work; source parameters | Owner decision, agent implementation | Complete; inputs distinguish configurations and evidence types |
+| 1 | Pin NanoBench and replay documented motor models | Agent | Replay complete under documented assumptions; [results and reproduction](docs/nanobench-baseline.md), frozen splits, acquisition hashes, source checks and development rollouts. G1 remains incomplete as stated above |
 | 2 | Identify only parameters the data can distinguish | Agent | Training-only fits; development checks; untouched final-test metrics; identifiability and residual analysis; comparison on the same protocol |
 | 3 | Transfer the checked model to recovery simulation | Agent | Motor and sensor limits, estimator and release-state assumptions, timestep check, and continuous contact/recovery metrics |
 | 4 | Run stock firmware in CrazySim | Agent | Pinned firmware/backend/configuration; boot, hover and release logs; motor outputs and supervisor transitions; intended sensing verified |

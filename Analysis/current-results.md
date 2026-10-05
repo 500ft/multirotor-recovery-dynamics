@@ -2,9 +2,18 @@
 
 ## Crazyflie
 
-The platform decision and [documented inputs](../Engineering%20Data/platform_crazyflie.csv)
-are recorded. No Crazyflie replay, identification or recovery result has been
-committed. The next result is the [NanoBench baseline replay](../ROADMAP.md#replay-and-identification).
+The [NanoBench baseline replay](../docs/nanobench-baseline.md) is executed on
+development flights. Documented motor models accumulate substantial angular-rate
+error relative to persistence. [Per-flight error tables](../Data/nanobench-baseline/development-errors.csv)
+and the [run record](../Data/nanobench-baseline/development-run.json) contain the
+scores, exclusions and runtime; the [figure](../Figures/nanobench-baseline.png)
+summarizes horizon-dependent error. Source, configuration and timing limits are
+listed with the replay. Final-test predictions remain unexamined, and no
+parameters were fitted. [G1 in the roadmap](../ROADMAP.md#current-step) remains
+incomplete for dynamic identification.
+The [selected-excerpt audit](../docs/nanobench-baseline.md#audit-of-the-exposed-development-excerpt)
+reproduces the mismatch without establishing a replay implementation defect.
+The original result remains unchanged.
 
 ## Historical designed aircraft
 

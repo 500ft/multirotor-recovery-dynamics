@@ -1,11 +1,11 @@
 # Multirotor Recovery Dynamics
 
-A simulation-first study of Crazyflie tumble recovery. The next experiment
-replays recorded motor commands from public flights, checks the dynamics model,
-and establishes what can be identified before developing a recovery controller.
+A simulation-first study of Crazyflie tumble recovery. A baseline replay of
+public flights shows substantial angular-rate error in documented motor models.
+The next step establishes what can be identified before fitting a model.
 
 [![CI](https://github.com/500ft/multirotor-recovery-dynamics/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/500ft/multirotor-recovery-dynamics/actions/workflows/ci.yml)
-![Evidence: documented inputs; replay pending](https://img.shields.io/badge/evidence-documented_inputs%3B_replay_pending-475569)
+![Evidence: development replay](https://img.shields.io/badge/evidence-development_replay-475569)
 [![License: MIT](https://img.shields.io/badge/license-MIT-0f766e)](LICENSE)
 
 [Current work](#current-work) · [Roadmap](ROADMAP.md) ·
@@ -20,10 +20,12 @@ model defaults. The [register guide](Engineering%20Data/README.md) explains the
 firmware's motor-voltage thrust curves and command limits.
 
 [NanoBench](https://github.com/syediu/nanobench-iros2026) supplies recorded motor
-commands, motion-capture state and onboard telemetry. The replay will check
-force and angular dynamics, then short open-loop predictions. Parameters will
-be fitted on training flights and evaluated on reserved whole flights.
-No Crazyflie prediction error or recovery result is released yet.
+commands, motion-capture state and onboard telemetry. The
+[executed replay](docs/nanobench-baseline.md) compares documented force and angular
+dynamics, short open-loop predictions and persistence on development flights.
+[Per-flight errors](Data/nanobench-baseline/development-errors.csv) and the
+[result figure](Figures/nanobench-baseline.png) report the outcome. Whole-flight
+splits were committed before comparison; final-test predictions remain unexamined.
 
 After identification, the study will compare stock and recovery firmware in
 CrazySim and examine feasible design variants. No purchase is authorized before
@@ -43,7 +45,7 @@ Historical results are retained here for reproduction.
 
 These results are for the historical designed aircraft (about 130–165 g, never
 built). All of them use estimated inputs, and none has been checked against
-hardware. The current platform has no committed replay result yet.
+hardware.
 
 | Question | Result |
 | --- | --- |
@@ -116,9 +118,10 @@ regeneration and the pinned CadQuery environment.
 
 ## What's next
 
-The [roadmap](ROADMAP.md) defines the replay task, identification checks,
-compiled-firmware comparison and later purchase decision. The first deliverable
-is a reproducible baseline with a frozen split and per-flight error tables.
+The [roadmap](ROADMAP.md#current-step) leaves G1 incomplete for dynamic
+identification. Resolve the replay's configuration and timing limits and assess
+usable excitation before selecting identifiable parameters and acceptance
+tolerances. Compiled-firmware comparison and a purchase decision remain later work.
 
 ## Safety
 

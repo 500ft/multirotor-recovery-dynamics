@@ -1,10 +1,10 @@
 # Test Safety and Release-Rig Plan
 
 The existing rig details and hazard register describe the historical aircraft.
-For the Crazyflie, retain the stop/containment principles below and prepare a
-configuration-specific procedure before any powered work. Simulation phases
-already require an independent disarm path and explicit supervisor behavior;
-see the [roadmap](../ROADMAP.md#recovery-and-design-comparison).
+For the eventual test aircraft, review the stop/containment principles below
+and prepare a configuration-specific procedure before any powered work.
+Aircraft, access and safety responsibility remain pending; see the
+[roadmap](../ROADMAP.md#cost-safety-and-publication).
 
 No powered release testing is authorized by this repository. It remains blocked until the physical setup and all safety gates are reviewed and approved.
 

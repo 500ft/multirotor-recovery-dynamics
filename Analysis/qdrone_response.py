@@ -91,7 +91,7 @@ def plot(data, result, path):
     axes[0].step(t, data[:, 1], where='post', color='#777777', label='Recorded reference')
     axes[0].plot(t, data[:, 2], color='#0072B2', label='Observed altitude', linewidth=.8)
     axes[0].set(ylabel='Altitude (m)', xlabel='Recorded time (s)')
-    axes[0].legend(loc='upper right')
+    axes[0].legend(loc='lower left', bbox_to_anchor=(0, 1.01), ncol=2)
     axes[1].plot(t, data[:, 3], color='#009E73', linewidth=.8)
     axes[1].set(ylabel='Battery voltage (V)', xlabel='Recorded time (s)')
     for direction, marker in [('up', '^'), ('down', 'v')]:
@@ -102,7 +102,7 @@ def plot(data, result, path):
             marker=marker, s=65, edgecolors='black', linewidths=.4, label=direction.capitalize())
     axes[2].set(xlabel='Last recorded battery voltage before command (V)',
                 ylabel=f"Altitude RMSE over {result['protocol_horizon_s']:g} s (m)")
-    axes[2].legend(title='Reference change')
+    axes[2].legend(title='Reference change', loc='lower left', bbox_to_anchor=(0, 1.01), ncol=2)
     fig.colorbar(artist, ax=axes[2], label='Command time (s)')
     for ax in axes:
         ax.grid(alpha=.2)
@@ -133,7 +133,7 @@ def run(cache, output, figure, fetch=False):
         source_record='Data/qdrone-response/sources.json', protocol_horizon_s=protocol['horizon_s'],
         selected_recordings=1, independently_identified_packs=None, archive_independent_run_count=None,
         independence='Repeated commands share one discharge. Archive figure panels do not establish independent runs or pack identities.',
-        endpoint='Continuous altitude tracking under original MPC. Source termination is a battery safety threshold, not a labeled recovery failure.',
+        endpoint='Continuous altitude tracking under original MPC. Source describes a voltage-based stop rule; recording end alone is not a labeled recovery failure.',
         warning_performance='Not evaluated; no independent recovery outcomes or fitted predictor.',
         runtime_s=time.perf_counter()-started)
     output.parent.mkdir(parents=True, exist_ok=True)

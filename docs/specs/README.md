@@ -1,6 +1,6 @@
 # Specifications
 
-Historical work for the earlier aircraft. The Crazyflie study follows the
+Historical work for the earlier aircraft. The current warning study follows the
 [roadmap](../../ROADMAP.md); these old tasks and thresholds do not transfer to it.
 
 A plain index of the files in this folder. They keep their original wording on

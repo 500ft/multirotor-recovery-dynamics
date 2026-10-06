@@ -1,40 +1,47 @@
 # Open questions
 
-The [roadmap](ROADMAP.md) is the only execution plan. The owner selected the
-Crazyflie family, with no purchase before G5. Each question closes with evidence.
+The [roadmap](ROADMAP.md) is the only execution plan. The
+[owner decision](docs/decisions/maneuver-warning-v2.md) adopts the warning question
+and public component-data work; physical choices remain open.
 
-## Active Crazyflie questions
+## Active evidence questions
 
-| ID | Question | Decision Needed From | Required Evidence | Status |
-|---|---|---|---|---|
-| OQ-018 | Which NanoBench dynamics parameters can the available excitation and effective sample rates identify separately? | Agent after G1 | Reduced-model fits and identifiability checks after source qualification; published mass stays fixed; final-test evaluation requires a later frozen task | BLOCKED at G1; no fitted model or final-test result |
-| OQ-019 | Which motor-command meaning, propeller configuration and thrust mapping apply to NanoBench? | Agent | Collection firmware/log-path trace, consistent per-motor units and motor ordering, development residuals using the sourced candidate curves | OPEN; [source audit](docs/nanobench-baseline.md#audit-of-the-exposed-development-excerpt) traces post-compensation ratios, but deployed settings and installed propellers remain unresolved |
-| OQ-020 | What evidence tests tumble recovery and transfer to a purchased aircraft? | Owner at G5 | Exact configuration, registered prediction, independent observation and approved staged test plan | OPEN; ordinary-flight agreement cannot settle this |
-| OQ-021 | How do the stock supervisor and estimator behave during release, and which changes are needed? | Agent | Compiled-firmware logs and pinned code/configuration; separate stock, supervisor-only and recovery-controller comparisons | OPEN |
-| OQ-022 | Can recorded timing, interpolation and input excitation resolve motor lag and yaw torque independently of inertia? | Source evidence, then agent | Raw block timestamps, applied offsets and deployed configuration before causal dynamic identification | BLOCKED; [public-source qualification](docs/nanobench-g1.md) did not recover the required timing/configuration |
-| OQ-023 | Which sensing and logging configuration supports an eventual physical recovery test? | Owner and agent | Sensor validity through tilt/free fall, external-pose dependence, mass and logging bandwidth; assessed in simulation before G5 | OPEN |
+| ID | Question | Status and closure evidence |
+| --- | --- | --- |
+| MR-D1 | Can the selected public file support a continuous response summary with known units, controller and permission? | CLOSED for the selected QDrone2 development recording; [executed report](docs/qdrone-response.md) |
+| MR-D2 | Are independent pack/run identities and maneuver completion outcomes available? | OPEN; selected QDrone2 recording has repeated commands and no recovery labels; closure needs independent labeled outcomes |
+| MR-D3 | Does the warning improve on voltage, sag-history and load baselines under withheld conditions? | UNTESTED; requires qualified outcomes, frozen whole-pack splits, false-alarm burden and useful lead-time criterion |
+| MR-D4 | Can NeuroBEM be reused, and what does its timing support? | OPEN; processed motor speed is not maximum authority; no derived analysis before permission/timing qualification |
 
 ## Pending owner decisions
 
-The external switch handoff proposes warnings of failed upset recovery within
-an available height, tested against independent maneuver outcomes under withheld
-pack, payload and guard conditions. These are unanswered choices, not an adopted
-replacement roadmap. The existing finish line and G5 restriction remain active.
-
 | ID | Owner choice | Status |
 | --- | --- | --- |
-| M1 | Adopt the proposed warning-study finish line, including useful warning time at matched false-alarm burden? | PENDING; documentation authorization supplies no answer |
-| M2 | Change purchase timing or provide lab access for physical outcomes before the existing G5? | PENDING; no purchase or campaign authorization |
-| M3 | Specify the recovery maneuver, available height and independent completion criterion? | PENDING |
-| M4 | Identify the test facility and responsible safety owner? | PENDING |
+| M1 / MR-1 | Adopt the maneuver-warning question and first public component-data task? | ADOPTED for software scope in the [owner decision](docs/decisions/maneuver-warning-v2.md) |
+| M2 | Provide physical access/funding direction and select the actual aircraft; change purchase timing before existing G5? | PENDING; no purchase, aircraft switch or physical campaign authorization |
+| M3 | Specify recovery maneuver, available height and independent completion criterion? | PENDING |
+| M4 | Identify test facility and responsible safety owner? | PENDING |
+
+## Superseded Crazyflie execution questions
+
+These questions leave the active queue with the [successor decision](docs/decisions/maneuver-warning-v2.md).
+Their scientific gaps remain unresolved; superseded does not mean answered.
+
+| ID | Preserved question | Status |
+| --- | --- | --- |
+| OQ-018 | Which dynamics parameters can NanoBench identify? | SUPERSEDED as active work; G1 incomplete, no fitted model or final-test result |
+| OQ-019 | Which command meaning, propellers and thrust mapping apply? | SUPERSEDED as active work; deployed settings/configuration unresolved in [source audit](docs/nanobench-baseline.md#audit-of-the-exposed-development-excerpt) |
+| OQ-020 | What evidence tests recovery transfer to a purchased Crazyflie? | SUPERSEDED; actual warning-study aircraft is pending M2 |
+| OQ-021 | How do the stock supervisor and estimator behave during release? | SUPERSEDED; compiled-firmware comparison remains unexecuted |
+| OQ-022 | Can timing resolve lag and yaw torque separately? | SUPERSEDED as active work; [G1 timing/configuration gaps](docs/nanobench-g1.md) remain |
+| OQ-023 | Which sensing/logging configuration supports physical recovery? | SUPERSEDED; must be reconsidered for M2–M4 |
 
 ## Historical and deferred questions
 
 The rows below preserve earlier decisions and unresolved findings. Their old
 OPEN labels do not schedule work on the retired designed aircraft or V995.
-Facility and containment questions are reconsidered for the actual Crazyflie
-configuration before physical tests. Load-cell questions reopen at that point;
-no previous V995 target becomes a per-motor Crazyflie requirement.
+Facility, containment and load-cell questions require review for the eventual
+physical configuration. No prior target transfers automatically.
 
 | ID | Question | Decision Needed From | Required Evidence | Status |
 |---|---|---|---|---|

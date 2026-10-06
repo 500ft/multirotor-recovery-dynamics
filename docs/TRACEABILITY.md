@@ -1,12 +1,15 @@
 # Traceability index
 
-Current Crazyflie decisions are the owner platform selection, documented
-[parameter register](../Engineering%20Data/platform_crazyflie.csv) and the
-[roadmap](../ROADMAP.md). Current result evidence is in the
-[NanoBench replay](nanobench-baseline.md) and [timing qualification](nanobench-g1.md).
-The proposed warning-study [owner decisions](../OPEN_QUESTIONS.md#pending-owner-decisions)
-remain unanswered. The rows below preserve the historical vehicle audit;
-its gates are not Crazyflie acceptance criteria.
+The [successor decision](decisions/maneuver-warning-v2.md) adopts the warning
+question and public component-data task. The [QDrone2 report](qdrone-response.md)
+links the source/license, registered protocol, executed result and figure.
+Physical [owner decisions](../OPEN_QUESTIONS.md#pending-owner-decisions) remain
+unanswered. The [roadmap](../ROADMAP.md) is the active plan.
+
+The [history index](history/README.md) preserves the NanoBench replay,
+configuration register and unresolved timing qualification. The rows below
+preserve the older designed-vehicle audit; its gates do not select or validate
+the warning-study aircraft.
 
 One row per consequential decision: what it is, what requires it, where its
 reasoning lives, which canonical inputs it depends on, how it will be validated,

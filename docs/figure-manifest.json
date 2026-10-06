@@ -1,7 +1,25 @@
 {
   "schema_version": "1.0",
-  "project": "Guarded Micro-UAV",
+  "project": "Multirotor Recovery Dynamics",
   "figures": [
+    {
+      "id": "qdrone-development-response",
+      "evidence_type": "continuous response from public development observations",
+      "scope": "QDrone2 original MPC, selected discharge; no recovery labels",
+      "generator": "Analysis/qdrone_response.py",
+      "command": "python -m Analysis.qdrone_response --fetch --cache /tmp/multirotor-qdrone-source --output Data/qdrone-response/results.json --figure Figures/qdrone-development-response.png",
+      "inputs": [
+        "Data/qdrone-response/sources.json",
+        "Data/qdrone-response/protocol.json"
+      ],
+      "outputs": [
+        "Figures/qdrone-development-response.png"
+      ],
+      "data_outputs": [
+        "Data/qdrone-response/results.json"
+      ],
+      "attribution": "Borbolla-Burillo et al., Experimental Setup and Experimental Results, doi:10.5281/zenodo.19464105, CC BY 4.0; metrics and plot derived here"
+    },
     {
       "id": "release-recovery-simulation",
       "evidence_type": "deterministic 6-DoF simulation",
@@ -17,32 +35,50 @@
         "Figures/release_recovery_envelope.png",
         "Figures/release_recovery_envelope.pdf"
       ],
-      "data_outputs": ["Data/release_recovery_results.json"],
-      "notes": "Uses encoded parameter tiers and placeholder or catalog-derived values; it is not based on assembled-hardware measurements."
+      "data_outputs": [
+        "Data/release_recovery_results.json"
+      ],
+      "notes": "Uses encoded parameter tiers and placeholder or catalog-derived values; it is not based on assembled-hardware measurements.",
+      "scope": "Historical designed aircraft"
     },
     {
       "id": "guard-load-path",
       "evidence_type": "authored explanatory diagram",
       "generator": null,
       "command": null,
-      "inputs": ["Design Report/README.md"],
-      "outputs": ["Figures/guard-load-path.svg"]
+      "inputs": [
+        "Design Report/README.md"
+      ],
+      "outputs": [
+        "Figures/guard-load-path.svg"
+      ],
+      "scope": "Historical designed aircraft"
     },
     {
       "id": "recovery-free-body-diagram",
       "evidence_type": "authored explanatory diagram",
       "generator": null,
       "command": null,
-      "inputs": ["Analysis/recovery.py"],
-      "outputs": ["Figures/recovery-fbd.svg"]
+      "inputs": [
+        "Analysis/recovery.py"
+      ],
+      "outputs": [
+        "Figures/recovery-fbd.svg"
+      ],
+      "scope": "Historical designed aircraft"
     },
     {
       "id": "release-rig-safety-layout",
       "evidence_type": "authored explanatory diagram",
       "generator": null,
       "command": null,
-      "inputs": ["Safety/README.md"],
-      "outputs": ["Figures/release-rig-safety.svg"]
+      "inputs": [
+        "Safety/README.md"
+      ],
+      "outputs": [
+        "Figures/release-rig-safety.svg"
+      ],
+      "scope": "Historical designed aircraft"
     }
   ]
 }

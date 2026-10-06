@@ -1,4 +1,10 @@
-# Test Data
+# Data
+
+[qdrone-response/](qdrone-response/) contains the current public component
+source record, registered development protocol and executed continuous-response
+result. Raw source workbooks remain outside git; [reproduction](../docs/qdrone-response.md#reproduce)
+fetches the selected licensed file and verifies its hash.
+
 
 [nanobench-baseline/](nanobench-baseline/) contains the Crazyflie development
 replay, source records and frozen split. [nanobench-g1/](nanobench-g1/) contains
@@ -7,7 +13,7 @@ these outputs to their generators and limits. Full downloaded flights remain
 outside git, apart from the attributed development test excerpt.
 
 Other existing result files and the physical-test layout below belong to the
-historical aircraft. The Crazyflie study follows the [roadmap](../ROADMAP.md);
+historical aircraft. The warning study follows the [roadmap](../ROADMAP.md);
 the old tasks and thresholds do not transfer to it.
 
 Do not commit fabricated or manually edited measurement results.

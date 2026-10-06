@@ -1,6 +1,19 @@
 # Current results
 
-## Crazyflie
+## QDrone2 public component response
+
+The [development summary](../docs/qdrone-response.md) reports continuous altitude
+tracking under the source authors' original MPC. The
+[result file](../Data/qdrone-response/results.json) holds each response's bias,
+MAE, RMSE, voltage and completeness; the
+[figure](../Figures/qdrone-development-response.png) shows direction and time.
+Source, license and pre-calculation protocol are linked in the report.
+Independent pack outcomes and recovery-failure labels remain unavailable.
+
+## Prior Crazyflie development study
+
+This section preserves the earlier study. It does not validate the current
+warning question or authorize reopening its final-test split.
 
 The [NanoBench baseline replay](../docs/nanobench-baseline.md) is executed on
 development flights. Documented motor models accumulate substantial angular-rate
@@ -9,7 +22,7 @@ and the [run record](../Data/nanobench-baseline/development-run.json) contain th
 scores, exclusions and runtime; the [figure](../Figures/nanobench-baseline.png)
 summarizes horizon-dependent error. Source, configuration and timing limits are
 listed with the replay. Final-test predictions remain unexamined, and no
-parameters were fitted. [G1 in the roadmap](../ROADMAP.md#current-step) remains
+parameters were fitted. [Preserved G1 gate](../ROADMAP.md#preserved-scientific-gates) remains
 incomplete for dynamic identification.
 The [selected-excerpt audit](../docs/nanobench-baseline.md#audit-of-the-exposed-development-excerpt)
 reproduces the mismatch without establishing a replay implementation defect.

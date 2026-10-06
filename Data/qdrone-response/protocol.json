@@ -1,0 +1,25 @@
+{
+  "role": "development",
+  "selected_file": "Fig13a DataRevised.xlsx",
+  "selected_sha256": "f28102792ce7e25f163ffe8fe4005b8e3d3fc650b98edd2c986aa151991c04f9",
+  "selection_basis": "Previously exposed Fig13a in research-resolution-20261006; fixed by handoff before this calculation. Other response workbooks and all NanoBench final files remain unopened.",
+  "unit": "One selected recording, repeated commands within one discharge; independent pack/run replication unknown.",
+  "scope": "Descriptive continuous tracking-response replication; no warning training, binary failure labels or causal voltage effect.",
+  "horizon_s": 2.0,
+  "step_threshold_m": 0.5,
+  "threshold_basis": "Half the source nominal reference jump, solely to detect commands; not a failure criterion.",
+  "metrics": [
+    "time-weighted signed altitude error mean (m)",
+    "time-weighted altitude RMSE (m)",
+    "time-weighted absolute altitude error mean (m)",
+    "last battery sample strictly before command (V)",
+    "time-weighted battery voltage within response (V)"
+  ],
+  "calculation": "Observed timestamp integration; trapezoidal quadrature of sampled error, squared error and absolute error. Interpolate only the evaluation endpoint if necessary. No resampling, filtering, fits or maximum-thrust inference.",
+  "missing": "Retain every detected step. Mark windows cut by next command, recording end or nonfinite required values incomplete, with no complete-window metric. Nonincreasing timestamps reject recording. No initial steady interval scored.",
+  "comparison": "Separate ascending/descending commands; do not count steps as independent runs or claim voltage causation. No invented acceptance threshold.",
+  "authorization": "Owner existing-session v2 dispatch authorizes the successor question and this public-data software task; physical aircraft, hardware/purchase, maneuver completion and facility remain undecided.",
+  "registered_utc": "2026-10-06T19:19:08.914926+00:00",
+  "parent_pr": 57,
+  "parent_head": "aeeccb2a8fee1942e3c0ae0b7d4777f7377fcb7c"
+}

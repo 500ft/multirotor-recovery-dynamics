@@ -39,6 +39,12 @@ The IDSIA alternative has processed motor-speed fields, but its reuse terms and
 causal timing need clarification. Owner action: review the
 [unsent license/data request](docs/idsia-data-request.txt) for possible outreach.
 
+The proposed replacement finish line for recovery-failure warnings remains
+undecided; [M1–M4](OPEN_QUESTIONS.md#pending-owner-decisions) have no recorded
+owner answers. The current finish line and G5 purchase restriction stay in force.
+No capability calculation or physical warning study is authorized by this
+documentation reconciliation.
+
 [Open questions](OPEN_QUESTIONS.md) track unresolved inputs. Historical aircraft
 results remain in [current-results](Analysis/current-results.md#historical-designed-aircraft).
 

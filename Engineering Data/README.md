@@ -40,15 +40,20 @@ The torque ratio is another firmware default; its applicability needs checking.
 
 In the pinned [motor driver](https://github.com/bitcraze/crazyflie-firmware/blob/f6e0f0a3b526861328caf3296a7ecf00bb915d39/src/drivers/src/motors.c),
 `motorsCompensateBatteryVoltage` maps thrust requests to PWM, and
-`motorsSetRatio` stores the resulting motor ratio. Trace the collection firmware
-before deciding whether NanoBench logs the corresponding signal. Replaying
-post-compensation PWM must not apply compensation a second time.
+`motorsSetRatio` stores the resulting motor ratio. The
+[collection-source audit](../docs/nanobench-baseline.md#signal-interpretation)
+traces the logged ratio through compensation, capping and overrides at the
+separate collection revision. Replaying it must not apply compensation twice.
+The [timing qualification](../docs/nanobench-g1.md) leaves deployed build settings,
+raw block timing and installed propulsion unresolved. Source tracing alone does
+not establish the configured aircraft's response.
 
 ## Source baseline
 
 - [NanoBench dataset and documentation](https://github.com/syediu/nanobench-iros2026/tree/934a1ab92c458cad99c9278a5cb63bf68af6e56c):
   instrumented vehicle, signal units, alignment and per-block sample counts.
-  The replay task pins downloaded files and their license at acquisition.
+  The [executed replay](../docs/nanobench-baseline.md) records acquisition hashes,
+  data-license evidence and development results.
 - [Bitcraze platform constants](https://github.com/bitcraze/crazyflie-firmware/blob/f6e0f0a3b526861328caf3296a7ecf00bb915d39/src/platform/interface/platform_defaults_cf2.h):
   firmware model inputs, conditional on build options.
 - [CrazySim source](https://github.com/gtfactslab/CrazySim/tree/3ec8b55da4bff887da542a9f314da825460e65be):

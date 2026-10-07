@@ -35,13 +35,14 @@ does not replace the authoritative protocol or task ledger.
 
 ## Visual provenance
 
-The current README leads with the Crazyflie study and its evidence status.
-Historical plots describe the earlier designed aircraft. Their generators and
-inputs remain in the [figure guide](data-and-figures.md). A Crazyflie replay
-plot should be added only with its committed result and reproduction command.
+The current README leads with the maneuver-warning question and the executed
+QDrone2 component response. The [figure guide](data-and-figures.md) distinguishes
+that observed development response from prior NanoBench and designed-aircraft
+figures. Current plots require committed results, source attribution and a
+reproduction command.
 
 [`media/project-overview.svg`](media/project-overview.svg) is an editable
-diagram of the project. It contains no measured values. Each stage has a text
+diagram of the historical designed-aircraft project. It contains no measured values. Each stage has a text
 label, so the meaning doesn't depend on colour, and the SVG has a title and
 description for screen readers.
 

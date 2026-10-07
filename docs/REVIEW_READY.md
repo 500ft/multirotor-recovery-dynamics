@@ -1,4 +1,9 @@
-# Review index
+# Historical review index
+
+This is the earlier designed-aircraft review record. Its review requests and
+verdicts are historical; the [history index](history/README.md) links later
+qualifications, and the [QDrone2 report](qdrone-response.md) is the current
+component-data result. The [roadmap](../ROADMAP.md) alone schedules work.
 
 What to review, and where each piece of evidence lives. The plan is in the
 [roadmap](../ROADMAP.md) and the history in the [progress log](SPRINT_PROGRESS.md).
@@ -7,7 +12,7 @@ The earlier, longer version of this index is kept at
 
 Nothing here has had an independent review, and nothing has been measured.
 
-## Review now
+## Historical review requests
 
 1. **The survivable-set results** ([current results](../Analysis/current-results.md),
    [design](specs/survivable-set/design.md)). The guard loses 69 of 76

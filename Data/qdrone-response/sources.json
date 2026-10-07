@@ -1,0 +1,145 @@
+{
+  "doi": "10.5281/zenodo.19464105",
+  "record_url": "https://zenodo.org/records/19464105",
+  "api_url": "https://zenodo.org/api/records/19464105",
+  "metadata_sha256": "746e95f187bb266e018aa152fe58391ae55a9be8916551458d80d7b11d3df964",
+  "retrieved_utc": "2026-10-06T19:19:08.914320+00:00",
+  "title": "Experimental Setup and Experimental Results",
+  "creators": [
+    "Borbolla-Burillo, Patricio",
+    "Sotelo, David",
+    "Favela-Contreras, Antonio",
+    "Beltran-Carbajal, Francisco",
+    "Yañez Badillo, Hugo",
+    "Sotelo, Carlos"
+  ],
+  "license": "cc-by-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "files": [
+    {
+      "name": "README Revised.txt",
+      "url": "https://zenodo.org/api/records/19464105/files/README%20Revised.txt/content",
+      "md5": "md5:7a3175932e6dc173e66faf3427537231",
+      "sha256": "c0b34cf48a0962819d596c8333884edae7900335f721bb7f163d7581cca3e022"
+    },
+    {
+      "name": "Fig13a DataRevised.xlsx",
+      "url": "https://zenodo.org/api/records/19464105/files/Fig13a%20DataRevised.xlsx/content",
+      "md5": "md5:a3b97856d5c0c091d4af734297cdb5a7",
+      "sha256": "f28102792ce7e25f163ffe8fe4005b8e3d3fc650b98edd2c986aa151991c04f9"
+    }
+  ],
+  "archive_inventory": [
+    {
+      "name": "Fig12b DataRevised.xlsx",
+      "checksum": "md5:1bd5072d45f13a0124f4569900fd7a0d",
+      "bytes": 124303
+    },
+    {
+      "name": "Fig14a DataRevised.xlsx",
+      "checksum": "md5:9aaf08ae7326d710d34c299c3777d167",
+      "bytes": 2300735
+    },
+    {
+      "name": "Fig15b DataRevised.xlsx",
+      "checksum": "md5:74c64e3c22583da34a4eb5463db5b711",
+      "bytes": 289274
+    },
+    {
+      "name": "Fig13b DataRevised.xlsx",
+      "checksum": "md5:bfb13de78896fd47e09e3012da34597f",
+      "bytes": 16311596
+    },
+    {
+      "name": "Fig12a DataRevised.xlsx",
+      "checksum": "md5:ad1a6ebad43f00f352f3feb57bcf5302",
+      "bytes": 122913
+    },
+    {
+      "name": "Fig10b DataRevised.xlsx",
+      "checksum": "md5:cca008d245f2d01ac38f11f955942578",
+      "bytes": 121100
+    },
+    {
+      "name": "Fig11a DataRevised.xlsx",
+      "checksum": "md5:25b9424ae43df6bd620d3a0149699f98",
+      "bytes": 359067
+    },
+    {
+      "name": "Fig16a DataRevised.xlsx",
+      "checksum": "md5:fe8c694d75f7b6f77982c865c883f68e",
+      "bytes": 75024
+    },
+    {
+      "name": "Fig15a DataRevised.xlsx",
+      "checksum": "md5:6b3d51743d3d1a7bee8ab08ad99d8b40",
+      "bytes": 272951
+    },
+    {
+      "name": "Fig11b DataRevised.xlsx",
+      "checksum": "md5:d95b532870f38fe7017eabf671821968",
+      "bytes": 415181
+    },
+    {
+      "name": "Fig13a DataRevised.xlsx",
+      "checksum": "md5:a3b97856d5c0c091d4af734297cdb5a7",
+      "bytes": 8154752
+    },
+    {
+      "name": "Fig6 DataRevised.xlsx",
+      "checksum": "md5:1b7ed0dea111b7d4b0b5cff7102bf2a1",
+      "bytes": 2527525
+    },
+    {
+      "name": "Fig7 DataRevised.xlsx",
+      "checksum": "md5:f1f2f0ea1534de5007a08bbd025efc19",
+      "bytes": 25000
+    },
+    {
+      "name": "Fig16b DataRevised.xlsx",
+      "checksum": "md5:9b42cb1d38650b4751c089158eaf3fbc",
+      "bytes": 75058
+    },
+    {
+      "name": "Fig9b DataRevised.xlsx",
+      "checksum": "md5:7507eb6865f187c3c6341bdab420f65d",
+      "bytes": 413479
+    },
+    {
+      "name": "Fig8 DataRevised.xlsx",
+      "checksum": "md5:4951e795e9ef92592b86521a369836ec",
+      "bytes": 10000
+    },
+    {
+      "name": "README Revised.txt",
+      "checksum": "md5:7a3175932e6dc173e66faf3427537231",
+      "bytes": 3703
+    },
+    {
+      "name": "Fig10a DataRevised.xlsx",
+      "checksum": "md5:bc0b6e102f72d13b2afbc9b489b59d9d",
+      "bytes": 120926
+    },
+    {
+      "name": "Fig14b DataRevised.xlsx",
+      "checksum": "md5:79fbc9acab5e30a5565f8abb85d39f92",
+      "bytes": 4450236
+    },
+    {
+      "name": "Fig9a DataRevised.xlsx",
+      "checksum": "md5:5d0304ae0dd5f1ef68c5d7015e6723ca",
+      "bytes": 404892
+    }
+  ],
+  "paper_doi": "10.1080/21642583.2026.2671488",
+  "paper_access": "Direct publisher fetch returned HTTP 403; no paper-only result used here.",
+  "source_endpoint": {
+    "control": "original MPC",
+    "reference_step_m": 1,
+    "reference_interval_s": 7,
+    "nominal_initial_battery_v": 15.5,
+    "stopping_battery_threshold_v": 14,
+    "locator": "README Revised.txt: Fig13a paragraph; units also in workbook header"
+  },
+  "independence": "Figure workbooks are not independent runs. Time-series and power/energy panels describe overlapping experiments. Metadata has no battery IDs or replicate identifiers; total independent runs/packs unknown."
+}

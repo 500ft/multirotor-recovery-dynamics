@@ -1,9 +1,15 @@
 # Engineering data
 
-The active Crazyflie inputs are in [platform_crazyflie.csv](platform_crazyflie.csv).
-Other tables in this directory describe the historical designed aircraft unless
-explicitly labeled otherwise. They remain available for reproducing that work.
-The [roadmap](../ROADMAP.md) defines current work.
+Current QDrone2 component inputs and their archive source are in
+[sources.json](../Data/qdrone-response/sources.json); analysis settings are in
+[protocol.json](../Data/qdrone-response/protocol.json). No dynamics parameter fit
+or aircraft selection is implied by this descriptive response result.
+
+[platform_crazyflie.csv](platform_crazyflie.csv) retains the prior NanoBench and
+Crazyflie configuration register unchanged. The firmware notes below apply to
+that earlier study. Other tables describe the historical designed aircraft
+unless explicitly labeled otherwise. Keep these vehicles separate; the
+[roadmap](../ROADMAP.md) defines current work.
 
 ## Parameter evidence
 

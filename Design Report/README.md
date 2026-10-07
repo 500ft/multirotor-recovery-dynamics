@@ -1,6 +1,6 @@
 # Design Report: Protected Throwable Micro-UAV
 
-Historical work for the earlier aircraft. The Crazyflie study follows the
+Historical work for the earlier aircraft. The current warning study follows the
 [roadmap](../ROADMAP.md); these old tasks and thresholds do not transfer to it.
 
 ## Summary

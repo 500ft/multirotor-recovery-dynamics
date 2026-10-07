@@ -8,10 +8,11 @@ the plan. This guide is for reading the work quickly or rerunning it.
 | If you have | Read |
 | --- | --- |
 | Two minutes | [Current work](../README.md#current-work), then the [roadmap](../ROADMAP.md) |
-| Half an hour | The [NanoBench replay](nanobench-baseline.md), [timing qualification](nanobench-g1.md), then [data and figures](data-and-figures.md) |
-| A current result to review | The [timing qualification](nanobench-g1.md); [PR #57](https://github.com/500ft/multirotor-recovery-dynamics/pull/57) contains its implementation |
+| Half an hour | The [QDrone2 response report](qdrone-response.md), [open questions](../OPEN_QUESTIONS.md), then [data and figures](data-and-figures.md) |
+| A current result to review | The [response result](../Data/qdrone-response/results.json) and [registered protocol](../Data/qdrone-response/protocol.json) |
+| Prior development replay | The [NanoBench replay](nanobench-baseline.md), [G1 qualification](nanobench-g1.md) and [history index](history/README.md) |
 | Historical recovery work | The [survivable-set design](specs/survivable-set/design.md) and historical [review index](REVIEW_READY.md) |
-| The current platform | The [Crazyflie platform register](../Engineering%20Data/platform_crazyflie.csv) and the [roadmap](../ROADMAP.md) |
+| Physical platform choice | Still pending in [M2](../OPEN_QUESTIONS.md#pending-owner-decisions); public datasets describe separate vehicles |
 | Bench hardware | The [bench wiring and bring-up](bench-acquisition.md); the retired [V995 fixture notes](../cad/v995/README.md) are history |
 
 ## Configurations
@@ -21,7 +22,7 @@ flight controller, 2S battery). It was never built. Its numbers live in
 `Engineering Data/`, `cad/bench/` and the analysis code, with its own gates
 (7.0 V, six motors, 0.020 N·m).
 
-The platform since 2026-10-04 is the Bitcraze Crazyflie. Its documented values,
+The previous study selected the Bitcraze Crazyflie. Its documented values,
 each with its source, are in `Engineering Data/platform_crazyflie.csv`, and no
 values are copied from the designed vehicle. The stock V995 (2026-09-27 to
 2026-10-04) is retired; its register in `cad/v995/` is kept as history.
@@ -54,7 +55,7 @@ python -m pytest cad/tests -q
 
 The [CAD workflow](../.github/workflows/cad-geometry.yml) regenerates the
 geometry and uploads it for inspection. The V995 geometry is retained as a historical fixture; completing it is
-outside the Crazyflie roadmap.
+outside the current roadmap.
 
 ## Regenerating the simulations
 

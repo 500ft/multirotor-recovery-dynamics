@@ -2,7 +2,10 @@
 
 Current Crazyflie decisions are the owner platform selection, documented
 [parameter register](../Engineering%20Data/platform_crazyflie.csv) and the
-[roadmap](../ROADMAP.md). The rows below preserve the historical vehicle audit;
+[roadmap](../ROADMAP.md). Current result evidence is in the
+[NanoBench replay](nanobench-baseline.md) and [timing qualification](nanobench-g1.md).
+The proposed warning-study [owner decisions](../OPEN_QUESTIONS.md#pending-owner-decisions)
+remain unanswered. The rows below preserve the historical vehicle audit;
 its gates are not Crazyflie acceptance criteria.
 
 One row per consequential decision: what it is, what requires it, where its
@@ -12,8 +15,9 @@ and its current status. **The mathematics is not repeated here** — follow the 
 **Status vocabulary.** `derived` (reasoning recorded) · `asserted` (purpose
 stated, derivation absent) · `bare` (value only) · `preregistered` (frozen before
 execution) · `blocked` (needs an input that does not exist) · `unresolved`.
-**No row is `measured` — no accepted physical measurement exists in this
-repository.**
+No historical decision row below is `measured`. The Crazyflie replay uses
+third-party ordinary-flight observations with their own source and license;
+it supplies no physical validation of recovery or warnings.
 
 ## Historical vehicle and propulsion
 

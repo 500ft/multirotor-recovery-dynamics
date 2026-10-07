@@ -8,8 +8,9 @@ the plan. This guide is for reading the work quickly or rerunning it.
 | If you have | Read |
 | --- | --- |
 | Two minutes | [Current work](../README.md#current-work), then the [roadmap](../ROADMAP.md) |
-| Half an hour | The [survivable-set design](specs/survivable-set/design.md), then one figure traced through [data and figures](data-and-figures.md) |
-| A review to do | The [review index](REVIEW_READY.md) |
+| Half an hour | The [NanoBench replay](nanobench-baseline.md), [timing qualification](nanobench-g1.md), then [data and figures](data-and-figures.md) |
+| A current result to review | The [timing qualification](nanobench-g1.md); [PR #57](https://github.com/500ft/multirotor-recovery-dynamics/pull/57) contains its implementation |
+| Historical recovery work | The [survivable-set design](specs/survivable-set/design.md) and historical [review index](REVIEW_READY.md) |
 | The current platform | The [Crazyflie platform register](../Engineering%20Data/platform_crazyflie.csv) and the [roadmap](../ROADMAP.md) |
 | Bench hardware | The [bench wiring and bring-up](bench-acquisition.md); the retired [V995 fixture notes](../cad/v995/README.md) are history |
 

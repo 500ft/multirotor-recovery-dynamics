@@ -1,7 +1,14 @@
 # Test Data
 
-Historical work for the earlier aircraft. The Crazyflie study follows the
-[roadmap](../ROADMAP.md); these old tasks and thresholds do not transfer to it.
+[nanobench-baseline/](nanobench-baseline/) contains the Crazyflie development
+replay, source records and frozen split. [nanobench-g1/](nanobench-g1/) contains
+the source qualification; [data and figures](../docs/data-and-figures.md) maps
+these outputs to their generators and limits. Full downloaded flights remain
+outside git, apart from the attributed development test excerpt.
+
+Other existing result files and the physical-test layout below belong to the
+historical aircraft. The Crazyflie study follows the [roadmap](../ROADMAP.md);
+the old tasks and thresholds do not transfer to it.
 
 Do not commit fabricated or manually edited measurement results.
 

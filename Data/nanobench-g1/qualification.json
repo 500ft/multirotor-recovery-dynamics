@@ -1,0 +1,248 @@
+{
+  "registration": "Data/nanobench-g1/registration.json",
+  "code_sha256": "ce25e9d6d655f8bde61596c11a67c073e66dc6ab536b252e7a2f6322f942b5c7",
+  "sources_sha256": "846c71ed97cf047a6692654d7aaa6f04faef1f0065caeea779f41f58d362a9b8",
+  "checked_sources": [
+    "nanobench-tree.json",
+    "idsia-main-tree.json",
+    "idsia-dev-tree.json",
+    "nanobench/README.md",
+    "nanobench/LICENSE",
+    "nanobench/datasets/dataset/build_dataset.py",
+    "nanobench/benchmarks/utils/data_loader.py",
+    "nanobench/benchmarks/task2_control/data/loader.py",
+    "nanobench/datasets/dataset/A1b_multisine_sysid_rep1_metadata.yaml",
+    "idsia-main/README.md",
+    "idsia-main/dataset/dataset.py",
+    "idsia-main/data/train/chirp_20251017_run1.csv",
+    "idsia-dev/README.md",
+    "idsia-dev/processing/bag_to_csv.py",
+    "idsia-dev/processing/csv_to_processed.ipynb",
+    "idsia-dev/utils/topic_utils.py",
+    "idsia-data-v1.0.zip"
+  ],
+  "trees": {
+    "nanobench": {
+      "revision": "934a1ab92c458cad99c9278a5cb63bf68af6e56c",
+      "blob_count": 383,
+      "license_paths": [
+        "LICENSE"
+      ],
+      "acquisition_candidate_paths": [
+        "benchmarks/task2_control/data/__pycache__/loader.cpython-310.pyc",
+        "benchmarks/task2_control/data/__pycache__/loader.cpython-38.pyc",
+        "benchmarks/task2_control/data/loader.py",
+        "benchmarks/task2_control/pid_mell_data/mell_aligned.csv",
+        "benchmarks/task2_control/pid_mell_data/pid_aligned.csv",
+        "benchmarks/utils/__pycache__/data_loader.cpython-38.pyc",
+        "benchmarks/utils/data_loader.py",
+        "datasets/dataset/build_dataset.py"
+      ]
+    },
+    "idsia-main": {
+      "revision": "2d921b57d166fe2debe08a5d39bd07297c5abc39",
+      "blob_count": 119,
+      "license_paths": [],
+      "acquisition_candidate_paths": []
+    },
+    "idsia-dev": {
+      "revision": "f17f6b30aa656abdcc1765ea0a416ca9edee8977",
+      "blob_count": 285,
+      "license_paths": [],
+      "acquisition_candidate_paths": [
+        "data/real/raw/csv/chirp_20251017_run1.csv",
+        "data/real/raw/csv/chirp_20251017_run2.csv",
+        "data/real/raw/csv/chirp_20251017_run3.csv",
+        "data/real/raw/csv/chirp_20251017_run4.csv",
+        "data/real/raw/csv/melon_20251017_run1.csv",
+        "data/real/raw/csv/melon_20251017_run2.csv",
+        "data/real/raw/csv/melon_20251017_run3.csv",
+        "data/real/raw/csv/random_20251017_run1.csv",
+        "data/real/raw/csv/random_20251017_run2.csv",
+        "data/real/raw/csv/random_20251017_run3.csv",
+        "data/real/raw/csv/random_20251017_run4.csv",
+        "data/real/raw/csv/square_20251017_run1.csv",
+        "data/real/raw/csv/square_20251017_run2.csv",
+        "data/real/raw/csv/square_20251017_run3.csv",
+        "data/real/raw/csv/square_20251017_run4.csv",
+        "data/real/raw/csv/square_20251017_run5.csv",
+        "data/real/raw/parquets/melon_20251017_run1.parquet",
+        "data/real/raw/parquets/melon_20251017_run2.parquet",
+        "data/real/raw/parquets/melon_20251017_run4.parquet",
+        "data/real/raw/parquets/melon_20251017_run5.parquet",
+        "data/real/raw/parquets/multisine_20251017_run1.parquet",
+        "data/real/raw/parquets/multisine_20251017_run2.parquet",
+        "data/real/raw/parquets/multisine_20251017_run3.parquet",
+        "data/real/raw/parquets/multisine_20251017_run4.parquet",
+        "data/real/raw/parquets/random1_20251017_run1.parquet",
+        "data/real/raw/parquets/random1_20251017_run2.parquet",
+        "data/real/raw/parquets/random1_20251017_run3.parquet",
+        "data/real/raw/parquets/random1_20251017_run4.parquet",
+        "data/real/raw/parquets/random2_20251017_run1.parquet",
+        "data/real/raw/parquets/random2_20251017_run2.parquet",
+        "data/real/raw/parquets/random2_20251017_run3.parquet",
+        "data/real/raw/parquets/random2_20251017_run4.parquet",
+        "data/real/raw/parquets/square_20251017_run1.parquet",
+        "data/real/raw/parquets/square_20251017_run2.parquet",
+        "data/real/raw/parquets/square_20251017_run3.parquet",
+        "data/real/raw/parquets/square_20251017_run4.parquet",
+        "data/real/raw/parquets/square_20251017_run5.parquet",
+        "data/real/raw/rosbags/rosbag2_chirp_20251017_run1.h5",
+        "data/real/raw/rosbags/rosbag2_chirp_20251017_run2.h5",
+        "data/real/raw/rosbags/rosbag2_chirp_20251017_run3.h5",
+        "data/real/raw/rosbags/rosbag2_chirp_20251017_run4.h5",
+        "data/real/raw/rosbags/rosbag2_random_20251017_run1.h5",
+        "data/real/raw/rosbags/rosbag2_random_20251017_run2.h5",
+        "data/real/raw/rosbags/rosbag2_random_20251017_run3.h5",
+        "data/real/raw/rosbags/rosbag2_random_20251017_run4.h5",
+        "data/real/raw/rosbags/rosbag2_square_20251017_run1.h5",
+        "data/real/raw/rosbags/rosbag2_square_20251017_run2.h5",
+        "data/real/raw/rosbags/rosbag2_square_20251017_run3.h5",
+        "data/real/raw/rosbags/rosbag2_square_20251017_run4.h5",
+        "data/real/raw/rosbags/rosbag2_square_20251017_run5.h5",
+        "processing/bag_to_csv.ipynb",
+        "processing/bag_to_csv.py",
+        "processing/columns.xlsx",
+        "processing/csv_to_processed.ipynb",
+        "processing/eda.ipynb",
+        "processing/forces_non_idealities.pdf",
+        "processing/kf_leastsquare.pdf",
+        "processing/thrust_timeseries_1.pdf",
+        "processing/thrust_timeseries_2.pdf",
+        "processing/thrust_timeseries_3.pdf",
+        "processing/thrust_timeseries_mean_std.pdf",
+        "processing/thurst_drag_coeff_identification.ipynb",
+        "processing/thurst_drag_coeff_identification_marco_version.ipynb",
+        "processing/yawtorque_timeseries_mean_std.pdf"
+      ]
+    }
+  },
+  "nanobench_development_metadata": {
+    "flight": "datasets/dataset/A1b_multisine_sysid_rep1.csv",
+    "fields": [
+      "battery_voltage_end",
+      "battery_voltage_start",
+      "category",
+      "crazyflie_id",
+      "firmware_version",
+      "params",
+      "recording_end_utc",
+      "recording_start_utc",
+      "repetition",
+      "row_counts",
+      "trajectory_id",
+      "trajectory_type"
+    ],
+    "firmware_version": "2025.12.1",
+    "crazyflie_id": "CF_01",
+    "recording_duration_s": 72.0,
+    "blocks": {
+      "attitude": {
+        "raw_rows": 6866,
+        "mean_rows_per_recording_second": 95.36111111111111
+      },
+      "attitude_qw": {
+        "raw_rows": 4939,
+        "mean_rows_per_recording_second": 68.59722222222223
+      },
+      "estimator": {
+        "raw_rows": 6857,
+        "mean_rows_per_recording_second": 95.23611111111111
+      },
+      "estimator_acc": {
+        "raw_rows": 6615,
+        "mean_rows_per_recording_second": 91.875
+      },
+      "imu": {
+        "raw_rows": 6982,
+        "mean_rows_per_recording_second": 96.97222222222223
+      },
+      "motor": {
+        "raw_rows": 5557,
+        "mean_rows_per_recording_second": 77.18055555555556
+      },
+      "pid_output": {
+        "raw_rows": 7052,
+        "mean_rows_per_recording_second": 97.94444444444444
+      },
+      "power": {
+        "raw_rows": 642,
+        "mean_rows_per_recording_second": 8.916666666666666
+      },
+      "setpoint": {
+        "raw_rows": 7012,
+        "mean_rows_per_recording_second": 97.38888888888889
+      },
+      "vicon": {
+        "raw_rows": 7224,
+        "mean_rows_per_recording_second": 100.33333333333333
+      }
+    },
+    "interpretation": "Average deliveries over coarse UTC recording duration, not independent samples or effective bandwidth. No per-sample timestamps or alignment offsets in this metadata."
+  },
+  "adapter_reproduction": {
+    "deterministic_fields_equal": true,
+    "original_result": "Data/nanobench-baseline/excerpt-audit.json",
+    "ignored_field": "runtime_s",
+    "interpretation": "Reproduces the previous arithmetic and mismatch, not physical agreement."
+  },
+  "idsia_schema": {
+    "archive_member": "train/chirp_20251017_run1.csv",
+    "header": [
+      "t",
+      "x",
+      "y",
+      "z",
+      "qx",
+      "qy",
+      "qz",
+      "qw",
+      "vx",
+      "vy",
+      "vz",
+      "wx",
+      "wy",
+      "wz",
+      "m1_rads",
+      "m2_rads",
+      "m3_rads",
+      "m4_rads",
+      "ax_body",
+      "ay_body",
+      "az_body"
+    ],
+    "member_sha256": "00e19738869e223c295232c44771c195f8c2f8c499e5497e27e520c7fc60ca23",
+    "matches_main_lfs_object": true,
+    "archive_license_paths": [],
+    "numerical_rows_parsed": 0,
+    "notebook_outputs_read": false,
+    "motor_extractor_definition_lines": [
+      70,
+      91
+    ],
+    "effective_motor_extractor_line": 91,
+    "effective_motor_extractor_mentions_stm32_timestamp": false,
+    "notebook_code_cell_locators_zero_based": {
+      "convert_erpm_to_rads": [
+        6
+      ],
+      "align_motor_signals": [
+        10
+      ],
+      "filter_dataframe": [
+        18
+      ],
+      "_filter_series": [
+        18
+      ],
+      "remove_motor_spikes": [
+        3
+      ]
+    }
+  },
+  "gate": "G1 incomplete: source review finds collection timing and deployed configuration unresolved. See docs/nanobench-g1.md.",
+  "fits_executed": 0,
+  "final_test_predictions_executed": 0,
+  "iteration": "Source probe and unchanged excerpt replay only. No processing or model change; mismatch retained.",
+  "runtime_s": 0.057403957995120436
+}

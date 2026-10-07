@@ -7,12 +7,26 @@ Crazyflie family, with no purchase before G5. Each question closes with evidence
 
 | ID | Question | Decision Needed From | Required Evidence | Status |
 |---|---|---|---|---|
-| OQ-018 | Which NanoBench dynamics parameters can the available excitation and effective sample rates identify separately? | Agent | Reduced-model fits, parameter correlations, training/development protocol and reserved whole-flight results; published mass stays fixed | OPEN |
-| OQ-019 | Which motor-command meaning, propeller configuration and thrust mapping apply to NanoBench? | Agent | Collection firmware/log-path trace, consistent per-motor units and motor ordering, development residuals using the sourced candidate curves | OPEN; firmware defaults are now sourced, applicability remains unresolved |
+| OQ-018 | Which NanoBench dynamics parameters can the available excitation and effective sample rates identify separately? | Agent after G1 | Reduced-model fits and identifiability checks after source qualification; published mass stays fixed; final-test evaluation requires a later frozen task | BLOCKED at G1; no fitted model or final-test result |
+| OQ-019 | Which motor-command meaning, propeller configuration and thrust mapping apply to NanoBench? | Agent | Collection firmware/log-path trace, consistent per-motor units and motor ordering, development residuals using the sourced candidate curves | OPEN; [source audit](docs/nanobench-baseline.md#audit-of-the-exposed-development-excerpt) traces post-compensation ratios, but deployed settings and installed propellers remain unresolved |
 | OQ-020 | What evidence tests tumble recovery and transfer to a purchased aircraft? | Owner at G5 | Exact configuration, registered prediction, independent observation and approved staged test plan | OPEN; ordinary-flight agreement cannot settle this |
 | OQ-021 | How do the stock supervisor and estimator behave during release, and which changes are needed? | Agent | Compiled-firmware logs and pinned code/configuration; separate stock, supervisor-only and recovery-controller comparisons | OPEN |
-| OQ-022 | Can recorded timing, interpolation and input excitation resolve motor lag and yaw torque independently of inertia? | Agent | Effective-rate inventory and identifiability analysis; retain priors or report combined parameters where needed | OPEN |
+| OQ-022 | Can recorded timing, interpolation and input excitation resolve motor lag and yaw torque independently of inertia? | Source evidence, then agent | Raw block timestamps, applied offsets and deployed configuration before causal dynamic identification | BLOCKED; [public-source qualification](docs/nanobench-g1.md) did not recover the required timing/configuration |
 | OQ-023 | Which sensing and logging configuration supports an eventual physical recovery test? | Owner and agent | Sensor validity through tilt/free fall, external-pose dependence, mass and logging bandwidth; assessed in simulation before G5 | OPEN |
+
+## Pending owner decisions
+
+The external switch handoff proposes warnings of failed upset recovery within
+an available height, tested against independent maneuver outcomes under withheld
+pack, payload and guard conditions. These are unanswered choices, not an adopted
+replacement roadmap. The existing finish line and G5 restriction remain active.
+
+| ID | Owner choice | Status |
+| --- | --- | --- |
+| M1 | Adopt the proposed warning-study finish line, including useful warning time at matched false-alarm burden? | PENDING; documentation authorization supplies no answer |
+| M2 | Change purchase timing or provide lab access for physical outcomes before the existing G5? | PENDING; no purchase or campaign authorization |
+| M3 | Specify the recovery maneuver, available height and independent completion criterion? | PENDING |
+| M4 | Identify the test facility and responsible safety owner? | PENDING |
 
 ## Historical and deferred questions
 

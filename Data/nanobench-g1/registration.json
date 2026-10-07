@@ -1,0 +1,46 @@
+{
+  "registered_utc": "2026-10-05T02:16:44.249004+00:00",
+  "base_commit": "97c303ee0d7d6dd58aa2860717e5fabeabad3c94",
+  "stage": "G1 source and adapter qualification before any fit",
+  "domain": {
+    "dataset_revision": "934a1ab92c458cad99c9278a5cb63bf68af6e56c",
+    "flight": "datasets/dataset/A1b_multisine_sysid_rep1.csv",
+    "role": "previously exposed development",
+    "sample": "existing committed excerpt, zero-based rows [3000,3070)",
+    "unit_of_evidence": "one source snapshot and one previously exposed flight; rows are not independent flights",
+    "input_units": "stored uint16-scale motor ratios after compensation, battery V, body gyro rad/s, body-to-world xyzw, host time s",
+    "input_transform": "Unchanged committed replay; no new alignment, resampling, compensation or parameter changes.",
+    "exclusions": "All other flight outcomes including training and final-test are outside this qualification probe. No alternative-dataset outcomes are scored."
+  },
+  "hashes": {
+    "Data/nanobench-baseline/sources.json": "974a76b86cb8b4e870d91f03c8f3666cbfd7f00db025d7b6fe09351e14a40a10",
+    "Data/nanobench-baseline/split.json": "e791504225fe08484945d9becb164ee3b9b1868df36cd4dc7cf42bb87c6f64ee",
+    "Data/nanobench-baseline/protocol.json": "397837b252156b17fadf13bfea2350f9c117ac186156fca28e66cf84bb6a49f6",
+    "Data/nanobench-baseline/excerpt-audit.json": "9916d62910ce9f495239890d4e141dff3ee8aa66074561897573515ac16787c7",
+    "Analysis/audit_nanobench_excerpt.py": "68932c5f0a6a560d1e6beb55269c4938e563a4817c6baa8928820b9315576d56",
+    "Analysis/nanobench_replay.py": "eea2a9883340166b697347150e842c64d5d09ddf97049a7a361425d48ce784c0",
+    "Analysis/tests/fixtures/nanobench/excitation.csv": "eb4f414198d52159ecab7b975dfaf8dab2d7390ec9676dfdfdc71095952dae97",
+    "Engineering Data/platform_crazyflie.csv": "06183cd872b8636ad1ab66704ff637ab99cca42eb9e8a2c4a2f68829929dc44e"
+  },
+  "source_scope": [
+    "NanoBench pinned recursive Git tree and public branches/releases",
+    "NanoBench referenced paper and source links for collection/configuration/alignment artifacts",
+    "Collection firmware tag and existing source trace",
+    "If prerequisite fails: actual IDSIA nanodrone-sysid-benchmark main/dev source, published data schema and explicit licence terms; no model execution or test outcomes"
+  ],
+  "qualification_requirements": [
+    "Collection build/configuration trace beyond a version label",
+    "Motor and gyro raw per-block timestamps, or a reproducible acquisition/alignment pipeline that identifies their relative timing and interpolation",
+    "Preserved logging point, units and motor/body conventions checked against sources",
+    "Existing excerpt adapter replay reproduces its arithmetic and recorded increments"
+  ],
+  "comparison_rule": "Adapter reproduction compares deterministic fields to the committed excerpt audit; runtime is excluded. Source qualification reports recovered/missing evidence with specific locators. This is an estimation/access qualification with no invented physical error tolerance.",
+  "stop_rule": "If collection timing/configuration remains inaccessible, stop at source qualification. Do not fit an empirical matrix as a workaround, estimate physical lag/delay, evaluate final-test data or certify G1/G2. Verify IDSIA identity, fields and rights before drafting an unsent request.",
+  "conditional_fit": "If all timing/configuration prerequisites are recovered, commit a separate prospective candidate/selection protocol before any fitting, with the unchanged training/development split. No fit or hyperparameter choice is authorized by a failed qualification.",
+  "iteration_history": [
+    {
+      "stage": "registration",
+      "change": "No model change. Fix source scope and exposed excerpt before the qualification run."
+    }
+  ]
+}

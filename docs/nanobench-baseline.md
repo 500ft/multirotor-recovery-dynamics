@@ -232,13 +232,9 @@ increment. This is an estimation diagnostic with no invented acceptance threshol
 
 ## Next decision
 
-Phase 1 has an executed conditional baseline. G1 remains incomplete for dynamic
-identification. The next task is to qualify the motor-command/gyro timing of the
-exposed development flight from public collection artifacts, recording which
-raw timestamps, offsets and build settings can be recovered. That evidence
-would determine whether a later torque/inertia identifiability analysis can
-separate model error from input timing. No fitting or final-test evaluation is
-included in this audit.
+The subsequent [public-source timing qualification](nanobench-g1.md) records the
+unresolved collection evidence and the stop before fitting. The
+[roadmap](../ROADMAP.md#current-step) holds the current action.
 
 The same evaluator can later compare the reserved split with a frozen fitted
 model. It requires `--split final_test`, `--frozen-model path.json` and

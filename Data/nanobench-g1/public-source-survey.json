@@ -1,0 +1,46 @@
+{
+  "scope": "Public metadata observed during this task; these moving endpoint observations are dated by sources.json. Pinned tree and file probes are reproducible separately.",
+  "nanobench_branches": [
+    {
+      "name": "main",
+      "commit": {
+        "sha": "934a1ab92c458cad99c9278a5cb63bf68af6e56c",
+        "url": "https://api.github.com/repos/syediu/nanobench/commits/934a1ab92c458cad99c9278a5cb63bf68af6e56c"
+      }
+    }
+  ],
+  "nanobench_releases": [],
+  "idsia_github_license": null,
+  "idsia_branches": [
+    {
+      "name": "dev",
+      "commit": {
+        "sha": "f17f6b30aa656abdcc1765ea0a416ca9edee8977",
+        "url": "https://api.github.com/repos/idsia-robotics/nanodrone-sysid-benchmark/commits/f17f6b30aa656abdcc1765ea0a416ca9edee8977"
+      }
+    },
+    {
+      "name": "main",
+      "commit": {
+        "sha": "2d921b57d166fe2debe08a5d39bd07297c5abc39",
+        "url": "https://api.github.com/repos/idsia-robotics/nanodrone-sysid-benchmark/commits/2d921b57d166fe2debe08a5d39bd07297c5abc39"
+      }
+    },
+    {
+      "name": "model_export",
+      "commit": {
+        "sha": "ac439dbcee386b25ce7ad89562c9a8eb5c696eef",
+        "url": "https://api.github.com/repos/idsia-robotics/nanodrone-sysid-benchmark/commits/ac439dbcee386b25ce7ad89562c9a8eb5c696eef"
+      }
+    }
+  ],
+  "idsia_release_assets": [
+    {
+      "tag": "v1.0",
+      "name": "data.zip",
+      "size": 13419786,
+      "digest": "sha256:5561a4d90652fc64fbbbbe93e7cf4a8f8eb66984304f435eb507c29119d7dd43",
+      "url": "https://github.com/idsia-robotics/nanodrone-sysid-benchmark/releases/download/v1.0/data.zip"
+    }
+  ]
+}

@@ -2,7 +2,8 @@
 
 A simulation-first study of Crazyflie tumble recovery. A baseline replay of
 public flights shows substantial angular-rate error in documented motor models.
-The next step establishes what can be identified before fitting a model.
+Source qualification leaves collection timing and configuration unresolved;
+fitting is paused at G1.
 
 [![CI](https://github.com/500ft/multirotor-recovery-dynamics/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/500ft/multirotor-recovery-dynamics/actions/workflows/ci.yml)
 ![Evidence: development replay](https://img.shields.io/badge/evidence-development_replay-475569)
@@ -26,6 +27,10 @@ dynamics, short open-loop predictions and persistence on development flights.
 [Per-flight errors](Data/nanobench-baseline/development-errors.csv) and the
 [result figure](Figures/nanobench-baseline.png) report the outcome. Whole-flight
 splits were committed before comparison; final-test predictions remain unexamined.
+
+The [timing qualification](docs/nanobench-g1.md) reproduces the exposed excerpt's
+arithmetic and mismatch. It could not recover raw motor/gyro timing or deployed
+build settings from the checked public sources, so conditional fitting stopped.
 
 After identification, the study will compare stock and recovery firmware in
 CrazySim and examine feasible design variants. No purchase is authorized before
@@ -119,9 +124,9 @@ regeneration and the pinned CadQuery environment.
 ## What's next
 
 The [roadmap](ROADMAP.md#current-step) leaves G1 incomplete for dynamic
-identification. Resolve the replay's configuration and timing limits and assess
-usable excitation before selecting identifiable parameters and acceptance
-tolerances. Compiled-firmware comparison and a purchase decision remain later work.
+identification. Its current action is review of the unsent data request.
+The proposed warning-study switch awaits the [M1–M4 owner decisions](OPEN_QUESTIONS.md#pending-owner-decisions).
+The current recovery-study finish line and no-purchase-before-G5 restriction remain.
 
 ## Safety
 

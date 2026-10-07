@@ -1,0 +1,212 @@
+{
+  "files": [
+    {
+      "path": "nanobench-tree.json",
+      "url": "https://api.github.com/repos/syediu/nanobench/git/trees/934a1ab92c458cad99c9278a5cb63bf68af6e56c?recursive=1",
+      "sha256": "c97b5ec6b505d2ef1feb544fca4864ce2b6d2b46073d1cce7bf6ec43497e2f45",
+      "retrieved_utc": "2026-10-05T02:17:16.385172+00:00",
+      "reproduce": true,
+      "json_compact": true
+    },
+    {
+      "path": "nanobench-branches.json",
+      "url": "https://api.github.com/repos/syediu/nanobench/branches?per_page=100",
+      "sha256": "0897a1b53d4a9cd711f33eb3b1032b64054507f4f750adb68d8da893474183fb",
+      "retrieved_utc": "2026-10-05T02:17:16.659714+00:00",
+      "reproduce": false,
+      "json_compact": false
+    },
+    {
+      "path": "nanobench-releases.json",
+      "url": "https://api.github.com/repos/syediu/nanobench/releases?per_page=100",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-10-05T02:17:16.935100+00:00",
+      "reproduce": false,
+      "json_compact": false
+    },
+    {
+      "path": "idsia-repo.json",
+      "url": "https://api.github.com/repos/idsia-robotics/nanodrone-sysid-benchmark",
+      "sha256": "f8f271f9e0f2ddb2ab669c80605fb0869881cf9645d3331c610b65ce22f89534",
+      "retrieved_utc": "2026-10-05T02:17:17.335218+00:00",
+      "reproduce": false,
+      "json_compact": false
+    },
+    {
+      "path": "idsia-branches.json",
+      "url": "https://api.github.com/repos/idsia-robotics/nanodrone-sysid-benchmark/branches?per_page=100",
+      "sha256": "acd93dd2095f6e1eabc2b3f10102caad915aba292a756f9ec0cead5d326e7d50",
+      "retrieved_utc": "2026-10-05T02:17:17.612460+00:00",
+      "reproduce": false,
+      "json_compact": false
+    },
+    {
+      "path": "idsia-releases.json",
+      "url": "https://api.github.com/repos/idsia-robotics/nanodrone-sysid-benchmark/releases?per_page=100",
+      "sha256": "a3c2328f692ea49eaa2e638b9080692c6b1291f909dff6d9a981e3d6d2c46fcd",
+      "retrieved_utc": "2026-10-05T02:17:17.943408+00:00",
+      "reproduce": false,
+      "json_compact": false
+    },
+    {
+      "path": "idsia-main-tree.json",
+      "url": "https://api.github.com/repos/idsia-robotics/nanodrone-sysid-benchmark/git/trees/2d921b57d166fe2debe08a5d39bd07297c5abc39?recursive=1",
+      "sha256": "276c773eba0fb1c4aeeb92a8e92fa28ff104e1a8fecccf6a6ed939131549239f",
+      "retrieved_utc": "2026-10-05T02:17:45.893922+00:00",
+      "reproduce": true,
+      "json_compact": true
+    },
+    {
+      "path": "idsia-dev-tree.json",
+      "url": "https://api.github.com/repos/idsia-robotics/nanodrone-sysid-benchmark/git/trees/f17f6b30aa656abdcc1765ea0a416ca9edee8977?recursive=1",
+      "sha256": "a933329569466bf0e51afc3b4e5d7fc85798b3c7aa12fa8518ff119a1d3357d2",
+      "retrieved_utc": "2026-10-05T02:17:46.318232+00:00",
+      "reproduce": true,
+      "json_compact": true
+    },
+    {
+      "path": "nanobench/README.md",
+      "url": "https://raw.githubusercontent.com/syediu/nanobench/934a1ab92c458cad99c9278a5cb63bf68af6e56c/README.md",
+      "sha256": "dcdadfbc306d9218905e08e5710e1bd23f22522aa3d5d3d318821214404f8197",
+      "retrieved_utc": "2026-10-05T02:18:25.362813+00:00",
+      "reproduce": true,
+      "json_compact": false
+    },
+    {
+      "path": "nanobench/LICENSE",
+      "url": "https://raw.githubusercontent.com/syediu/nanobench/934a1ab92c458cad99c9278a5cb63bf68af6e56c/LICENSE",
+      "sha256": "69901188c51f2f874baf81666074a9e8dfbeb581592a068ad60a10dd43a5de59",
+      "retrieved_utc": "2026-10-05T02:18:25.502622+00:00",
+      "reproduce": true,
+      "json_compact": false
+    },
+    {
+      "path": "nanobench/datasets/dataset/build_dataset.py",
+      "url": "https://raw.githubusercontent.com/syediu/nanobench/934a1ab92c458cad99c9278a5cb63bf68af6e56c/datasets/dataset/build_dataset.py",
+      "sha256": "1b67abbdba79388836a65412a277c3df3f43510e33da36746ea192090b8e1972",
+      "retrieved_utc": "2026-10-05T02:18:25.637743+00:00",
+      "reproduce": true,
+      "json_compact": false
+    },
+    {
+      "path": "nanobench/benchmarks/utils/data_loader.py",
+      "url": "https://raw.githubusercontent.com/syediu/nanobench/934a1ab92c458cad99c9278a5cb63bf68af6e56c/benchmarks/utils/data_loader.py",
+      "sha256": "9a9250f7e24e51e87aa3c2989a2061f22c0be62e679d0bd40d68e286234b40c3",
+      "retrieved_utc": "2026-10-05T02:18:25.770887+00:00",
+      "reproduce": true,
+      "json_compact": false
+    },
+    {
+      "path": "nanobench/benchmarks/task2_control/data/loader.py",
+      "url": "https://raw.githubusercontent.com/syediu/nanobench/934a1ab92c458cad99c9278a5cb63bf68af6e56c/benchmarks/task2_control/data/loader.py",
+      "sha256": "6b92ae0d6e40530200858e999be82670a8c587b8ba10b72547801fa6f8a8ff42",
+      "retrieved_utc": "2026-10-05T02:18:25.900990+00:00",
+      "reproduce": true,
+      "json_compact": false
+    },
+    {
+      "path": "nanobench/datasets/dataset/A1b_multisine_sysid_rep1_metadata.yaml",
+      "url": "https://raw.githubusercontent.com/syediu/nanobench/934a1ab92c458cad99c9278a5cb63bf68af6e56c/datasets/dataset/A1b_multisine_sysid_rep1_metadata.yaml",
+      "sha256": "26468128c8e01c9b19e22ac2d4f5f532e489a4027420c5b51e1da94468160781",
+      "retrieved_utc": "2026-10-05T02:18:26.021400+00:00",
+      "reproduce": true,
+      "json_compact": false
+    },
+    {
+      "path": "idsia-main/README.md",
+      "url": "https://raw.githubusercontent.com/idsia-robotics/nanodrone-sysid-benchmark/2d921b57d166fe2debe08a5d39bd07297c5abc39/README.md",
+      "sha256": "acff1c6eff5ed6d32b53339192edc00de9d67a970393acbb9c5f0347aa17930b",
+      "retrieved_utc": "2026-10-05T02:18:26.211453+00:00",
+      "reproduce": true,
+      "json_compact": false
+    },
+    {
+      "path": "idsia-main/dataset/dataset.py",
+      "url": "https://raw.githubusercontent.com/idsia-robotics/nanodrone-sysid-benchmark/2d921b57d166fe2debe08a5d39bd07297c5abc39/dataset/dataset.py",
+      "sha256": "2c853d683d7dcb0471cef4263402903a695746a3e6ce0c8f7726abf2a73e2c24",
+      "retrieved_utc": "2026-10-05T02:18:26.473065+00:00",
+      "reproduce": true,
+      "json_compact": false
+    },
+    {
+      "path": "idsia-main/data/train/chirp_20251017_run1.csv",
+      "url": "https://raw.githubusercontent.com/idsia-robotics/nanodrone-sysid-benchmark/2d921b57d166fe2debe08a5d39bd07297c5abc39/data/train/chirp_20251017_run1.csv",
+      "sha256": "cfb10c3418a678d9a2465cde6df4c2b3e556fec2921d74d4d3f0bdebb6eda445",
+      "retrieved_utc": "2026-10-05T02:18:26.609580+00:00",
+      "reproduce": true,
+      "json_compact": false
+    },
+    {
+      "path": "idsia-dev/README.md",
+      "url": "https://raw.githubusercontent.com/idsia-robotics/nanodrone-sysid-benchmark/f17f6b30aa656abdcc1765ea0a416ca9edee8977/README.md",
+      "sha256": "0dc9a2e597efe96c27128addc158cf31f5d80266bf542a2ccd31ff1425e61b92",
+      "retrieved_utc": "2026-10-05T02:18:26.746172+00:00",
+      "reproduce": true,
+      "json_compact": false
+    },
+    {
+      "path": "idsia-dev/processing/bag_to_csv.py",
+      "url": "https://raw.githubusercontent.com/idsia-robotics/nanodrone-sysid-benchmark/f17f6b30aa656abdcc1765ea0a416ca9edee8977/processing/bag_to_csv.py",
+      "sha256": "01a2c5584d968eb0d5bae48106c1cd41f0d74f6e1225518f5eac9744c3f69f33",
+      "retrieved_utc": "2026-10-05T02:18:26.878556+00:00",
+      "reproduce": true,
+      "json_compact": false
+    },
+    {
+      "path": "idsia-dev/processing/csv_to_processed.ipynb",
+      "url": "https://raw.githubusercontent.com/idsia-robotics/nanodrone-sysid-benchmark/f17f6b30aa656abdcc1765ea0a416ca9edee8977/processing/csv_to_processed.ipynb",
+      "sha256": "ad5746371f960db2c1856a9270bf636630ea3f1564db4e653e88ed6880b3adcd",
+      "retrieved_utc": "2026-10-05T02:18:27.233456+00:00",
+      "reproduce": true,
+      "json_compact": false
+    },
+    {
+      "path": "nanobench-paper-v1.html",
+      "url": "https://arxiv.org/html/2603.09908v1",
+      "sha256": "23246735bc59fe652e1c8253257d88dda8416506d6a2150ed26a4d14761b7e31",
+      "retrieved_utc": "2026-10-05T02:18:27.309872+00:00",
+      "reproduce": false,
+      "json_compact": false
+    },
+    {
+      "path": "idsia-benchmark-page.html",
+      "url": "https://www.nonlinearbenchmark.org/benchmarks/nano-drone",
+      "sha256": "2b55ffaaa5eb631ea247edf42905dab23115683107b88234fead5845544f7b09",
+      "retrieved_utc": "2026-10-05T02:18:27.739505+00:00",
+      "reproduce": false,
+      "json_compact": false
+    },
+    {
+      "path": "idsia-dev/utils/topic_utils.py",
+      "url": "https://raw.githubusercontent.com/idsia-robotics/nanodrone-sysid-benchmark/f17f6b30aa656abdcc1765ea0a416ca9edee8977/utils/topic_utils.py",
+      "sha256": "7930aad31cad296ef7502376439ae1e1a6724cc17cdb95b053b9f9680909b0b2",
+      "retrieved_utc": "2026-10-05T02:22:14.443729+00:00",
+      "reproduce": true,
+      "json_compact": false
+    },
+    {
+      "path": "idsia-data-v1.0.zip",
+      "url": "https://github.com/idsia-robotics/nanodrone-sysid-benchmark/releases/download/v1.0/data.zip",
+      "sha256": "5561a4d90652fc64fbbbbe93e7cf4a8f8eb66984304f435eb507c29119d7dd43",
+      "retrieved_utc": "2026-10-05T02:22:15.019723+00:00",
+      "reproduce": true,
+      "json_compact": false
+    },
+    {
+      "path": "idsia-disclaimer.html",
+      "url": "https://www.nonlinearbenchmark.org/disclaimer",
+      "sha256": "ec0603bc1ed7a268783f5c6a37bfb295047f197ac65f0b553a1cee477c823d71",
+      "retrieved_utc": "2026-10-05T02:22:15.302485+00:00",
+      "reproduce": false,
+      "json_compact": false
+    },
+    {
+      "path": "idsia-paper-v1.html",
+      "url": "https://arxiv.org/html/2512.14450v1",
+      "sha256": "b89fb3bde30bbeba6a462162e03677c9b52daaf6a9772ac2cb798082cb2e58f2",
+      "retrieved_utc": "2026-10-05T02:22:15.392669+00:00",
+      "reproduce": false,
+      "json_compact": false
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+UNSENT DRAFT. No recipient has been contacted.
+
+To: Maintainers of idsia-robotics/nanodrone-sysid-benchmark
+Subject: Dataset/code reuse terms and motor-telemetry processing trace
+
+Hello,
+
+We are assessing your nano-drone benchmark for a public, reproducible dynamics
+study. We found the repository and release through Nonlinear Benchmark and
+reviewed the source revisions listed in Data/nanobench-g1/sources.json in our
+repository, 500ft/multirotor-recovery-dynamics.
+
+Could you clarify the license covering the released flight data, raw recordings
+and software? In particular, may we publish derived error tables/figures and
+small attributed excerpts for reproducibility? We found the citation request
+but could not locate an explicit license grant in the inspected artifacts.
+
+We also want to preserve the distinction between processed motor-speed signals
+and causal actuator dynamics. Could you point us to:
+
+- The deployed firmware revision, bidirectional DShot driver, build settings,
+  motor order, and electrical-RPM to mechanical-speed conversion, including
+  the pole-pair convention used for the released motor-speed columns.
+- The exact processing revision and per-flight settings that produced the
+  release, including time shifts, missing-data handling and filter settings.
+- A suitable training recording with original motor and gyro timestamps,
+  commands, telemetry and clock mapping before interpolation, correlation
+  alignment and zero-phase filtering, with applicable reuse terms.
+- Whether the later extract_motors definition that omits stm32_timestamp was
+  used for this release, or whether another acquisition path retains it.
+
+We have inspected a training-file header and processing source, without fitting
+a model or evaluating the benchmark's reserved trajectories. We would cite your
+paper and keep any conclusions specific to the available configuration and data.
+
+Thank you.

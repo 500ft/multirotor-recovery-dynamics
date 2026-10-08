@@ -1,37 +1,24 @@
-# Executable Analysis
+# Executable analysis
 
-Historical work for the earlier aircraft. The Crazyflie study follows the
-[roadmap](../ROADMAP.md); these old tasks and thresholds do not transfer to it.
+Current result reproduction is [QDrone2 response](../docs/qdrone-response.md#reproduce).
+The [roadmap](../ROADMAP.md) defines prerequisites for future physics and warning
+work. No new feasibility calculator or warning model is implemented yet.
 
-These tools provide reproducible preliminary calculations. They do not replace CAD, bench testing, 3-D simulation, or physical validation.
+Run the retained regression checks:
 
-Run all checks:
-
-```bash
-python3 -m unittest discover -s Analysis/tests -v
+```sh
+python -m unittest discover -s Analysis/tests -v
 ```
 
-Generate current reports:
+[NanoBench reproduction](../docs/nanobench-baseline.md) and
+[G1 qualification](../docs/nanobench-g1.md) remain available with their original
+split and blockers. Final-test files remain unopened.
 
-```bash
-python3 Analysis/budget.py
-python3 Analysis/recovery.py
-python3 Analysis/guard.py
-python3 Analysis/classifier_stats.py
-python3 Analysis/render_state_machine.py
-```
+Historical designed-aircraft models remain because committed results depend on
+them: budget, recovery, guard, allocation, rigid-body, release, Monte Carlo and
+survivable-set/scenario code. [Data and figures](../docs/data-and-figures.md)
+maps their inputs and commands. Instrument calibration/gates and statistical
+helpers retain their tests. These calculations do not accept the future aircraft.
 
-## Model Status
-
-| Tool | Purpose | Status |
-|---|---|---|
-| `budget.py` | mass rollup and freeze-rule check | executable; inputs are estimates |
-| `recovery.py` | conservative first-order recovery envelope | executable; not a full 3-D controller simulation |
-| `rigid_body.py` | dependency-free 3-D attitude integration kernel | executable; controller coupling still pending |
-| `guard.py` | low-energy linear-elastic guard functional check | executable; not a fracture model |
-| `classifier_stats.py` | confidence upper-bound calculations | executable |
-| `render_state_machine.py` | render Mermaid from the authoritative JSON source | executable |
-| `gates.py` | pre-registered propulsion/current/vision decision thresholds | executable; awaiting measurements |
-| `hardware_resources.py` | validate UART/pad/timer allocation | executable; catalog map verified |
-
-Replace every placeholder input with CAD, datasheet, or measured values before using results for design freeze.
+The unused prototype state-diagram renderer and retired CAD task-ledger validator
+were removed; see [cleanup and retention](../docs/history/README.md#cleanup-and-retention).

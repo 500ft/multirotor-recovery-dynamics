@@ -6,7 +6,7 @@ containing PR head; no physical specimen, geometry export or measurement is clai
 Deliverables: [25-row register](../../cad/bench/parameters.csv),
 [source and coordinate decisions](../../cad/bench/design-inputs.md), and
 [consistency test](../../Analysis/tests/test_bench_inputs.py).
-The authoritative status remains [CAD_TASKS.csv](../../docs/CAD_TASKS.csv).
+The authoritative status remains [CAD_TASKS.csv](https://github.com/500ft/multirotor-recovery-dynamics/blob/6b5f45e0bb39ffdeeef004dbebd51f8e4d1e7a1b/docs/CAD_TASKS.csv).
 The earlier sprint ledger is byte-preserved. Missing fits remain blank/pending;
 completing the input inventory does not authorize fabrication or motor operation.
 
@@ -34,7 +34,7 @@ Final follow-up: repository and bench-input checks passed (11 tests, exit 0);
 four rejected invalid mutations, dependency/link/sprint preservation PASS).
 
 Before accepting this PR, also run the embedded Python validator in
-[CAD_PLAN_CHECKS.md](../../docs/CAD_PLAN_CHECKS.md), then `git diff --check`.
+[CAD_PLAN_CHECKS.md](https://github.com/500ft/multirotor-recovery-dynamics/blob/6b5f45e0bb39ffdeeef004dbebd51f8e4d1e7a1b/docs/CAD_PLAN_CHECKS.md), then `git diff --check`.
 That validator checks dependencies, evidence links and historical sprint-ledger
 preservation; it does not turn owner readiness into a completed gate.
 

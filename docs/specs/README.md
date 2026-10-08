@@ -24,7 +24,7 @@ plan, read the [roadmap](../../ROADMAP.md).
 | File | Status | What it is |
 | --- | --- | --- |
 | [measured-authority-gate/design.md](measured-authority-gate/design.md) | Frozen 2026-07-17 | Six-motor authority test at 7.0 V for the designed vehicle. Does not apply to the V995 |
-| [measured-authority-gate/evidence-contract.md](measured-authority-gate/evidence-contract.md), [evidence-intake.md](measured-authority-gate/evidence-intake.md), [plan.md](measured-authority-gate/plan.md), [test-report.md](measured-authority-gate/test-report.md) | Records | Its admission format, intake checklist, plan and software test report |
+| [measured-authority-gate/evidence-contract.md](measured-authority-gate/evidence-contract.md), [evidence-intake.md](measured-authority-gate/evidence-intake.md), [plan.md](https://github.com/500ft/multirotor-recovery-dynamics/blob/6b5f45e0bb39ffdeeef004dbebd51f8e4d1e7a1b/docs/specs/measured-authority-gate/plan.md), [test-report.md](measured-authority-gate/test-report.md) | Records | Its admission format, intake checklist, plan and software test report |
 
 ## Records and finished plans
 
@@ -32,5 +32,5 @@ plan, read the [roadmap](../../ROADMAP.md).
 | --- | --- |
 | [survivable-set/review-2026-09-19.md](survivable-set/review-2026-09-19.md) | Review of the study, revised after the owner's hardware photos |
 | [survivable-set/critique-2026-09-24-status.md](survivable-set/critique-2026-09-24-status.md) | Status of each point in the 2026-09-24 critique |
-| [evidence-gap-correction/plan.md](evidence-gap-correction/plan.md) | The 2026-09-11 correction plan |
-| [cad-development/scope.md](cad-development/scope.md) | Early CAD scope |
+| [evidence-gap-correction/plan.md](https://github.com/500ft/multirotor-recovery-dynamics/blob/6b5f45e0bb39ffdeeef004dbebd51f8e4d1e7a1b/docs/specs/evidence-gap-correction/plan.md) | The 2026-09-11 correction plan |
+| [cad-development/scope.md](https://github.com/500ft/multirotor-recovery-dynamics/blob/6b5f45e0bb39ffdeeef004dbebd51f8e4d1e7a1b/docs/specs/cad-development/scope.md) | Early CAD scope |

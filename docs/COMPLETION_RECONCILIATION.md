@@ -1,5 +1,5 @@
 # Completion reconciliation and bench-input return
-Prepared 2026-09-11. Preparation is not fixture release, calibration, measured authority, or permission for powered work. Task status authority: [SPRINT_TASKS.csv](SPRINT_TASKS.csv) and [CAD_TASKS.csv](CAD_TASKS.csv).
+Prepared 2026-09-11. Preparation is not fixture release, calibration, measured authority, or permission for powered work. Task status authority: [SPRINT_TASKS.csv](https://github.com/500ft/multirotor-recovery-dynamics/blob/6b5f45e0bb39ffdeeef004dbebd51f8e4d1e7a1b/docs/SPRINT_TASKS.csv) and [CAD_TASKS.csv](https://github.com/500ft/multirotor-recovery-dynamics/blob/6b5f45e0bb39ffdeeef004dbebd51f8e4d1e7a1b/docs/CAD_TASKS.csv).
 
 ## Each recommendation, separately
 

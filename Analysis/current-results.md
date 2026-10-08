@@ -1,5 +1,9 @@
 # Current results
 
+The [dependency roadmap](../ROADMAP.md) requires qualified propulsion measurements
+and a delay-aware physics comparator before warning evaluation. No new physical
+or warning result is supplied by the roadmap cleanup.
+
 ## QDrone2 public component response
 
 The [development summary](../docs/qdrone-response.md) reports continuous altitude

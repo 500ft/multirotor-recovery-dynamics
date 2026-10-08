@@ -1,9 +1,12 @@
-# Control Architecture and Recovery State Machine
+# Historical control architecture and recovery state machine
 
-Historical work for the earlier aircraft. The Crazyflie study follows the
+Historical specification for the earlier aircraft. The current study follows the
 [roadmap](../ROADMAP.md); these old tasks and thresholds do not transfer to it.
 
-The machine-readable source is [state_machine.json](state_machine.json). Any firmware implementation and diagram must preserve these state names and transition guards.
+The machine-readable [state specification](state_machine.json) remains because
+the frozen historical drop protocol references its failsafe path. No current
+controller implementation or flight authorization follows from these states.
+The unused Mermaid renderer has been removed; the specification and tests remain.
 
 ## Architecture
 

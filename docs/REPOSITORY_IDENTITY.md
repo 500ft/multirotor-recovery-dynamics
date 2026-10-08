@@ -41,10 +41,8 @@ that observed development response from prior NanoBench and designed-aircraft
 figures. Current plots require committed results, source attribution and a
 reproduction command.
 
-[`media/project-overview.svg`](media/project-overview.svg) is an editable
-diagram of the historical designed-aircraft project. It contains no measured values. Each stage has a text
-label, so the meaning doesn't depend on colour, and the SVG has a title and
-description for screen readers.
+The obsolete conceptual overview was removed with its retired execution plan;
+evidence-backed figures remain in the production guide.
 
 ## Keeping navigation reproducible
 
@@ -57,9 +55,9 @@ python tools/test_presentation.py
 
 CI runs these checks alongside the existing project gates. They check the README,
 reading guide, identity note, contribution guide and figure guide: local paths,
-anchors, canonical title/CI badge, image alternative text and SVG accessibility.
+anchors, canonical title/CI badge, image alternative text.
 Four offline cases confirm valid input passes while missing links, wrong anchors
-and identity/accessibility errors fail. This is a bounded presentation checker,
+and identity errors fail. This is a bounded presentation checker,
 not an exhaustive Markdown parser, external-link crawler or scientific validator.
 
 ## Presentation references

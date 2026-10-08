@@ -1,7 +1,7 @@
 # Traceability index
 
-The [successor decision](decisions/maneuver-warning-v2.md) adopts the warning
-question and public component-data task. The [QDrone2 report](qdrone-response.md)
+The [dependency decision](decisions/dependency-roadmap.md) adopts the warning
+question's qualification sequence and mandatory delay-aware physics baseline. The [QDrone2 report](qdrone-response.md)
 links the source/license, registered protocol, executed result and figure.
 Physical [owner decisions](../OPEN_QUESTIONS.md#pending-owner-decisions) remain
 unanswered. The [roadmap](../ROADMAP.md) is the active plan.

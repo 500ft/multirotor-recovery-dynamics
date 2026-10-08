@@ -103,20 +103,45 @@ Before step 2 the owner does a power-off continuity/polarity check of every row 
 
 ## 4b. Observability contract (C06)
 
-One row per desired output. **Missing is not zero**: a quantity marked
-*unavailable* must not be plotted, fitted or labelled with a surrogate.
+These tables describe the proposed acquisition chain, with the same pending
+qualifications as the [source configuration](../evidence/week-2026-09-19/hardware-inventory.csv).
+They do not qualify a new per-motor stand. **Missing is not zero**: unavailable
+quantities cannot be plotted, fitted or labelled with a surrogate.
 
-| Quantity | Source | Frame / node | Timestamp meaning | Rate / filter age | Range | Uncertainty | Availability | Permitted claim |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Aggregate axial force | installed cell + NAU7802 | fixture axis, cradle datum | ADC data-ready | 80 SPS nominal; conversion + filter age to be measured | cell-dependent | from installed calibration; **not** the datasheet figure | after R3 calibration | whole-article axial force in the stated restraint |
-| Bus voltage, current | INA260 | declared node (VBus ties to `Vin+`), averaging declared | conversion-window end | configured window; report achieved rate | chip limits ≠ harness rating | reference-instrument comparison | after R2 dummy-load check | aggregate electrical power at that node |
-| Specific force | LIS3DH | sensor axes + mounting offset from CG | sample register read | 100 Hz proposed | ±2/4/8/16 g, per-axis saturation flagged | axis map, offsets, scale vs gravity | after six-orientation check | specific force only — **not** attitude, **not** rate |
-| Beam crossing | IR break-beam | geometry and polarity recorded | edge timestamp | <2 ms device response + software stamp | — | spacing, ambient light | after 30-cycle check | one coarse crossing event |
-| Per-rotor force | — | — | — | — | — | — | **unavailable** | none |
-| Angular rate / full attitude | — | — | — | — | — | — | **unavailable** (LIS3DH is specific force; no gyro purchased) | none |
-| Trajectory | — | — | — | — | — | — | **unavailable** without external tracking | none |
-| Fault identity | — | — | — | — | — | — | **unavailable** | none |
-| Physical damage | — | — | — | — | — | — | **unavailable** — requires inspection, recorded separately from any kinematic proxy | none |
+### Available channels after their stated checks
+
+| Quantity [unit] | Source and frame/node | Required qualification | Permitted claim |
+| :--- | :--- | :--- | :--- |
+| Aggregate axial force [N] | Installed cell + NAU7802; fixture axis, cradle datum | R3 installed calibration | Whole-article axial force in the stated restraint |
+| Bus voltage [V], current [mA] | INA260; declared node, VBus tied to `Vin+`; declared averaging | R2 dummy-load check | Aggregate electrical power at that node |
+| Specific force [m/s²] | LIS3DH; sensor axes and mounting offset from CG | Six-orientation check | Specific force only; attitude and angular rate unavailable |
+| Beam crossing [event] | IR break-beam; recorded geometry and polarity | 30-cycle check | One coarse crossing event |
+
+### Timing, range and uncertainty still to qualify
+
+| Quantity | Timestamp meaning | Rate/filter age and range | Uncertainty basis |
+| :--- | :--- | :--- | :--- |
+| Aggregate axial force | ADC data-ready | 80 samples/s nominal; conversion and filter age to be measured; cell-dependent range | Installed calibration, beyond a datasheet figure |
+| Bus voltage/current | Conversion-window end | Configured window; report achieved rate; chip limits do not define harness rating | Reference-instrument comparison |
+| Specific force | Sample-register read | 100 Hz proposed; ±2/4/8/16 g; per-axis saturation flag | Axis map, offsets and scale versus gravity |
+| Beam crossing | Edge timestamp | <2 ms device response plus software timestamp; range unspecified | Spacing and ambient-light effects |
+
+### Unavailable outputs
+
+| Quantity | Availability | Missing evidence |
+| :--- | :--- | :--- |
+| Per-rotor force | Unavailable | No per-rotor measurement in this chain |
+| Angular rate / full attitude | Unavailable | LIS3DH supplies specific force; no gyro purchased in the recorded inventory |
+| Trajectory | Unavailable | External tracking |
+| Fault identity | Unavailable | Qualified fault observation |
+| Physical damage | Unavailable | Separate inspection record; kinematics do not supply it |
+
+Source: original C06 channel contract and the [wiring/settings above](#1-buses-and-power-e1).
+The [firmware fields](../Instrumentation/firmware/code.py) log current in mA and
+specific force in m/s²; force in N requires calibration of raw ADC counts.
+No calibration, rate or range has been newly verified by this table redesign.
+Current stand prerequisites, including optional torque and missing RPM/temperature
+qualification, remain in [roadmap A](../ROADMAP.md#a-qualify-component-instrumentation-and-propulsion).
 
 **Offset-sensor caveat.** A sensor not at the CG also measures `α × r` and
 `ω × (ω × r)`. At 20 rad/s with a 10 mm perpendicular offset the centripetal term

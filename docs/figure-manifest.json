@@ -6,19 +6,22 @@
       "id": "qdrone-development-response",
       "evidence_type": "continuous response from public development observations",
       "scope": "QDrone2 original MPC, selected discharge; no recovery labels",
-      "generator": "Analysis/qdrone_response.py",
-      "command": "python -m Analysis.qdrone_response --fetch --cache /tmp/multirotor-qdrone-source --output Data/qdrone-response/results.json --figure Figures/qdrone-development-response.png",
+      "generator": "Analysis/plot_qdrone_response.py",
+      "command": "python -m Analysis.plot_qdrone_response --cache /tmp/multirotor-qdrone-source --figure Figures/qdrone-development-response.png --tables docs",
       "inputs": [
         "Data/qdrone-response/sources.json",
-        "Data/qdrone-response/protocol.json"
-      ],
-      "outputs": [
-        "Figures/qdrone-development-response.png"
-      ],
-      "data_outputs": [
+        "Data/qdrone-response/protocol.json",
         "Data/qdrone-response/results.json"
       ],
-      "attribution": "Borbolla-Burillo et al., Experimental Setup and Experimental Results, doi:10.5281/zenodo.19464105, CC BY 4.0; metrics and plot derived here"
+      "outputs": [
+        "Figures/qdrone-development-response.png",
+        "Figures/qdrone-development-response.pdf",
+        "docs/qdrone-response-table.md",
+        "docs/qdrone-response.csv"
+      ],
+      "data_outputs": [],
+      "attribution": "Borbolla-Burillo et al., Experimental Setup and Experimental Results, doi:10.5281/zenodo.19464105, CC BY 4.0; metrics and plot derived here",
+      "notes": "Stored result is read-only. Time traces read the SHA-256-pinned Fig13a workbook in the external cache; no metric recomputation or holdout access."
     },
     {
       "id": "release-recovery-simulation",

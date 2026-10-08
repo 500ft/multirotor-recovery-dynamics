@@ -11,6 +11,8 @@ tracking under the source authors' original MPC. The
 [result file](../Data/qdrone-response/results.json) holds each response's bias,
 MAE, RMSE, voltage and completeness; the
 [figure](../Figures/qdrone-development-response.png) shows direction and time.
+The [response table](../docs/qdrone-response-table.md) keeps all events in command
+order, with [downloadable values](../docs/qdrone-response.csv).
 Source, license and pre-calculation protocol are linked in the report.
 Independent pack outcomes and recovery-failure labels remain unavailable.
 

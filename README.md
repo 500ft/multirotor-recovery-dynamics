@@ -25,11 +25,13 @@ integrates errors over recorded timestamps. The [registered protocol](Data/qdron
 was committed before calculation. [Results](Data/qdrone-response/results.json)
 retain every detected step and the incomplete window.
 
-![QDrone2 observed altitude, battery voltage and command-response error](Figures/qdrone-development-response.png)
+![QDrone2 development observations: aligned altitude and voltage traces, with stored response RMSE against command time and precommand voltage; upward and downward commands use distinct markers](Figures/qdrone-development-response.png)
 
 Observations collected by Borbolla-Burillo et al.,
 [Experimental Setup and Experimental Results](https://doi.org/10.5281/zenodo.19464105),
-under CC BY 4.0. This repository computed the metrics and plot. Repeated steps
+under CC BY 4.0. [Vector figure](Figures/qdrone-development-response.pdf) ·
+[Response table](docs/qdrone-response-table.md) · [CSV](docs/qdrone-response.csv).
+This repository computed the metrics and plot. Repeated steps
 share one discharge; voltage and elapsed time co-vary. The plot describes
 tracking under the source controller and provides no recovery-failure labels.
 

@@ -1,8 +1,8 @@
 # Open questions
 
 The [roadmap](ROADMAP.md) is the only execution plan. The
-[owner decision](docs/decisions/maneuver-warning-v2.md) adopts the warning question
-and public component-data work; physical choices remain open.
+[dependency decision](docs/decisions/dependency-roadmap.md) adopts the qualification
+and mandatory physics-baseline sequence; physical choices remain open.
 
 ## Active evidence questions
 
@@ -10,14 +10,16 @@ and public component-data work; physical choices remain open.
 | --- | --- | --- |
 | MR-D1 | Can the selected public file support a continuous response summary with known units, controller and permission? | CLOSED for the selected QDrone2 development recording; [executed report](docs/qdrone-response.md) |
 | MR-D2 | Are independent pack/run identities and maneuver completion outcomes available? | OPEN; selected QDrone2 recording has repeated commands and no recovery labels; closure needs independent labeled outcomes |
-| MR-D3 | Does the warning improve on voltage, sag-history and load baselines under withheld conditions? | UNTESTED; requires qualified outcomes, frozen whole-pack splits, false-alarm burden and useful lead-time criterion |
+| MR-D3 | Does the warning improve on delay-aware physics feasibility, voltage, sag-history and load baselines under withheld conditions? | UNTESTED; requires qualified outcomes, frozen whole-pack splits, false-alarm burden and useful lead-time criterion |
 | MR-D4 | Can NeuroBEM be reused, and what does its timing support? | OPEN; processed motor speed is not maximum authority; no derived analysis before permission/timing qualification |
+| MR-D5 | Are the selected propulsion configuration, installed force/current/voltage/RPM/temperature channels and containment qualified? | OPEN; roadmap A requires calibration, capacity/resolution, tare, timing and approval; torque needs a separate qualified method if used |
+| MR-D6 | Is a delay-aware thrust-to-weight/height-to-arrest comparator supported by measured configuration inputs? | OPEN; roadmap B and C must complete before warning comparison |
 
 ## Pending owner decisions
 
 | ID | Owner choice | Status |
 | --- | --- | --- |
-| M1 / MR-1 | Adopt the maneuver-warning question and first public component-data task? | ADOPTED for software scope in the [owner decision](docs/decisions/maneuver-warning-v2.md) |
+| M1 / MR-1 | Adopt the maneuver-warning question and dependency roadmap? | ADOPTED for the question, completed public-data task and [dependency-plan cleanup](docs/decisions/dependency-roadmap.md); no physical execution approval |
 | M2 | Provide physical access/funding direction and select the actual aircraft; change purchase timing before existing G5? | PENDING; no purchase, aircraft switch or physical campaign authorization |
 | M3 | Specify recovery maneuver, available height and independent completion criterion? | PENDING |
 | M4 | Identify test facility and responsible safety owner? | PENDING |

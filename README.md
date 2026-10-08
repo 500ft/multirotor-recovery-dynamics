@@ -1,8 +1,9 @@
 # Multirotor Recovery Dynamics
 
-Can a maneuver-specific warning predict failed recovery within an available
-height on unseen battery packs and payloads, better than voltage, sag-history
-and load baselines at the same false-alarm rate?
+Can a maneuver-specific warning beat a physics feasibility baseline based on
+thrust-to-weight and height to arrest descent, including delays, on unseen
+packs, payloads and guards? Compare voltage, sag-history and load baselines
+at the same false-alarm burden and report useful warning lead time.
 
 The first public-data result summarizes **20 complete altitude responses** from
 one QDrone2 development recording. A final command has an incomplete response.
@@ -32,9 +33,10 @@ under CC BY 4.0. This repository computed the metrics and plot. Repeated steps
 share one discharge; voltage and elapsed time co-vary. The plot describes
 tracking under the source controller and provides no recovery-failure labels.
 
-The [owner decision](docs/decisions/maneuver-warning-v2.md) adopts the successor
-question and this public component-data task. The actual test aircraft, physical
-maneuver, access, budget and safety approval remain
+The [dependency-roadmap decision](docs/decisions/dependency-roadmap.md) adopts
+the component qualification and physics-baseline prerequisites. The
+[roadmap](ROADMAP.md#dependency-order) shows what each later result depends on.
+The actual test aircraft, physical maneuver, access, budget and safety approval remain
 [owner decisions](OPEN_QUESTIONS.md#pending-owner-decisions).
 
 ## Quick start

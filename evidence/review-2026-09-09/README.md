@@ -85,4 +85,4 @@ Hosted checks and workflow-permission evidence are recorded by the parent in the
 cross-repository handoff after push. Until a real successful job is observed,
 DR-CAD-10 stays in progress. No hardware, manufacturing release, safety approval,
 measurement agreement or project validation verdict is authorized by these tests.
-The sole task status is [CAD_TASKS.csv](../../docs/CAD_TASKS.csv).
+The sole task status is [CAD_TASKS.csv](https://github.com/500ft/multirotor-recovery-dynamics/blob/6b5f45e0bb39ffdeeef004dbebd51f8e4d1e7a1b/docs/CAD_TASKS.csv).

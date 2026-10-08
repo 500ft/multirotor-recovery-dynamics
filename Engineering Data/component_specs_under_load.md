@@ -6,7 +6,7 @@ gates (`Engineering Plan/stage1-verification-gates.md`). Every flying part must
 still be weighed and bench-tested on receipt.
 
 Components are grouped by procurement wave to match
-[procurement-2026-07.md](../Engineering%20Plan/procurement-2026-07.md): **Wave 1**
+[procurement-2026-07.md](https://github.com/500ft/multirotor-recovery-dynamics/blob/6b5f45e0bb39ffdeeef004dbebd51f8e4d1e7a1b/Engineering%20Plan/procurement-2026-07.md): **Wave 1**
 is bench-decisive (order now), **Wave 2** is gated on the EST-REC-007 torque
 measurement. Each part carries an **If not in the drone** line — its reuse value
 if the drone path dies or the part is displaced from the build.

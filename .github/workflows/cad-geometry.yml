@@ -16,10 +16,6 @@ jobs:
         shell: bash -el {0}
     steps:
       - uses: actions/checkout@v7
-        with:
-          # Full history: the historical ledger report reads
-          # docs/SPRINT_TASKS.csv at HISTORICAL_BASE via `git show`.
-          fetch-depth: 0
       - uses: conda-incubator/setup-miniconda@v4
         with:
           activate-environment: cad-geometry
@@ -30,8 +26,6 @@ jobs:
         run: conda install -y --file cad/requirements.lock
       - name: Regenerate geometry from the registered parameters
         run: python cad/generate.py --parameters cad/bench/parameters.csv --output ${{ runner.temp }}/cad-out
-      - name: Regenerate the V995 fixture geometry (separate register)
-        run: python cad/v995/generate_fixture.py --parameters cad/v995/parameters.csv --output ${{ runner.temp }}/v995-out
       - name: Geometry tests (contract, negative controls, version constraints)
         run: python -m pytest cad/tests -q
       - uses: actions/upload-artifact@v7

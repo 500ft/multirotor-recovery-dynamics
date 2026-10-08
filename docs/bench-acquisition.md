@@ -10,9 +10,12 @@ this wiring, the settings in §3 and the fail-closed run semantics in §4b — t
 time, starting with the power-off continuity check. Analysis scripts that consume a
 completed run are a later slice.
 
-Platform: bench chain built for the Veeniix V995 demonstrator, which was retired
-on 2026-10-04. The chain is kept for Crazyflie per-motor thrust work
-([roadmap](../ROADMAP.md)).
+Platform: this proposed chain originated with the retired V995 demonstrator.
+It is retained as an acquisition asset; the current propulsion configuration and
+its installed capacity, calibration, timing and containment remain unqualified.
+[Roadmap A](../ROADMAP.md#a-qualify-component-instrumentation-and-propulsion) sets
+those prerequisites. Neither this force channel nor the INA260 measures torque;
+RPM and measured component temperature need qualified channels.
 
 Original platform note: bench chain for the Veeniix V995 demonstrator
 ([`evidence/week-2026-09-19/platform-capabilities.md`](../evidence/week-2026-09-19/platform-capabilities.md)).

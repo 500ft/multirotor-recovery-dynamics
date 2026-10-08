@@ -1,6 +1,12 @@
 # Measurement and Instrumentation Plan
 
-Mechanical prerequisites now have [individual CAD tasks](../docs/CAD_PLAN.md) and a [CAD status ledger](../docs/CAD_TASKS.csv): vehicle packaging/guard, modeled mass properties, propulsion metrology stand and pendulum fixture. Approved calibration and energized-test safety remain separate requirements; no fixture has been built by this planning amendment.
+Current prerequisites and completion evidence are in [roadmap A](../ROADMAP.md#a-qualify-component-instrumentation-and-propulsion).
+This directory retains useful acquisition, calibration and safety assets. The
+historical register and wiring proposal do not establish installed performance
+or approval to energize. A thrust cell and INA260 provide no reaction-torque
+measurement without a separately qualified method. RPM and component-temperature
+channels, stand capacity/resolution, tare, synchronization and containment remain
+to be qualified for the selected propulsion configuration.
 
 Analysis is only accepted when the measurement system can resolve the predicted difference. The authoritative register is [instrumentation.csv](../Engineering%20Data/instrumentation.csv).
 

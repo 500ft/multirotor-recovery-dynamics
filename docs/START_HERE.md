@@ -12,6 +12,7 @@ the plan. This guide is for reading the work quickly or rerunning it.
 | A current result to review | The [response result](../Data/qdrone-response/results.json) and [registered protocol](../Data/qdrone-response/protocol.json) |
 | Prior development replay | The [NanoBench replay](nanobench-baseline.md), [G1 qualification](nanobench-g1.md) and [history index](history/README.md) |
 | Historical recovery work | The [survivable-set design](specs/survivable-set/design.md) and historical [review index](REVIEW_READY.md) |
+| Development dependencies | [Roadmap prerequisites and completion evidence](../ROADMAP.md#dependency-order); instrumentation and propulsion qualification precede the physics baseline |
 | Physical platform choice | Still pending in [M2](../OPEN_QUESTIONS.md#pending-owner-decisions); public datasets describe separate vehicles |
 | Bench hardware | The [bench wiring and bring-up](bench-acquisition.md); the retired [V995 fixture notes](../cad/v995/README.md) are history |
 
@@ -38,8 +39,8 @@ python -m unittest discover -s Analysis/tests -v
 python -m unittest discover -s Instrumentation/tests -v
 ```
 
-The full analysis suite takes a few minutes. [CI](../.github/workflows/ci.yml)
-runs the same sequence. Crazyflie inputs belong in its [platform register](../Engineering%20Data/platform_crazyflie.csv).
+[CI](../.github/workflows/ci.yml) runs analysis and instrumentation tests,
+the historical simulation smoke and presentation checks. Crazyflie inputs belong in its [platform register](../Engineering%20Data/platform_crazyflie.csv).
 The designed-vehicle and V995 input checks remain historical regression checks.
 
 ## CAD — pinned environment
@@ -54,8 +55,9 @@ python -m pytest cad/tests -q
 ```
 
 The [CAD workflow](../.github/workflows/cad-geometry.yml) regenerates the
-geometry and uploads it for inspection. The V995 geometry is retained as a historical fixture; completing it is
-outside the current roadmap.
+retained motor-envelope geometry and uploads it for inspection. V995 CAD stays
+available as a historical asset with its tests; automatic generation of its
+unreleased fixture has been removed. Completing it is outside the roadmap.
 
 ## Regenerating the simulations
 

@@ -11,7 +11,10 @@
 command. Observations belong to the dataset authors; the figure describes
 tracking within a development recording, with no recovery-failure labels.
 
-The [roadmap](../ROADMAP.md) holds the current step and scientific gates.
+The [roadmap](../ROADMAP.md) holds the dependency order and scientific gates.
+Retained historical plots still have their reproduction sources; the obsolete
+conceptual overview and unused control renderer were removed, as recorded in
+[cleanup and retention](history/README.md#cleanup-and-retention).
 
 ## Prior Crazyflie results
 
@@ -144,7 +147,7 @@ designed vehicle above — see
 | Classifier confidence bounds | `Analysis/classifier_stats.py` | Trial and event counts |
 | Hardware resource checks | `Analysis/hardware_resources.py` | Interface and power CSV tables |
 | Measured-authority verdict | `Analysis/measured_authority_gate.py` | Future derived CSV + hashed raw/calibration/uncertainty/derivation manifest, six sampled-motor IDs, unique observations; [format](specs/measured-authority-gate/evidence-contract.md) |
-| State-machine Mermaid | `Analysis/render_state_machine.py` | `Controls/state_machine.json` |
+| Historical control specification | Renderer retired; [pre-cleanup source](https://github.com/500ft/multirotor-recovery-dynamics/blob/6b5f45e0bb39ffdeeef004dbebd51f8e4d1e7a1b/Analysis/render_state_machine.py) | `Controls/state_machine.json` retained for the frozen drop protocol |
 
 Run the repository tests before updating result documents:
 

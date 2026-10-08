@@ -1,4 +1,4 @@
-# Multirotor Recovery Dynamics
+# Multirotor Recovery Warning
 
 Can a maneuver-specific warning beat a physics feasibility baseline based on
 thrust-to-weight and height to arrest descent, including delays, on unseen
@@ -10,7 +10,7 @@ one QDrone2 development recording. A final command has an incomplete response.
 The data support a continuous tracking description; independent recovery
 outcomes are still needed to test the warning question.
 
-[![CI](https://github.com/500ft/multirotor-recovery-dynamics/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/500ft/multirotor-recovery-dynamics/actions/workflows/ci.yml)
+[![CI](https://github.com/500ft/multirotor-recovery-warning/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/500ft/multirotor-recovery-warning/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-0f766e)](LICENSE)
 
 [Current work](#current-work) · [Roadmap](ROADMAP.md) ·
@@ -42,8 +42,8 @@ The actual test aircraft, physical maneuver, access, budget and safety approval 
 ## Quick start
 
 ```sh
-git clone https://github.com/500ft/multirotor-recovery-dynamics.git
-cd multirotor-recovery-dynamics
+git clone https://github.com/500ft/multirotor-recovery-warning.git
+cd multirotor-recovery-warning
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt

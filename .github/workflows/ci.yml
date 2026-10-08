@@ -24,5 +24,5 @@ jobs:
         run: python -m Analysis.run_survivable_set --smoke --workers 2
       - name: Check README links, identity and negative controls
         run: |
-          python tools/check_presentation.py . "Multirotor Recovery Dynamics" multirotor-recovery-dynamics
+          python tools/check_presentation.py . "Multirotor Recovery Warning" multirotor-recovery-warning
           python tools/test_presentation.py

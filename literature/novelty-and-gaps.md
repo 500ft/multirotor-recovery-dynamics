@@ -23,6 +23,7 @@ who else is publishing an adjacent claim.
 | 12 | **Attitude-priority desaturation** (roll/pitch → collective → yaw) | Faessler et al. (RA-L 2017); PX4 airmode | A / deployed |
 | 13 | **Monte-Carlo estimation of a quadrotor safe flight envelope**, substituting for HJ reachability | **Sun & de Visser (AIAA 2019)** | B |
 | 14 | Parachute recovery of small UAS **at ≥900 g**, with a 10–15 m altitude floor | ASTM F3322; EASA M2 MoC; Siotia et al. (2026); ParaZero test data | A / B / C |
+| 15 | **Loss-of-control prediction 2 s ahead on real quadcopter flight data**, from onboard sensor measurements only; commanded rotor values saturate before loss of control and were the clearest early signal; predictors transferred across mass, blade diameter and blade count (added 2026-10-09) | **Altena, van Beers & de Visser (JAIS 2023)** | B, 172 real events, abstract only |
 
 ## 2. Genuinely open — the defensible lane
 
@@ -145,3 +146,39 @@ These are real absences, verified, and within reach of this project:
   into a measurement — and no one else has published one.
 - **The paired-comparison fix (note 05 §3) is a correctness prerequisite** for
   any future claim about mechanism vs reallocation.
+
+## 6. Warning versus physics baseline (added 2026-10-09)
+
+The repository question is now whether a maneuver-specific warning improves on
+a physics feasibility baseline (`ROADMAP.md`). The nearest prior work is
+**Altena, van Beers & de Visser (2023)**, *Loss-of-Control Prediction of a
+Quadcopter Using Recurrent Neural Networks*, Journal of Aerospace Information
+Systems 20(10) 648–659, [10.2514/1.I011231](https://doi.org/10.2514/1.I011231).
+
+From the abstract: 172 real-world loss-of-control events on three quadcopters
+(53 g Tiny Whoop, 73 g URUAV UZ85, 265 g GEPRC CineGO). Loss of control was
+forced by commanding an excessive yaw rate (2000 deg/s), an unrecoverable upset
+by design. Four recurrent network architectures were trained on onboard sensor
+measurements only. The commanded rotor values were the clearest early warning
+signal because they saturate before loss of control. All four architectures
+predicted the event 2 s before it occurred. The predictors transferred across
+changes in mass, blade diameter and blade count.
+
+| | Altena et al. (2023) | This repo |
+| --- | --- | --- |
+| Event | commanded upset (2000 deg/s yaw rate), unrecoverable by design | battery- or thrust-limited loss of recovery capability |
+| Inputs | onboard sensor measurements only | warning features preregistered in F.1; voltage, sag-history, load and physics baselines |
+| Transfer | across mass, blade diameter and blade count | unseen packs, payloads and guard conditions |
+| Status | published, real flight data | no outcome data yet (ROADMAP E, F) |
+
+Rotor-command saturation is effectively the thrust-margin signal, so this is
+the physics comparator the warning must beat.
+
+**Gap:** a warning compared with a physics comparator at matched false-alarm
+rate, or tested on held-out battery packs, was not found in the 2026-10-09
+review (abstract-level, web search only, forward citations not searched).
+
+**Risk:** the nearest prior work suggests the physics quantity does most of the
+predicting, so a null result against the thrust-margin baseline is likely.
+Record this as a risk to milestone F, which depends on the flight outcomes from
+E. No milestone status changes here; that is an owner decision not yet made.

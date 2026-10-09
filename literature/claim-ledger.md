@@ -139,3 +139,15 @@ cited papers.
 ### G2. Sub-250 g rotor-loss work is an open lane
 - **Amended 2026-09-24 (critique C02/C07).** Two corrections. (i) The defensible statement is search-bounded: *we found no published demonstration of recovery from **complete** rotor loss on a sub-250 g multirotor*. It is **not** "empirically empty" — a sub-35 g counterexample exists and is logged under G3; complete loss and partial degradation must not be conflated. (ii) The physical rationale previously given was **wrong**: terminal spin is independent of `Izz` (note 01 §6), so "spin rises as inertia falls" does not follow. High spin is a demonstrated *sensing* obstacle at full scale (Sun et al. 2021 A; Yeom et al. 2024 B); its scale dependence is open.
 - **Action:** state as "no published flight demonstration at sub-250 g that we could find", never "no one has considered it". Note it corroborates our own gyro-limited envelope. **Confidence: high.**
+
+---
+
+## H. Warning versus physics baseline
+
+### H1. "A maneuver-specific warning improves on a physics feasibility baseline based on thrust-to-weight and height to arrest descent" (`ROADMAP.md`, the research question)
+- **Nearest prior work (added 2026-10-09):** Altena, van Beers & de Visser (JAIS 2023, 3 / B from the abstract; full text not read). 172 real-world loss-of-control events on three quadcopters (53 g Tiny Whoop, 73 g URUAV UZ85, 265 g GEPRC CineGO). Loss of control was forced by commanding an excessive yaw rate (2000 deg/s), an unrecoverable upset by design. Four recurrent network architectures were trained on onboard sensor measurements only. The commanded rotor values were the clearest early warning signal because they saturate before loss of control. All four architectures predicted the event 2 s before it occurred. The predictors transferred across changes in mass, blade diameter and blade count.
+- **Why it matters here:** rotor-command saturation is effectively the thrust-margin signal, so this is the physics comparator the maneuver-specific warning must beat.
+- **Difference:** the prior work predicts a commanded upset. This repository asks about a battery- or thrust-limited loss of recovery capability.
+- **Gap:** a warning compared with a physics comparator at matched false-alarm rate, or tested on held-out battery packs, was not found in the 2026-10-09 review (abstract-level, web search only, forward citations not searched).
+- **Risk:** the nearest prior work suggests the physics quantity does most of the predicting, so a null result against the thrust-margin baseline is likely. This is a risk to milestone F, which depends on the flight outcomes from E. No milestone status changes here; that is an owner decision not yet made.
+- **Action:** cite Altena et al. as the related-work anchor for F.1 and keep the physics baseline as the preregistered primary comparator so a null result is reportable. **Confidence: moderate** that the gap survives; the search was abstract-level.

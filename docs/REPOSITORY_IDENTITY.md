@@ -1,8 +1,9 @@
 # Repository identity and reading conventions
 
-Updated September 10, 2026. The project is now **Multirotor Recovery Dynamics**, at
-[`500ft/multirotor-recovery-dynamics`](https://github.com/500ft/multirotor-recovery-dynamics).
-Its previous repository name was `SelfStabilizingDrone`; this is a rename of the same
+Updated October 8, 2026. The project is now **Multirotor Recovery Warning**, at
+[`500ft/multirotor-recovery-warning`](https://github.com/500ft/multirotor-recovery-warning). The name states the
+current research question in the [roadmap](../ROADMAP.md). Its previous
+repository names were `multirotor-recovery-dynamics` and `SelfStabilizingDrone`; each is a rename of the same
 repository, not a new project or release.
 
 ## What the rename changes
@@ -16,7 +17,7 @@ rename an import or command-line API.
 To update an existing clone without moving its files:
 
 ```sh
-git remote set-url origin https://github.com/500ft/multirotor-recovery-dynamics.git
+git remote set-url origin https://github.com/500ft/multirotor-recovery-warning.git
 git remote -v
 ```
 
@@ -49,7 +50,7 @@ evidence-backed figures remain in the production guide.
 From the repository root:
 
 ```sh
-python tools/check_presentation.py . "Multirotor Recovery Dynamics" multirotor-recovery-dynamics
+python tools/check_presentation.py . "Multirotor Recovery Warning" multirotor-recovery-warning
 python tools/test_presentation.py
 ```
 

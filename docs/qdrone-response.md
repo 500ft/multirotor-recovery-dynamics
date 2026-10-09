@@ -12,8 +12,9 @@ and precommand voltage. [Vector PDF](../Figures/qdrone-development-response.pdf)
 
 ![QDrone2 original-MPC development recording: altitude and reference above aligned battery voltage, then the same complete-window RMSE values against time and voltage](../Figures/qdrone-development-response.png)
 
-Panels C and D share a zero-based RMSE scale and the same events. Upward and
-downward commands use both distinct markers and colors. The dotted time marker
+Panels c and d show the same events on one RMSE axis. The axis starts at the
+data floor with labelled ticks, so the gap between directions is visible. Upward
+and downward commands use both distinct markers and colors. The dotted time marker
 locates the incomplete response; it has no invented error value. No bands or
 error bars are drawn because none were estimated. The existing narrow variation
 can be read precisely in the response table. [Visual inventory and provenance](qdrone-visuals.md)

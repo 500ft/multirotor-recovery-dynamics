@@ -123,6 +123,8 @@ adds gyroscopic feedforward and EST yaw rotational drag. Writes
 `Figures/survivable_set_{psafe,policy}{,_a2}.png`. Two diagnostics:
 `--convergence` writes `Data/survivable_set_convergence.json` (dt-halving
 impact-state deltas) and `--smoke` exercises the pipeline in CI without writing.
+`--figures-only` redraws the four figures from the committed results JSON and
+runs no simulation.
 Action parameters marked EST are owner inputs (OQ-010); the preregistrations in
 [`docs/specs/survivable-set/design.md`](specs/survivable-set/design.md) and
 [`design-a2.md`](specs/survivable-set/design-a2.md) freeze criteria, cells,
@@ -157,6 +159,21 @@ Run the repository tests before updating result documents:
 
 ```bash
 python -m unittest discover -s Analysis/tests -v
+```
+
+## Figure style
+
+[`Analysis/figure_style.py`](../Analysis/figure_style.py) holds the font sizes,
+tick and legend defaults, entity colours and file settings shared by every
+generated figure. The same tier, design package or model keeps one colour in
+every figure. PNGs are written at 300 dpi and PDFs without timestamps. These
+commands redraw the committed figures; only the first one runs a simulation:
+
+```bash
+python -m Analysis.run_release_recovery
+python -m Analysis.run_survivable_set --figures-only
+python -m Analysis.plot_nanobench_baseline --results Data/nanobench-baseline/development-errors.csv --output Figures/nanobench-baseline.png
+python -m Analysis.plot_qdrone_response --cache /tmp/multirotor-qdrone-source --figure Figures/qdrone-development-response.png --tables docs
 ```
 
 ## Engineering diagrams

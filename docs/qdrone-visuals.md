@@ -28,8 +28,10 @@ visible evidence status. The stacked voltage and altitude traces have an
 identical time domain, without a dual axis. Command direction uses triangle
 orientation as well as color; the reference altitude uses a dashed line.
 
-RMSE panels share a zero-based scale, making absolute error visible without
-magnifying the narrow response variation. Their points are the same stored
+RMSE panels share one axis that starts at the data floor with labelled
+non-zero ticks. The zero-based axis of the first redesign left most of each
+panel empty (figure-style rule 3.2). Panel titles state only comparisons that
+hold for every event, and the table keeps the absolute values. Their points are the same stored
 complete events; the chronological table preserves detail and the incomplete
 ending. No smoothing, fit, interval, thrust headroom or recovery boundary is
 introduced. Voltage and demand/time confounding, the original MPC and the

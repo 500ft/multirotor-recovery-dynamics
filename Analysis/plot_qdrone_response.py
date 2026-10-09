@@ -10,89 +10,99 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 import numpy as np
 
+from Analysis import figure_style as fs
+
 ROOT = Path(__file__).resolve().parents[1]
-BLUE, GREEN, PURPLE, GRAY = '#2980b9', '#27ae60', '#7d3c98', '#62676d'
-DIRECTIONS = [('up', '^', BLUE), ('down', 'v', PURPLE)]
+GRAY = fs.GRAY
+DIRECTIONS = [('up', '^', fs.QDRONE['up']), ('down', 'v', fs.QDRONE['down'])]
 
 
 def make_figure(data, result):
     """All traces use source samples; scatter values come from stored events."""
-    with plt.rc_context({'font.size': 11, 'axes.titlesize': 12,
-                         'axes.labelsize': 11, 'legend.fontsize': 10,
-                         'figure.facecolor': 'white', 'axes.facecolor': 'white',
-                         'pdf.fonttype': 42, 'path.simplify': False}):
-        fig = plt.figure(figsize=(10, 9.4))
-        grid = fig.add_gridspec(3, 2, height_ratios=[1.15, 1, 1.05],
-                               left=.085, right=.975, bottom=.12, top=.855,
-                               hspace=.52, wspace=.23)
-        altitude = fig.add_subplot(grid[0, :])
-        voltage = fig.add_subplot(grid[1, :], sharex=altitude)
-        by_time = fig.add_subplot(grid[2, 0])
-        by_voltage = fig.add_subplot(grid[2, 1], sharey=by_time)
+    complete = [e for e in result['events'] if e['status'] == 'complete']
+    incomplete = [e for e in result['events'] if e['status'] != 'complete']
+    rmse = {d: [e['rmse_m'] for e in complete if e['direction'] == d] for d, _, _ in DIRECTIONS}
+    split = bool(rmse['up'] and rmse['down']) and min(rmse['down']) > max(rmse['up'])
+    with fs.style():
+        fig = plt.figure(figsize=(7.2, 8.0))
+        outer = fig.add_gridspec(2, 1, height_ratios=[2.15, 1.05], left=.105, right=.88,
+                                 bottom=.125, top=.845, hspace=.42)
+        traces = outer[0].subgridspec(2, 1, height_ratios=[1.15, 1], hspace=.32)
+        errors = outer[1].subgridspec(1, 2, wspace=.12)
+        altitude = fig.add_subplot(traces[0])
+        voltage = fig.add_subplot(traces[1], sharex=altitude)
+        by_time = fig.add_subplot(errors[0])
+        by_voltage = fig.add_subplot(errors[1], sharey=by_time)
         t = data[:, 0]
-        altitude.plot(t, data[:, 2], color=BLUE, lw=1.15, label='Observed altitude')
-        altitude.step(t, data[:, 1], where='post', color=GRAY, lw=1.1,
-                      ls='--', label='Recorded reference')
-        altitude.set(title='A  Altitude tracking', ylabel='Altitude [m]')
-        altitude.legend(loc='lower right', bbox_to_anchor=(1, 1.015),
-                        ncol=2, frameon=False)
+        altitude.plot(t, data[:, 2], color=fs.QDRONE['altitude'], lw=1.0, label='Observed')
+        altitude.step(t, data[:, 1], where='post', color=fs.QDRONE['reference'], lw=1.0,
+                      ls='--', label='Reference')
+        altitude.set(title='Altitude follows the recorded reference steps', ylabel='Altitude (m)')
+        altitude.legend(loc='lower right', bbox_to_anchor=(1, 1.0), ncol=2, handlelength=2.2)
         altitude.tick_params(labelbottom=False)
-        voltage.plot(t, data[:, 3], color=GREEN, lw=.65)
-        voltage.set(title='B  Recorded battery voltage', ylabel='Voltage [V]',
-                    xlabel='Recorded time [s]', xlim=(t[0], t[-1]))
+        voltage.plot(t, data[:, 3], color=fs.QDRONE['voltage'], lw=.6)
+        voltage.set(title='Voltage declines across the recording and swings at each command',
+                    ylabel='Voltage (V)', xlabel='Recorded time (s)', xlim=(t[0], t[-1]))
         # A vertical reference shows the censored window without inventing an RMSE.
-        incomplete = [e for e in result['events'] if e['status'] != 'complete']
         for e in incomplete:
             for ax in (altitude, voltage):
                 ax.axvline(e['time_s'], color=GRAY, ls=':', lw=1)
         for direction, marker, color in DIRECTIONS:
-            events = [e for e in result['events'] if e['status'] == 'complete'
-                      and e['direction'] == direction]
+            events = [e for e in complete if e['direction'] == direction]
             for ax, key in ((by_time, 'time_s'), (by_voltage, 'precommand_voltage_v')):
                 selected = [e for e in events if e[key] is not None]
                 ax.scatter([e[key] for e in selected], [e['rmse_m'] for e in selected],
-                           marker=marker, color=color, s=42, edgecolor='white',
-                           linewidth=.35, label=direction.capitalize(), zorder=3)
-        by_time.set(title='C  Response error over time', xlabel='Command time [s]',
-                    ylabel=f"{result['protocol_horizon_s']:g} s altitude RMSE [m]",
+                           marker=marker, color=color, s=30, edgecolor='white',
+                           linewidth=.35, zorder=3)
+        by_time.set(title='Every down step has a higher\nRMSE than every up step' if split
+                    else 'Response error over time',
+                    xlabel='Command time (s)',
+                    ylabel=f"{result['protocol_horizon_s']:g} s altitude RMSE (m)",
                     xlim=(t[0], t[-1]))
-        by_voltage.set(title='D  The same errors vs voltage',
-                       xlabel='Precommand battery voltage [V]')
-        upper = np.ceil(max(e['rmse_m'] for e in result['events']
-                            if e['status'] == 'complete') * 1.1 * 10) / 10
-        by_time.set_ylim(0, upper)
-        by_time.legend(loc='center left', frameon=False, title='Reference change')
+        by_voltage.set(title='The gap holds across the\nprecommand voltage range' if split
+                       else 'The same errors against voltage',
+                       xlabel='Precommand voltage (V)')
+        # The RMSE values span a narrow band, so the axis starts at the data floor
+        # with labelled non-zero ticks rather than at zero.
+        values = rmse['up'] + rmse['down']
+        lo = np.floor((min(values) - .004) * 100) / 100
+        hi = np.ceil((max(values) + .004) * 100) / 100
+        by_time.set_ylim(lo, hi)
+        by_time.set_yticks(np.round(np.linspace(lo, hi, 3), 3))
         by_voltage.tick_params(labelleft=False)
-        for ax in (by_time, by_voltage):
-            ax.axhline(0, color=GRAY, lw=.8)
-            ax.yaxis.set_major_locator(MaxNLocator(3))
+        right = max(e['precommand_voltage_v'] for e in complete)
+        for direction, marker, color in DIRECTIONS:
+            name = {'up': 'Up', 'down': 'Down'}[direction]
+            glyph = {'up': '\u25b2', 'down': '\u25bc'}[direction]
+            by_voltage.annotate(f'{glyph} {name}', (1.02, np.mean(rmse[direction])),
+                                xycoords=('axes fraction', 'data'), va='center',
+                                fontsize=fs.SMALL, color=color, annotation_clip=False)
         for ax in (altitude, voltage, by_time, by_voltage):
-            ax.set_title(ax.get_title(), loc='left', pad=10)
-            ax.set_title('', loc='center')
-            ax.grid(axis='y', color='#d6d9dc', lw=.6, alpha=.65)
+            ax.grid(axis='y')
             ax.set_axisbelow(True)
-            ax.spines[['top', 'right']].set_visible(False)
-            ax.spines[['left', 'bottom']].set_color('#80858a')
             ax.xaxis.set_major_locator(MaxNLocator(6))
-        fig.suptitle('QDrone2 | tracking during one recorded discharge',
-                     x=.085, y=.978, ha='left', fontsize=15)
-        fig.text(.085, .935, 'DEVELOPMENT OBSERVATIONS · original MPC · no recovery-failure labels',
-                 fontsize=11, color=GRAY)
-        fig.text(.085, .903,
-                 f"{result['complete_steps']} complete response windows; {len(incomplete)} incomplete. "
-                 'Dotted line: incomplete command.', fontsize=10)
-        fig.text(.085, .051, 'Repeated commands share one recording. Demand, voltage and elapsed time co-vary.', fontsize=10)
-        fig.text(.085, .023, 'Observations: Borbolla-Burillo et al. · Zenodo 19464105 · CC BY 4.0', fontsize=9, color=GRAY)
+        by_time.xaxis.set_major_locator(MaxNLocator(5))
+        by_voltage.xaxis.set_major_locator(MaxNLocator(4))
+        for ax, letter, dx, dy in ((altitude, 'a', -.085, .012), (voltage, 'b', -.085, .012),
+                                   (by_time, 'c', -.085, .045), (by_voltage, 'd', -.03, .045)):
+            fs.panel_letter(fig, ax, letter, dx=dx, dy=dy)
+        fig.text(.02, .985, f"QDrone2 tracked {result['complete_steps']} complete altitude steps "
+                 'during one recorded discharge', va='top')
+        fig.text(.02, .952, 'DEVELOPMENT OBSERVATIONS \u00b7 original MPC \u00b7 no recovery-failure labels',
+                 va='top', fontsize=fs.SMALL, color=GRAY)
+        fig.text(.02, .925, f"{result['complete_steps']} complete response windows; "
+                 f"{len(incomplete)} incomplete (dotted line).", va='top', fontsize=fs.SMALL)
+        fig.text(.02, .045, 'Repeated commands share one recording. Demand, voltage and '
+                 'elapsed time co-vary.', fontsize=fs.SMALL)
+        fig.text(.02, .018, 'Observations: Borbolla-Burillo et al. \u00b7 Zenodo 19464105 \u00b7 CC BY 4.0',
+                 fontsize=fs.SMALL, color=GRAY)
     return fig
 
 
 def plot(data, result, path):
-    path = Path(path)
-    path.parent.mkdir(parents=True, exist_ok=True)
     fig = make_figure(data, result)
-    fig.savefig(path, dpi=180, facecolor='white')
-    fig.savefig(path.with_suffix('.pdf'), facecolor='white',
-                metadata={'CreationDate': None, 'ModDate': None})
+    with fs.style():
+        fs.save(fig, path, ('png', 'pdf'))
     plt.close(fig)
 
 

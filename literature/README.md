@@ -22,6 +22,7 @@ traced. No reference in this folder was written from memory.
 | [`notes/04-impact-severity-and-crashworthiness.md`](notes/04-impact-severity-and-crashworthiness.md) | ASSURE A4/A14, HIC, the 11/25 ft-lb criteria, vehicle crashworthiness, terminal velocity | `BARE_CRITERION`, `GUARDED_CRITERION`; `design.md` §5 |
 | [`notes/05-statistics-reachability-preregistration.md`](notes/05-statistics-reachability-preregistration.md) | Clopper–Pearson, paired binary designs, rare-event MC, reachable sets, preregistration | `kill_criterion`, `policy_map`, the A-vs-A2 comparison, `design.md` §6–7 |
 | [`notes/06-measurement-thrust-stand-uncertainty.md`](notes/06-measurement-thrust-stand-uncertainty.md) | GUM/VIM, OIML R 60, low-Re propellers, thrust-stand design, ground effect, ducts | `docs/bench-acquisition.md`, the R3 calibration plan, OQ-012, the authority gate |
+| [`notes/07-loss-of-control-prediction.md`](notes/07-loss-of-control-prediction.md) | Loss-of-control prediction from onboard data; the thrust-margin comparator (added 2026-10-09) | the `ROADMAP.md` question; F.1 baselines; ledger H1; `novelty-and-gaps.md` §6 |
 | [`claim-ledger.md`](claim-ledger.md) | Every load-bearing repo claim → support, contradiction, required action | all of the above |
 | [`novelty-and-gaps.md`](novelty-and-gaps.md) | What is established, what is genuinely open, who else is claiming our gap | `design.md` §1 |
 | [`references.bib`](references.bib) | BibTeX for the verified entries | — |

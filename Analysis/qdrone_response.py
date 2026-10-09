@@ -83,36 +83,10 @@ def summarize(data, protocol):
 
 
 def plot(data, result, path):
-    import matplotlib
-    matplotlib.use('Agg')
-    import matplotlib.pyplot as plt
-    fig, axes = plt.subplots(3, 1, figsize=(10, 9), layout='constrained')
-    t = data[:, 0]
-    axes[0].step(t, data[:, 1], where='post', color='#777777', label='Recorded reference')
-    axes[0].plot(t, data[:, 2], color='#0072B2', label='Observed altitude', linewidth=.8)
-    axes[0].set(ylabel='Altitude (m)', xlabel='Recorded time (s)')
-    axes[0].legend(loc='lower left', bbox_to_anchor=(0, 1.01), ncol=2)
-    axes[1].plot(t, data[:, 3], color='#009E73', linewidth=.8)
-    axes[1].set(ylabel='Battery voltage (V)', xlabel='Recorded time (s)')
-    for direction, marker in [('up', '^'), ('down', 'v')]:
-        events = [e for e in result['events'] if e['status']=='complete' and e['direction']==direction
-                  and e['precommand_voltage_v'] is not None]
-        artist = axes[2].scatter([e['precommand_voltage_v'] for e in events], [e['rmse_m'] for e in events],
-            c=[e['time_s'] for e in events], vmin=t[0], vmax=t[-1], cmap='viridis',
-            marker=marker, s=65, edgecolors='black', linewidths=.4, label=direction.capitalize())
-    axes[2].set(xlabel='Last recorded battery voltage before command (V)',
-                ylabel=f"Altitude RMSE over {result['protocol_horizon_s']:g} s (m)")
-    axes[2].legend(title='Reference change', loc='lower left', bbox_to_anchor=(0, 1.01), ncol=2)
-    fig.colorbar(artist, ax=axes[2], label='Command time (s)')
-    for ax in axes:
-        ax.grid(alpha=.2)
-        ax.spines[['top', 'right']].set_visible(False)
-    fig.suptitle('QDrone2: continuous tracking response during one recorded discharge')
-    fig.supxlabel('Development description, original MPC. Repeated steps share one recording; voltage and time co-vary.\n'
-                  'Observations: Borbolla-Burillo et al., Zenodo 19464105, CC BY 4.0. No recovery-failure labels.', fontsize=9)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(path, dpi=160)
-    plt.close(fig)
+    # Keep the existing analysis CLI compatible; the renderer also accepts the
+    # committed result directly, so visual changes need not rewrite evidence.
+    from Analysis.plot_qdrone_response import plot as render
+    render(data, result, path)
 
 
 def run(cache, output, figure, fetch=False):

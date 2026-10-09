@@ -11,7 +11,8 @@
       "inputs": [
         "Data/qdrone-response/sources.json",
         "Data/qdrone-response/protocol.json",
-        "Data/qdrone-response/results.json"
+        "Data/qdrone-response/results.json",
+        "Analysis/figure_style.py"
       ],
       "outputs": [
         "Figures/qdrone-development-response.png",
@@ -30,7 +31,8 @@
       "command": "python -m Analysis.run_release_recovery",
       "inputs": [
         "Analysis/sim_release_recovery.py",
-        "Analysis/run_release_recovery.py"
+        "Analysis/run_release_recovery.py",
+        "Analysis/figure_style.py"
       ],
       "outputs": [
         "Figures/release_recovery_timeseries.png",
@@ -42,6 +44,27 @@
         "Data/release_recovery_results.json"
       ],
       "notes": "Uses encoded parameter tiers and placeholder or catalog-derived values; it is not based on assembled-hardware measurements.",
+      "scope": "Historical designed aircraft"
+    },
+    {
+      "id": "survivable-set-figures",
+      "evidence_type": "Monte Carlo simulation",
+      "generator": "Analysis/run_survivable_set.py",
+      "command": "python -m Analysis.run_survivable_set --figures-only",
+      "inputs": [
+        "Data/survivable_set_results.json",
+        "Data/survivable_set_results_a2.json",
+        "Analysis/run_survivable_set.py",
+        "Analysis/figure_style.py"
+      ],
+      "outputs": [
+        "Figures/survivable_set_psafe.png",
+        "Figures/survivable_set_policy.png",
+        "Figures/survivable_set_psafe_a2.png",
+        "Figures/survivable_set_policy_a2.png"
+      ],
+      "data_outputs": [],
+      "notes": "Redraws the figures from the committed results without running the sweep. The full sweep (python -m Analysis.run_survivable_set) writes the same figures together with the results.",
       "scope": "Historical designed aircraft"
     },
     {

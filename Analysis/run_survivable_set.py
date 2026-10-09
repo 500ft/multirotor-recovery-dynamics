@@ -16,6 +16,8 @@ Other modes:
 * ``--smoke``      : minimal pipeline exercise for CI (primary cells, two classes,
                      a handful of trials, variant a2, no files written; exit 0 on
                      structural success).
+* ``--figures-only``: redraw the four committed figures from the committed
+                     results JSON. Runs no simulation and writes only Figures/.
 * ``--convergence``: integrator diagnostic — repeats a few primary-cell trials at
                      dt = 5e-4 (production) and 2.5e-4 (halved), reports impact-
                      state deviations, writes ``Data/survivable_set_convergence.json``.
@@ -41,6 +43,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
+from Analysis import figure_style as fs
 from Analysis.failure_allocation import FAILURE_CLASSES
 from Analysis import survivable_set as ss
 
@@ -110,71 +113,212 @@ def broadcast_parachute(rows, parachute_rows, variant):
     return out
 
 
+VARIANT_NAME = {"a": "Baseline PD controller (variant a)",
+                "a2": "Spin-aware controller (variant a2)"}
+SIM_NOTE = ("Simulation-only prediction. Action inputs are estimates pending owner input "
+            "(OQ-010).")
+
+
+def _trial_note(rows):
+    """State the trial counts actually present in the plotted rows."""
+    counts = {}
+    for r in rows:
+        counts.setdefault("parachute" if r["action"] == "parachute" else "other", set()).add(r["n"])
+    other = sorted(counts.get("other", ()))
+    note = f"{other[0]} trials per cell"
+    if len(other) > 1:
+        note += f" ({', '.join(f'{n:,}' for n in other[1:])} in outlined primary cells)"
+    if "parachute" in counts:
+        note += f"; parachute-like device {', '.join(f'{n:,}' for n in sorted(counts['parachute']))}"
+    return note + "."
+
+
 def psafe_figure(rows, path: Path, variant: str):
     """Exact-lower-bound heatmaps over (h, omega) at the vz=0, delay=0.11 slice."""
     classes = sorted(FAILURE_CLASSES)
     hs, ws = (1.5, 3.0, 6.0), (2.0, 6.0)
     by_key = {(r["class"], r["cell"], r["action"]): r for r in rows}
-    fig, axes = plt.subplots(len(classes), len(ss.ACTIONS),
-                             figsize=(10.5, 11.5), constrained_layout=True)
-    for i, cls in enumerate(classes):
-        for j, action in enumerate(ss.ACTIONS):
-            grid = np.full((len(ws), len(hs)), np.nan)
-            for (a, h), (b, w) in product(enumerate(hs), enumerate(ws)):
-                cell = ss.Cell(h, 0.0, w, 0.11)
-                r = by_key.get((cls, cell.label(), action))
-                if r:
-                    grid[b, a] = r["p_safe_95_lower"]
-            ax = axes[i, j]
-            im = ax.imshow(grid, vmin=0.0, vmax=1.0, cmap="viridis",
-                           origin="lower", aspect="auto")
-            for (a, _), (b, _) in product(enumerate(hs), enumerate(ws)):
-                if not np.isnan(grid[b, a]):
-                    ax.text(a, b, f"{grid[b, a]:.2f}", ha="center", va="center",
-                            color="white" if grid[b, a] < 0.6 else "black",
-                            fontsize=9)
-            ax.set_xticks(range(len(hs)), [f"{h:g}" for h in hs])
-            ax.set_yticks(range(len(ws)), [f"{w:g}" for w in ws])
-            if i == 0:
-                ax.set_title(action)
-            if i == len(classes) - 1:
-                ax.set_xlabel("release height h [m]")
-            if j == 0:
-                ax.set_ylabel(f"{cls}\ntumble rate [rad/s]")
-    fig.colorbar(im, ax=axes, shrink=0.5, label="P_safe exact 95% lower bound")
-    fig.suptitle(f"Survivable set, variant {variant} (slice: vz0 = 0, delay = "
-                 "0.11 s) — SIMULATION-ONLY PREDICTION, EST inputs pending (OQ-010)")
-    fig.savefig(path, dpi=160)
+    shown = [r for r in rows if r["cell"] in
+             {ss.Cell(h, 0.0, w, 0.11).label() for h in hs for w in ws}]
+    peak = max(shown, key=lambda r: r["p_safe_95_lower"])
+    zero_actions = [a for a in ss.ACTIONS
+                    if all(r["p_safe_95_lower"] == 0 for r in shown if r["action"] == a)]
+    short = fs.FAILURE_NAME[peak["class"]].split(" (")[0]
+    title = f"{short} peaks at {peak['p_safe_95_lower']:.2f}"
+    if zero_actions:
+        title += "; the " + " and ".join(fs.ACTION_NAME[a].lower() for a in zero_actions)
+        title += " is 0 in every cell"
+    with fs.style():
+        fig, axes = plt.subplots(len(classes), len(ss.ACTIONS), figsize=(7.0, 8.6),
+                                 sharex=True, sharey=True,
+                                 gridspec_kw={"left": .1, "right": .83, "top": .775,
+                                              "bottom": .07, "hspace": .55, "wspace": .08})
+        for i, cls in enumerate(classes):
+            for j, action in enumerate(ss.ACTIONS):
+                grid = np.full((len(ws), len(hs)), np.nan)
+                ns = {}
+                for (a, h), (b, w) in product(enumerate(hs), enumerate(ws)):
+                    cell = ss.Cell(h, 0.0, w, 0.11)
+                    r = by_key.get((cls, cell.label(), action))
+                    if r:
+                        grid[b, a] = r["p_safe_95_lower"]
+                        ns[(a, b)] = r["n"]
+                ax = axes[i, j]
+                im = ax.imshow(grid, vmin=0.0, vmax=1.0, cmap="viridis",
+                               origin="lower", aspect="auto")
+                base_n = min(ns.values()) if ns else None
+                for (a, b), n in ns.items():
+                    v = grid[b, a]
+                    ax.text(a, b, "<0.01" if 0 < v < .005 else f"{v:.2f}", ha="center", va="center",
+                            fontsize=fs.SMALL,
+                            color="white" if v < 0.6 else "black")
+                    if action != "parachute" and n != base_n:
+                        ax.add_patch(plt.Rectangle((a - .45, b - .45), .9, .9, fill=False,
+                                                   ec="white", lw=1.4))
+                ax.set_xticks(range(len(hs)), [f"{h:g}" for h in hs])
+                ax.set_yticks(range(len(ws)), [f"{w:g}" for w in ws])
+                ax.tick_params(length=2)
+                for spine in ax.spines.values():
+                    spine.set_visible(False)
+                if i == 0:
+                    ax.text(.5, 1.36, fs.ACTION_NAME[action].replace(" only", "\nonly")
+                            .replace("-like ", "-like\n").replace("Guard ", "Guard\n"),
+                            transform=ax.transAxes, ha="center", va="bottom")
+            axes[i, 0].text(0, 1.07, fs.FAILURE_NAME[cls], transform=axes[i, 0].transAxes,
+                            ha="left", va="bottom")
+        fig.supxlabel("Release height (m)", y=.015)
+        fig.supylabel("Tumble rate at failure (rad/s)", x=.015)
+        cax = fig.add_axes([.855, .3, .022, .4])
+        cb = fig.colorbar(im, cax=cax)
+        cb.set_label("Survival probability,\nexact 95% lower bound")
+        cb.outline.set_visible(False)
+        fig.text(.02, .985, title, va="top")
+        cap = ""
+        if peak["successes"] == peak["n"]:
+            cap = (f"\n{peak['p_safe_95_lower']:.2f} is the bound that {peak['n']} survivals "
+                   f"in {peak['n']} trials give.")
+        fig.text(.02, .955, f"{SIM_NOTE}\n{VARIANT_NAME[variant]}. Slice: "
+                 "no initial vertical speed, 0.11 s detection delay.\n" + _trial_note(shown)
+                 + cap, va="top", fontsize=fs.SMALL, color=fs.GRAY)
+        fs.save(fig, path)
     plt.close(fig)
+
+
+def _cell_factors(label):
+    """('h1.5', 'vz-1.5', 'w2', 'd0.11') -> (1.5, -1.5, 2.0, 0.11)."""
+    h, vz, w, d = label.split("_")
+    return float(h[1:]), float(vz[2:]), float(w[1:]), float(d[1:])
 
 
 def policy_figure(policy, path: Path, variant: str):
-    """Study B decision map: best action per (class, cell); '?' where ambiguous."""
+    """Study B decision map: best action per (class, cell), shaded where ambiguous."""
     classes = sorted(FAILURE_CLASSES)
     cells = [c.label() for c in ss.EXPLORATORY_CELLS]
-    idx = {a: k for k, a in enumerate(ss.ACTIONS)}
-    grid = np.full((len(classes), len(cells)), np.nan)
-    marks = {}
-    for row in policy:
-        if row["cell"] not in cells:
-            continue
-        i, j = classes.index(row["class"]), cells.index(row["cell"])
-        grid[i, j] = idx[row["best_action"]]
-        marks[(i, j)] = "?" if row["ambiguous_with"] else ""
-    fig, ax = plt.subplots(figsize=(13, 3.6), constrained_layout=True)
-    cmap = matplotlib.colors.ListedColormap(["#c44e52", "#4c72b0", "#55a868"])
-    ax.imshow(grid, cmap=cmap, vmin=-0.5, vmax=2.5, aspect="auto")
-    for (i, j), m in marks.items():
-        letter = ss.ACTIONS[int(grid[i, j])][0].upper()
-        ax.text(j, i, letter + m, ha="center", va="center", fontsize=7)
-    ax.set_yticks(range(len(classes)), classes)
-    ax.set_xticks(range(len(cells)), cells, rotation=90, fontsize=6)
-    ax.set_title(f"Design-package ranking, variant {variant} — NOT a runtime "
-                 "policy (design.md 6b)\nbest package by exact lower bound "
-                 "(R=realloc_only, M=mechanism, P=parachute; "
-                 "'?' = within Monte Carlo uncertainty)", fontsize=9)
-    fig.savefig(path, dpi=160)
+    rows = {(r["class"], r["cell"]): r for r in policy if r["cell"] in cells}
+    total = len(rows)
+    clear = [r for r in rows.values() if not r["ambiguous_with"]]
+
+    def kind(r):
+        if r["best_p_safe_95_lower"] == 0:
+            return "none"
+        return "clear" if not r["ambiguous_with"] else "overlap"
+
+    if not clear:
+        title = f"No design package is clearly best in any of the {total} failure-state cells"
+    else:
+        title = (f"A design package is clearly best in {len(clear)} of {total} "
+                 "failure-state cells")
+    primary = {c.label() for c in ss.PRIMARY_CELLS}
+    seen = set()
+    with fs.style():
+        fig = plt.figure(figsize=(7.0, 8.0))
+        grid = fig.add_gridspec(1, 2, width_ratios=[1.45, 2.2], left=.02, right=.98,
+                                top=.77, bottom=.13, wspace=.02)
+        table = fig.add_subplot(grid[0, 0])
+        heat = fig.add_subplot(grid[0, 1], sharey=table)
+        for j, cls in enumerate(classes):
+            for i, cell in enumerate(cells):
+                r = rows.get((cls, cell))
+                if r is None:
+                    continue
+                k = kind(r)
+                base = fs.ACTION[r["best_action"]]
+                face = {"none": "#eeeeee", "overlap": fs.tint(base, .35), "clear": base}[k]
+                seen.add((k, r["best_action"] if k != "none" else None))
+                heat.add_patch(plt.Rectangle((j, i), 1, 1, fc=face, ec="white", lw=1))
+                if cls in ss.PRIMARY_CLASSES and cell in primary:
+                    heat.add_patch(plt.Rectangle((j + .06, i + .1), .88, .8, fill=False,
+                                                 ec=fs.INK, lw=1.1))
+                v = r["best_p_safe_95_lower"]
+                # Two decimals, except a positive bound that would print as 0.00.
+                heat.text(j + .5, i + .5, "<0.01" if 0 < v < .005 else f"{v:.2f}", ha="center",
+                          va="center", fontsize=fs.SMALL,
+                          color="white" if k == "clear" else fs.INK)
+        heat.set_xlim(0, len(classes))
+        heat.set_ylim(len(cells), 0)
+        heat.set_xticks([j + .5 for j in range(len(classes))],
+                        [fs.FAILURE_NAME[c].replace(" rotors out", "\nrotors out")
+                         .replace(" authority ", " authority\n").replace(" rotor out", "\nrotor out")
+                         for c in classes])
+        heat.xaxis.tick_top()
+        heat.tick_params(length=0, labelleft=False, labelsize=fs.SMALL)
+        heat.spines[:].set_visible(False)
+        heat.set_xlabel("Best package's survival lower bound, by failure class")
+        heat.xaxis.set_label_position("top")
+        # Left: the four state factors of each row, read as a small table.
+        heads = ["Height\n(m)", "Vertical\nspeed (m/s)", "Tumble\nrate (rad/s)", "Delay\n(s)"]
+        xs = [.11, .37, .66, .91]
+        for x, h in zip(xs, heads):
+            table.text(x, -.4, h, ha="center", va="bottom", fontsize=fs.SMALL)
+        previous = None
+        for i, cell in enumerate(cells):
+            f = _cell_factors(cell)
+            for k, (x, v) in enumerate(zip(xs, f)):
+                if k == 0 and v == previous:
+                    continue
+                table.text(x, i + .5, f"{v:g}", ha="center", va="center", fontsize=fs.TICK)
+            if previous is not None and f[0] != previous:
+                for ax in (table, heat):
+                    ax.axhline(i, color=fs.GRAY, lw=.8)
+            previous = f[0]
+        table.set_xlim(0, 1)
+        table.axis("off")
+        names = {"realloc_only": "reallocation", "mechanism": "mechanism",
+                 "parachute": "parachute-like device"}
+        handles, labels = [], []
+        order = [("clear", a) for a in ss.ACTIONS] + [("overlap", a) for a in ss.ACTIONS]
+        for k, a in order + [("none", None)]:
+            if (k, a) not in seen:
+                continue
+            face = ("#eeeeee" if k == "none" else
+                    fs.ACTION[a] if k == "clear" else fs.tint(fs.ACTION[a], .35))
+            handles.append(plt.Rectangle((0, 0), 1, 1, fc=face, ec="none"))
+            labels.append({"clear": f"Best: {names.get(a)}, interval clear of the others",
+                           "overlap": f"Best: {names.get(a)}, within Monte Carlo uncertainty",
+                           "none": "No package above 0 (all lower bounds 0)"}[k])
+        fig.legend(handles, labels, loc="lower left", bbox_to_anchor=(.03, .005),
+                   ncol=1, handlelength=1.2, borderaxespad=0)
+        fig.text(.02, .985, title, va="top")
+        fig.text(.02, .955, "Ranks aircraft design packages by exact 95% lower bound; "
+                 "it is not a runtime policy (design.md 6b).\n"
+                 f"{SIM_NOTE}\n{VARIANT_NAME[variant]}.\n"
+                 f"{ss.EXPLORATORY_TRIALS} trials per cell ({ss.PRIMARY_TRIALS} in outlined "
+                 f"primary cells); parachute-like device {ss.PARACHUTE_TRIALS:,}.",
+                 va="top", fontsize=fs.SMALL, color=fs.GRAY)
+        fs.save(fig, path)
     plt.close(fig)
+
+
+def render_committed_figures(repo: Path):
+    """Redraw the four figures from the committed results; runs no simulation."""
+    for variant in ss.VARIANTS:
+        suffix = "" if variant == "a" else f"_{variant}"
+        data = json.loads((repo / "Data" / f"survivable_set_results{suffix}.json").read_text())
+        psafe_figure(data["exploratory"], repo / "Figures" / f"survivable_set_psafe{suffix}.png",
+                     variant)
+        policy_figure(data["policy"], repo / "Figures" / f"survivable_set_policy{suffix}.png",
+                      variant)
+        print(f"[written] Figures/survivable_set_{{psafe,policy}}{suffix}.png")
 
 
 def paired_action_comparisons(rows, variant):
@@ -374,6 +518,8 @@ def main(argv=None):
     ap.add_argument("--convergence", action="store_true",
                     help="dt-halving diagnostic on primary-cell trials")
     ap.add_argument("--workers", type=int, default=max(1, (os.cpu_count() or 2) - 2))
+    ap.add_argument("--figures-only", action="store_true",
+                    help="redraw Figures/ from the committed results JSON; no simulation")
     ap.add_argument("--output-dir", default=None,
                     help="write results here (required-safe for --quick: "
                          "defaults to a scratch dir, never the repo)")
@@ -382,6 +528,9 @@ def main(argv=None):
 
     if args.smoke:
         run_smoke(args.workers)
+        return
+    if args.figures_only:
+        render_committed_figures(repo)
         return
     if args.convergence:
         run_convergence(repo)
